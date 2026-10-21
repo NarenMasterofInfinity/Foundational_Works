@@ -7,7 +7,7 @@ Each unit has its own folder and opens as a self-contained HTML page. Navigation
 | Unit | Open | Contents |
 | --- | --- | --- |
 | 01 · Retrieval Methods | [Open the atlas](retrieval-methods/index.html) | Historical timeline; Boolean, lexical, probabilistic, expansion, dense, learned sparse, late interaction, indexes, rankers, fusion, graphs, multimodal, generative/agentic retrieval; evaluation labs and annotated references. |
-| 02 · System Design | [Open the atlas](system-design/index.html) | Staged foundations edition: complete 22-unit, 99-chapter blueprint; four fully written Unit 1 chapters, 16 original chapter diagrams, four interactive workbenches, exercises and separate solutions. Units 2–22 and the 12 case studies remain planned. |
+| 02 · System Design | [Open the atlas](system-design/index.html) | Complete first edition: all 22 units and 99 chapters, 575 original figures, 13 interactive workbenches, twelve full case studies, 242 questions and separate explained solutions. |
 
 ## GitHub Pages
 
@@ -42,7 +42,7 @@ System Design is also self-contained and built with Python’s standard library:
 python3 system-design/src/build.py
 ```
 
-See its [editorial blueprint](system-design/BLUEPRINT.md), [completion manifest](system-design/completion-manifest.json), and [production notes](system-design/README.md). The blueprint allocates the entire supplied syllabus; an allocation is explicitly distinct from a produced lesson.
+See its [editorial blueprint](system-design/BLUEPRINT.md), [completion manifest](system-design/completion-manifest.json), and [production notes](system-design/README.md). The manifest records all produced chapters, exact syllabus coverage, required visual plates, full case-study sections, and assessment.
 
 To rebuild Retrieval Methods after an editorial change:
 

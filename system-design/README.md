@@ -1,38 +1,47 @@
 # The System Design Atlas
 
-**From Objects to Planet-Scale Systems** — a staged, illustrated textbook in the existing Learn · Research · Visualise design language.
+**From Objects to Planet-Scale Systems** — the complete first edition in the Learn · Research · Visualise design language.
 
-Open [the digital edition](index.html) or [the foundations PDF](System-Design-Atlas-Foundations.pdf).
+Open [the digital edition](index.html) or download [the complete PDF](System-Design-Atlas-Complete.pdf) (1,010 tagged A4 pages, approximately 13 MB). The earlier [foundations PDF](System-Design-Atlas-Foundations.pdf) is retained as a separately scoped historical installment.
 
-## Current scope
+## What is included
 
-The entire supplied syllabus is allocated to **22 units and 99 chapters**, with 390 exact topic items, unit/chapter prerequisites, illustration commissions, starting references, and all 12 mandatory case studies. Each case study has the complete 22-section review protocol. The original request is retained in [BRIEF.txt](BRIEF.txt).
+- All **22 units and 99 chapters**, covering all **390 exact supplied syllabus items**.
+- **49,478 words of authored lesson, pattern, and case-study prose**, excluding the separate solutions and much of the reader/reference material.
+- **575 original SVG figures**, including at least four per chapter and all 94 required unit illustration assignments. Four Unit 1 assignments refer to its existing chapter figures; 90 additional unit plates cover the other required visual vocabulary. The master concept map is separately numbered M.1.
+- All **12 mandatory end-to-end designs**, each with all **22 required review sections**, explicit assumptions, APIs, logical schemas, LLD, HLD, flows, calculations, failures, security, deployment, observability, costs, alternatives, evolution, review, and an implementation challenge.
+- **242 questions and 242 separate explained answers**: five conceptual, three scenarios, one design/debugging challenge, one implementation exercise, and one advanced thought experiment for every unit.
+- **26 individual LLD pattern treatments**, including miniature pseudocode, intent, collaborator roles, use, cost, and distinctions from related patterns.
+- **13 browser-local workbenches**: acknowledgment/crash ordering, change propagation, weighted design preferences, C4 views, capacity, bounded queues, last-seat claims, LRU, rendezvous assignment, pipeline fencing, quorum intersection, token bucket, and cost per useful outcome.
+- A **441-entry glossary and concept reference**, complete contents, dependency-closed reading paths, formula reference, pattern destinations, diagram index, and **61 selected production sources**.
 
-**Unit 1 is produced:** four substantive chapters follow one to-do application through state, contracts, module boundaries, requirements, ADRs, C4, request ordering, and deployment. They include 16 original SVG teaching figures, four interactive workbenches, executable Python, five conceptual questions, three scenarios, one design challenge, one implementation exercise, one thought experiment, and separate explained solutions.
+The content-driven [manifest](completion-manifest.json) records actual produced artifacts and review boundaries. The [book blueprint](BLUEPRINT.md) retains stable chapter IDs and exact topic allocation. The original request remains in [BRIEF.txt](BRIEF.txt).
 
-**Units 2–22 are planned.** Their pages are explicitly labeled editorial outlines. They are not counted as finished lessons, worked case studies, or completed assessments. See the [hierarchical blueprint](BLUEPRINT.md) and [machine-readable manifest](completion-manifest.json).
+## Reading and visual design
 
-## Reader experience
+Warm paper, serif display typography, teal navigation, semantic diagram colors, and generous spacing continue the Retrieval Atlas design language. Diagrams distinguish numbered snapshots, ordered actions, dependencies, boundaries, and acknowledgments where applicable; a snapshot card does not imply an independent process or a network call.
 
-- Warm paper, serif display typography, teal navigation, restrained semantic diagram colors, and original vectors match the Retrieval Atlas.
-- The HTML embeds its CSS, JavaScript, content, search index, and illustrations. It reads offline, through `file://`, or under a repository subpath with no installation or external fonts.
-- All lesson text remains available without JavaScript. JavaScript adds navigation, global concept search, glossary/source filtering, workbenches, and optional browser-local read marks.
-- Workbenches model acknowledgment/crash ordering, change propagation, weighted design preferences, and C4 views. Assumptions and limitations are visible; no invented performance measurements are used.
-- Reference desks include a concept map, reading paths, glossary, formula reference, diagram index, pattern destinations, source bibliography, and completion manifest.
-- Printing includes the produced chapters, explained assessment, and reference desks. Planned chapter bodies are excluded. The PDF is a **foundations installment**, not the complete future textbook.
+The HTML embeds its CSS, JavaScript, text, search index, and vectors. It works through `file://`, a local server, or GitHub Pages under a repository subpath without installation, external fonts, or runtime network calls. JavaScript adds navigation, search, interactive models, and optional browser-local read marks. All chapters remain readable without JavaScript.
 
-## Build and verify
+Workloads, latency budgets, capacity inputs, and cost rates are **illustrative assumptions**, not company benchmarks or claims about real infrastructure. Local executable models demonstrate specific mechanisms and failure boundaries; they are not production consensus, authentication, accounting, or payment-provider integrations. See [SOURCE_REVIEW.md](SOURCE_REVIEW.md) for the technical distinctions and [QA.md](QA.md) for verification evidence.
 
-Build with Python’s standard library:
+## Build
+
+Python's standard library is sufficient:
 
 ```bash
 python3 system-design/src/build.py
 python3 system-design/src/verify_example.py
+python3 system-design/src/verify_mechanisms.py
 ```
 
-The builder regenerates `index.html`, `BLUEPRINT.md`, and `completion-manifest.json`. It validates exact topic allocation, prerequisites, internal links, unique IDs, assessment counts, and case-study requirements. The example verification tests invalid input, storage errors, completion, reopening, and abrupt process termination before/after commit.
+The builder produces `index.html`, `BLUEPRINT.md`, and `completion-manifest.json`, validating actual content, exact topic allocation, chapter figures, all case sections, assessment counts, unique IDs, anchors, and prerequisite order. Production status follows authored lessons and figures through `src/edition.py`; it is not inferred from a topic checklist alone.
 
-Browser verification uses Node 22+ and a dedicated Chrome debugging session; no npm packages are needed:
+The teaching content lives in `src/teaching/`, separated into foundations, LLD, data, distributed systems, production, cases, patterns, assessment, sources, and miniature implementations. Existing Unit 1 HTML and workbench controls retain stable links. Required unit plates are implemented in `src/essential_plates.py` and subject-specific graphics in `src/atlas_figures.py`.
+
+## Browser verification and PDF
+
+Use Node 22+ and a dedicated local Chrome debugging profile; no npm packages are required:
 
 ```bash
 google-chrome --headless=new --no-sandbox --disable-gpu \
@@ -41,20 +50,21 @@ google-chrome --headless=new --no-sandbox --disable-gpu \
   --remote-debugging-port=0 \
   --user-data-dir=/tmp/system-design-atlas-chrome about:blank
 
-node system-design/src/verify_browser.mjs \
+node system-design/src/verify_complete.mjs \
   "$PWD" /tmp/system-design-atlas-chrome/DevToolsActivePort
 ```
 
-The browser script verifies all 133 views at five widths, tests workbench behavior and edge conditions, checks deep links and saved read marks, verifies JavaScript-disabled reading and no external reading requests, tests library search, and regenerates the foundations PDF. It writes review screenshots to `/tmp/system-design-atlas-qa`. Chrome may require the environment’s normal approval for local socket access.
+The browser test checks all 133 views, five widths, actual chapter/case/assessment counts, model arithmetic and failures, deep links, source/glossary filters, saved reading progress, JavaScript-disabled reading, offline loading, SVG text bounds, and print visibility. `verify_browser.mjs` is a compatibility entry point for the same complete-edition test.
 
-See [QA.md](QA.md) and [SOURCE_REVIEW.md](SOURCE_REVIEW.md) for verification boundaries and source review.
+Regenerate the full export after a successful build:
 
-## Continue production
+```bash
+node system-design/src/verify_complete.mjs \
+  "$PWD" /tmp/system-design-atlas-chrome/DevToolsActivePort --pdf-only
+```
 
-1. Select the next dependency-ready chapter in the manifest; Unit 2 is the next coherent unit.
-2. Produce the full teaching chapter and original figures, not only a summary of its topic list.
-3. Verify primary sources and precise implementation versions; update source status without implying that a checked link proves a future claim.
-4. Add its assessment and separate reasoning-based solutions.
-5. Update the chapter production registry and indexes, rebuild, and rerun checks appropriate to the changes.
+This writes `System-Design-Atlas-Complete.pdf`, including every produced chapter, unit reference plates, and reference desks. The browser's Print command uses the same print styling. The retained foundations PDF is not silently overwritten by the complete export.
 
-The current builder intentionally recognizes only Unit 1 as produced. Future work must extend production data and content before changing those statuses. Do not mark the rest complete by relabeling the existing outlines.
+For representative figure screenshots, use `--figures-only`. QA artifacts are written to `/tmp/system-design-complete-qa`; they are not runtime dependencies. Local socket access may need the environment's standard approval.
+
+No deployment or git push is performed by the builder or verification scripts.

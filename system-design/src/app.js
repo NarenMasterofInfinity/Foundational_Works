@@ -5,7 +5,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let activePanel='overview';
 function navigate(hash,{focus=false}={}){
- const id=decodeURIComponent((hash||'#overview').replace(/^#/,''));
+ let id;try{id=decodeURIComponent((hash||'#overview').replace(/^#/,''));}catch{id='overview';}
  const target=document.getElementById(id),panel=target?.classList.contains('panel')?target:target?.closest('.panel');
  const chosen=panel||$('#overview');activePanel=chosen.id;
  $$('.panel').forEach(p=>{p.hidden=p!==chosen;});
@@ -38,7 +38,7 @@ let readChapters=[];
 try{const saved=JSON.parse(localStorage.getItem('system-design-atlas-reading')||'[]');if(Array.isArray(saved))readChapters=saved.filter(x=>AtlasData.chapters.includes(x));}catch{}
 function refreshReading(){
  $$('.read-toggle').forEach(b=>{const yes=readChapters.includes(b.dataset.read);b.textContent=yes?'Marked read ✓':'Mark as read ○';b.setAttribute('aria-pressed',String(yes));});
- $('#reading-progress').textContent=`${readChapters.length} of 4 chapters marked read`;
+ $('#reading-progress').textContent=`${readChapters.length} of ${AtlasData.chapters.length} chapters marked read`;
 }
 $$('.read-toggle').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.read;readChapters=readChapters.includes(id)?readChapters.filter(x=>x!==id):[...readChapters,id];try{localStorage.setItem('system-design-atlas-reading',JSON.stringify(readChapters));}catch{}refreshReading();}));refreshReading();
 
@@ -111,7 +111,7 @@ let printState=null;
 window.addEventListener('beforeprint',()=>{
  if(printState)return;
  printState={closed:$$('details:not([open])'),glossary:$('#glossary-search').value,sources:$('#source-search').value,title:document.title};
- document.title='The System Design Atlas — Foundations Edition';
+ document.title='The System Design Atlas — Complete Edition';
  printState.closed.forEach(d=>d.open=true);$('#glossary-search').value='';$('#source-search').value='';filterGlossary();filterSources();document.body.classList.add('printing');
 });
 window.addEventListener('afterprint',()=>{

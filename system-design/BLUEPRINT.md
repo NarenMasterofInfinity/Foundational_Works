@@ -1,18 +1,18 @@
-# The System Design Atlas — book blueprint
+# The System Design Atlas — complete book blueprint
 
-This is a staged first installment, not the finished textbook. Planned pages are editorial outlines, not lessons.
+Complete first edition: all 22 units and all 12 mandatory case studies produced
 
-Editorial snapshot: 2026-10-21. 99 chapters across 22 units.
+A complete illustrated reference edition. Workload, latency, capacity and price examples are explicitly assumed models; code examples demonstrate bounded mechanisms rather than production infrastructure.
 
 ## Unit 1: Introduction to System Design
 
-Status: available. Prerequisites: [].
+Status: available. Direct prerequisites: [].
 
 Worked example: Design a basic to-do application. Begin with a single program and progressively identify modules, persistent storage, a web API, and deployment boundaries.
 
 ### 1.1 A system is a promise — available
 
-Prerequisites: 
+Content source: src/chapter-1.html
 
 - What is a software system?
 
@@ -24,25 +24,25 @@ Prerequisites:
 
 - State, data, computation, and communication.
 
-Illustrations: The boundary follows the promise; Data becomes state through a transition; HLD and LLD ask connected questions; From a working demo to a recoverable write
+Figures: 1.1.1 The boundary follows the promise; 1.1.2 Data becomes state through a transition; 1.1.3 HLD and LLD ask connected questions; 1.1.4 From a working demo to a recoverable write
 
-Starting references: https://www.sqlite.org/atomiccommit.html · https://www.rfc-editor.org/rfc/rfc9110.html
+References: https://www.sqlite.org/atomiccommit.html · https://www.rfc-editor.org/rfc/rfc9110.html
 
 ### 1.2 Boundaries that make change local — available
 
-Prerequisites: ch-1-1
+Content source: src/chapter-2.html
 
 - Coupling, cohesion, modularity, separation of concerns.
 
 - Abstraction layers.
 
-Illustrations: An innocent feature crosses every responsibility; Separate responsibilities inside one process; Dependency direction differs from execution direction; Abstraction narrows the question at each layer
+Figures: 1.2.1 An innocent feature crosses every responsibility; 1.2.2 Separate responsibilities inside one process; 1.2.3 Dependency direction differs from execution direction; 1.2.4 Abstraction narrows the question at each layer
 
-Starting references: https://doi.org/10.1145/361598.361623 · https://martinfowler.com/articles/injection.html
+References: https://doi.org/10.1145/361598.361623 · https://martinfowler.com/articles/injection.html
 
 ### 1.3 Requirements become decisions — available
 
-Prerequisites: ch-1-2
+Content source: src/chapter-3.html
 
 - Functional and nonfunctional requirements.
 
@@ -54,32 +54,30 @@ Prerequisites: ch-1-2
 
 - Why the simplest sufficient design is often preferable.
 
-Illustrations: Make a vague quality measurable; A decision is a testable hypothesis; A hard constraint comes before a preference score; Healthy traffic does not prove durable data
+Figures: 1.3.1 Make a vague quality measurable; 1.3.2 A decision is a testable hypothesis; 1.3.3 A hard constraint comes before a preference score; 1.3.4 Healthy traffic does not prove durable data
 
-Starting references: https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+References: https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
 
 ### 1.4 One application, many architectural views — available
 
-Prerequisites: ch-1-3
+Content source: src/chapter-4.html
 
 - Architecture diagrams: C4 model, context, container, component, deployment, sequence.
 
-Illustrations: C4 changes the level of detail; A deployment view locates the single points of failure; A lost response makes the outcome uncertain; Architecture evolves when an assumption fails
+Figures: 1.4.1 C4 changes the level of detail; 1.4.2 A deployment view locates the single points of failure; 1.4.3 A lost response makes the outcome uncertain; 1.4.4 Architecture evolves when an assumption fails
 
-Starting references: https://c4model.com/diagrams · https://c4model.com/abstractions/container · https://www.rfc-editor.org/rfc/rfc9110.html
+References: https://c4model.com/diagrams · https://c4model.com/abstractions/container · https://www.rfc-editor.org/rfc/rfc9110.html
 
-Essential unit diagrams: HLD vs LLD comparison; abstraction layers; architecture decision workflow; C4 diagram hierarchy
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. available.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 2: Requirements, Estimation, and Engineering Trade-offs
 
-Status: planned. Prerequisites: [1].
+Status: available. Direct prerequisites: [1].
 
 Worked example: A social platform has 10 million daily active users. Estimate requests per second, traffic at peak, storage growth, image bandwidth, and approximate infrastructure requirements.
 
-### 2.1 Turn user journeys into workloads — planned
+### 2.1 Turn user journeys into workloads — available
 
-Prerequisites: unit-1
+Content source: src/teaching/foundations.py
 
 - Gathering and prioritizing requirements.
 
@@ -87,13 +85,13 @@ Prerequisites: unit-1
 
 - Read-heavy vs write-heavy systems.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 2.1.1 Gathering and prioritizing requirements · worked snapshots; 2.1.2 User journeys and workload characteristics · worked snapshots; 2.1.3 Read-heavy vs write-heavy systems · worked snapshots; 2.1.4 The running system · invariant and recovery review
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://sre.google/workbook/table-of-contents/ · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+References: https://sre.google/workbook/implementing-slos/ · https://doi.org/10.1287/opre.9.3.383 · https://research.google/pubs/the-tail-at-scale/
 
-### 2.2 Measure the experience — planned
+### 2.2 Measure the experience — available
 
-Prerequisites: ch-2-1
+Content source: src/teaching/foundations.py
 
 - Latency, throughput, QPS, RPS, TPS.
 
@@ -103,13 +101,13 @@ Prerequisites: ch-2-1
 
 - SLI, SLO, SLA, and error budgets.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 2.2.1 Latency, throughput, QPS, RPS, TPS · worked snapshots; 2.2.2 A small mean can hide one slow request; 2.2.3 Availability, reliability, durability, consistency · worked snapshots; 2.2.4 SLI, SLO, SLA, and error budgets · worked snapshots
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://sre.google/workbook/table-of-contents/ · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+References: https://sre.google/workbook/implementing-slos/ · https://doi.org/10.1287/opre.9.3.383 · https://research.google/pubs/the-tail-at-scale/
 
-### 2.3 Estimate the resources — planned
+### 2.3 Estimate the resources — available
 
-Prerequisites: ch-2-2
+Content source: src/teaching/foundations.py
 
 - Capacity and growth planning.
 
@@ -117,13 +115,13 @@ Prerequisites: ch-2-2
 
 - Peak vs average load.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 2.3.1 Capacity and growth planning · worked snapshots; 2.3.2 Different workload dimensions have different magnitudes; 2.3.3 Peak vs average load · worked snapshots; 2.3.4 The running system · invariant and recovery review
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://sre.google/workbook/table-of-contents/ · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+References: https://sre.google/workbook/implementing-slos/ · https://doi.org/10.1287/opre.9.3.383 · https://research.google/pubs/the-tail-at-scale/
 
-### 2.4 Queues, bottlenecks & defensible decisions — planned
+### 2.4 Queues, bottlenecks & defensible decisions — available
 
-Prerequisites: ch-2-3
+Content source: src/teaching/foundations.py
 
 - Little's Law and queueing intuition.
 
@@ -135,22 +133,20 @@ Prerequisites: ch-2-3
 
 - Decision matrices and trade-off analysis.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 2.4.1 Little's Law and queueing intuition · worked snapshots; 2.4.2 Amdahl's Law and bottlenecks · worked snapshots; 2.4.3 Tail latency and latency budgets · worked snapshots; 2.4.4 Cost, security, operational complexity, and maintainability as constraints · worked snapshots; 2.4.5 Decision matrices and trade-off analysis · worked snapshots
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://sre.google/workbook/table-of-contents/ · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+References: https://sre.google/workbook/implementing-slos/ · https://doi.org/10.1287/opre.9.3.383 · https://research.google/pubs/the-tail-at-scale/
 
-Essential unit diagrams: Request-volume timeline; throughput-latency curve; latency waterfall; capacity planning worksheet
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 3: Networking Foundations for System Design
 
-Status: planned. Prerequisites: [1].
+Status: available. Direct prerequisites: [1].
 
 Worked example: Trace what happens when someone enters a website URL, from DNS lookup through server execution to browser rendering.
 
-### 3.1 Addresses, sockets & transports — planned
+### 3.1 Addresses, sockets & transports — available
 
-Prerequisites: unit-1
+Content source: src/teaching/foundations.py
 
 - How the internet works from the application perspective.
 
@@ -158,13 +154,13 @@ Prerequisites: unit-1
 
 - TCP vs UDP vs QUIC.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 3.1.1 How the internet works from the application perspective · worked snapshots; 3.1.2 IP addresses, ports, sockets, routing · worked snapshots; 3.1.3 TCP vs UDP vs QUIC · worked snapshots; 3.1.4 The running system · invariant and recovery review
 
-Starting references: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/ · https://github.com/ByteByteGoHq/system-design-101 · https://www.rfc-editor.org/rfc/rfc9110.html
+References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
-### 3.2 A secure request, one round trip at a time — planned
+### 3.2 A secure request, one round trip at a time — available
 
-Prerequisites: ch-3-1
+Content source: src/teaching/foundations.py
 
 - DNS resolution and DNS caching.
 
@@ -176,13 +172,13 @@ Prerequisites: ch-3-1
 
 - Latency caused by network round trips.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 3.2.1 DNS resolution and DNS caching · worked snapshots; 3.2.2 TLS and HTTPS · worked snapshots; 3.2.3 HTTP/1.1, HTTP/2, HTTP/3 · worked snapshots; 3.2.4 Connection establishment and connection reuse · worked snapshots; 3.2.5 A cold request spends time before server work
 
-Starting references: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/ · https://github.com/ByteByteGoHq/system-design-101 · https://www.rfc-editor.org/rfc/rfc9110.html
+References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
-### 3.3 Intermediaries & persistent connections — planned
+### 3.3 Intermediaries & persistent connections — available
 
-Prerequisites: ch-3-2
+Content source: src/teaching/foundations.py
 
 - Reverse proxies vs forward proxies.
 
@@ -192,13 +188,13 @@ Prerequisites: ch-3-2
 
 - WebSockets, Server-Sent Events, and polling.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 3.3.1 Reverse proxies vs forward proxies · worked snapshots; 3.3.2 Load balancers vs API gateways · worked snapshots; 3.3.3 L4 vs L7 load balancing · worked snapshots; 3.3.4 WebSockets, Server-Sent Events, and polling · worked snapshots
 
-Starting references: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/ · https://github.com/ByteByteGoHq/system-design-101 · https://www.rfc-editor.org/rfc/rfc9110.html
+References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
-### 3.4 Discover, route & survive the network — planned
+### 3.4 Discover, route & survive the network — available
 
-Prerequisites: ch-3-3
+Content source: src/teaching/foundations.py
 
 - NAT, firewalls, ingress, egress.
 
@@ -210,22 +206,20 @@ Prerequisites: ch-3-3
 
 - Connection pooling and keepalive.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 3.4.1 NAT, firewalls, ingress, egress · worked snapshots; 3.4.2 Service discovery · worked snapshots; 3.4.3 CDN and edge networking · worked snapshots; 3.4.4 Network partitions, timeouts, packet loss · worked snapshots; 3.4.5 Connection pooling and keepalive · worked snapshots
 
-Starting references: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/ · https://github.com/ByteByteGoHq/system-design-101 · https://www.rfc-editor.org/rfc/rfc9110.html
+References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
-Essential unit diagrams: Complete HTTP request timeline; TCP/TLS interaction; load-balancing topology; WebSocket vs polling communication
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 4: Runtime, Processes, Threads, and Concurrency
 
-Status: planned. Prerequisites: [1].
+Status: available. Direct prerequisites: [1].
 
 Worked example: Build a service that processes 1,000 file uploads. Compare sequential execution, threads, asynchronous I/O, and worker queues. Identify which architecture helps under which workload.
 
-### 4.1 The runtime owns your resources — planned
+### 4.1 The runtime owns your resources — available
 
-Prerequisites: unit-1
+Content source: src/teaching/foundations.py
 
 - Program vs process vs thread.
 
@@ -237,13 +231,13 @@ Prerequisites: unit-1
 
 - Synchronous vs asynchronous execution.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 4.1.1 Threads share a heap but have execution-local stacks; 4.1.2 Memory, stack, heap, and object lifetimes · worked snapshots; 4.1.3 Scheduling and context switching · worked snapshots; 4.1.4 CPU-bound vs I/O-bound workloads · worked snapshots; 4.1.5 Synchronous vs asynchronous execution · worked snapshots
 
-Starting references: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
+References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
-### 4.2 Tasks, threads & event loops — planned
+### 4.2 Tasks, threads & event loops — available
 
-Prerequisites: ch-4-1
+Content source: src/teaching/foundations.py
 
 - Blocking vs nonblocking I/O.
 
@@ -253,13 +247,13 @@ Prerequisites: ch-4-1
 
 - Thread pools and worker pools.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 4.2.1 Blocking vs nonblocking I/O · worked snapshots; 4.2.2 Concurrency vs parallelism · worked snapshots; 4.2.3 Event loops, tasks, futures, promises · worked snapshots; 4.2.4 Thread pools and worker pools · worked snapshots
 
-Starting references: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
+References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
-### 4.3 Shared memory & coordination — planned
+### 4.3 Shared memory & coordination — available
 
-Prerequisites: ch-4-2
+Content source: src/teaching/foundations.py
 
 - Shared memory vs message passing.
 
@@ -269,13 +263,13 @@ Prerequisites: ch-4-2
 
 - Deadlocks, starvation, livelocks.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 4.3.1 Shared memory vs message passing · worked snapshots; 4.3.2 Race conditions and critical sections · worked snapshots; 4.3.3 Mutexes, semaphores, atomics, condition variables · worked snapshots; 4.3.4 A circular wait prevents both participants progressing
 
-Starting references: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
+References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
-### 4.4 Visibility, cancellation & overload — planned
+### 4.4 Visibility, cancellation & overload — available
 
-Prerequisites: ch-4-3
+Content source: src/teaching/foundations.py
 
 - Memory visibility and happens-before relationships.
 
@@ -285,22 +279,20 @@ Prerequisites: ch-4-3
 
 - Cancellation and structured concurrency.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 4.4.1 Memory visibility and happens-before relationships · worked snapshots; 4.4.2 Thread safety and immutability · worked snapshots; 4.4.3 Resource exhaustion and backpressure · worked snapshots; 4.4.4 Cancellation and structured concurrency · worked snapshots
 
-Starting references: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
+References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
-Essential unit diagrams: Process/thread memory model; scheduling timeline; race-condition interleaving; deadlock wait graph; event-loop flow
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 5: Object-Oriented and Modular Software Design
 
-Status: planned. Prerequisites: [1].
+Status: available. Direct prerequisites: [1].
 
 Worked example: Start with a poorly designed payment-processing class. Refactor it into appropriate components, showing which problems each design improvement solves.
 
-### 5.1 Model behavior with objects and values — planned
+### 5.1 Model behavior with objects and values — available
 
-Prerequisites: unit-1
+Content source: src/teaching/lld.py
 
 - Abstraction, encapsulation, polymorphism, inheritance.
 
@@ -312,13 +304,13 @@ Prerequisites: unit-1
 
 - SOLID principles, including their limitations.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 5.1.1 Abstraction, encapsulation, polymorphism, inheritance · worked snapshots; 5.1.2 Composition vs inheritance · worked snapshots; 5.1.3 Interfaces and contracts · worked snapshots; 5.1.4 High cohesion and low coupling · worked snapshots; 5.1.5 SOLID principles, including their limitations · worked snapshots
 
-Starting references: https://refactoring.guru/design-patterns · https://martinfowler.com/bliki/BoundedContext.html
+References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
-### 5.2 Principles under pressure — planned
+### 5.2 Principles under pressure — available
 
-Prerequisites: ch-5-1
+Content source: src/teaching/lld.py
 
 - DRY, KISS, YAGNI.
 
@@ -328,13 +320,13 @@ Prerequisites: ch-5-1
 
 - Command-query separation.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 5.2.1 DRY, KISS, YAGNI · worked snapshots; 5.2.2 Law of Demeter · worked snapshots; 5.2.3 Tell, Don't Ask · worked snapshots; 5.2.4 Command-query separation · worked snapshots
 
-Starting references: https://refactoring.guru/design-patterns · https://martinfowler.com/bliki/BoundedContext.html
+References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
-### 5.3 Side effects, domain models & collaboration — planned
+### 5.3 Side effects, domain models & collaboration — available
 
-Prerequisites: ch-5-2
+Content source: src/teaching/lld.py
 
 - Immutability and side-effect management.
 
@@ -344,34 +336,32 @@ Prerequisites: ch-5-2
 
 - Testability and design for change.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 5.3.1 Immutability and side-effect management · worked snapshots; 5.3.2 Domain models, entities, value objects · worked snapshots; 5.3.3 Object collaboration · worked snapshots; 5.3.4 Testability and design for change · worked snapshots
 
-Starting references: https://refactoring.guru/design-patterns · https://martinfowler.com/bliki/BoundedContext.html
+References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
-### 5.4 Design for change, testing & functions — planned
+### 5.4 Design for change, testing & functions — available
 
-Prerequisites: ch-5-3
+Content source: src/teaching/lld.py
 
 - Refactoring and recognizing code smells.
 
 - Functional programming alternatives to object-centric design.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 5.4.1 Refactoring and recognizing code smells · worked snapshots; 5.4.2 Functional programming alternatives to object-centric design · worked snapshots; 5.4.3 The running system · ordered responsibility; 5.4.4 The running system · invariant and recovery review
 
-Starting references: https://refactoring.guru/design-patterns · https://martinfowler.com/bliki/BoundedContext.html
+References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
-Essential unit diagrams: Before/after class diagrams; dependency graph; inheritance vs composition; cohesion/coupling illustrations
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 6: Design Patterns, Dependency Injection, and Object Lifecycles
 
-Status: planned. Prerequisites: [5].
+Status: available. Direct prerequisites: [5].
 
 Worked example: Create a notification platform supporting email, SMS, and push notifications. Evolve it from hardcoded classes to DI, Strategy, Factory, and Decorator patterns.
 
-### 6.1 Dependencies, inversion & composition — planned
+### 6.1 Dependencies, inversion & composition — available
 
-Prerequisites: unit-5
+Content source: src/teaching/lld.py
 
 - Dependency, dependency direction, and inversion.
 
@@ -385,13 +375,13 @@ Prerequisites: unit-5
 
 - Composition roots and DI containers.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 6.1.1 Dependency, dependency direction, and inversion · worked snapshots; 6.1.2 Inversion of Control (IoC) · worked snapshots; 6.1.3 Dependency Injection (DI) · worked snapshots; 6.1.4 Constructor, property/setter, and method injection · worked snapshots; 6.1.5 Dependency inversion principle vs DI · worked snapshots; 6.1.6 Composition roots and DI containers · worked snapshots
 
-Starting references: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns · https://refactoring.guru/design-patterns/catalog
+References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
-### 6.2 Lifetimes, ownership & cleanup — planned
+### 6.2 Lifetimes, ownership & cleanup — available
 
-Prerequisites: ch-6-1
+Content source: src/teaching/lld.py
 
 - Transient, scoped, singleton, and framework-specific lifetimes.
 
@@ -405,74 +395,72 @@ Prerequisites: ch-6-1
 
 - Dependency cycles and captive dependencies.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 6.2.1 Scope identities make lifetime semantics visible; 6.2.2 Request scopes, session scopes, and custom scopes · worked snapshots; 6.2.3 Object creation vs object ownership · worked snapshots; 6.2.4 Disposal, cleanup, and resource lifecycles · worked snapshots; 6.2.5 Lazy initialization · worked snapshots; 6.2.6 Dependency cycles and captive dependencies · worked snapshots
 
-Starting references: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns · https://refactoring.guru/design-patterns/catalog
+References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
-### 6.3 Injection, locators & factories — planned
+### 6.3 Injection, locators & factories — available
 
-Prerequisites: ch-6-2
+Content source: src/teaching/lld.py
 
 - DI vs service locator.
 
 - DI vs factory pattern.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 6.3.1 DI vs service locator · worked snapshots; 6.3.2 DI vs factory pattern · worked snapshots; 6.3.3 The running system · ordered responsibility; 6.3.4 The running system · invariant and recovery review
 
-Starting references: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns · https://refactoring.guru/design-patterns/catalog
+References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
-### 6.4 Creational patterns — planned
+### 6.4 Creational patterns — available
 
-Prerequisites: ch-6-3
+Content source: src/teaching/lld.py
 
 - Factory Method, Abstract Factory, Builder, Prototype, Singleton.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 6.4.1 Factory Method, Abstract Factory, Builder, Prototype, Singleton · worked snapshots; 6.4.2 Factory Method · collaborator roles; 6.4.3 Abstract Factory · collaborator roles; 6.4.4 Builder · collaborator roles; 6.4.5 Prototype · collaborator roles; 6.4.6 Singleton · collaborator roles
 
-Starting references: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns · https://refactoring.guru/design-patterns/catalog
+References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
-### 6.5 Structural patterns — planned
+### 6.5 Structural patterns — available
 
-Prerequisites: ch-6-4
+Content source: src/teaching/lld.py
 
 - Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 6.5.1 Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy · worked snapshots; 6.5.2 Adapter · collaborator roles; 6.5.3 Bridge · collaborator roles; 6.5.4 Composite · collaborator roles; 6.5.5 Decorator · collaborator roles; 6.5.6 Facade · collaborator roles; 6.5.7 Flyweight · collaborator roles; 6.5.8 Proxy · collaborator roles
 
-Starting references: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns · https://refactoring.guru/design-patterns/catalog
+References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
-### 6.6 Behavioral patterns — planned
+### 6.6 Behavioral patterns — available
 
-Prerequisites: ch-6-5
+Content source: src/teaching/lld.py
 
 - Strategy, Observer, Command, State, Chain of Responsibility, Template Method, Iterator, Mediator, Memento, Visitor.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 6.6.1 Strategy, Observer, Command, State, Chain of Responsibility, Template Method, Iterator, Mediator, Memento, Visitor · worked snapshots; 6.6.2 Strategy · collaborator roles; 6.6.3 Observer · collaborator roles; 6.6.4 Command · collaborator roles; 6.6.5 State · collaborator roles; 6.6.6 Chain of Responsibility · collaborator roles; 6.6.7 Template Method · collaborator roles; 6.6.8 Iterator · collaborator roles; 6.6.9 Mediator · collaborator roles; 6.6.10 Memento · collaborator roles; 6.6.11 Visitor · collaborator roles
 
-Starting references: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns · https://refactoring.guru/design-patterns/catalog
+References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
-### 6.7 Enterprise patterns & boundaries — planned
+### 6.7 Enterprise patterns & boundaries — available
 
-Prerequisites: ch-6-6
+Content source: src/teaching/lld.py
 
 - Repository, Unit of Work, Specification, CQRS, and dependency boundaries.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 6.7.1 Repository, Unit of Work, Specification, CQRS, and dependency boundaries · worked snapshots; 6.7.2 Repository · collaborator roles; 6.7.3 Unit of Work · collaborator roles; 6.7.4 Specification · collaborator roles; 6.7.5 CQRS · collaborator roles
 
-Starting references: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns · https://refactoring.guru/design-patterns/catalog
+References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
-Essential unit diagrams: Object creation timelines; singleton/scoped/transient identity illustration; UML class relationships; dependency inversion before/after; pattern comparisons
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 7: Application Architecture and Domain-Driven Design
 
-Status: planned. Prerequisites: [5, 6].
+Status: available. Direct prerequisites: [5, 6].
 
 Worked example: Design an online shopping application first as a modular monolith, then examine the conditions under which selected domains should become independent services.
 
-### 7.1 Layers, monoliths & ports — planned
+### 7.1 Layers, monoliths & ports — available
 
-Prerequisites: unit-5, unit-6
+Content source: src/teaching/lld.py
 
 - Layered/N-tier architecture.
 
@@ -486,13 +474,13 @@ Prerequisites: unit-5, unit-6
 
 - Onion Architecture.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 7.1.1 Layered/N-tier architecture · worked snapshots; 7.1.2 Modular monoliths · worked snapshots; 7.1.3 Monolith vs microservices · worked snapshots; 7.1.4 Clean Architecture · worked snapshots; 7.1.5 Hexagonal/Ports and Adapters · worked snapshots; 7.1.6 Onion Architecture · worked snapshots
 
-Starting references: https://learn.microsoft.com/azure/architecture/guide/architecture-styles · https://martinfowler.com/bliki/BoundedContext.html · https://www.martinfowler.com/articles/microservices.html
+References: https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/ · https://martinfowler.com/bliki/BoundedContext.html · https://martinfowler.com/articles/microservices.html
 
-### 7.2 Model a bounded context — planned
+### 7.2 Model a bounded context — available
 
-Prerequisites: ch-7-1
+Content source: src/teaching/lld.py
 
 - Domain-Driven Design (DDD).
 
@@ -502,13 +490,13 @@ Prerequisites: ch-7-1
 
 - Domain events.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 7.2.1 Domain-Driven Design (DDD) · worked snapshots; 7.2.2 Context boundaries protect different business meanings; 7.2.3 Aggregates, entities, value objects, domain services · worked snapshots; 7.2.4 Domain events · worked snapshots
 
-Starting references: https://learn.microsoft.com/azure/architecture/guide/architecture-styles · https://martinfowler.com/bliki/BoundedContext.html · https://www.martinfowler.com/articles/microservices.html
+References: https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/ · https://martinfowler.com/bliki/BoundedContext.html · https://martinfowler.com/articles/microservices.html
 
-### 7.3 Keep business policy inside — planned
+### 7.3 Keep business policy inside — available
 
-Prerequisites: ch-7-2
+Content source: src/teaching/lld.py
 
 - Dependency rules and module boundaries.
 
@@ -520,13 +508,13 @@ Prerequisites: ch-7-2
 
 - Event-driven architecture.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 7.3.1 Dependency rules and module boundaries · worked snapshots; 7.3.2 Business logic vs orchestration vs infrastructure · worked snapshots; 7.3.3 Controllers, services, repositories, adapters · worked snapshots; 7.3.4 Anti-corruption layers · worked snapshots; 7.3.5 Event-driven architecture · worked snapshots
 
-Starting references: https://learn.microsoft.com/azure/architecture/guide/architecture-styles · https://martinfowler.com/bliki/BoundedContext.html · https://www.martinfowler.com/articles/microservices.html
+References: https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/ · https://martinfowler.com/bliki/BoundedContext.html · https://martinfowler.com/articles/microservices.html
 
-### 7.4 Evolution without a distributed monolith — planned
+### 7.4 Evolution without a distributed monolith — available
 
-Prerequisites: ch-7-3
+Content source: src/teaching/lld.py
 
 - Serverless and function-oriented architectures.
 
@@ -538,22 +526,20 @@ Prerequisites: ch-7-3
 
 - When not to use microservices.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 7.4.1 Serverless and function-oriented architectures · worked snapshots; 7.4.2 Evolutionary architecture · worked snapshots; 7.4.3 Technical vs business boundaries · worked snapshots; 7.4.4 Distributed monolith antipattern · worked snapshots; 7.4.5 When not to use microservices · worked snapshots
 
-Starting references: https://learn.microsoft.com/azure/architecture/guide/architecture-styles · https://martinfowler.com/bliki/BoundedContext.html · https://www.martinfowler.com/articles/microservices.html
+References: https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/ · https://martinfowler.com/bliki/BoundedContext.html · https://martinfowler.com/articles/microservices.html
 
-Essential unit diagrams: Layered vs Hexagonal; modular monolith vs microservices; dependency arrows; bounded context map
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 8: API Design and Communication Contracts
 
-Status: planned. Prerequisites: [1, 3].
+Status: available. Direct prerequisites: [1, 3].
 
 Worked example: Design a payment API with create-payment, payment-status, refunds, idempotency protection, duplicate requests, and failed network responses.
 
-### 8.1 Model resources and messages — planned
+### 8.1 Model resources and messages — available
 
-Prerequisites: unit-1, unit-3
+Content source: src/teaching/lld.py
 
 - API fundamentals and interface contracts.
 
@@ -567,13 +553,13 @@ Prerequisites: unit-1, unit-3
 
 - Pagination, filtering, sorting.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 8.1.1 API fundamentals and interface contracts · worked snapshots; 8.1.2 REST, GraphQL, gRPC, RPC · worked snapshots; 8.1.3 Resource modeling · worked snapshots; 8.1.4 Request/response schemas · worked snapshots; 8.1.5 Status codes and error models · worked snapshots; 8.1.6 Pagination, filtering, sorting · worked snapshots
 
-Starting references: https://developer.mozilla.org/en-US/docs/Web/HTTP · https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://api-security.owasp.org/editions/2023/en/0x11-t10/
+References: https://www.rfc-editor.org/rfc/rfc9110.html · https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://www.rfc-editor.org/rfc/rfc9700.html
 
-### 8.2 Compatibility & idempotency — planned
+### 8.2 Compatibility & idempotency — available
 
-Prerequisites: ch-8-1
+Content source: src/teaching/lld.py
 
 - Cursor vs offset pagination.
 
@@ -581,13 +567,13 @@ Prerequisites: ch-8-1
 
 - Idempotency and idempotency keys.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 8.2.1 Cursor vs offset pagination · worked snapshots; 8.2.2 API versioning and compatibility · worked snapshots; 8.2.3 A payment retry follows durable operation identity; 8.2.4 The running system · invariant and recovery review
 
-Starting references: https://developer.mozilla.org/en-US/docs/Web/HTTP · https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://api-security.owasp.org/editions/2023/en/0x11-t10/
+References: https://www.rfc-editor.org/rfc/rfc9110.html · https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://www.rfc-editor.org/rfc/rfc9700.html
 
-### 8.3 Control access, load & long operations — planned
+### 8.3 Control access, load & long operations — available
 
-Prerequisites: ch-8-2
+Content source: src/teaching/lld.py
 
 - Authentication vs authorization at API boundaries.
 
@@ -599,13 +585,13 @@ Prerequisites: ch-8-2
 
 - Webhooks and delivery acknowledgments.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 8.3.1 Authentication vs authorization at API boundaries · worked snapshots; 8.3.2 Rate limits and quotas · worked snapshots; 8.3.3 Retries and timeouts · worked snapshots; 8.3.4 Streaming APIs and long-running operations · worked snapshots; 8.3.5 Webhooks and delivery acknowledgments · worked snapshots
 
-Starting references: https://developer.mozilla.org/en-US/docs/Web/HTTP · https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://api-security.owasp.org/editions/2023/en/0x11-t10/
+References: https://www.rfc-editor.org/rfc/rfc9110.html · https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://www.rfc-editor.org/rfc/rfc9700.html
 
-### 8.4 Evolve a public contract — planned
+### 8.4 Evolve a public contract — available
 
-Prerequisites: ch-8-3
+Content source: src/teaching/lld.py
 
 - Schema evolution.
 
@@ -617,22 +603,20 @@ Prerequisites: ch-8-3
 
 - API documentation and discoverability.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 8.4.1 Schema evolution · worked snapshots; 8.4.2 Consumer-driven contracts · worked snapshots; 8.4.3 API gateways and BFF · worked snapshots; 8.4.4 Public vs internal APIs · worked snapshots; 8.4.5 API documentation and discoverability · worked snapshots
 
-Starting references: https://developer.mozilla.org/en-US/docs/Web/HTTP · https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://api-security.owasp.org/editions/2023/en/0x11-t10/
+References: https://www.rfc-editor.org/rfc/rfc9110.html · https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://www.rfc-editor.org/rfc/rfc9700.html
 
-Essential unit diagrams: REST request flow; API gateway topology; synchronous vs asynchronous API; payment state-machine diagram
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 9: Data Models and Storage Technologies
 
-Status: planned. Prerequisites: [1].
+Status: available. Direct prerequisites: [1].
 
 Worked example: Choose storage technologies for user profiles, financial transactions, chat messages, event logs, and uploaded PDFs. Justify each decision.
 
-### 9.1 Storage promises & database families — planned
+### 9.1 Storage promises & database families — available
 
-Prerequisites: unit-1
+Content source: src/teaching/data.py
 
 - What data storage must guarantee.
 
@@ -652,13 +636,13 @@ Prerequisites: unit-1
 
 - Vector indexes: introductory architecture only.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 9.1.1 What data storage must guarantee · worked snapshots; 9.1.2 Relational databases and SQL · worked snapshots; 9.1.3 Document databases · worked snapshots; 9.1.4 Key-value databases · worked snapshots; 9.1.5 Wide-column stores · worked snapshots; 9.1.6 Graph databases · worked snapshots; 9.1.7 Time-series databases · worked snapshots; 9.1.8 Search indexes · worked snapshots; 9.1.9 Vector indexes: introductory architecture only · worked snapshots
 
-Starting references: https://db.cs.cmu.edu/courses/ · https://learn.microsoft.com/en-us/azure/architecture/guide/
+References: https://db.cs.cmu.edu/courses/ · https://www.postgresql.org/docs/18/indexes-types.html
 
-### 9.2 Files, objects & analytical layouts — planned
+### 9.2 Files, objects & analytical layouts — available
 
-Prerequisites: ch-9-1
+Content source: src/teaching/data.py
 
 - Object storage vs block vs file storage.
 
@@ -668,13 +652,13 @@ Prerequisites: ch-9-1
 
 - Normalization vs denormalization.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 9.2.1 Object storage vs block vs file storage · worked snapshots; 9.2.2 OLTP vs OLAP · worked snapshots; 9.2.3 Row-oriented vs column-oriented storage · worked snapshots; 9.2.4 Normalization vs denormalization · worked snapshots
 
-Starting references: https://db.cs.cmu.edu/courses/ · https://learn.microsoft.com/en-us/azure/architecture/guide/
+References: https://db.cs.cmu.edu/courses/ · https://www.postgresql.org/docs/18/indexes-types.html
 
-### 9.3 Model relationships and ownership — planned
+### 9.3 Model relationships and ownership — available
 
-Prerequisites: ch-9-2
+Content source: src/teaching/data.py
 
 - ER diagrams and relational modeling.
 
@@ -684,34 +668,32 @@ Prerequisites: ch-9-2
 
 - Choosing storage based on access patterns.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 9.3.1 An order schema preserves relationships and history; 9.3.2 Referential integrity · worked snapshots; 9.3.3 Data ownership · worked snapshots; 9.3.4 Choosing storage based on access patterns · worked snapshots
 
-Starting references: https://db.cs.cmu.edu/courses/ · https://learn.microsoft.com/en-us/azure/architecture/guide/
+References: https://db.cs.cmu.edu/courses/ · https://www.postgresql.org/docs/18/indexes-types.html
 
-### 9.4 Access patterns, retention & operational cost — planned
+### 9.4 Access patterns, retention & operational cost — available
 
-Prerequisites: ch-9-3
+Content source: src/teaching/data.py
 
 - Data retention and lifecycle.
 
 - Polyglot persistence and its operational costs.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 9.4.1 Data retention and lifecycle · worked snapshots; 9.4.2 Polyglot persistence and its operational costs · worked snapshots; 9.4.3 The running system · ordered responsibility; 9.4.4 The running system · invariant and recovery review
 
-Starting references: https://db.cs.cmu.edu/courses/ · https://learn.microsoft.com/en-us/azure/architecture/guide/
+References: https://db.cs.cmu.edu/courses/ · https://www.postgresql.org/docs/18/indexes-types.html
 
-Essential unit diagrams: Database taxonomy; physical storage representations; normalized vs denormalized schema; entity-relationship diagrams
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 10: Database Internals, Transactions, and Concurrency Control
 
-Status: planned. Prerequisites: [4, 9].
+Status: available. Direct prerequisites: [4, 9].
 
 Worked example: Two users attempt to purchase the last available ticket. Demonstrate the lost-update race, show why naive reads fail, and implement valid alternatives using transactions and concurrency control.
 
-### 10.1 Pages, indexes & query plans — planned
+### 10.1 Pages, indexes & query plans — available
 
-Prerequisites: unit-4, unit-9
+Content source: src/teaching/data.py
 
 - How databases store and retrieve records.
 
@@ -725,13 +707,13 @@ Prerequisites: unit-4, unit-9
 
 - Index selection and query optimization.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 10.1.1 How databases store and retrieve records · worked snapshots; 10.1.2 Pages, records, indexes, and buffer pools · worked snapshots; 10.1.3 B+tree lookup narrows an ordered key range; 10.1.4 LSM trees and write amplification · worked snapshots; 10.1.5 Query planning and EXPLAIN · worked snapshots; 10.1.6 Index selection and query optimization · worked snapshots
 
-Starting references: https://15445.courses.cs.cmu.edu/ · https://www.postgresql.org/docs/current/transaction-iso.html
+References: https://www.postgresql.org/docs/18/transaction-iso.html · https://www.postgresql.org/docs/18/indexes-types.html · https://www.postgresql.org/docs/18/wal-intro.html · https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
 
-### 10.2 Commit, logging & versions — planned
+### 10.2 Commit, logging & versions — available
 
-Prerequisites: ch-10-1
+Content source: src/teaching/data.py
 
 - ACID properties.
 
@@ -741,13 +723,13 @@ Prerequisites: ch-10-1
 
 - MVCC.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 10.2.1 ACID properties · worked snapshots; 10.2.2 Transaction commit and rollback · worked snapshots; 10.2.3 Write-ahead logging · worked snapshots; 10.2.4 Two snapshots can legitimately see different versions
 
-Starting references: https://15445.courses.cs.cmu.edu/ · https://www.postgresql.org/docs/current/transaction-iso.html
+References: https://www.postgresql.org/docs/18/transaction-iso.html · https://www.postgresql.org/docs/18/indexes-types.html · https://www.postgresql.org/docs/18/wal-intro.html · https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
 
-### 10.3 Races, anomalies & isolation — planned
+### 10.3 Races, anomalies & isolation — available
 
-Prerequisites: ch-10-2
+Content source: src/teaching/data.py
 
 - Locking and optimistic concurrency control.
 
@@ -759,13 +741,13 @@ Prerequisites: ch-10-2
 
 - Serializable execution and serializability.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 10.3.1 Locking and optimistic concurrency control · worked snapshots; 10.3.2 Dirty reads, nonrepeatable reads, phantom reads · worked snapshots; 10.3.3 Lost updates, write skew, serialization anomalies · worked snapshots; 10.3.4 Isolation levels and implementation differences · worked snapshots; 10.3.5 Serializable execution and serializability · worked snapshots
 
-Starting references: https://15445.courses.cs.cmu.edu/ · https://www.postgresql.org/docs/current/transaction-iso.html
+References: https://www.postgresql.org/docs/18/transaction-iso.html · https://www.postgresql.org/docs/18/indexes-types.html · https://www.postgresql.org/docs/18/wal-intro.html · https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
 
-### 10.4 Pools, recovery & ticket correctness — planned
+### 10.4 Pools, recovery & ticket correctness — available
 
-Prerequisites: ch-10-3
+Content source: src/teaching/data.py
 
 - Database connection pooling.
 
@@ -773,22 +755,20 @@ Prerequisites: ch-10-3
 
 - Backup, recovery, and durability.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 10.4.1 Database connection pooling · worked snapshots; 10.4.2 Transactions across multiple operations · worked snapshots; 10.4.3 Backup, recovery, and durability · worked snapshots; 10.4.4 The running system · invariant and recovery review
 
-Starting references: https://15445.courses.cs.cmu.edu/ · https://www.postgresql.org/docs/current/transaction-iso.html
+References: https://www.postgresql.org/docs/18/transaction-iso.html · https://www.postgresql.org/docs/18/indexes-types.html · https://www.postgresql.org/docs/18/wal-intro.html · https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
 
-Essential unit diagrams: B+tree traversal; MVCC version timeline; concurrent transaction interleavings; lock wait graph; WAL and recovery
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 11: Caching and Content Delivery
 
-Status: planned. Prerequisites: [3, 9].
+Status: available. Direct prerequisites: [3, 9].
 
 Worked example: A popular product page receives enormous traffic. Introduce caching gradually and examine stale prices, thundering herds, inventory correctness, and failure behavior.
 
-### 11.1 Locality and cache placement — planned
+### 11.1 Locality and cache placement — available
 
-Prerequisites: unit-3, unit-9
+Content source: src/teaching/data.py
 
 - Why caching works.
 
@@ -798,13 +778,13 @@ Prerequisites: unit-3, unit-9
 
 - Browser, CDN, application, and database caches.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 11.1.1 Why caching works · worked snapshots; 11.1.2 Cache locality and the working set · worked snapshots; 11.1.3 In-process vs distributed caches · worked snapshots; 11.1.4 Browser, CDN, application, and database caches · worked snapshots
 
-Starting references: https://redis.io/docs/latest/develop/use/patterns/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/ · https://learn.microsoft.com/en-us/azure/architecture/patterns
+References: https://www.rfc-editor.org/rfc/rfc9111.html · https://redis.io/docs/latest/develop/reference/eviction/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 
-### 11.2 Copies, freshness & eviction — planned
+### 11.2 Copies, freshness & eviction — available
 
-Prerequisites: ch-11-1
+Content source: src/teaching/data.py
 
 - Cache-aside, read-through, write-through, write-behind.
 
@@ -814,13 +794,13 @@ Prerequisites: ch-11-1
 
 - Eviction: LRU, LFU, FIFO, and alternatives.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 11.2.1 Cache-aside, read-through, write-through, write-behind · worked snapshots; 11.2.2 TTL and cache expiration · worked snapshots; 11.2.3 A stale cache is a separate state copy; 11.2.4 LRU and FIFO disagree after the same accesses
 
-Starting references: https://redis.io/docs/latest/develop/use/patterns/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/ · https://learn.microsoft.com/en-us/azure/architecture/patterns
+References: https://www.rfc-editor.org/rfc/rfc9111.html · https://redis.io/docs/latest/develop/reference/eviction/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 
-### 11.3 Hot keys, stampedes & negative results — planned
+### 11.3 Hot keys, stampedes & negative results — available
 
-Prerequisites: ch-11-2
+Content source: src/teaching/data.py
 
 - Hot keys.
 
@@ -832,13 +812,13 @@ Prerequisites: ch-11-2
 
 - Cache warming and prefetching.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 11.3.1 Hot keys · worked snapshots; 11.3.2 Cache stampedes, penetration, and avalanche · worked snapshots; 11.3.3 Negative caching · worked snapshots; 11.3.4 Stale-while-revalidate · worked snapshots; 11.3.5 Cache warming and prefetching · worked snapshots
 
-Starting references: https://redis.io/docs/latest/develop/use/patterns/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/ · https://learn.microsoft.com/en-us/azure/architecture/patterns
+References: https://www.rfc-editor.org/rfc/rfc9111.html · https://redis.io/docs/latest/develop/reference/eviction/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 
-### 11.4 Edges, partitions & the price of a cache — planned
+### 11.4 Edges, partitions & the price of a cache — available
 
-Prerequisites: ch-11-3
+Content source: src/teaching/data.py
 
 - Redis-like data structures.
 
@@ -848,22 +828,20 @@ Prerequisites: ch-11-3
 
 - When caching is harmful.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 11.4.1 Redis-like data structures · worked snapshots; 11.4.2 CDN architecture and origin shielding · worked snapshots; 11.4.3 Cache partitioning and replication · worked snapshots; 11.4.4 When caching is harmful · worked snapshots
 
-Starting references: https://redis.io/docs/latest/develop/use/patterns/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/ · https://learn.microsoft.com/en-us/azure/architecture/patterns
+References: https://www.rfc-editor.org/rfc/rfc9111.html · https://redis.io/docs/latest/develop/reference/eviction/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 
-Essential unit diagrams: Cache hit/miss sequence; cache hierarchy; eviction simulation; stampede timeline; geographic CDN delivery
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 12: Scalability, Load Balancing, and Data Distribution
 
-Status: planned. Prerequisites: [2, 3, 9, 10, 11].
+Status: available. Direct prerequisites: [2, 3, 9, 10, 11].
 
 Worked example: Scale a URL shortener from 100 requests per second to 100,000. Introduce new components only when justified by a demonstrated bottleneck.
 
-### 12.1 Scale compute & route requests — planned
+### 12.1 Scale compute & route requests — available
 
-Prerequisites: unit-2, unit-3, unit-9, unit-10, unit-11
+Content source: src/teaching/data.py
 
 - Vertical vs horizontal scaling.
 
@@ -877,13 +855,13 @@ Prerequisites: unit-2, unit-3, unit-9, unit-10, unit-11
 
 - Autoscaling metrics.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 12.1.1 Vertical vs horizontal scaling · worked snapshots; 12.1.2 Stateless vs stateful services · worked snapshots; 12.1.3 Load distribution algorithms · worked snapshots; 12.1.4 Health checks and failover · worked snapshots; 12.1.5 Sticky sessions · worked snapshots; 12.1.6 Autoscaling metrics · worked snapshots
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices
+References: https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store
 
-### 12.2 Replicate and partition data — planned
+### 12.2 Replicate and partition data — available
 
-Prerequisites: ch-12-1
+Content source: src/teaching/data.py
 
 - Replication.
 
@@ -897,13 +875,13 @@ Prerequisites: ch-12-1
 
 - Hot partitions and skew.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 12.2.1 Replication · worked snapshots; 12.2.2 Partitioning and sharding · worked snapshots; 12.2.3 Range partitioning vs hash partitioning · worked snapshots; 12.2.4 A new owner takes only part of the hash space; 12.2.5 Rebalancing · worked snapshots; 12.2.6 Averages hide a hot partition
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices
+References: https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store
 
-### 12.3 Lag, proxies & saturated pools — planned
+### 12.3 Lag, proxies & saturated pools — available
 
-Prerequisites: ch-12-2
+Content source: src/teaching/data.py
 
 - Read replicas and read/write splitting.
 
@@ -915,13 +893,13 @@ Prerequisites: ch-12-2
 
 - Bottleneck identification.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 12.3.1 Read replicas and read/write splitting · worked snapshots; 12.3.2 Replication lag · worked snapshots; 12.3.3 Database proxying · worked snapshots; 12.3.4 Connection pool saturation · worked snapshots; 12.3.5 Bottleneck identification · worked snapshots
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices
+References: https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store
 
-### 12.4 Regions, write paths & scale economics — planned
+### 12.4 Regions, write paths & scale economics — available
 
-Prerequisites: ch-12-3
+Content source: src/teaching/data.py
 
 - Queueing and overload.
 
@@ -933,22 +911,20 @@ Prerequisites: ch-12-3
 
 - Scale-out economics.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 12.4.1 Queueing and overload · worked snapshots; 12.4.2 Single points of failure · worked snapshots; 12.4.3 Multi-region strategies · worked snapshots; 12.4.4 Scaling writes vs scaling reads · worked snapshots; 12.4.5 Scale-out economics · worked snapshots
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices
+References: https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store
 
-Essential unit diagrams: Architecture evolution across four load levels; consistent-hashing ring; sharding heatmap; load-balancer failover
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 13: File Systems, Search Infrastructure, and Data Pipelines
 
-Status: planned. Prerequisites: [8, 9, 10].
+Status: available. Direct prerequisites: [8, 9, 10].
 
 Worked example: Design a document-processing system accepting millions of files, tracking processing state, extracting metadata, maintaining provenance, and exposing searchable results.
 
-### 13.1 Upload bytes without losing identity — planned
+### 13.1 Upload bytes without losing identity — available
 
-Prerequisites: unit-8, unit-9, unit-10
+Content source: src/teaching/data.py
 
 - Binary/object storage.
 
@@ -960,13 +936,13 @@ Prerequisites: unit-8, unit-9, unit-10
 
 - Metadata vs binary data.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 13.1.1 Binary/object storage · worked snapshots; 13.1.2 The upload pipeline separates bytes from control; 13.1.3 Multipart and resumable uploads · worked snapshots; 13.1.4 Checksums and content addressing · worked snapshots; 13.1.5 Metadata vs binary data · worked snapshots
 
-Starting references: https://15445.courses.cs.cmu.edu/ · https://learn.microsoft.com/en-us/azure/architecture/ · https://kafka.apache.org/documentation/
+References: https://openlineage.io/docs/ · https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex · https://kafka.apache.org/41/design/design/
 
-### 13.2 Build and rebuild a search index — planned
+### 13.2 Build and rebuild a search index — available
 
-Prerequisites: ch-13-1
+Content source: src/teaching/data.py
 
 - Search engines and inverted indexes.
 
@@ -974,13 +950,13 @@ Prerequisites: ch-13-1
 
 - Search ingestion and reindexing.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 13.2.1 An inverted index is a term-to-document map; 13.2.2 Indexing pipelines · worked snapshots; 13.2.3 Search ingestion and reindexing · worked snapshots; 13.2.4 The running system · invariant and recovery review
 
-Starting references: https://15445.courses.cs.cmu.edu/ · https://learn.microsoft.com/en-us/azure/architecture/ · https://kafka.apache.org/documentation/
+References: https://openlineage.io/docs/ · https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex · https://kafka.apache.org/41/design/design/
 
-### 13.3 Move data through batch and streams — planned
+### 13.3 Move data through batch and streams — available
 
-Prerequisites: ch-13-2
+Content source: src/teaching/data.py
 
 - Batch vs streaming pipelines.
 
@@ -992,13 +968,13 @@ Prerequisites: ch-13-2
 
 - Stream processing fundamentals.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 13.3.1 Batch vs streaming pipelines · worked snapshots; 13.3.2 ETL vs ELT · worked snapshots; 13.3.3 Change Data Capture (CDC) · worked snapshots; 13.3.4 Data lakes and warehouses · worked snapshots; 13.3.5 Stream processing fundamentals · worked snapshots
 
-Starting references: https://15445.courses.cs.cmu.edu/ · https://learn.microsoft.com/en-us/azure/architecture/ · https://kafka.apache.org/documentation/
+References: https://openlineage.io/docs/ · https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex · https://kafka.apache.org/41/design/design/
 
-### 13.4 Quality, provenance & replay — planned
+### 13.4 Quality, provenance & replay — available
 
-Prerequisites: ch-13-3
+Content source: src/teaching/data.py
 
 - Data provenance and lineage.
 
@@ -1008,22 +984,20 @@ Prerequisites: ch-13-3
 
 - Designing data-intensive applications.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 13.4.1 Data provenance and lineage · worked snapshots; 13.4.2 Data quality, schema validation, and replay · worked snapshots; 13.4.3 Lifecycle policies and retention · worked snapshots; 13.4.4 Designing data-intensive applications · worked snapshots
 
-Starting references: https://15445.courses.cs.cmu.edu/ · https://learn.microsoft.com/en-us/azure/architecture/ · https://kafka.apache.org/documentation/
+References: https://openlineage.io/docs/ · https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex · https://kafka.apache.org/41/design/design/
 
-Essential unit diagrams: Upload pipeline; inverted index; ingestion DAG; batch vs stream timeline; lineage graph
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 14: Distributed Systems Fundamentals
 
-Status: planned. Prerequisites: [3, 4, 10].
+Status: available. Direct prerequisites: [3, 4, 10].
 
 Worked example: A social application writes a new post in one region while a friend reads it from another. Examine different consistency contracts and their user-visible effects.
 
-### 14.1 Partial failure & the meaning of time — planned
+### 14.1 Partial failure & the meaning of time — available
 
-Prerequisites: unit-3, unit-4, unit-10
+Content source: src/teaching/distributed.py
 
 - What makes a distributed system difficult?
 
@@ -1039,13 +1013,13 @@ Prerequisites: unit-3, unit-4, unit-10
 
 - Lamport clocks and vector clocks.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 14.1.1 What makes a distributed system difficult · worked snapshots; 14.1.2 Partial failures · worked snapshots; 14.1.3 Network uncertainty · worked snapshots; 14.1.4 Fault models · worked snapshots; 14.1.5 Time, clocks, and event ordering · worked snapshots; 14.1.6 Physical vs logical clocks · worked snapshots; 14.1.7 Vector comparison exposes concurrent events
 
-Starting references: https://pdos.csail.mit.edu/6.5840/ · https://learn.microsoft.com/en-us/azure/architecture/patterns · https://lamport.azurewebsites.net/pubs/time-clocks.pdf
+References: https://jepsen.io/consistency · https://lamport.azurewebsites.net/pubs/time-clocks.pdf · https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf
 
-### 14.2 Consistency as a reader-visible contract — planned
+### 14.2 Consistency as a reader-visible contract — available
 
-Prerequisites: ch-14-1
+Content source: src/teaching/distributed.py
 
 - Consistency models.
 
@@ -1059,13 +1033,13 @@ Prerequisites: ch-14-1
 
 - Read-your-writes and monotonic reads.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 14.2.1 Consistency models · worked snapshots; 14.2.2 Strong consistency and eventual consistency · worked snapshots; 14.2.3 Linearizability · worked snapshots; 14.2.4 Serializability vs linearizability · worked snapshots; 14.2.5 Sequential and causal consistency · worked snapshots; 14.2.6 Read-your-writes and monotonic reads · worked snapshots
 
-Starting references: https://pdos.csail.mit.edu/6.5840/ · https://learn.microsoft.com/en-us/azure/architecture/patterns · https://lamport.azurewebsites.net/pubs/time-clocks.pdf
+References: https://jepsen.io/consistency · https://lamport.azurewebsites.net/pubs/time-clocks.pdf · https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf
 
-### 14.3 Partitions, CAP, PACELC & quorums — planned
+### 14.3 Partitions, CAP, PACELC & quorums — available
 
-Prerequisites: ch-14-2
+Content source: src/teaching/distributed.py
 
 - CAP theorem, with its actual assumptions.
 
@@ -1075,13 +1049,13 @@ Prerequisites: ch-14-2
 
 - Split-brain situations.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 14.3.1 CAP theorem, with its actual assumptions · worked snapshots; 14.3.2 PACELC as a useful extension · worked snapshots; 14.3.3 Intersecting quorums still need a protocol; 14.3.4 A partition can leave two live but disconnected sides
 
-Starting references: https://pdos.csail.mit.edu/6.5840/ · https://learn.microsoft.com/en-us/azure/architecture/patterns · https://lamport.azurewebsites.net/pubs/time-clocks.pdf
+References: https://jepsen.io/consistency · https://lamport.azurewebsites.net/pubs/time-clocks.pdf · https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf
 
-### 14.4 Coordination, safety & liveness — planned
+### 14.4 Coordination, safety & liveness — available
 
-Prerequisites: ch-14-3
+Content source: src/teaching/distributed.py
 
 - Distributed coordination.
 
@@ -1089,22 +1063,20 @@ Prerequisites: ch-14-3
 
 - Safety vs liveness.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 14.4.1 Distributed coordination · worked snapshots; 14.4.2 The fallacies of distributed computing · worked snapshots; 14.4.3 Safety vs liveness · worked snapshots; 14.4.4 The running system · invariant and recovery review
 
-Starting references: https://pdos.csail.mit.edu/6.5840/ · https://learn.microsoft.com/en-us/azure/architecture/patterns · https://lamport.azurewebsites.net/pubs/time-clocks.pdf
+References: https://jepsen.io/consistency · https://lamport.azurewebsites.net/pubs/time-clocks.pdf · https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf
 
-Essential unit diagrams: Network partition; causality timeline; consistency model comparisons; read/write quorum visualizations
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 15: Replication, Leader Election, and Consensus
 
-Status: planned. Prerequisites: [14].
+Status: available. Direct prerequisites: [14].
 
 Worked example: Three database replicas, one leader, and a network partition. Walk through elections, writes, acknowledgement rules, recovery, and potential data loss.
 
-### 15.1 Choose a replication model — planned
+### 15.1 Choose a replication model — available
 
-Prerequisites: unit-14
+Content source: src/teaching/distributed.py
 
 - Primary/replica architectures.
 
@@ -1118,13 +1090,13 @@ Prerequisites: unit-14
 
 - Quorum-based systems.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 15.1.1 Primary/replica architectures · worked snapshots; 15.1.2 Leader/follower replication · worked snapshots; 15.1.3 Multi-leader replication · worked snapshots; 15.1.4 Leaderless replication · worked snapshots; 15.1.5 Synchronous vs asynchronous replication · worked snapshots; 15.1.6 Quorum-based systems · worked snapshots
 
-Starting references: https://pdos.csail.mit.edu/6.5840/ · https://redis.io/docs/latest/develop/use/patterns/ · https://raft.github.io/raft.pdf
+References: https://pdos.csail.mit.edu/6.5840/ · https://raft.github.io/raft.pdf · https://lamport.azurewebsites.net/pubs/paxos-simple.pdf · https://arxiv.org/abs/1608.03960
 
-### 15.2 Raft and replicated state machines — planned
+### 15.2 Raft and replicated state machines — available
 
-Prerequisites: ch-15-1
+Content source: src/teaching/distributed.py
 
 - Consensus and replicated state machines.
 
@@ -1136,13 +1108,13 @@ Prerequisites: ch-15-1
 
 - Membership changes.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 15.2.1 Consensus and replicated state machines · worked snapshots; 15.2.2 Raft election changes authority under protocol rules; 15.2.3 Paxos: conceptual foundations · worked snapshots; 15.2.4 Presence in a log is not the same as commitment; 15.2.5 Membership changes · worked snapshots
 
-Starting references: https://pdos.csail.mit.edu/6.5840/ · https://redis.io/docs/latest/develop/use/patterns/ · https://raft.github.io/raft.pdf
+References: https://pdos.csail.mit.edu/6.5840/ · https://raft.github.io/raft.pdf · https://lamport.azurewebsites.net/pubs/paxos-simple.pdf · https://arxiv.org/abs/1608.03960
 
-### 15.3 Fences, leases & failure detection — planned
+### 15.3 Fences, leases & failure detection — available
 
-Prerequisites: ch-15-2
+Content source: src/teaching/distributed.py
 
 - Split-brain prevention and fencing tokens.
 
@@ -1152,34 +1124,32 @@ Prerequisites: ch-15-2
 
 - Distributed locks and leases.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 15.3.1 Split-brain prevention and fencing tokens · worked snapshots; 15.3.2 Failure detection · worked snapshots; 15.3.3 Strongly consistent metadata services · worked snapshots; 15.3.4 Distributed locks and leases · worked snapshots
 
-Starting references: https://pdos.csail.mit.edu/6.5840/ · https://redis.io/docs/latest/develop/use/patterns/ · https://raft.github.io/raft.pdf
+References: https://pdos.csail.mit.edu/6.5840/ · https://raft.github.io/raft.pdf · https://lamport.azurewebsites.net/pubs/paxos-simple.pdf · https://arxiv.org/abs/1608.03960
 
-### 15.4 Conflicts, CRDTs & regional trade-offs — planned
+### 15.4 Conflicts, CRDTs & regional trade-offs — available
 
-Prerequisites: ch-15-3
+Content source: src/teaching/distributed.py
 
 - Conflict resolution and CRDT introduction.
 
 - Multi-region replication trade-offs.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 15.4.1 Conflict resolution and CRDT introduction · worked snapshots; 15.4.2 Multi-region replication trade-offs · worked snapshots; 15.4.3 The running system · ordered responsibility; 15.4.4 The running system · invariant and recovery review
 
-Starting references: https://pdos.csail.mit.edu/6.5840/ · https://redis.io/docs/latest/develop/use/patterns/ · https://raft.github.io/raft.pdf
+References: https://pdos.csail.mit.edu/6.5840/ · https://raft.github.io/raft.pdf · https://lamport.azurewebsites.net/pubs/paxos-simple.pdf · https://arxiv.org/abs/1608.03960
 
-Essential unit diagrams: Raft state transitions; election timeline; replicated log; quorum intersection; network partition recovery
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 16: Message Queues, Events, and Distributed Workflows
 
-Status: planned. Prerequisites: [8, 10, 14, 15].
+Status: available. Direct prerequisites: [8, 10, 14, 15].
 
 Worked example: Design an e-commerce checkout that coordinates payment, inventory reservation, shipment creation, and refund compensation.
 
-### 16.1 Queues, logs & delivery boundaries — planned
+### 16.1 Queues, logs & delivery boundaries — available
 
-Prerequisites: unit-8, unit-10, unit-14, unit-15
+Content source: src/teaching/distributed.py
 
 - Synchronous vs asynchronous communication.
 
@@ -1199,13 +1169,13 @@ Prerequisites: unit-8, unit-10, unit-14, unit-15
 
 - Consumer acknowledgements.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 16.1.1 Synchronous vs asynchronous communication · worked snapshots; 16.1.2 Queues vs logs vs pub/sub · worked snapshots; 16.1.3 Producers, consumers, brokers · worked snapshots; 16.1.4 Partitions, consumer groups, offsets · worked snapshots; 16.1.5 Delivery guarantees · worked snapshots; 16.1.6 At-most-once and at-least-once processing · worked snapshots; 16.1.7 Exactly-once processing within defined boundaries · worked snapshots; 16.1.8 Ordering guarantees · worked snapshots; 16.1.9 Consumer acknowledgements · worked snapshots
 
-Starting references: https://kafka.apache.org/documentation/ · https://microservices.io/patterns/data/transactional-outbox · https://learn.microsoft.com/en-us/azure/architecture/patterns · https://microservices.io/patterns/data/transactional-outbox.html
+References: https://learn.microsoft.com/en-us/azure/architecture/patterns/saga · https://microservices.io/patterns/data/transactional-outbox.html · https://kafka.apache.org/41/design/design/
 
-### 16.2 Retries, poison messages & idempotence — planned
+### 16.2 Retries, poison messages & idempotence — available
 
-Prerequisites: ch-16-1
+Content source: src/teaching/distributed.py
 
 - Retries and dead-letter queues.
 
@@ -1215,13 +1185,13 @@ Prerequisites: ch-16-1
 
 - Event sourcing.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 16.2.1 Retries and dead-letter queues · worked snapshots; 16.2.2 Poison messages · worked snapshots; 16.2.3 Idempotent consumers · worked snapshots; 16.2.4 Event sourcing · worked snapshots
 
-Starting references: https://kafka.apache.org/documentation/ · https://microservices.io/patterns/data/transactional-outbox · https://learn.microsoft.com/en-us/azure/architecture/patterns · https://microservices.io/patterns/data/transactional-outbox.html
+References: https://learn.microsoft.com/en-us/azure/architecture/patterns/saga · https://microservices.io/patterns/data/transactional-outbox.html · https://kafka.apache.org/41/design/design/
 
-### 16.3 Event sourcing, CQRS & the outbox — planned
+### 16.3 Event sourcing, CQRS & the outbox — available
 
-Prerequisites: ch-16-2
+Content source: src/teaching/distributed.py
 
 - CQRS.
 
@@ -1229,13 +1199,13 @@ Prerequisites: ch-16-2
 
 - Sagas and compensating transactions.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 16.3.1 CQRS · worked snapshots; 16.3.2 The outbox closes a local publication gap; 16.3.3 A failed shipment starts tracked compensation; 16.3.4 The running system · invariant and recovery review
 
-Starting references: https://kafka.apache.org/documentation/ · https://microservices.io/patterns/data/transactional-outbox · https://learn.microsoft.com/en-us/azure/architecture/patterns · https://microservices.io/patterns/data/transactional-outbox.html
+References: https://learn.microsoft.com/en-us/azure/architecture/patterns/saga · https://microservices.io/patterns/data/transactional-outbox.html · https://kafka.apache.org/41/design/design/
 
-### 16.4 Sagas, durable work & reconciliation — planned
+### 16.4 Sagas, durable work & reconciliation — available
 
-Prerequisites: ch-16-3
+Content source: src/teaching/distributed.py
 
 - Choreography vs orchestration.
 
@@ -1249,22 +1219,20 @@ Prerequisites: ch-16-3
 
 - Reconciliation after partial failure.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 16.4.1 Choreography vs orchestration · worked snapshots; 16.4.2 Workflow engines · worked snapshots; 16.4.3 Durable job execution · worked snapshots; 16.4.4 Scheduling, leases, and worker coordination · worked snapshots; 16.4.5 Backpressure and replay · worked snapshots; 16.4.6 Reconciliation after partial failure · worked snapshots
 
-Starting references: https://kafka.apache.org/documentation/ · https://microservices.io/patterns/data/transactional-outbox · https://learn.microsoft.com/en-us/azure/architecture/patterns · https://microservices.io/patterns/data/transactional-outbox.html
+References: https://learn.microsoft.com/en-us/azure/architecture/patterns/saga · https://microservices.io/patterns/data/transactional-outbox.html · https://kafka.apache.org/41/design/design/
 
-Essential unit diagrams: Queue lifecycle; consumer partition assignment; Saga happy/failure paths; outbox transaction; event replay
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 17: Reliability, Fault Tolerance, and Disaster Recovery
 
-Status: planned. Prerequisites: [2, 12, 15, 16].
+Status: available. Direct prerequisites: [2, 12, 15, 16].
 
 Worked example: A downstream payment provider becomes unavailable during peak traffic. Demonstrate the failure cascade and progressively introduce resilience mechanisms.
 
-### 17.1 Failure domains & redundancy — planned
+### 17.1 Failure domains & redundancy — available
 
-Prerequisites: unit-2, unit-12, unit-15, unit-16
+Content source: src/teaching/distributed.py
 
 - Failure domains and fault isolation.
 
@@ -1274,13 +1242,13 @@ Prerequisites: unit-2, unit-12, unit-15, unit-16
 
 - Active-active vs active-passive.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 17.1.1 Failure domains and fault isolation · worked snapshots; 17.1.2 Availability vs durability · worked snapshots; 17.1.3 Redundancy · worked snapshots; 17.1.4 Active-active vs active-passive · worked snapshots
 
-Starting references: https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/reliability.html · https://docs.cloud.google.com/architecture/disaster-recovery · https://sre.google/workbook/table-of-contents/
+References: https://sre.google/sre-book/handling-overload/ · https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide · https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
 
-### 17.2 Retries, circuit breakers & isolation — planned
+### 17.2 Retries, circuit breakers & isolation — available
 
-Prerequisites: ch-17-1
+Content source: src/teaching/distributed.py
 
 - Timeouts.
 
@@ -1294,13 +1262,13 @@ Prerequisites: ch-17-1
 
 - Rate limiting.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 17.2.1 Timeouts · worked snapshots; 17.2.2 Retries, exponential backoff, jitter · worked snapshots; 17.2.3 Retry storms · worked snapshots; 17.2.4 A circuit breaker bounds futile calls; 17.2.5 Bulkheads · worked snapshots; 17.2.6 Rate limiting · worked snapshots
 
-Starting references: https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/reliability.html · https://docs.cloud.google.com/architecture/disaster-recovery · https://sre.google/workbook/table-of-contents/
+References: https://sre.google/sre-book/handling-overload/ · https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide · https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
 
-### 17.3 Shed load and degrade deliberately — planned
+### 17.3 Shed load and degrade deliberately — available
 
-Prerequisites: ch-17-2
+Content source: src/teaching/distributed.py
 
 - Load shedding.
 
@@ -1310,13 +1278,13 @@ Prerequisites: ch-17-2
 
 - Health checking.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 17.3.1 Load shedding · worked snapshots; 17.3.2 Graceful degradation · worked snapshots; 17.3.3 Fallbacks · worked snapshots; 17.3.4 Health checking · worked snapshots
 
-Starting references: https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/reliability.html · https://docs.cloud.google.com/architecture/disaster-recovery · https://sre.google/workbook/table-of-contents/
+References: https://sre.google/sre-book/handling-overload/ · https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide · https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
 
-### 17.4 Recover, test & learn from failure — planned
+### 17.4 Recover, test & learn from failure — available
 
-Prerequisites: ch-17-3
+Content source: src/teaching/distributed.py
 
 - RTO and RPO.
 
@@ -1334,22 +1302,20 @@ Prerequisites: ch-17-3
 
 - Incident analysis and prevention.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 17.4.1 Recovery time and recoverable data are different; 17.4.2 Backups and restore testing · worked snapshots; 17.4.3 Failover and failback · worked snapshots; 17.4.4 Multi-zone and multi-region deployments · worked snapshots; 17.4.5 Chaos engineering · worked snapshots; 17.4.6 SLO-based reliability decisions · worked snapshots; 17.4.7 Cascading failures · worked snapshots; 17.4.8 Incident analysis and prevention · worked snapshots
 
-Starting references: https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/reliability.html · https://docs.cloud.google.com/architecture/disaster-recovery · https://sre.google/workbook/table-of-contents/
+References: https://sre.google/sre-book/handling-overload/ · https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide · https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
 
-Essential unit diagrams: Retry amplification timeline; circuit breaker state machine; bulkhead isolation; failure-domain map; RTO/RPO timeline
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 18: Security Architecture and Privacy
 
-Status: planned. Prerequisites: [3, 7, 8, 9].
+Status: available. Direct prerequisites: [3, 7, 8, 9].
 
 Worked example: Design a multi-tenant SaaS application where an administrator must never gain access to another organization's data.
 
-### 18.1 Threats, identity & authorization — planned
+### 18.1 Threats, identity & authorization — available
 
-Prerequisites: unit-3, unit-7, unit-8, unit-9
+Content source: src/teaching/production.py
 
 - Threat modeling.
 
@@ -1365,13 +1331,13 @@ Prerequisites: unit-3, unit-7, unit-8, unit-9
 
 - Least privilege.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 18.1.1 Threat modeling · worked snapshots; 18.1.2 Trust boundaries · worked snapshots; 18.1.3 Authentication vs authorization · worked snapshots; 18.1.4 Sessions, cookies, tokens · worked snapshots; 18.1.5 OAuth 2.0 and OpenID Connect · worked snapshots; 18.1.6 Role-based and attribute-based access control · worked snapshots; 18.1.7 Least privilege · worked snapshots
 
-Starting references: https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://sre.google/books/
+References: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html · https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html · https://www.rfc-editor.org/rfc/rfc9700.html · https://openid.net/specs/openid-connect-core-1_0.html
 
-### 18.2 Secrets, encryption & trust boundaries — planned
+### 18.2 Secrets, encryption & trust boundaries — available
 
-Prerequisites: ch-18-1
+Content source: src/teaching/production.py
 
 - Defense in depth.
 
@@ -1387,13 +1353,13 @@ Prerequisites: ch-18-1
 
 - Zero-trust principles.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 18.2.1 Defense in depth · worked snapshots; 18.2.2 Secrets management · worked snapshots; 18.2.3 Encryption in transit and at rest · worked snapshots; 18.2.4 Password hashing · worked snapshots; 18.2.5 Key management and rotation · worked snapshots; 18.2.6 Network segmentation · worked snapshots; 18.2.7 Zero-trust principles · worked snapshots
 
-Starting references: https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://sre.google/books/
+References: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html · https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html · https://www.rfc-editor.org/rfc/rfc9700.html · https://openid.net/specs/openid-connect-core-1_0.html
 
-### 18.3 Tenant isolation, audit & deletion — planned
+### 18.3 Tenant isolation, audit & deletion — available
 
-Prerequisites: ch-18-2
+Content source: src/teaching/production.py
 
 - API security and common vulnerabilities.
 
@@ -1405,13 +1371,13 @@ Prerequisites: ch-18-2
 
 - Privacy, retention, and deletion.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 18.3.1 API security and common vulnerabilities · worked snapshots; 18.3.2 Tenant identity must survive every trust boundary; 18.3.3 Data minimization · worked snapshots; 18.3.4 Audit trails · worked snapshots; 18.3.5 Privacy, retention, and deletion · worked snapshots
 
-Starting references: https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://sre.google/books/
+References: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html · https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html · https://www.rfc-editor.org/rfc/rfc9700.html · https://openid.net/specs/openid-connect-core-1_0.html
 
-### 18.4 Supply chains and security reviews — planned
+### 18.4 Supply chains and security reviews — available
 
-Prerequisites: ch-18-3
+Content source: src/teaching/production.py
 
 - Supply-chain security.
 
@@ -1419,22 +1385,20 @@ Prerequisites: ch-18-3
 
 - Secure-by-design reviews.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 18.4.1 Supply-chain security · worked snapshots; 18.4.2 Security vs usability trade-offs · worked snapshots; 18.4.3 Secure-by-design reviews · worked snapshots; 18.4.4 The running system · invariant and recovery review
 
-Starting references: https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://sre.google/books/
+References: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html · https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html · https://www.rfc-editor.org/rfc/rfc9700.html · https://openid.net/specs/openid-connect-core-1_0.html
 
-Essential unit diagrams: Trust-boundary map; authentication sequence; authorization decision flow; tenant-isolation architecture
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 19: Observability, Monitoring, and Incident Engineering
 
-Status: planned. Prerequisites: [2, 3, 4, 10].
+Status: available. Direct prerequisites: [2, 3, 4, 10].
 
 Worked example: An API's p99 latency increases from 200 ms to 5 seconds. Use traces, metrics, logs, and database analysis to localize the bottleneck.
 
-### 19.1 Observe behavior with three signals — planned
+### 19.1 Observe behavior with three signals — available
 
-Prerequisites: unit-2, unit-3, unit-4, unit-10
+Content source: src/teaching/production.py
 
 - Monitoring vs observability.
 
@@ -1448,13 +1412,13 @@ Prerequisites: unit-2, unit-3, unit-4, unit-10
 
 - Golden signals.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 19.1.1 Monitoring vs observability · worked snapshots; 19.1.2 Logs, metrics, and traces · worked snapshots; 19.1.3 Structured logging · worked snapshots; 19.1.4 This slow request is dominated by waiting; 19.1.5 Trace IDs, span IDs, context propagation · worked snapshots; 19.1.6 Golden signals · worked snapshots
 
-Starting references: https://opentelemetry.io/docs/concepts/ · https://opentelemetry.io/docs/concepts/observability-primer/ · https://sre.google/workbook/table-of-contents/
+References: https://opentelemetry.io/docs/concepts/signals/ · https://opentelemetry.io/docs/concepts/context-propagation/ · https://sre.google/workbook/alerting-on-slos/
 
-### 19.2 Choose indicators, budgets & alerts — planned
+### 19.2 Choose indicators, budgets & alerts — available
 
-Prerequisites: ch-19-1
+Content source: src/teaching/production.py
 
 - RED and USE methods.
 
@@ -1466,13 +1430,13 @@ Prerequisites: ch-19-1
 
 - Dashboards.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 19.2.1 RED and USE methods · worked snapshots; 19.2.2 SLIs, SLOs, error budgets · worked snapshots; 19.2.3 Alert design and alert fatigue · worked snapshots; 19.2.4 Sampling and telemetry cost · worked snapshots; 19.2.5 Dashboards · worked snapshots
 
-Starting references: https://opentelemetry.io/docs/concepts/ · https://opentelemetry.io/docs/concepts/observability-primer/ · https://sre.google/workbook/table-of-contents/
+References: https://opentelemetry.io/docs/concepts/signals/ · https://opentelemetry.io/docs/concepts/context-propagation/ · https://sre.google/workbook/alerting-on-slos/
 
-### 19.3 Profile and investigate production — planned
+### 19.3 Profile and investigate production — available
 
-Prerequisites: ch-19-2
+Content source: src/teaching/production.py
 
 - Profiling.
 
@@ -1484,13 +1448,13 @@ Prerequisites: ch-19-2
 
 - Root-cause investigation.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 19.3.1 Profiling · worked snapshots; 19.3.2 Query and application performance diagnosis · worked snapshots; 19.3.3 Incident response · worked snapshots; 19.3.4 On-call and runbooks · worked snapshots; 19.3.5 Root-cause investigation · worked snapshots
 
-Starting references: https://opentelemetry.io/docs/concepts/ · https://opentelemetry.io/docs/concepts/observability-primer/ · https://sre.google/workbook/table-of-contents/
+References: https://opentelemetry.io/docs/concepts/signals/ · https://opentelemetry.io/docs/concepts/context-propagation/ · https://sre.google/workbook/alerting-on-slos/
 
-### 19.4 Learn from incidents and trace async work — planned
+### 19.4 Learn from incidents and trace async work — available
 
-Prerequisites: ch-19-3
+Content source: src/teaching/production.py
 
 - Blameless postmortems.
 
@@ -1498,22 +1462,20 @@ Prerequisites: ch-19-3
 
 - Observability across asynchronous workflows.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 19.4.1 Blameless postmortems · worked snapshots; 19.4.2 Capacity monitoring · worked snapshots; 19.4.3 Observability across asynchronous workflows · worked snapshots; 19.4.4 The running system · invariant and recovery review
 
-Starting references: https://opentelemetry.io/docs/concepts/ · https://opentelemetry.io/docs/concepts/observability-primer/ · https://sre.google/workbook/table-of-contents/
+References: https://opentelemetry.io/docs/concepts/signals/ · https://opentelemetry.io/docs/concepts/context-propagation/ · https://sre.google/workbook/alerting-on-slos/
 
-Essential unit diagrams: Distributed trace waterfall; request ID propagation; metrics-to-root-cause workflow; error-budget burn chart
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 20: Deployment, Cloud Infrastructure, and Platform Architecture
 
-Status: planned. Prerequisites: [3, 7, 17, 18, 19].
+Status: available. Direct prerequisites: [3, 7, 17, 18, 19].
 
 Worked example: Take a single-process application and deploy it into a reliable, observable, multi-instance production environment with safe releases.
 
-### 20.1 Environments, VMs & containers — planned
+### 20.1 Environments, VMs & containers — available
 
-Prerequisites: unit-3, unit-7, unit-17, unit-18, unit-19
+Content source: src/teaching/production.py
 
 - Development vs staging vs production.
 
@@ -1523,13 +1485,13 @@ Prerequisites: unit-3, unit-7, unit-17, unit-18, unit-19
 
 - Kubernetes fundamentals.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 20.1.1 Development vs staging vs production · worked snapshots; 20.1.2 VMs and containers isolate at different layers; 20.1.3 Container fundamentals · worked snapshots; 20.1.4 Kubernetes fundamentals · worked snapshots
 
-Starting references: https://kubernetes.io/docs/concepts/overview/components/ · https://12factor.net/ · https://docs.aws.amazon.com/wellarchitected/
+References: https://12factor.net/ · https://kubernetes.io/docs/concepts/overview/components/ · https://sre.google/workbook/canarying-releases/
 
-### 20.2 Control planes, scheduling & configuration — planned
+### 20.2 Control planes, scheduling & configuration — available
 
-Prerequisites: ch-20-1
+Content source: src/teaching/production.py
 
 - Control plane vs data plane.
 
@@ -1541,13 +1503,13 @@ Prerequisites: ch-20-1
 
 - Immutable infrastructure.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 20.2.1 Control plane vs data plane · worked snapshots; 20.2.2 Scheduling and service discovery · worked snapshots; 20.2.3 Autoscaling · worked snapshots; 20.2.4 Configuration and secret delivery · worked snapshots; 20.2.5 Immutable infrastructure · worked snapshots
 
-Starting references: https://kubernetes.io/docs/concepts/overview/components/ · https://12factor.net/ · https://docs.aws.amazon.com/wellarchitected/
+References: https://12factor.net/ · https://kubernetes.io/docs/concepts/overview/components/ · https://sre.google/workbook/canarying-releases/
 
-### 20.3 Releases, flags & schema migrations — planned
+### 20.3 Releases, flags & schema migrations — available
 
-Prerequisites: ch-20-2
+Content source: src/teaching/production.py
 
 - Infrastructure as Code.
 
@@ -1561,13 +1523,13 @@ Prerequisites: ch-20-2
 
 - Multi-environment configuration.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 20.3.1 Infrastructure as Code · worked snapshots; 20.3.2 CI/CD · worked snapshots; 20.3.3 Canary exposure expands only after verification; 20.3.4 Feature flags · worked snapshots; 20.3.5 Rollbacks and database migrations · worked snapshots; 20.3.6 Multi-environment configuration · worked snapshots
 
-Starting references: https://kubernetes.io/docs/concepts/overview/components/ · https://12factor.net/ · https://docs.aws.amazon.com/wellarchitected/
+References: https://12factor.net/ · https://kubernetes.io/docs/concepts/overview/components/ · https://sre.google/workbook/canarying-releases/
 
-### 20.4 Platforms, serverless & ownership — planned
+### 20.4 Platforms, serverless & ownership — available
 
-Prerequisites: ch-20-3
+Content source: src/teaching/production.py
 
 - Twelve-Factor App principles.
 
@@ -1581,22 +1543,20 @@ Prerequisites: ch-20-3
 
 - Platform engineering basics.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 20.4.1 Twelve-Factor App principles · worked snapshots; 20.4.2 Serverless compute · worked snapshots; 20.4.3 Cloud vs on-premises trade-offs · worked snapshots; 20.4.4 Infrastructure ownership and managed services · worked snapshots; 20.4.5 Deployment topologies and networking · worked snapshots; 20.4.6 Platform engineering basics · worked snapshots
 
-Starting references: https://kubernetes.io/docs/concepts/overview/components/ · https://12factor.net/ · https://docs.aws.amazon.com/wellarchitected/
+References: https://12factor.net/ · https://kubernetes.io/docs/concepts/overview/components/ · https://sre.google/workbook/canarying-releases/
 
-Essential unit diagrams: VM/container comparison; Kubernetes cluster; CI/CD pipeline; blue-green deployment; canary traffic progression
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 21: Performance, Cost Optimization, and System Validation
 
-Status: planned. Prerequisites: [2, 4, 10, 12, 17, 19, 20].
+Status: available. Direct prerequisites: [2, 4, 10, 12, 17, 19, 20].
 
 Worked example: Compare three production architectures for a service with variable traffic. Model monthly costs, p99 latency, availability, and operational complexity under explicit assumptions.
 
-### 21.1 Budgets, bottlenecks & honest benchmarks — planned
+### 21.1 Budgets, bottlenecks & honest benchmarks — available
 
-Prerequisites: unit-2, unit-4, unit-10, unit-12, unit-17, unit-19, unit-20
+Content source: src/teaching/production.py
 
 - Performance budgets.
 
@@ -1610,13 +1570,13 @@ Prerequisites: unit-2, unit-4, unit-10, unit-12, unit-17, unit-19, unit-20
 
 - Tail latency analysis.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 21.1.1 Performance budgets · worked snapshots; 21.1.2 CPU, memory, disk, network, and database bottlenecks · worked snapshots; 21.1.3 Profiling and benchmarking · worked snapshots; 21.1.4 Load, stress, spike, and soak testing · worked snapshots; 21.1.5 Benchmark methodology and statistical pitfalls · worked snapshots; 21.1.6 Tail latency analysis · worked snapshots
 
-Starting references: https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-optimization.html · https://martinfowler.com/articles/practical-test-pyramid.html · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+References: https://martinfowler.com/articles/practical-test-pyramid.html · https://sre.google/sre-book/handling-overload/ · https://research.google/pubs/the-tail-at-scale/
 
-### 21.2 Capacity, architecture & cost per outcome — planned
+### 21.2 Capacity, architecture & cost per outcome — available
 
-Prerequisites: ch-21-1
+Content source: src/teaching/production.py
 
 - Queue saturation and throughput ceilings.
 
@@ -1630,13 +1590,13 @@ Prerequisites: ch-21-1
 
 - Capacity reservation vs elastic capacity.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 21.2.1 Queue saturation and throughput ceilings · worked snapshots; 21.2.2 Performance tuning vs architecture changes · worked snapshots; 21.2.3 Architecture costs are not capacity guarantees; 21.2.4 Compute, storage, networking, and telemetry costs · worked snapshots; 21.2.5 Cost per request or transaction · worked snapshots; 21.2.6 Capacity reservation vs elastic capacity · worked snapshots
 
-Starting references: https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-optimization.html · https://martinfowler.com/articles/practical-test-pyramid.html · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+References: https://martinfowler.com/articles/practical-test-pyramid.html · https://sre.google/sre-book/handling-overload/ · https://research.google/pubs/the-tail-at-scale/
 
-### 21.3 Efficiency and a useful test portfolio — planned
+### 21.3 Efficiency and a useful test portfolio — available
 
-Prerequisites: ch-21-2
+Content source: src/teaching/production.py
 
 - Cost-performance optimization.
 
@@ -1646,13 +1606,13 @@ Prerequisites: ch-21-2
 
 - Fault-injection tests.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 21.3.1 Cost-performance optimization · worked snapshots; 21.3.2 Sustainability and resource efficiency · worked snapshots; 21.3.3 Unit, integration, contract, end-to-end, and performance tests · worked snapshots; 21.3.4 Fault-injection tests · worked snapshots
 
-Starting references: https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-optimization.html · https://martinfowler.com/articles/practical-test-pyramid.html · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+References: https://martinfowler.com/articles/practical-test-pyramid.html · https://sre.google/sre-book/handling-overload/ · https://research.google/pubs/the-tail-at-scale/
 
-### 21.4 Fitness functions and design validation — planned
+### 21.4 Fitness functions and design validation — available
 
-Prerequisites: ch-21-3
+Content source: src/teaching/production.py
 
 - Data consistency validation.
 
@@ -1662,74 +1622,20 @@ Prerequisites: ch-21-3
 
 - Evaluating a design against its original requirements.
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 21.4.1 Data consistency validation · worked snapshots; 21.4.2 Architecture fitness functions · worked snapshots; 21.4.3 Regression testing · worked snapshots; 21.4.4 Evaluating a design against its original requirements · worked snapshots
 
-Starting references: https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-optimization.html · https://martinfowler.com/articles/practical-test-pyramid.html · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+References: https://martinfowler.com/articles/practical-test-pyramid.html · https://sre.google/sre-book/handling-overload/ · https://research.google/pubs/the-tail-at-scale/
 
-Essential unit diagrams: Performance bottleneck tree; throughput-latency curve; cost breakdown; test pyramid; design decision matrix
-
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Assessment: all eleven questions and separate explained solutions produced.
 ## Unit 22: End-to-End Design, Architecture Reviews, and Evolution
 
-Status: planned. Prerequisites: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21].
+Status: available. Direct prerequisites: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21].
 
 Worked example: Twelve complete architectural designs with a common 22-point review protocol.
 
-### 22.1 URL Shortener — planned
+### 22.1 URL Shortener — available
 
-Prerequisites: unit-8, unit-9, unit-11, unit-12
-
-- Functional requirements
-
-- Nonfunctional requirements
-
-- Explicit assumptions and workload numbers
-
-- Naive initial architecture
-
-- Core API contracts
-
-- Data model and schema
-
-- Low-level component organization
-
-- High-level system architecture
-
-- Data and control flows
-
-- Capacity estimates
-
-- End-to-end latency estimates
-
-- Failure scenarios
-
-- Scalability improvements
-
-- Consistency requirements
-
-- Security model
-
-- Deployment approach
-
-- Observability design
-
-- Infrastructure cost considerations
-
-- Alternative architectures and trade-offs
-
-- Architecture evolution from small scale to large scale
-
-- Design review identifying weaknesses and improvements
-
-- A short implementation exercise
-
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
-
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
-
-### 22.2 Rate Limiter — planned
-
-Prerequisites: unit-2, unit-4, unit-12, unit-17
+Content source: src/teaching/cases.py
 
 - Functional requirements
 
@@ -1775,65 +1681,13 @@ Prerequisites: unit-2, unit-4, unit-12, unit-17
 
 - A short implementation exercise
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 22.1.1 Data ownership and relationships; 22.1.2 The high-level path and responsibility boundaries; 22.1.3 Naive path, failure, improved path, review; 22.1.4 Evolution follows demonstrated requirements
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
+References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9111.html · https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices
 
-### 22.3 Chat Application — planned
+### 22.2 Rate Limiter — available
 
-Prerequisites: unit-3, unit-9, unit-14, unit-16
-
-- Functional requirements
-
-- Nonfunctional requirements
-
-- Explicit assumptions and workload numbers
-
-- Naive initial architecture
-
-- Core API contracts
-
-- Data model and schema
-
-- Low-level component organization
-
-- High-level system architecture
-
-- Data and control flows
-
-- Capacity estimates
-
-- End-to-end latency estimates
-
-- Failure scenarios
-
-- Scalability improvements
-
-- Consistency requirements
-
-- Security model
-
-- Deployment approach
-
-- Observability design
-
-- Infrastructure cost considerations
-
-- Alternative architectures and trade-offs
-
-- Architecture evolution from small scale to large scale
-
-- Design review identifying weaknesses and improvements
-
-- A short implementation exercise
-
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
-
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
-
-### 22.4 Notification Platform — planned
-
-Prerequisites: unit-6, unit-8, unit-16, unit-17
+Content source: src/teaching/cases.py
 
 - Functional requirements
 
@@ -1879,65 +1733,13 @@ Prerequisites: unit-6, unit-8, unit-16, unit-17
 
 - A short implementation exercise
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 22.2.1 Data ownership and relationships; 22.2.2 The high-level path and responsibility boundaries; 22.2.3 Naive path, failure, improved path, review; 22.2.4 Evolution follows demonstrated requirements
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
+References: https://www.rfc-editor.org/rfc/rfc2697.html · https://sre.google/sre-book/handling-overload/
 
-### 22.5 Social Media Feed — planned
+### 22.3 Chat Application — available
 
-Prerequisites: unit-9, unit-11, unit-12, unit-16
-
-- Functional requirements
-
-- Nonfunctional requirements
-
-- Explicit assumptions and workload numbers
-
-- Naive initial architecture
-
-- Core API contracts
-
-- Data model and schema
-
-- Low-level component organization
-
-- High-level system architecture
-
-- Data and control flows
-
-- Capacity estimates
-
-- End-to-end latency estimates
-
-- Failure scenarios
-
-- Scalability improvements
-
-- Consistency requirements
-
-- Security model
-
-- Deployment approach
-
-- Observability design
-
-- Infrastructure cost considerations
-
-- Alternative architectures and trade-offs
-
-- Architecture evolution from small scale to large scale
-
-- Design review identifying weaknesses and improvements
-
-- A short implementation exercise
-
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
-
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
-
-### 22.6 Video Streaming Platform — planned
-
-Prerequisites: unit-3, unit-11, unit-13, unit-20
+Content source: src/teaching/cases.py
 
 - Functional requirements
 
@@ -1983,65 +1785,13 @@ Prerequisites: unit-3, unit-11, unit-13, unit-20
 
 - A short implementation exercise
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 22.3.1 Data ownership and relationships; 22.3.2 The high-level path and responsibility boundaries; 22.3.3 Naive path, failure, improved path, review; 22.3.4 Evolution follows demonstrated requirements
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
+References: https://www.rfc-editor.org/rfc/rfc6455.html · https://kafka.apache.org/41/design/design/ · https://www.postgresql.org/docs/18/transaction-iso.html
 
-### 22.7 Ride-Hailing System — planned
+### 22.4 Notification Platform — available
 
-Prerequisites: unit-9, unit-12, unit-14, unit-16
-
-- Functional requirements
-
-- Nonfunctional requirements
-
-- Explicit assumptions and workload numbers
-
-- Naive initial architecture
-
-- Core API contracts
-
-- Data model and schema
-
-- Low-level component organization
-
-- High-level system architecture
-
-- Data and control flows
-
-- Capacity estimates
-
-- End-to-end latency estimates
-
-- Failure scenarios
-
-- Scalability improvements
-
-- Consistency requirements
-
-- Security model
-
-- Deployment approach
-
-- Observability design
-
-- Infrastructure cost considerations
-
-- Alternative architectures and trade-offs
-
-- Architecture evolution from small scale to large scale
-
-- Design review identifying weaknesses and improvements
-
-- A short implementation exercise
-
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
-
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
-
-### 22.8 Online Ticket Booking — planned
-
-Prerequisites: unit-8, unit-10, unit-16, unit-18
+Content source: src/teaching/cases.py
 
 - Functional requirements
 
@@ -2087,65 +1837,13 @@ Prerequisites: unit-8, unit-10, unit-16, unit-18
 
 - A short implementation exercise
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 22.4.1 Data ownership and relationships; 22.4.2 The high-level path and responsibility boundaries; 22.4.3 Naive path, failure, improved path, review; 22.4.4 Evolution follows demonstrated requirements
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
+References: https://martinfowler.com/articles/injection.html · https://microservices.io/patterns/data/transactional-outbox.html · https://kafka.apache.org/41/design/design/
 
-### 22.9 Payment System — planned
+### 22.5 Social Media Feed — available
 
-Prerequisites: unit-8, unit-10, unit-16, unit-17, unit-18
-
-- Functional requirements
-
-- Nonfunctional requirements
-
-- Explicit assumptions and workload numbers
-
-- Naive initial architecture
-
-- Core API contracts
-
-- Data model and schema
-
-- Low-level component organization
-
-- High-level system architecture
-
-- Data and control flows
-
-- Capacity estimates
-
-- End-to-end latency estimates
-
-- Failure scenarios
-
-- Scalability improvements
-
-- Consistency requirements
-
-- Security model
-
-- Deployment approach
-
-- Observability design
-
-- Infrastructure cost considerations
-
-- Alternative architectures and trade-offs
-
-- Architecture evolution from small scale to large scale
-
-- Design review identifying weaknesses and improvements
-
-- A short implementation exercise
-
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
-
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
-
-### 22.10 Distributed Job Scheduler — planned
-
-Prerequisites: unit-4, unit-15, unit-16, unit-17
+Content source: src/teaching/cases.py
 
 - Functional requirements
 
@@ -2191,65 +1889,13 @@ Prerequisites: unit-4, unit-15, unit-16, unit-17
 
 - A short implementation exercise
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 22.5.1 Data ownership and relationships; 22.5.2 The high-level path and responsibility boundaries; 22.5.3 Naive path, failure, improved path, review; 22.5.4 Evolution follows demonstrated requirements
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
+References: https://www.rfc-editor.org/rfc/rfc9111.html · https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://kafka.apache.org/41/design/design/
 
-### 22.11 Collaborative Document Editor — planned
+### 22.6 Video Streaming Platform — available
 
-Prerequisites: unit-3, unit-14, unit-15, unit-16
-
-- Functional requirements
-
-- Nonfunctional requirements
-
-- Explicit assumptions and workload numbers
-
-- Naive initial architecture
-
-- Core API contracts
-
-- Data model and schema
-
-- Low-level component organization
-
-- High-level system architecture
-
-- Data and control flows
-
-- Capacity estimates
-
-- End-to-end latency estimates
-
-- Failure scenarios
-
-- Scalability improvements
-
-- Consistency requirements
-
-- Security model
-
-- Deployment approach
-
-- Observability design
-
-- Infrastructure cost considerations
-
-- Alternative architectures and trade-offs
-
-- Architecture evolution from small scale to large scale
-
-- Design review identifying weaknesses and improvements
-
-- A short implementation exercise
-
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
-
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
-
-### 22.12 Large-Scale Document Processing Platform — planned
-
-Prerequisites: unit-13, unit-16, unit-17, unit-18, unit-19, unit-20
+Content source: src/teaching/cases.py
 
 - Functional requirements
 
@@ -2295,10 +1941,320 @@ Prerequisites: unit-13, unit-16, unit-17, unit-18, unit-19, unit-20
 
 - A short implementation exercise
 
-Illustrations: A — simplest working arrangement; B — failure or limiting assumption; C — revised mechanism and cost; Execution trace and alternatives
+Figures: 22.6.1 Data ownership and relationships; 22.6.2 The high-level path and responsibility boundaries; 22.6.3 Naive path, failure, improved path, review; 22.6.4 Evolution follows demonstrated requirements
 
-Starting references: https://github.com/donnemartin/system-design-primer · https://github.com/ByteByteGoHq/system-design-101 · https://learn.microsoft.com/en-us/azure/architecture/ · https://pdos.csail.mit.edu/6.5840/
+References: https://www.rfc-editor.org/rfc/rfc8216.html · https://www.rfc-editor.org/rfc/rfc9111.html · https://openlineage.io/docs/
 
-Essential unit diagrams: 
+### 22.7 Ride-Hailing System — available
 
-Assessment: 5 conceptual + 3 scenario + design + implementation + thought experiment; separate explained solutions. planned.
+Content source: src/teaching/cases.py
+
+- Functional requirements
+
+- Nonfunctional requirements
+
+- Explicit assumptions and workload numbers
+
+- Naive initial architecture
+
+- Core API contracts
+
+- Data model and schema
+
+- Low-level component organization
+
+- High-level system architecture
+
+- Data and control flows
+
+- Capacity estimates
+
+- End-to-end latency estimates
+
+- Failure scenarios
+
+- Scalability improvements
+
+- Consistency requirements
+
+- Security model
+
+- Deployment approach
+
+- Observability design
+
+- Infrastructure cost considerations
+
+- Alternative architectures and trade-offs
+
+- Architecture evolution from small scale to large scale
+
+- Design review identifying weaknesses and improvements
+
+- A short implementation exercise
+
+Figures: 22.7.1 Data ownership and relationships; 22.7.2 The high-level path and responsibility boundaries; 22.7.3 Naive path, failure, improved path, review; 22.7.4 Evolution follows demonstrated requirements
+
+References: https://postgis.net/docs/ST_DWithin.html · https://www.postgresql.org/docs/18/transaction-iso.html · https://learn.microsoft.com/en-us/azure/architecture/patterns/saga
+
+### 22.8 Online Ticket Booking — available
+
+Content source: src/teaching/cases.py
+
+- Functional requirements
+
+- Nonfunctional requirements
+
+- Explicit assumptions and workload numbers
+
+- Naive initial architecture
+
+- Core API contracts
+
+- Data model and schema
+
+- Low-level component organization
+
+- High-level system architecture
+
+- Data and control flows
+
+- Capacity estimates
+
+- End-to-end latency estimates
+
+- Failure scenarios
+
+- Scalability improvements
+
+- Consistency requirements
+
+- Security model
+
+- Deployment approach
+
+- Observability design
+
+- Infrastructure cost considerations
+
+- Alternative architectures and trade-offs
+
+- Architecture evolution from small scale to large scale
+
+- Design review identifying weaknesses and improvements
+
+- A short implementation exercise
+
+Figures: 22.8.1 Data ownership and relationships; 22.8.2 The high-level path and responsibility boundaries; 22.8.3 Naive path, failure, improved path, review; 22.8.4 Evolution follows demonstrated requirements
+
+References: https://www.postgresql.org/docs/18/transaction-iso.html · https://learn.microsoft.com/en-us/azure/architecture/patterns/saga · https://www.rfc-editor.org/rfc/rfc9110.html
+
+### 22.9 Payment System — available
+
+Content source: src/teaching/cases.py
+
+- Functional requirements
+
+- Nonfunctional requirements
+
+- Explicit assumptions and workload numbers
+
+- Naive initial architecture
+
+- Core API contracts
+
+- Data model and schema
+
+- Low-level component organization
+
+- High-level system architecture
+
+- Data and control flows
+
+- Capacity estimates
+
+- End-to-end latency estimates
+
+- Failure scenarios
+
+- Scalability improvements
+
+- Consistency requirements
+
+- Security model
+
+- Deployment approach
+
+- Observability design
+
+- Infrastructure cost considerations
+
+- Alternative architectures and trade-offs
+
+- Architecture evolution from small scale to large scale
+
+- Design review identifying weaknesses and improvements
+
+- A short implementation exercise
+
+Figures: 22.9.1 Data ownership and relationships; 22.9.2 The high-level path and responsibility boundaries; 22.9.3 Naive path, failure, improved path, review; 22.9.4 Evolution follows demonstrated requirements
+
+References: https://www.postgresql.org/docs/18/transaction-iso.html · https://microservices.io/patterns/data/transactional-outbox.html · https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+### 22.10 Distributed Job Scheduler — available
+
+Content source: src/teaching/cases.py
+
+- Functional requirements
+
+- Nonfunctional requirements
+
+- Explicit assumptions and workload numbers
+
+- Naive initial architecture
+
+- Core API contracts
+
+- Data model and schema
+
+- Low-level component organization
+
+- High-level system architecture
+
+- Data and control flows
+
+- Capacity estimates
+
+- End-to-end latency estimates
+
+- Failure scenarios
+
+- Scalability improvements
+
+- Consistency requirements
+
+- Security model
+
+- Deployment approach
+
+- Observability design
+
+- Infrastructure cost considerations
+
+- Alternative architectures and trade-offs
+
+- Architecture evolution from small scale to large scale
+
+- Design review identifying weaknesses and improvements
+
+- A short implementation exercise
+
+Figures: 22.10.1 Data ownership and relationships; 22.10.2 The high-level path and responsibility boundaries; 22.10.3 Naive path, failure, improved path, review; 22.10.4 Evolution follows demonstrated requirements
+
+References: https://sre.google/sre-book/distributed-periodic-scheduling/ · https://raft.github.io/raft.pdf · https://kafka.apache.org/41/design/design/
+
+### 22.11 Collaborative Document Editor — available
+
+Content source: src/teaching/cases.py
+
+- Functional requirements
+
+- Nonfunctional requirements
+
+- Explicit assumptions and workload numbers
+
+- Naive initial architecture
+
+- Core API contracts
+
+- Data model and schema
+
+- Low-level component organization
+
+- High-level system architecture
+
+- Data and control flows
+
+- Capacity estimates
+
+- End-to-end latency estimates
+
+- Failure scenarios
+
+- Scalability improvements
+
+- Consistency requirements
+
+- Security model
+
+- Deployment approach
+
+- Observability design
+
+- Infrastructure cost considerations
+
+- Alternative architectures and trade-offs
+
+- Architecture evolution from small scale to large scale
+
+- Design review identifying weaknesses and improvements
+
+- A short implementation exercise
+
+Figures: 22.11.1 Data ownership and relationships; 22.11.2 The high-level path and responsibility boundaries; 22.11.3 Naive path, failure, improved path, review; 22.11.4 Evolution follows demonstrated requirements
+
+References: https://arxiv.org/abs/1608.03960 · https://www.rfc-editor.org/rfc/rfc6455.html · https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+### 22.12 Large-Scale Document Processing Platform — available
+
+Content source: src/teaching/cases.py
+
+- Functional requirements
+
+- Nonfunctional requirements
+
+- Explicit assumptions and workload numbers
+
+- Naive initial architecture
+
+- Core API contracts
+
+- Data model and schema
+
+- Low-level component organization
+
+- High-level system architecture
+
+- Data and control flows
+
+- Capacity estimates
+
+- End-to-end latency estimates
+
+- Failure scenarios
+
+- Scalability improvements
+
+- Consistency requirements
+
+- Security model
+
+- Deployment approach
+
+- Observability design
+
+- Infrastructure cost considerations
+
+- Alternative architectures and trade-offs
+
+- Architecture evolution from small scale to large scale
+
+- Design review identifying weaknesses and improvements
+
+- A short implementation exercise
+
+Figures: 22.12.1 Data ownership and relationships; 22.12.2 The high-level path and responsibility boundaries; 22.12.3 Naive path, failure, improved path, review; 22.12.4 Evolution follows demonstrated requirements
+
+References: https://openlineage.io/docs/ · https://kafka.apache.org/41/design/design/ · https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html · https://microservices.io/patterns/data/transactional-outbox.html
+
+Assessment: all eleven questions and separate explained solutions produced.
