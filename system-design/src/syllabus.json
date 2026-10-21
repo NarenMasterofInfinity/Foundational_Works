@@ -1,0 +1,785 @@
+[
+  {
+    "n": 1,
+    "title": "Introduction to System Design",
+    "topics": [
+      "What is a software system?",
+      "What does it mean to design a system?",
+      "HLD vs LLD vs software architecture.",
+      "Functional and nonfunctional requirements.",
+      "Components, boundaries, interfaces, and contracts.",
+      "Coupling, cohesion, modularity, separation of concerns.",
+      "Abstraction layers.",
+      "State, data, computation, and communication.",
+      "Constraints, assumptions, risks, and trade-offs.",
+      "Architecture diagrams: C4 model, context, container, component, deployment, sequence.",
+      "Architectural characteristics and quality attributes.",
+      "Architecture Decision Records (ADRs).",
+      "Why the simplest sufficient design is often preferable."
+    ],
+    "references": [
+      "https://learn.microsoft.com/en-us/azure/architecture/guide/",
+      "https://github.com/donnemartin/system-design-primer",
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+    ],
+    "illustrations": [
+      "HLD vs LLD comparison",
+      "abstraction layers",
+      "architecture decision workflow",
+      "C4 diagram hierarchy"
+    ],
+    "example": "Design a basic to-do application. Begin with a single program and progressively identify modules, persistent storage, a web API, and deployment boundaries."
+  },
+  {
+    "n": 2,
+    "title": "Requirements, Estimation, and Engineering Trade-offs",
+    "topics": [
+      "Gathering and prioritizing requirements.",
+      "User journeys and workload characteristics.",
+      "Read-heavy vs write-heavy systems.",
+      "Latency, throughput, QPS, RPS, TPS.",
+      "Average vs median vs p95/p99 latency.",
+      "Availability, reliability, durability, consistency.",
+      "SLI, SLO, SLA, and error budgets.",
+      "Capacity and growth planning.",
+      "Storage, memory, bandwidth, and CPU estimates.",
+      "Peak vs average load.",
+      "Little's Law and queueing intuition.",
+      "Amdahl's Law and bottlenecks.",
+      "Tail latency and latency budgets.",
+      "Cost, security, operational complexity, and maintainability as constraints.",
+      "Decision matrices and trade-off analysis."
+    ],
+    "references": [
+      "https://github.com/donnemartin/system-design-primer",
+      "https://sre.google/workbook/table-of-contents/",
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+    ],
+    "illustrations": [
+      "Request-volume timeline",
+      "throughput-latency curve",
+      "latency waterfall",
+      "capacity planning worksheet"
+    ],
+    "example": "A social platform has 10 million daily active users. Estimate requests per second, traffic at peak, storage growth, image bandwidth, and approximate infrastructure requirements."
+  },
+  {
+    "n": 3,
+    "title": "Networking Foundations for System Design",
+    "topics": [
+      "How the internet works from the application perspective.",
+      "IP addresses, ports, sockets, routing.",
+      "TCP vs UDP vs QUIC.",
+      "DNS resolution and DNS caching.",
+      "TLS and HTTPS.",
+      "HTTP/1.1, HTTP/2, HTTP/3.",
+      "Connection establishment and connection reuse.",
+      "Latency caused by network round trips.",
+      "Reverse proxies vs forward proxies.",
+      "Load balancers vs API gateways.",
+      "L4 vs L7 load balancing.",
+      "WebSockets, Server-Sent Events, and polling.",
+      "NAT, firewalls, ingress, egress.",
+      "Service discovery.",
+      "CDN and edge networking.",
+      "Network partitions, timeouts, packet loss.",
+      "Connection pooling and keepalive."
+    ],
+    "references": [
+      "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview",
+      "https://www.cloudflare.com/learning/cdn/what-is-a-cdn/",
+      "https://github.com/ByteByteGoHq/system-design-101"
+    ],
+    "illustrations": [
+      "Complete HTTP request timeline",
+      "TCP/TLS interaction",
+      "load-balancing topology",
+      "WebSocket vs polling communication"
+    ],
+    "example": "Trace what happens when someone enters a website URL, from DNS lookup through server execution to browser rendering."
+  },
+  {
+    "n": 4,
+    "title": "Runtime, Processes, Threads, and Concurrency",
+    "topics": [
+      "Program vs process vs thread.",
+      "Memory, stack, heap, and object lifetimes.",
+      "Scheduling and context switching.",
+      "CPU-bound vs I/O-bound workloads.",
+      "Synchronous vs asynchronous execution.",
+      "Blocking vs nonblocking I/O.",
+      "Concurrency vs parallelism.",
+      "Event loops, tasks, futures, promises.",
+      "Thread pools and worker pools.",
+      "Shared memory vs message passing.",
+      "Race conditions and critical sections.",
+      "Mutexes, semaphores, atomics, condition variables.",
+      "Deadlocks, starvation, livelocks.",
+      "Memory visibility and happens-before relationships.",
+      "Thread safety and immutability.",
+      "Resource exhaustion and backpressure.",
+      "Cancellation and structured concurrency."
+    ],
+    "references": [
+      "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+      "https://go.dev/ref/mem"
+    ],
+    "illustrations": [
+      "Process/thread memory model",
+      "scheduling timeline",
+      "race-condition interleaving",
+      "deadlock wait graph",
+      "event-loop flow"
+    ],
+    "example": "Build a service that processes 1,000 file uploads. Compare sequential execution, threads, asynchronous I/O, and worker queues. Identify which architecture helps under which workload."
+  },
+  {
+    "n": 5,
+    "title": "Object-Oriented and Modular Software Design",
+    "topics": [
+      "Abstraction, encapsulation, polymorphism, inheritance.",
+      "Composition vs inheritance.",
+      "Interfaces and contracts.",
+      "High cohesion and low coupling.",
+      "SOLID principles, including their limitations.",
+      "DRY, KISS, YAGNI.",
+      "Law of Demeter.",
+      "Tell, Don't Ask.",
+      "Command-query separation.",
+      "Immutability and side-effect management.",
+      "Domain models, entities, value objects.",
+      "Object collaboration.",
+      "Testability and design for change.",
+      "Refactoring and recognizing code smells.",
+      "Functional programming alternatives to object-centric design."
+    ],
+    "references": [
+      "https://refactoring.guru/design-patterns",
+      "https://martinfowler.com/bliki/BoundedContext.html"
+    ],
+    "illustrations": [
+      "Before/after class diagrams",
+      "dependency graph",
+      "inheritance vs composition",
+      "cohesion/coupling illustrations"
+    ],
+    "example": "Start with a poorly designed payment-processing class. Refactor it into appropriate components, showing which problems each design improvement solves."
+  },
+  {
+    "n": 6,
+    "title": "Design Patterns, Dependency Injection, and Object Lifecycles",
+    "topics": [
+      "Dependency, dependency direction, and inversion.",
+      "Inversion of Control (IoC).",
+      "Dependency Injection (DI).",
+      "Constructor, property/setter, and method injection.",
+      "Dependency inversion principle vs DI.",
+      "Composition roots and DI containers.",
+      "Transient, scoped, singleton, and framework-specific lifetimes.",
+      "Request scopes, session scopes, and custom scopes.",
+      "Object creation vs object ownership.",
+      "Disposal, cleanup, and resource lifecycles.",
+      "Lazy initialization.",
+      "Dependency cycles and captive dependencies.",
+      "DI vs service locator.",
+      "DI vs factory pattern.",
+      "Factory Method, Abstract Factory, Builder, Prototype, Singleton.",
+      "Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy.",
+      "Strategy, Observer, Command, State, Chain of Responsibility, Template Method, Iterator, Mediator, Memento, Visitor.",
+      "Repository, Unit of Work, Specification, CQRS, and dependency boundaries."
+    ],
+    "references": [
+      "https://martinfowler.com/articles/injection.html",
+      "https://refactoring.guru/design-patterns",
+      "https://refactoring.guru/design-patterns/catalog"
+    ],
+    "illustrations": [
+      "Object creation timelines",
+      "singleton/scoped/transient identity illustration",
+      "UML class relationships",
+      "dependency inversion before/after",
+      "pattern comparisons"
+    ],
+    "example": "Create a notification platform supporting email, SMS, and push notifications. Evolve it from hardcoded classes to DI, Strategy, Factory, and Decorator patterns."
+  },
+  {
+    "n": 7,
+    "title": "Application Architecture and Domain-Driven Design",
+    "topics": [
+      "Layered/N-tier architecture.",
+      "Modular monoliths.",
+      "Monolith vs microservices.",
+      "Clean Architecture.",
+      "Hexagonal/Ports and Adapters.",
+      "Onion Architecture.",
+      "Domain-Driven Design (DDD).",
+      "Bounded contexts and ubiquitous language.",
+      "Aggregates, entities, value objects, domain services.",
+      "Domain events.",
+      "Dependency rules and module boundaries.",
+      "Business logic vs orchestration vs infrastructure.",
+      "Controllers, services, repositories, adapters.",
+      "Anti-corruption layers.",
+      "Event-driven architecture.",
+      "Serverless and function-oriented architectures.",
+      "Evolutionary architecture.",
+      "Technical vs business boundaries.",
+      "Distributed monolith antipattern.",
+      "When not to use microservices."
+    ],
+    "references": [
+      "https://learn.microsoft.com/azure/architecture/guide/architecture-styles",
+      "https://martinfowler.com/bliki/BoundedContext.html",
+      "https://www.martinfowler.com/articles/microservices.html"
+    ],
+    "illustrations": [
+      "Layered vs Hexagonal",
+      "modular monolith vs microservices",
+      "dependency arrows",
+      "bounded context map"
+    ],
+    "example": "Design an online shopping application first as a modular monolith, then examine the conditions under which selected domains should become independent services."
+  },
+  {
+    "n": 8,
+    "title": "API Design and Communication Contracts",
+    "topics": [
+      "API fundamentals and interface contracts.",
+      "REST, GraphQL, gRPC, RPC.",
+      "Resource modeling.",
+      "Request/response schemas.",
+      "Status codes and error models.",
+      "Pagination, filtering, sorting.",
+      "Cursor vs offset pagination.",
+      "API versioning and compatibility.",
+      "Idempotency and idempotency keys.",
+      "Authentication vs authorization at API boundaries.",
+      "Rate limits and quotas.",
+      "Retries and timeouts.",
+      "Streaming APIs and long-running operations.",
+      "Webhooks and delivery acknowledgments.",
+      "Schema evolution.",
+      "Consumer-driven contracts.",
+      "API gateways and BFF.",
+      "Public vs internal APIs.",
+      "API documentation and discoverability."
+    ],
+    "references": [
+      "https://developer.mozilla.org/en-US/docs/Web/HTTP",
+      "https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices",
+      "https://api-security.owasp.org/editions/2023/en/0x11-t10/"
+    ],
+    "illustrations": [
+      "REST request flow",
+      "API gateway topology",
+      "synchronous vs asynchronous API",
+      "payment state-machine diagram"
+    ],
+    "example": "Design a payment API with create-payment, payment-status, refunds, idempotency protection, duplicate requests, and failed network responses."
+  },
+  {
+    "n": 9,
+    "title": "Data Models and Storage Technologies",
+    "topics": [
+      "What data storage must guarantee.",
+      "Relational databases and SQL.",
+      "Document databases.",
+      "Key-value databases.",
+      "Wide-column stores.",
+      "Graph databases.",
+      "Time-series databases.",
+      "Search indexes.",
+      "Vector indexes: introductory architecture only.",
+      "Object storage vs block vs file storage.",
+      "OLTP vs OLAP.",
+      "Row-oriented vs column-oriented storage.",
+      "Normalization vs denormalization.",
+      "ER diagrams and relational modeling.",
+      "Referential integrity.",
+      "Data ownership.",
+      "Choosing storage based on access patterns.",
+      "Data retention and lifecycle.",
+      "Polyglot persistence and its operational costs."
+    ],
+    "references": [
+      "https://db.cs.cmu.edu/courses/",
+      "https://learn.microsoft.com/en-us/azure/architecture/guide/"
+    ],
+    "illustrations": [
+      "Database taxonomy",
+      "physical storage representations",
+      "normalized vs denormalized schema",
+      "entity-relationship diagrams"
+    ],
+    "example": "Choose storage technologies for user profiles, financial transactions, chat messages, event logs, and uploaded PDFs. Justify each decision."
+  },
+  {
+    "n": 10,
+    "title": "Database Internals, Transactions, and Concurrency Control",
+    "topics": [
+      "How databases store and retrieve records.",
+      "Pages, records, indexes, and buffer pools.",
+      "B-tree/B+tree and hash indexing.",
+      "LSM trees and write amplification.",
+      "Query planning and EXPLAIN.",
+      "Index selection and query optimization.",
+      "ACID properties.",
+      "Transaction commit and rollback.",
+      "Write-ahead logging.",
+      "MVCC.",
+      "Locking and optimistic concurrency control.",
+      "Dirty reads, nonrepeatable reads, phantom reads.",
+      "Lost updates, write skew, serialization anomalies.",
+      "Isolation levels and implementation differences.",
+      "Serializable execution and serializability.",
+      "Database connection pooling.",
+      "Transactions across multiple operations.",
+      "Backup, recovery, and durability."
+    ],
+    "references": [
+      "https://15445.courses.cs.cmu.edu/",
+      "https://www.postgresql.org/docs/current/transaction-iso.html"
+    ],
+    "illustrations": [
+      "B+tree traversal",
+      "MVCC version timeline",
+      "concurrent transaction interleavings",
+      "lock wait graph",
+      "WAL and recovery"
+    ],
+    "example": "Two users attempt to purchase the last available ticket. Demonstrate the lost-update race, show why naive reads fail, and implement valid alternatives using transactions and concurrency control."
+  },
+  {
+    "n": 11,
+    "title": "Caching and Content Delivery",
+    "topics": [
+      "Why caching works.",
+      "Cache locality and the working set.",
+      "In-process vs distributed caches.",
+      "Browser, CDN, application, and database caches.",
+      "Cache-aside, read-through, write-through, write-behind.",
+      "TTL and cache expiration.",
+      "Cache consistency and invalidation.",
+      "Eviction: LRU, LFU, FIFO, and alternatives.",
+      "Hot keys.",
+      "Cache stampedes, penetration, and avalanche.",
+      "Negative caching.",
+      "Stale-while-revalidate.",
+      "Cache warming and prefetching.",
+      "Redis-like data structures.",
+      "CDN architecture and origin shielding.",
+      "Cache partitioning and replication.",
+      "When caching is harmful."
+    ],
+    "references": [
+      "https://redis.io/docs/latest/develop/use/patterns/",
+      "https://www.cloudflare.com/learning/cdn/what-is-a-cdn/",
+      "https://learn.microsoft.com/en-us/azure/architecture/patterns"
+    ],
+    "illustrations": [
+      "Cache hit/miss sequence",
+      "cache hierarchy",
+      "eviction simulation",
+      "stampede timeline",
+      "geographic CDN delivery"
+    ],
+    "example": "A popular product page receives enormous traffic. Introduce caching gradually and examine stale prices, thundering herds, inventory correctness, and failure behavior."
+  },
+  {
+    "n": 12,
+    "title": "Scalability, Load Balancing, and Data Distribution",
+    "topics": [
+      "Vertical vs horizontal scaling.",
+      "Stateless vs stateful services.",
+      "Load distribution algorithms.",
+      "Health checks and failover.",
+      "Sticky sessions.",
+      "Autoscaling metrics.",
+      "Replication.",
+      "Partitioning and sharding.",
+      "Range partitioning vs hash partitioning.",
+      "Consistent hashing and rendezvous hashing.",
+      "Rebalancing.",
+      "Hot partitions and skew.",
+      "Read replicas and read/write splitting.",
+      "Replication lag.",
+      "Database proxying.",
+      "Connection pool saturation.",
+      "Bottleneck identification.",
+      "Queueing and overload.",
+      "Single points of failure.",
+      "Multi-region strategies.",
+      "Scaling writes vs scaling reads.",
+      "Scale-out economics."
+    ],
+    "references": [
+      "https://github.com/donnemartin/system-design-primer",
+      "https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices"
+    ],
+    "illustrations": [
+      "Architecture evolution across four load levels",
+      "consistent-hashing ring",
+      "sharding heatmap",
+      "load-balancer failover"
+    ],
+    "example": "Scale a URL shortener from 100 requests per second to 100,000. Introduce new components only when justified by a demonstrated bottleneck."
+  },
+  {
+    "n": 13,
+    "title": "File Systems, Search Infrastructure, and Data Pipelines",
+    "topics": [
+      "Binary/object storage.",
+      "Large-file upload architecture.",
+      "Multipart and resumable uploads.",
+      "Checksums and content addressing.",
+      "Metadata vs binary data.",
+      "Search engines and inverted indexes.",
+      "Indexing pipelines.",
+      "Search ingestion and reindexing.",
+      "Batch vs streaming pipelines.",
+      "ETL vs ELT.",
+      "Change Data Capture (CDC).",
+      "Data lakes and warehouses.",
+      "Stream processing fundamentals.",
+      "Data provenance and lineage.",
+      "Data quality, schema validation, and replay.",
+      "Lifecycle policies and retention.",
+      "Designing data-intensive applications."
+    ],
+    "references": [
+      "https://15445.courses.cs.cmu.edu/",
+      "https://learn.microsoft.com/en-us/azure/architecture/",
+      "https://kafka.apache.org/documentation/"
+    ],
+    "illustrations": [
+      "Upload pipeline",
+      "inverted index",
+      "ingestion DAG",
+      "batch vs stream timeline",
+      "lineage graph"
+    ],
+    "example": "Design a document-processing system accepting millions of files, tracking processing state, extracting metadata, maintaining provenance, and exposing searchable results."
+  },
+  {
+    "n": 14,
+    "title": "Distributed Systems Fundamentals",
+    "topics": [
+      "What makes a distributed system difficult?",
+      "Partial failures.",
+      "Network uncertainty.",
+      "Fault models.",
+      "Time, clocks, and event ordering.",
+      "Physical vs logical clocks.",
+      "Lamport clocks and vector clocks.",
+      "Consistency models.",
+      "Strong consistency and eventual consistency.",
+      "Linearizability.",
+      "Serializability vs linearizability.",
+      "Sequential and causal consistency.",
+      "Read-your-writes and monotonic reads.",
+      "CAP theorem, with its actual assumptions.",
+      "PACELC as a useful extension.",
+      "Quorums and read/write trade-offs.",
+      "Split-brain situations.",
+      "Distributed coordination.",
+      "The fallacies of distributed computing.",
+      "Safety vs liveness."
+    ],
+    "references": [
+      "https://pdos.csail.mit.edu/6.5840/",
+      "https://learn.microsoft.com/en-us/azure/architecture/patterns"
+    ],
+    "illustrations": [
+      "Network partition",
+      "causality timeline",
+      "consistency model comparisons",
+      "read/write quorum visualizations"
+    ],
+    "example": "A social application writes a new post in one region while a friend reads it from another. Examine different consistency contracts and their user-visible effects."
+  },
+  {
+    "n": 15,
+    "title": "Replication, Leader Election, and Consensus",
+    "topics": [
+      "Primary/replica architectures.",
+      "Leader/follower replication.",
+      "Multi-leader replication.",
+      "Leaderless replication.",
+      "Synchronous vs asynchronous replication.",
+      "Quorum-based systems.",
+      "Consensus and replicated state machines.",
+      "Raft: terms, elections, log replication, commit.",
+      "Paxos: conceptual foundations.",
+      "Log ordering and durability.",
+      "Membership changes.",
+      "Split-brain prevention and fencing tokens.",
+      "Failure detection.",
+      "Strongly consistent metadata services.",
+      "Distributed locks and leases.",
+      "Conflict resolution and CRDT introduction.",
+      "Multi-region replication trade-offs."
+    ],
+    "references": [
+      "https://pdos.csail.mit.edu/6.5840/",
+      "https://redis.io/docs/latest/develop/use/patterns/"
+    ],
+    "illustrations": [
+      "Raft state transitions",
+      "election timeline",
+      "replicated log",
+      "quorum intersection",
+      "network partition recovery"
+    ],
+    "example": "Three database replicas, one leader, and a network partition. Walk through elections, writes, acknowledgement rules, recovery, and potential data loss."
+  },
+  {
+    "n": 16,
+    "title": "Message Queues, Events, and Distributed Workflows",
+    "topics": [
+      "Synchronous vs asynchronous communication.",
+      "Queues vs logs vs pub/sub.",
+      "Producers, consumers, brokers.",
+      "Partitions, consumer groups, offsets.",
+      "Delivery guarantees.",
+      "At-most-once and at-least-once processing.",
+      "Exactly-once processing within defined boundaries.",
+      "Ordering guarantees.",
+      "Consumer acknowledgements.",
+      "Retries and dead-letter queues.",
+      "Poison messages.",
+      "Idempotent consumers.",
+      "Event sourcing.",
+      "CQRS.",
+      "Transactional outbox.",
+      "Sagas and compensating transactions.",
+      "Choreography vs orchestration.",
+      "Workflow engines.",
+      "Durable job execution.",
+      "Scheduling, leases, and worker coordination.",
+      "Backpressure and replay.",
+      "Reconciliation after partial failure."
+    ],
+    "references": [
+      "https://kafka.apache.org/documentation/",
+      "https://microservices.io/patterns/data/transactional-outbox",
+      "https://learn.microsoft.com/en-us/azure/architecture/patterns"
+    ],
+    "illustrations": [
+      "Queue lifecycle",
+      "consumer partition assignment",
+      "Saga happy/failure paths",
+      "outbox transaction",
+      "event replay"
+    ],
+    "example": "Design an e-commerce checkout that coordinates payment, inventory reservation, shipment creation, and refund compensation."
+  },
+  {
+    "n": 17,
+    "title": "Reliability, Fault Tolerance, and Disaster Recovery",
+    "topics": [
+      "Failure domains and fault isolation.",
+      "Availability vs durability.",
+      "Redundancy.",
+      "Active-active vs active-passive.",
+      "Timeouts.",
+      "Retries, exponential backoff, jitter.",
+      "Retry storms.",
+      "Circuit breakers.",
+      "Bulkheads.",
+      "Rate limiting.",
+      "Load shedding.",
+      "Graceful degradation.",
+      "Fallbacks.",
+      "Health checking.",
+      "RTO and RPO.",
+      "Backups and restore testing.",
+      "Failover and failback.",
+      "Multi-zone and multi-region deployments.",
+      "Chaos engineering.",
+      "SLO-based reliability decisions.",
+      "Cascading failures.",
+      "Incident analysis and prevention."
+    ],
+    "references": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/reliability.html",
+      "https://docs.cloud.google.com/architecture/disaster-recovery",
+      "https://sre.google/workbook/table-of-contents/"
+    ],
+    "illustrations": [
+      "Retry amplification timeline",
+      "circuit breaker state machine",
+      "bulkhead isolation",
+      "failure-domain map",
+      "RTO/RPO timeline"
+    ],
+    "example": "A downstream payment provider becomes unavailable during peak traffic. Demonstrate the failure cascade and progressively introduce resilience mechanisms."
+  },
+  {
+    "n": 18,
+    "title": "Security Architecture and Privacy",
+    "topics": [
+      "Threat modeling.",
+      "Trust boundaries.",
+      "Authentication vs authorization.",
+      "Sessions, cookies, tokens.",
+      "OAuth 2.0 and OpenID Connect.",
+      "Role-based and attribute-based access control.",
+      "Least privilege.",
+      "Defense in depth.",
+      "Secrets management.",
+      "Encryption in transit and at rest.",
+      "Password hashing.",
+      "Key management and rotation.",
+      "Network segmentation.",
+      "Zero-trust principles.",
+      "API security and common vulnerabilities.",
+      "Multi-tenant isolation.",
+      "Data minimization.",
+      "Audit trails.",
+      "Privacy, retention, and deletion.",
+      "Supply-chain security.",
+      "Security vs usability trade-offs.",
+      "Secure-by-design reviews."
+    ],
+    "references": [
+      "https://api-security.owasp.org/editions/2023/en/0x11-t10/",
+      "https://sre.google/books/"
+    ],
+    "illustrations": [
+      "Trust-boundary map",
+      "authentication sequence",
+      "authorization decision flow",
+      "tenant-isolation architecture"
+    ],
+    "example": "Design a multi-tenant SaaS application where an administrator must never gain access to another organization's data."
+  },
+  {
+    "n": 19,
+    "title": "Observability, Monitoring, and Incident Engineering",
+    "topics": [
+      "Monitoring vs observability.",
+      "Logs, metrics, and traces.",
+      "Structured logging.",
+      "Distributed tracing.",
+      "Trace IDs, span IDs, context propagation.",
+      "Golden signals.",
+      "RED and USE methods.",
+      "SLIs, SLOs, error budgets.",
+      "Alert design and alert fatigue.",
+      "Sampling and telemetry cost.",
+      "Dashboards.",
+      "Profiling.",
+      "Query and application performance diagnosis.",
+      "Incident response.",
+      "On-call and runbooks.",
+      "Root-cause investigation.",
+      "Blameless postmortems.",
+      "Capacity monitoring.",
+      "Observability across asynchronous workflows."
+    ],
+    "references": [
+      "https://opentelemetry.io/docs/concepts/",
+      "https://opentelemetry.io/docs/concepts/observability-primer/",
+      "https://sre.google/workbook/table-of-contents/"
+    ],
+    "illustrations": [
+      "Distributed trace waterfall",
+      "request ID propagation",
+      "metrics-to-root-cause workflow",
+      "error-budget burn chart"
+    ],
+    "example": "An API's p99 latency increases from 200 ms to 5 seconds. Use traces, metrics, logs, and database analysis to localize the bottleneck."
+  },
+  {
+    "n": 20,
+    "title": "Deployment, Cloud Infrastructure, and Platform Architecture",
+    "topics": [
+      "Development vs staging vs production.",
+      "Virtual machines vs containers.",
+      "Container fundamentals.",
+      "Kubernetes fundamentals.",
+      "Control plane vs data plane.",
+      "Scheduling and service discovery.",
+      "Autoscaling.",
+      "Configuration and secret delivery.",
+      "Immutable infrastructure.",
+      "Infrastructure as Code.",
+      "CI/CD.",
+      "Rolling, blue-green, and canary deployments.",
+      "Feature flags.",
+      "Rollbacks and database migrations.",
+      "Multi-environment configuration.",
+      "Twelve-Factor App principles.",
+      "Serverless compute.",
+      "Cloud vs on-premises trade-offs.",
+      "Infrastructure ownership and managed services.",
+      "Deployment topologies and networking.",
+      "Platform engineering basics."
+    ],
+    "references": [
+      "https://kubernetes.io/docs/concepts/overview/components/",
+      "https://12factor.net/",
+      "https://docs.aws.amazon.com/wellarchitected/"
+    ],
+    "illustrations": [
+      "VM/container comparison",
+      "Kubernetes cluster",
+      "CI/CD pipeline",
+      "blue-green deployment",
+      "canary traffic progression"
+    ],
+    "example": "Take a single-process application and deploy it into a reliable, observable, multi-instance production environment with safe releases."
+  },
+  {
+    "n": 21,
+    "title": "Performance, Cost Optimization, and System Validation",
+    "topics": [
+      "Performance budgets.",
+      "CPU, memory, disk, network, and database bottlenecks.",
+      "Profiling and benchmarking.",
+      "Load, stress, spike, and soak testing.",
+      "Benchmark methodology and statistical pitfalls.",
+      "Tail latency analysis.",
+      "Queue saturation and throughput ceilings.",
+      "Performance tuning vs architecture changes.",
+      "Horizontal scaling economics.",
+      "Compute, storage, networking, and telemetry costs.",
+      "Cost per request or transaction.",
+      "Capacity reservation vs elastic capacity.",
+      "Cost-performance optimization.",
+      "Sustainability and resource efficiency.",
+      "Unit, integration, contract, end-to-end, and performance tests.",
+      "Fault-injection tests.",
+      "Data consistency validation.",
+      "Architecture fitness functions.",
+      "Regression testing.",
+      "Evaluating a design against its original requirements."
+    ],
+    "references": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-optimization.html",
+      "https://martinfowler.com/articles/practical-test-pyramid.html",
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html"
+    ],
+    "illustrations": [
+      "Performance bottleneck tree",
+      "throughput-latency curve",
+      "cost breakdown",
+      "test pyramid",
+      "design decision matrix"
+    ],
+    "example": "Compare three production architectures for a service with variable traffic. Model monthly costs, p99 latency, availability, and operational complexity under explicit assumptions."
+  },
+  {
+    "n": 22,
+    "title": "End-to-End Design, Architecture Reviews, and Evolution",
+    "topics": [],
+    "references": [
+      "https://github.com/donnemartin/system-design-primer",
+      "https://github.com/ByteByteGoHq/system-design-101",
+      "https://learn.microsoft.com/en-us/azure/architecture/",
+      "https://pdos.csail.mit.edu/6.5840/"
+    ],
+    "illustrations": [],
+    "example": "Twelve complete architectural designs with a common 22-point review protocol."
+  }
+]

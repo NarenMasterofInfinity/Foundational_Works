@@ -1,0 +1,1262 @@
+MASTER PROMPT: THE SYSTEM DESIGN ATLAS
+
+Role and Objective
+
+You are an expert computer science educator, principal software architect, technical illustrator, and textbook author.
+
+Create The System Design Atlas: From Objects to Planet-Scale Systems, a comprehensive, visually rich, deeply educational reference book.
+
+This must not resemble a conventional interview-preparation guide, a collection of definitions, or a superficial system design cheat sheet.
+
+Instead, it should combine:
+
+- The theoretical depth of a university computer science textbook.
+- The practical knowledge of an experienced production systems engineer.
+- The visual clarity of a beautifully illustrated engineering atlas.
+- The intuitive teaching style of a great lecturer.
+- The architectural trade-off reasoning of real engineering design reviews.
+
+Primary goal: Make a reader capable of understanding, designing, implementing, evaluating, debugging, scaling, and evolving real-world software systems.
+
+Target reader
+
+A technically capable software engineer who understands basic programming and has built applications but wants a rigorous understanding of software design and systems architecture.
+
+Begin with intuitive explanations but progress to advanced undergraduate, graduate, and professional engineering depth.
+
+Do not assume detailed prior knowledge of distributed systems, operating systems, concurrency, database internals, or architecture patterns.
+
+Scope
+
+Cover both:
+
+1. Low-Level Design (LLD): object organization, interfaces, principles, patterns, dependencies, maintainability.
+2. High-Level Design (HLD): networks, APIs, storage, scalability, concurrency, distributed computing, reliability, security, deployment, and production operations.
+
+Remain programming-language-agnostic and cloud-provider-neutral. Use pseudocode or Python for examples when useful.
+
+---
+
+PART I — SYSTEM DESIGN FOUNDATIONS
+
+Unit 1: Introduction to System Design
+
+Topics:
+
+- What is a software system?
+- What does it mean to design a system?
+- HLD vs LLD vs software architecture.
+- Functional and nonfunctional requirements.
+- Components, boundaries, interfaces, and contracts.
+- Coupling, cohesion, modularity, separation of concerns.
+- Abstraction layers.
+- State, data, computation, and communication.
+- Constraints, assumptions, risks, and trade-offs.
+- Architecture diagrams: C4 model, context, container, component, deployment, sequence.
+- Architectural characteristics and quality attributes.
+- Architecture Decision Records (ADRs).
+- Why the simplest sufficient design is often preferable.
+
+Example: Design a basic to-do application. Begin with a single program and progressively identify modules, persistent storage, a web API, and deployment boundaries.
+
+Essential diagrams: HLD vs LLD comparison; abstraction layers; architecture decision workflow; C4 diagram hierarchy.
+
+References:
+
+- https://learn.microsoft.com/en-us/azure/architecture/guide/
+- https://github.com/donnemartin/system-design-primer
+- https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+
+Unit 2: Requirements, Estimation, and Engineering Trade-offs
+
+Topics:
+
+- Gathering and prioritizing requirements.
+- User journeys and workload characteristics.
+- Read-heavy vs write-heavy systems.
+- Latency, throughput, QPS, RPS, TPS.
+- Average vs median vs p95/p99 latency.
+- Availability, reliability, durability, consistency.
+- SLI, SLO, SLA, and error budgets.
+- Capacity and growth planning.
+- Storage, memory, bandwidth, and CPU estimates.
+- Peak vs average load.
+- Little's Law and queueing intuition.
+- Amdahl's Law and bottlenecks.
+- Tail latency and latency budgets.
+- Cost, security, operational complexity, and maintainability as constraints.
+- Decision matrices and trade-off analysis.
+
+Worked example: A social platform has 10 million daily active users. Estimate requests per second, traffic at peak, storage growth, image bandwidth, and approximate infrastructure requirements.
+
+Essential diagrams: Request-volume timeline; throughput-latency curve; latency waterfall; capacity planning worksheet.
+
+References:
+
+- https://github.com/donnemartin/system-design-primer
+- https://sre.google/workbook/table-of-contents/
+- https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+
+Unit 3: Networking Foundations for System Design
+
+Topics:
+
+- How the internet works from the application perspective.
+- IP addresses, ports, sockets, routing.
+- TCP vs UDP vs QUIC.
+- DNS resolution and DNS caching.
+- TLS and HTTPS.
+- HTTP/1.1, HTTP/2, HTTP/3.
+- Connection establishment and connection reuse.
+- Latency caused by network round trips.
+- Reverse proxies vs forward proxies.
+- Load balancers vs API gateways.
+- L4 vs L7 load balancing.
+- WebSockets, Server-Sent Events, and polling.
+- NAT, firewalls, ingress, egress.
+- Service discovery.
+- CDN and edge networking.
+- Network partitions, timeouts, packet loss.
+- Connection pooling and keepalive.
+
+Worked example: Trace what happens when someone enters a website URL, from DNS lookup through server execution to browser rendering.
+
+Essential diagrams: Complete HTTP request timeline; TCP/TLS interaction; load-balancing topology; WebSocket vs polling communication.
+
+References:
+
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview
+- https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
+- https://github.com/ByteByteGoHq/system-design-101
+
+Unit 4: Runtime, Processes, Threads, and Concurrency
+
+Topics:
+
+- Program vs process vs thread.
+- Memory, stack, heap, and object lifetimes.
+- Scheduling and context switching.
+- CPU-bound vs I/O-bound workloads.
+- Synchronous vs asynchronous execution.
+- Blocking vs nonblocking I/O.
+- Concurrency vs parallelism.
+- Event loops, tasks, futures, promises.
+- Thread pools and worker pools.
+- Shared memory vs message passing.
+- Race conditions and critical sections.
+- Mutexes, semaphores, atomics, condition variables.
+- Deadlocks, starvation, livelocks.
+- Memory visibility and happens-before relationships.
+- Thread safety and immutability.
+- Resource exhaustion and backpressure.
+- Cancellation and structured concurrency.
+
+Worked example: Build a service that processes 1,000 file uploads. Compare sequential execution, threads, asynchronous I/O, and worker queues. Identify which architecture helps under which workload.
+
+Essential diagrams: Process/thread memory model; scheduling timeline; race-condition interleaving; deadlock wait graph; event-loop flow.
+
+References:
+
+- https://pages.cs.wisc.edu/~remzi/OSTEP/
+- https://go.dev/ref/mem
+
+---
+
+PART II — LOW-LEVEL DESIGN AND SOFTWARE ARCHITECTURE
+
+Unit 5: Object-Oriented and Modular Software Design
+
+Topics:
+
+- Abstraction, encapsulation, polymorphism, inheritance.
+- Composition vs inheritance.
+- Interfaces and contracts.
+- High cohesion and low coupling.
+- SOLID principles, including their limitations.
+- DRY, KISS, YAGNI.
+- Law of Demeter.
+- Tell, Don't Ask.
+- Command-query separation.
+- Immutability and side-effect management.
+- Domain models, entities, value objects.
+- Object collaboration.
+- Testability and design for change.
+- Refactoring and recognizing code smells.
+- Functional programming alternatives to object-centric design.
+
+Worked example: Start with a poorly designed payment-processing class. Refactor it into appropriate components, showing which problems each design improvement solves.
+
+Essential diagrams: Before/after class diagrams; dependency graph; inheritance vs composition; cohesion/coupling illustrations.
+
+References:
+
+- https://refactoring.guru/design-patterns
+- https://martinfowler.com/bliki/BoundedContext.html
+
+Unit 6: Design Patterns, Dependency Injection, and Object Lifecycles
+
+Topics:
+
+Dependency management
+
+- Dependency, dependency direction, and inversion.
+- Inversion of Control (IoC).
+- Dependency Injection (DI).
+- Constructor, property/setter, and method injection.
+- Dependency inversion principle vs DI.
+- Composition roots and DI containers.
+- Transient, scoped, singleton, and framework-specific lifetimes.
+- Request scopes, session scopes, and custom scopes.
+- Object creation vs object ownership.
+- Disposal, cleanup, and resource lifecycles.
+- Lazy initialization.
+- Dependency cycles and captive dependencies.
+- DI vs service locator.
+- DI vs factory pattern.
+
+Creational patterns
+
+- Factory Method, Abstract Factory, Builder, Prototype, Singleton.
+
+Structural patterns
+
+- Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy.
+
+Behavioral patterns
+
+- Strategy, Observer, Command, State, Chain of Responsibility, Template Method, Iterator, Mediator, Memento, Visitor.
+
+Architectural and enterprise patterns
+
+- Repository, Unit of Work, Specification, CQRS, and dependency boundaries.
+
+Explain when each pattern is useful, when it adds unnecessary complexity, and how similar patterns differ.
+
+Worked example: Create a notification platform supporting email, SMS, and push notifications. Evolve it from hardcoded classes to DI, Strategy, Factory, and Decorator patterns.
+
+Essential diagrams: Object creation timelines; singleton/scoped/transient identity illustration; UML class relationships; dependency inversion before/after; pattern comparisons.
+
+References:
+
+- https://martinfowler.com/articles/injection.html
+- https://refactoring.guru/design-patterns
+- https://refactoring.guru/design-patterns/catalog
+
+Unit 7: Application Architecture and Domain-Driven Design
+
+Topics:
+
+- Layered/N-tier architecture.
+- Modular monoliths.
+- Monolith vs microservices.
+- Clean Architecture.
+- Hexagonal/Ports and Adapters.
+- Onion Architecture.
+- Domain-Driven Design (DDD).
+- Bounded contexts and ubiquitous language.
+- Aggregates, entities, value objects, domain services.
+- Domain events.
+- Dependency rules and module boundaries.
+- Business logic vs orchestration vs infrastructure.
+- Controllers, services, repositories, adapters.
+- Anti-corruption layers.
+- Event-driven architecture.
+- Serverless and function-oriented architectures.
+- Evolutionary architecture.
+- Technical vs business boundaries.
+- Distributed monolith antipattern.
+- When not to use microservices.
+
+Worked example: Design an online shopping application first as a modular monolith, then examine the conditions under which selected domains should become independent services.
+
+Essential diagrams: Layered vs Hexagonal; modular monolith vs microservices; dependency arrows; bounded context map.
+
+References:
+
+- https://learn.microsoft.com/azure/architecture/guide/architecture-styles
+- https://martinfowler.com/bliki/BoundedContext.html
+- https://www.martinfowler.com/articles/microservices.html
+
+Unit 8: API Design and Communication Contracts
+
+Topics:
+
+- API fundamentals and interface contracts.
+- REST, GraphQL, gRPC, RPC.
+- Resource modeling.
+- Request/response schemas.
+- Status codes and error models.
+- Pagination, filtering, sorting.
+- Cursor vs offset pagination.
+- API versioning and compatibility.
+- Idempotency and idempotency keys.
+- Authentication vs authorization at API boundaries.
+- Rate limits and quotas.
+- Retries and timeouts.
+- Streaming APIs and long-running operations.
+- Webhooks and delivery acknowledgments.
+- Schema evolution.
+- Consumer-driven contracts.
+- API gateways and BFF.
+- Public vs internal APIs.
+- API documentation and discoverability.
+
+Worked example: Design a payment API with create-payment, payment-status, refunds, idempotency protection, duplicate requests, and failed network responses.
+
+Essential diagrams: REST request flow; API gateway topology; synchronous vs asynchronous API; payment state-machine diagram.
+
+References:
+
+- https://developer.mozilla.org/en-US/docs/Web/HTTP
+- https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices
+- https://api-security.owasp.org/editions/2023/en/0x11-t10/
+
+---
+
+PART III — DATA, STORAGE, AND SCALABILITY
+
+Unit 9: Data Models and Storage Technologies
+
+Topics:
+
+- What data storage must guarantee.
+- Relational databases and SQL.
+- Document databases.
+- Key-value databases.
+- Wide-column stores.
+- Graph databases.
+- Time-series databases.
+- Search indexes.
+- Vector indexes: introductory architecture only.
+- Object storage vs block vs file storage.
+- OLTP vs OLAP.
+- Row-oriented vs column-oriented storage.
+- Normalization vs denormalization.
+- ER diagrams and relational modeling.
+- Referential integrity.
+- Data ownership.
+- Choosing storage based on access patterns.
+- Data retention and lifecycle.
+- Polyglot persistence and its operational costs.
+
+Worked example: Choose storage technologies for user profiles, financial transactions, chat messages, event logs, and uploaded PDFs. Justify each decision.
+
+Essential diagrams: Database taxonomy; physical storage representations; normalized vs denormalized schema; entity-relationship diagrams.
+
+References:
+
+- https://db.cs.cmu.edu/courses/
+- https://learn.microsoft.com/en-us/azure/architecture/guide/
+
+Unit 10: Database Internals, Transactions, and Concurrency Control
+
+Topics:
+
+- How databases store and retrieve records.
+- Pages, records, indexes, and buffer pools.
+- B-tree/B+tree and hash indexing.
+- LSM trees and write amplification.
+- Query planning and EXPLAIN.
+- Index selection and query optimization.
+- ACID properties.
+- Transaction commit and rollback.
+- Write-ahead logging.
+- MVCC.
+- Locking and optimistic concurrency control.
+- Dirty reads, nonrepeatable reads, phantom reads.
+- Lost updates, write skew, serialization anomalies.
+- Isolation levels and implementation differences.
+- Serializable execution and serializability.
+- Database connection pooling.
+- Transactions across multiple operations.
+- Backup, recovery, and durability.
+
+Worked example: Two users attempt to purchase the last available ticket. Demonstrate the lost-update race, show why naive reads fail, and implement valid alternatives using transactions and concurrency control.
+
+Essential diagrams: B+tree traversal; MVCC version timeline; concurrent transaction interleavings; lock wait graph; WAL and recovery.
+
+References:
+
+- https://15445.courses.cs.cmu.edu/
+- https://www.postgresql.org/docs/current/transaction-iso.html
+
+Unit 11: Caching and Content Delivery
+
+Topics:
+
+- Why caching works.
+- Cache locality and the working set.
+- In-process vs distributed caches.
+- Browser, CDN, application, and database caches.
+- Cache-aside, read-through, write-through, write-behind.
+- TTL and cache expiration.
+- Cache consistency and invalidation.
+- Eviction: LRU, LFU, FIFO, and alternatives.
+- Hot keys.
+- Cache stampedes, penetration, and avalanche.
+- Negative caching.
+- Stale-while-revalidate.
+- Cache warming and prefetching.
+- Redis-like data structures.
+- CDN architecture and origin shielding.
+- Cache partitioning and replication.
+- When caching is harmful.
+
+Worked example: A popular product page receives enormous traffic. Introduce caching gradually and examine stale prices, thundering herds, inventory correctness, and failure behavior.
+
+Essential diagrams: Cache hit/miss sequence; cache hierarchy; eviction simulation; stampede timeline; geographic CDN delivery.
+
+References:
+
+- https://redis.io/docs/latest/develop/use/patterns/
+- https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
+- https://learn.microsoft.com/en-us/azure/architecture/patterns
+
+Unit 12: Scalability, Load Balancing, and Data Distribution
+
+Topics:
+
+- Vertical vs horizontal scaling.
+- Stateless vs stateful services.
+- Load distribution algorithms.
+- Health checks and failover.
+- Sticky sessions.
+- Autoscaling metrics.
+- Replication.
+- Partitioning and sharding.
+- Range partitioning vs hash partitioning.
+- Consistent hashing and rendezvous hashing.
+- Rebalancing.
+- Hot partitions and skew.
+- Read replicas and read/write splitting.
+- Replication lag.
+- Database proxying.
+- Connection pool saturation.
+- Bottleneck identification.
+- Queueing and overload.
+- Single points of failure.
+- Multi-region strategies.
+- Scaling writes vs scaling reads.
+- Scale-out economics.
+
+Worked example: Scale a URL shortener from 100 requests per second to 100,000. Introduce new components only when justified by a demonstrated bottleneck.
+
+Essential diagrams: Architecture evolution across four load levels; consistent-hashing ring; sharding heatmap; load-balancer failover.
+
+References:
+
+- https://github.com/donnemartin/system-design-primer
+- https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices
+
+Unit 13: File Systems, Search Infrastructure, and Data Pipelines
+
+Topics:
+
+- Binary/object storage.
+- Large-file upload architecture.
+- Multipart and resumable uploads.
+- Checksums and content addressing.
+- Metadata vs binary data.
+- Search engines and inverted indexes.
+- Indexing pipelines.
+- Search ingestion and reindexing.
+- Batch vs streaming pipelines.
+- ETL vs ELT.
+- Change Data Capture (CDC).
+- Data lakes and warehouses.
+- Stream processing fundamentals.
+- Data provenance and lineage.
+- Data quality, schema validation, and replay.
+- Lifecycle policies and retention.
+- Designing data-intensive applications.
+
+Worked example: Design a document-processing system accepting millions of files, tracking processing state, extracting metadata, maintaining provenance, and exposing searchable results.
+
+Essential diagrams: Upload pipeline; inverted index; ingestion DAG; batch vs stream timeline; lineage graph.
+
+References:
+
+- https://15445.courses.cs.cmu.edu/
+- https://learn.microsoft.com/en-us/azure/architecture/
+- https://kafka.apache.org/documentation/
+
+---
+
+PART IV — DISTRIBUTED SYSTEMS AND RELIABILITY
+
+Unit 14: Distributed Systems Fundamentals
+
+Topics:
+
+- What makes a distributed system difficult?
+- Partial failures.
+- Network uncertainty.
+- Fault models.
+- Time, clocks, and event ordering.
+- Physical vs logical clocks.
+- Lamport clocks and vector clocks.
+- Consistency models.
+- Strong consistency and eventual consistency.
+- Linearizability.
+- Serializability vs linearizability.
+- Sequential and causal consistency.
+- Read-your-writes and monotonic reads.
+- CAP theorem, with its actual assumptions.
+- PACELC as a useful extension.
+- Quorums and read/write trade-offs.
+- Split-brain situations.
+- Distributed coordination.
+- The fallacies of distributed computing.
+- Safety vs liveness.
+
+Worked example: A social application writes a new post in one region while a friend reads it from another. Examine different consistency contracts and their user-visible effects.
+
+Essential diagrams: Network partition; causality timeline; consistency model comparisons; read/write quorum visualizations.
+
+References:
+
+- https://pdos.csail.mit.edu/6.5840/
+- https://learn.microsoft.com/en-us/azure/architecture/patterns
+
+Unit 15: Replication, Leader Election, and Consensus
+
+Topics:
+
+- Primary/replica architectures.
+- Leader/follower replication.
+- Multi-leader replication.
+- Leaderless replication.
+- Synchronous vs asynchronous replication.
+- Quorum-based systems.
+- Consensus and replicated state machines.
+- Raft: terms, elections, log replication, commit.
+- Paxos: conceptual foundations.
+- Log ordering and durability.
+- Membership changes.
+- Split-brain prevention and fencing tokens.
+- Failure detection.
+- Strongly consistent metadata services.
+- Distributed locks and leases.
+- Conflict resolution and CRDT introduction.
+- Multi-region replication trade-offs.
+
+Worked example: Three database replicas, one leader, and a network partition. Walk through elections, writes, acknowledgement rules, recovery, and potential data loss.
+
+Essential diagrams: Raft state transitions; election timeline; replicated log; quorum intersection; network partition recovery.
+
+References:
+
+- https://pdos.csail.mit.edu/6.5840/
+- https://redis.io/docs/latest/develop/use/patterns/
+
+Unit 16: Message Queues, Events, and Distributed Workflows
+
+Topics:
+
+- Synchronous vs asynchronous communication.
+- Queues vs logs vs pub/sub.
+- Producers, consumers, brokers.
+- Partitions, consumer groups, offsets.
+- Delivery guarantees.
+- At-most-once and at-least-once processing.
+- Exactly-once processing within defined boundaries.
+- Ordering guarantees.
+- Consumer acknowledgements.
+- Retries and dead-letter queues.
+- Poison messages.
+- Idempotent consumers.
+- Event sourcing.
+- CQRS.
+- Transactional outbox.
+- Sagas and compensating transactions.
+- Choreography vs orchestration.
+- Workflow engines.
+- Durable job execution.
+- Scheduling, leases, and worker coordination.
+- Backpressure and replay.
+- Reconciliation after partial failure.
+
+Worked example: Design an e-commerce checkout that coordinates payment, inventory reservation, shipment creation, and refund compensation.
+
+Essential diagrams: Queue lifecycle; consumer partition assignment; Saga happy/failure paths; outbox transaction; event replay.
+
+References:
+
+- https://kafka.apache.org/documentation/
+- https://microservices.io/patterns/data/transactional-outbox
+- https://learn.microsoft.com/en-us/azure/architecture/patterns
+
+Unit 17: Reliability, Fault Tolerance, and Disaster Recovery
+
+Topics:
+
+- Failure domains and fault isolation.
+- Availability vs durability.
+- Redundancy.
+- Active-active vs active-passive.
+- Timeouts.
+- Retries, exponential backoff, jitter.
+- Retry storms.
+- Circuit breakers.
+- Bulkheads.
+- Rate limiting.
+- Load shedding.
+- Graceful degradation.
+- Fallbacks.
+- Health checking.
+- RTO and RPO.
+- Backups and restore testing.
+- Failover and failback.
+- Multi-zone and multi-region deployments.
+- Chaos engineering.
+- SLO-based reliability decisions.
+- Cascading failures.
+- Incident analysis and prevention.
+
+Worked example: A downstream payment provider becomes unavailable during peak traffic. Demonstrate the failure cascade and progressively introduce resilience mechanisms.
+
+Essential diagrams: Retry amplification timeline; circuit breaker state machine; bulkhead isolation; failure-domain map; RTO/RPO timeline.
+
+References:
+
+- https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/reliability.html
+- https://docs.cloud.google.com/architecture/disaster-recovery
+- https://sre.google/workbook/table-of-contents/
+
+---
+
+PART V — SECURITY AND PRODUCTION ENGINEERING
+
+Unit 18: Security Architecture and Privacy
+
+Topics:
+
+- Threat modeling.
+- Trust boundaries.
+- Authentication vs authorization.
+- Sessions, cookies, tokens.
+- OAuth 2.0 and OpenID Connect.
+- Role-based and attribute-based access control.
+- Least privilege.
+- Defense in depth.
+- Secrets management.
+- Encryption in transit and at rest.
+- Password hashing.
+- Key management and rotation.
+- Network segmentation.
+- Zero-trust principles.
+- API security and common vulnerabilities.
+- Multi-tenant isolation.
+- Data minimization.
+- Audit trails.
+- Privacy, retention, and deletion.
+- Supply-chain security.
+- Security vs usability trade-offs.
+- Secure-by-design reviews.
+
+Worked example: Design a multi-tenant SaaS application where an administrator must never gain access to another organization's data.
+
+Essential diagrams: Trust-boundary map; authentication sequence; authorization decision flow; tenant-isolation architecture.
+
+References:
+
+- https://api-security.owasp.org/editions/2023/en/0x11-t10/
+- https://sre.google/books/
+
+Unit 19: Observability, Monitoring, and Incident Engineering
+
+Topics:
+
+- Monitoring vs observability.
+- Logs, metrics, and traces.
+- Structured logging.
+- Distributed tracing.
+- Trace IDs, span IDs, context propagation.
+- Golden signals.
+- RED and USE methods.
+- SLIs, SLOs, error budgets.
+- Alert design and alert fatigue.
+- Sampling and telemetry cost.
+- Dashboards.
+- Profiling.
+- Query and application performance diagnosis.
+- Incident response.
+- On-call and runbooks.
+- Root-cause investigation.
+- Blameless postmortems.
+- Capacity monitoring.
+- Observability across asynchronous workflows.
+
+Worked example: An API's p99 latency increases from 200 ms to 5 seconds. Use traces, metrics, logs, and database analysis to localize the bottleneck.
+
+Essential diagrams: Distributed trace waterfall; request ID propagation; metrics-to-root-cause workflow; error-budget burn chart.
+
+References:
+
+- https://opentelemetry.io/docs/concepts/
+- https://opentelemetry.io/docs/concepts/observability-primer/
+- https://sre.google/workbook/table-of-contents/
+
+Unit 20: Deployment, Cloud Infrastructure, and Platform Architecture
+
+Topics:
+
+- Development vs staging vs production.
+- Virtual machines vs containers.
+- Container fundamentals.
+- Kubernetes fundamentals.
+- Control plane vs data plane.
+- Scheduling and service discovery.
+- Autoscaling.
+- Configuration and secret delivery.
+- Immutable infrastructure.
+- Infrastructure as Code.
+- CI/CD.
+- Rolling, blue-green, and canary deployments.
+- Feature flags.
+- Rollbacks and database migrations.
+- Multi-environment configuration.
+- Twelve-Factor App principles.
+- Serverless compute.
+- Cloud vs on-premises trade-offs.
+- Infrastructure ownership and managed services.
+- Deployment topologies and networking.
+- Platform engineering basics.
+
+Worked example: Take a single-process application and deploy it into a reliable, observable, multi-instance production environment with safe releases.
+
+Essential diagrams: VM/container comparison; Kubernetes cluster; CI/CD pipeline; blue-green deployment; canary traffic progression.
+
+References:
+
+- https://kubernetes.io/docs/concepts/overview/components/
+- https://12factor.net/
+- https://docs.aws.amazon.com/wellarchitected/
+
+Unit 21: Performance, Cost Optimization, and System Validation
+
+Topics:
+
+- Performance budgets.
+- CPU, memory, disk, network, and database bottlenecks.
+- Profiling and benchmarking.
+- Load, stress, spike, and soak testing.
+- Benchmark methodology and statistical pitfalls.
+- Tail latency analysis.
+- Queue saturation and throughput ceilings.
+- Performance tuning vs architecture changes.
+- Horizontal scaling economics.
+- Compute, storage, networking, and telemetry costs.
+- Cost per request or transaction.
+- Capacity reservation vs elastic capacity.
+- Cost-performance optimization.
+- Sustainability and resource efficiency.
+- Unit, integration, contract, end-to-end, and performance tests.
+- Fault-injection tests.
+- Data consistency validation.
+- Architecture fitness functions.
+- Regression testing.
+- Evaluating a design against its original requirements.
+
+Worked example: Compare three production architectures for a service with variable traffic. Model monthly costs, p99 latency, availability, and operational complexity under explicit assumptions.
+
+Essential diagrams: Performance bottleneck tree; throughput-latency curve; cost breakdown; test pyramid; design decision matrix.
+
+References:
+
+- https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-optimization.html
+- https://martinfowler.com/articles/practical-test-pyramid.html
+- https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
+
+---
+
+PART VI — COMPLETE SYSTEM DESIGN CASE STUDIES
+
+Unit 22: End-to-End Design, Architecture Reviews, and Evolution
+
+Create fully worked system designs, not just architecture pictures.
+
+Mandatory case studies
+
+1. URL Shortener — ID generation, storage, caching, collision handling, traffic scaling.
+2. Rate Limiter — token bucket, leaky bucket, sliding window, distributed rate limiting.
+3. Chat Application — message delivery, WebSockets, offline messages, ordering, presence.
+4. Notification Platform — pub/sub, template engines, retries, preferences, delivery tracking.
+5. Social Media Feed — fan-out-on-write vs fan-out-on-read, hot users, feed ranking infrastructure.
+6. Video Streaming Platform — upload, encoding, object storage, CDN, adaptive delivery.
+7. Ride-Hailing System — location updates, proximity queries, dispatch, matching, consistency.
+8. Online Ticket Booking — concurrency, locking, reservations, expiry, payments.
+9. Payment System — idempotency, ledgers, reconciliation, refunds, external provider failures.
+10. Distributed Job Scheduler — durable schedules, worker leases, retries, duplicate execution.
+11. Collaborative Document Editor — synchronization, versioning, conflict resolution, CRDT/OT fundamentals.
+12. Large-Scale Document Processing Platform — file ingestion, workflow orchestration, classification, extraction, provenance, human review, scaling, fault recovery.
+
+Additional optional case studies:
+
+- Search engine.
+- Cloud storage service.
+- Distributed cache.
+- API gateway.
+- Metrics collection platform.
+- Multi-tenant SaaS.
+- Real-time fraud detection.
+- IoT ingestion platform.
+
+Every case study must include
+
+1. Functional requirements.
+2. Nonfunctional requirements.
+3. Explicit assumptions and workload numbers.
+4. Naive initial architecture.
+5. Core API contracts.
+6. Data model and schema.
+7. Low-level component organization.
+8. High-level system architecture.
+9. Data and control flows.
+10. Capacity estimates.
+11. End-to-end latency estimates.
+12. Failure scenarios.
+13. Scalability improvements.
+14. Consistency requirements.
+15. Security model.
+16. Deployment approach.
+17. Observability design.
+18. Infrastructure cost considerations.
+19. Alternative architectures and trade-offs.
+20. Architecture evolution from small scale to large scale.
+21. Design review identifying weaknesses and improvements.
+22. A short implementation exercise.
+
+Do not claim specific technology architectures are the exact internal implementations used by real companies without authoritative supporting evidence.
+
+References:
+
+- https://github.com/donnemartin/system-design-primer
+- https://github.com/ByteByteGoHq/system-design-101
+- https://learn.microsoft.com/en-us/azure/architecture/
+- https://pdos.csail.mit.edu/6.5840/
+
+---
+
+MANDATORY PEDAGOGICAL FRAMEWORK
+
+A. How to explain every concept
+
+Use the following progression.
+
+1. Begin with the actual problem
+
+Introduce a realistic situation that exposes the need for the concept.
+
+For example, when teaching Dependency Injection:
+
+"A PaymentService directly creates a StripePaymentGateway. What happens when the application must support another gateway or run tests without making real payments?"
+
+Describe what becomes difficult before introducing terminology.
+
+2. Build the simplest working solution
+
+Show the most straightforward reasonable implementation.
+
+Explain why it works at first.
+
+Avoid introducing additional abstractions prematurely.
+
+3. Demonstrate where it breaks
+
+Use a realistic counterexample, scaling requirement, concurrency issue, failure, maintenance problem, or testing difficulty.
+
+Illustrate the weakness concretely.
+
+4. Introduce the concept intuitively
+
+Use everyday analogies when useful, but explicitly state where the analogy stops being accurate.
+
+5. Explain the internal mechanism
+
+Show actual data structures, object interactions, state changes, messages, request timelines, or resource ownership.
+
+Do not stop at a verbal definition.
+
+6. Implement a miniature version
+
+Use executable code or language-neutral pseudocode.
+
+Demonstrate behavior with concrete input and output.
+
+7. Compare alternatives
+
+State why the chosen approach helps, which costs it introduces, and when another approach is more appropriate.
+
+8. Demonstrate failure behavior
+
+Show what happens under concurrent access, timeouts, crashes, retries, and degraded dependencies, as applicable.
+
+9. Connect it to production
+
+Explain where the concept appears in actual software architecture.
+
+10. Reinforce understanding
+
+End with a short mental model, common misconception, trivia, and questions requiring reasoning.
+
+---
+
+MANDATORY VISUAL DESIGN STANDARDS
+
+This is an ATLAS. The diagrams are core teaching material rather than decoration.
+
+Illustration requirements
+
+For each substantial chapter, create at least four meaningful visuals when supported by the subject, and more whenever a concept is difficult to understand without them.
+
+Choose from:
+
+- Annotated architecture diagrams.
+- Sequence diagrams.
+- Class/UML diagrams.
+- State-transition diagrams.
+- Database schema/ER diagrams.
+- Object-lifetime and memory diagrams.
+- Time-based execution timelines.
+- Request/response flow diagrams.
+- Failure propagation diagrams.
+- Trade-off matrices.
+- Decision trees.
+- Scaling progression diagrams.
+- Latency waterfalls.
+- Geographical replication diagrams.
+- Before-and-after architecture comparisons.
+- Step-by-step algorithm illustrations.
+- Charts showing actual calculated data.
+
+Use custom SVG/vector illustrations or other high-quality graphics where possible. Mermaid and PlantUML are useful for source-backed technical diagrams.
+
+Use original illustrations rather than copying diagrams from external resources.
+
+Visual language
+
+Maintain a consistent visual theme throughout the entire atlas.
+
+Suggested palette:
+
+- Blue: normal request/data flow.
+- Green: successful or healthy state.
+- Amber: degraded state, caution, or trade-off.
+- Red: failure, bottleneck, or error.
+- Purple: shared infrastructure or control plane.
+- Gray: external or inactive components.
+
+Include a legend where color carries meaning. Do not rely on color alone.
+
+Every arrow must have a clear meaning. Distinguish data movement from control flow, acknowledgements, and dependencies.
+
+Every diagram must have:
+
+- Figure number and meaningful title.
+- Explicit component labels.
+- Readable typography.
+- Caption explaining the main insight.
+- The reason the diagram is relevant.
+- Source or "Author-created illustration" attribution where appropriate.
+
+Diagrams must remain legible when exported to PDF and when viewed at normal reading size.
+
+Required visual progression
+
+For most architectural concepts, show three states:
+
+Diagram A — Naive implementation
+
+The simplest approach.
+
+Diagram B — What goes wrong
+
+The bottleneck, race, coupling, failure, or scalability limit.
+
+Diagram C — Improved implementation
+
+The refined design, with the reason it solves the problem.
+
+For concepts such as concurrency, include step-by-step snapshots with exact event ordering.
+
+For concepts such as caching and distributed consistency, explicitly depict where copies of state exist, how fresh they are, and when they can disagree.
+
+Never create visually impressive but technically ambiguous diagrams.
+
+---
+
+EXAMPLE QUALITY REQUIREMENTS
+
+Every important concept must contain at least one substantial worked example.
+
+Prefer a consistent set of recurring systems so the reader can see the same application become more sophisticated across chapters.
+
+Use realistic domains:
+
+- Payment processing.
+- Online shopping.
+- Chat.
+- Ticket booking.
+- Document processing.
+- Notification delivery.
+- Video streaming.
+
+For each example, show:
+
+1. Problem statement and assumptions.
+2. Initial implementation or architecture.
+3. Data and control flow.
+4. Concrete inputs and outputs.
+5. Normal successful execution.
+6. Important edge cases.
+7. What goes wrong under failure or concurrency.
+8. Corrected implementation.
+9. Trade-offs and remaining limitations.
+
+When performing calculations, show units and intermediate steps. For performance claims, distinguish measurements from estimates.
+
+Illustrative example requirement:
+
+If a system receives 600,000 requests over 10 minutes, calculate average RPS as:
+
+600,000 / 600 = 1,000 requests/second.
+
+Then introduce a peak-traffic multiplier, state that it is an assumption, and recompute capacity.
+
+Do not claim that this immediately determines server count. Explain why per-instance throughput, resource saturation, headroom, and measured latency still matter.
+
+---
+
+REQUIRED CHAPTER TEMPLATE
+
+Every chapter must follow this general structure.
+
+Chapter N: [Concept]
+
+Opening illustration: An engaging visual showing the engineering problem.
+
+Why this matters: What practical problem does this concept solve?
+
+Learning objectives: What the reader should be able to reason about afterward.
+
+Intuition first: Explain in accessible language without sacrificing correctness.
+
+Formal definition: Provide a technically precise definition.
+
+Inside the mechanism: Explain how it works step by step.
+
+Annotated diagrams: Show the real interactions.
+
+Worked example: A concrete application, with code or pseudocode where useful.
+
+Failure laboratory: Demonstrate a bug, breakdown, or incorrect assumption.
+
+Design alternatives: Compare approaches and describe selection criteria.
+
+Production considerations: Performance, consistency, reliability, operations, and security implications.
+
+Common misconceptions: Explain at least three relevant mistakes or oversimplifications.
+
+Trivia: Include two or three short, interesting, fact-checked technical facts, historical notes, or counterintuitive observations.
+
+Quick reference: A concise summary or comparison table.
+
+Knowledge check: Three conceptual questions, two applied design questions, and one challenging scenario.
+
+Further reading: Direct links to high-quality references with brief annotations explaining what each source contributes.
+
+Related concepts: Cross-reference other atlas chapters.
+
+Use the template naturally. Do not inflate simple concepts to fit a fixed length.
+
+---
+
+SPECIAL TECHNICAL ACCURACY REQUIREMENTS
+
+Pay particular attention to commonly oversimplified claims.
+
+- Dependency Injection is not synonymous with a DI container.
+- Singleton lifetime may be per container or process, not necessarily one object across a distributed application.
+- Async execution does not automatically mean parallel execution.
+- Thread safety does not follow simply from using asynchronous APIs.
+- A database transaction does not automatically provide the strongest isolation.
+- CAP is about the trade-offs under partitions, not a permanent choice of only two arbitrary qualities.
+- Eventual consistency is not a synonym for unreliable data.
+- Exactly-once processing guarantees must identify the precise system boundary and assumptions.
+- Idempotency does not automatically guarantee exactly-once execution.
+- A message broker does not automatically make a workflow reliable.
+- A cache can introduce consistency and operational problems.
+- Microservices are not inherently better than modular monoliths.
+- Replication does not automatically prevent acknowledged write loss.
+- Adding servers does not automatically improve throughput if another resource is saturated.
+- High availability and durability are distinct properties.
+- UML, HLD, LLD, and architectural styles are organizational tools, not universal formal divisions of software engineering.
+
+Where terminology differs between frameworks or communities, explain the differences.
+
+Explicitly distinguish fundamental guarantees, common implementations, engineering conventions, and simplified mental models.
+
+---
+
+SOURCING AND RESEARCH POLICY
+
+Use the supplied references as starting points, not as the sole source of information.
+
+Prioritize sources in this order:
+
+1. Foundational research papers and original specifications.
+2. University courses, textbooks, and academic lectures.
+3. Official technology and protocol documentation.
+4. Engineering publications and architecture guidance from established organizations.
+5. High-quality independent engineering explanations.
+
+Key reference collections:
+
+- MIT Distributed Systems: https://pdos.csail.mit.edu/6.5840/
+- CMU Database Courses: https://db.cs.cmu.edu/courses/
+- Operating Systems: Three Easy Pieces: https://pages.cs.wisc.edu/~remzi/OSTEP/
+- Google SRE Books: https://sre.google/books/
+- Google SRE Workbook: https://sre.google/workbook/table-of-contents/
+- Microsoft Architecture Center: https://learn.microsoft.com/en-us/azure/architecture/
+- AWS Well-Architected: https://docs.aws.amazon.com/wellarchitected/
+- Martin Fowler: https://martinfowler.com/
+- Refactoring Guru: https://refactoring.guru/design-patterns
+- System Design Primer: https://github.com/donnemartin/system-design-primer
+- System Design 101: https://github.com/ByteByteGoHq/system-design-101
+- OpenTelemetry: https://opentelemetry.io/docs/
+- OWASP API Security: https://api-security.owasp.org/
+- Apache Kafka: https://kafka.apache.org/documentation/
+
+For each chapter:
+
+- Verify reference links.
+- Cite the primary source for technical guarantees.
+- Distinguish original research from later interpretations.
+- Cite factual claims about real company architectures.
+- Never invent benchmarks, source links, company details, or performance results.
+- Mark illustrative numbers as assumptions.
+- Date version-sensitive documentation.
+- Paraphrase sources and respect copyright.
+- Provide further reading sorted from introductory to advanced.
+
+---
+
+BOOK DESIGN AND READER EXPERIENCE
+
+Create a consistent, modern, premium technical reference book.
+
+Prefer:
+
+- Clear typography.
+- Generous white space.
+- Highly legible diagrams.
+- Restrained, meaningful use of color.
+- Consistent figure and table numbering.
+- Distinct visual treatments for intuition, formal theory, examples, misconceptions, and trivia.
+- Strong visual hierarchy.
+- Helpful chapter-opening illustrations.
+- Cross-references and a searchable glossary.
+
+Do not create long walls of unstructured text.
+
+However, do not sacrifice technical depth for visual minimalism.
+
+Include a master concept map that shows the relationships among low-level design, databases, networking, distributed systems, reliability, security, and deployment.
+
+Include a dependency-aware reading path and prerequisite links between chapters.
+
+Include both beginner-friendly entry points and advanced deep-dive sections.
+
+Create a glossary of technical terms, a diagram index, a formula reference, a design-pattern index, and a source bibliography.
+
+---
+
+EXERCISES AND ASSESSMENT
+
+At the end of each unit, include:
+
+- Five conceptual questions.
+- Three scenario-based questions.
+- One design or debugging challenge.
+- One small implementation exercise where relevant.
+- One advanced thought experiment.
+
+Provide answer explanations in a separate solutions section.
+
+The explanations must explain why incorrect alternatives fail, not only which answer is correct.
+
+Use exercises to evaluate understanding of assumptions, failure modes, and trade-offs rather than memorization.
+
+---
+
+GENERATION WORKFLOW
+
+Do not attempt to generate the complete textbook as a single shallow response.
+
+Follow this workflow:
+
+Stage 1 — Book blueprint
+
+- Build the complete hierarchical table of contents.
+- Expand the 22 units into appropriate chapters and subchapters.
+- Map prerequisites and cross-references.
+- Specify planned illustrations.
+- Identify authoritative references per chapter.
+- Build the case-study progression.
+
+Stage 2 — Chapter production
+
+- Produce one complete chapter or a small coherent set of chapters at a time.
+- Give each chapter sufficient space for explanations, worked examples, and diagrams.
+- Avoid superficial compression.
+- Maintain a consistent glossary and visual language.
+
+Stage 3 — Quality review
+
+- Check technical claims against primary references.
+- Validate equations and assumptions.
+- Check code and pseudocode for correctness.
+- Check every diagram for consistency with the explanation.
+- Check that critical trade-offs, failures, and alternatives are covered.
+- Check for duplicated concepts and missing cross-references.
+
+Stage 4 — Atlas assembly
+
+- Merge chapters into the unified book.
+- Include a complete index, glossary, bibliography, exercises, and case studies.
+- Maintain consistent visual and editorial standards.
+- Produce a navigable digital edition and print-friendly PDF if supported.
+
+Maintain a completion manifest so no syllabus item, illustration, exercise, or reference is silently omitted.
+
+---
+
+FINAL SUCCESS CRITERIA
+
+A reader completing this atlas should be able to:
+
+1. Explain how a request travels through a modern software system.
+2. Design clean modules, classes, contracts, and dependency relationships.
+3. Select appropriate software architecture patterns.
+4. Model data and choose appropriate storage strategies.
+5. Reason correctly about concurrency and transactional behavior.
+6. Estimate infrastructure requirements and identify bottlenecks.
+7. Scale systems and explain the limitations of each scaling strategy.
+8. Reason about distributed consistency, replication, and failures.
+9. Build reliable asynchronous workflows.
+10. Design security and observability into a system from the beginning.
+11. Evaluate cost, performance, reliability, and maintainability trade-offs.
+12. Diagnose design failures and propose defensible improvements.
+13. Produce complete HLD and LLD designs for real software products.
+14. Understand how a simple architecture evolves into a production-scale system.
+
+The central teaching philosophy is:
+
+Do not merely explain what a component or pattern is.
+
+Explain the problem that created the need for it, how it works internally, why it helps, where it fails, what it costs, and how an engineer decides whether to use it.
+
+Every important abstraction should be accompanied by an illustration, an actual execution example, and a meaningful trade-off.
+
+The final result must feel like a complete, carefully researched, beautifully illustrated engineering atlas—not a collection of AI-generated notes.
