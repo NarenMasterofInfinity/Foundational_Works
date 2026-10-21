@@ -2,18 +2,20 @@
 
 **From Objects to Planet-Scale Systems** — the complete first edition in the Learn · Research · Visualise design language.
 
-Open [the digital edition](index.html) or download [the complete PDF](System-Design-Atlas-Complete.pdf) (1,010 tagged A4 pages, approximately 13 MB). The earlier [foundations PDF](System-Design-Atlas-Foundations.pdf) is retained as a separately scoped historical installment.
+Open [the digital edition](index.html) or download [the complete PDF](System-Design-Atlas-Complete.pdf) (1,012 tagged A4 pages, approximately 13 MB). The earlier [foundations PDF](System-Design-Atlas-Foundations.pdf) is retained as a separately scoped historical installment.
 
 ## What is included
 
 - All **22 units and 99 chapters**, covering all **390 exact supplied syllabus items**.
-- **49,478 words of authored lesson, pattern, and case-study prose**, excluding the separate solutions and much of the reader/reference material.
+- **50,392 words of authored lesson, pattern, and case-study prose**, excluding the separate solutions and much of the reader/reference material.
 - **575 original SVG figures**, including at least four per chapter and all 94 required unit illustration assignments. Four Unit 1 assignments refer to its existing chapter figures; 90 additional unit plates cover the other required visual vocabulary. The master concept map is separately numbered M.1.
 - All **12 mandatory end-to-end designs**, each with all **22 required review sections**, explicit assumptions, APIs, logical schemas, LLD, HLD, flows, calculations, failures, security, deployment, observability, costs, alternatives, evolution, review, and an implementation challenge.
 - **242 questions and 242 separate explained answers**: five conceptual, three scenarios, one design/debugging challenge, one implementation exercise, and one advanced thought experiment for every unit.
 - **26 individual LLD pattern treatments**, including miniature pseudocode, intent, collaborator roles, use, cost, and distinctions from related patterns.
 - **13 browser-local workbenches**: acknowledgment/crash ordering, change propagation, weighted design preferences, C4 views, capacity, bounded queues, last-seat claims, LRU, rendezvous assignment, pipeline fencing, quorum intersection, token bucket, and cost per useful outcome.
 - A **441-entry glossary and concept reference**, complete contents, dependency-closed reading paths, formula reference, pattern destinations, diagram index, and **61 selected production sources**.
+
+Unit 1 has been revised to introduce each idea through the to-do application before naming it. The four chapters use shorter paragraphs, worked sequences, and optional sections for extra detail; their figures, workbenches, questions, and answers use the same approach. Units 2–22 retain their existing text.
 
 The content-driven [manifest](completion-manifest.json) records actual produced artifacts and review boundaries. The [book blueprint](BLUEPRINT.md) retains stable chapter IDs and exact topic allocation. The original request remains in [BRIEF.txt](BRIEF.txt).
 

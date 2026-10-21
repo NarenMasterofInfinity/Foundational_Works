@@ -58,12 +58,18 @@ def render_chapter(u,c,j):
     prereq=', '.join(link(p) for p in c['prerequisites']) or 'Basic programming'
     meta=f'<div class="chapter-meta"><span>Prerequisites: {prereq}</span><span>{len(c["illustrations"])} original figures</span><button class="read-toggle quiet" data-read="{c["id"]}" aria-pressed="false" type="button">Mark as read ○</button></div>'
     end='<p>'+link(f'questions-unit-{n}',f'Unit {n} exercises →')+' · '+link(f'answers-unit-{n}',f'Unit {n} explained solutions →')+'</p>'
-    return heading(f'PART {u["part"]+1} / UNIT {n:02} / CHAPTER {c["number"]}',c['title'])+meta+LEGEND+body+end+refs(c['references'])+f'<div class="chapter-end">{previous}{nxt}</div>'
+    legend=LEGEND if n!=1 else '<div class="visual-legend" aria-label="Diagram legend"><span>Reading the figures: boxes name parts or states; arrow labels explain how they relate. Dashed arrows show a code dependency or a change in the level of detail. Each caption explains the example.</span></div>'
+    reading=refs(c['references'])
+    if n==1:
+        reading=reading.replace('Start with the introductory guidance, then inspect original specifications, research, or implementation details. Access and stated use checked 21 October 2026. Author-created examples and assumed numbers are separate from source guarantees.','These sources explain the ideas and mechanisms used in this chapter. The to-do application is our own teaching example. Links were reviewed on 21 October 2026.')
+    return heading(f'PART {u["part"]+1} / UNIT {n:02} / CHAPTER {c["number"]}',c['title'])+meta+legend+body+end+reading+f'<div class="chapter-end">{previous}{nxt}</div>'
 
 def render_unit(u):
     n=u['n'];html=heading(f'PART {u["part"]+1} / UNIT {n:02}',u['title'])
     html+='<div class="edition-note">'+badge()+f'<p>{len(u["chapters"])} produced chapters, with original figures, worked mechanisms, and a complete eleven-question assessment with separate explained solutions.</p></div>'
     html+='<p class="prereq"><strong>Before this unit:</strong> '+(', '.join(link(f'unit-{p}',f'Unit {p}') for p in u['prerequisites']) or 'Basic programming')+'</p>'
+    if n==1:
+        html+='<p class="lead">How do we turn a small program into an application people can rely on? We will build a to-do application, one decision at a time.</p><p>Begin with a task kept in memory. Save it between runs, organise the code into modules, and work out what the application must do. Then draw the design and trace a request through it.</p>'
     html+='<div class="chapter-list">'+''.join(card(c) for c in u['chapters'])+'</div><h2>The running example</h2>'+paragraphs(u['example'])
     html+='<p>'+link(f'questions-unit-{n}',f'Unit {n} assessment →','primary')+' '+link(f'answers-unit-{n}','Explained solutions →','text-link')+'</p>'
     if n<22:
@@ -74,7 +80,7 @@ def render_unit(u):
         if n>1:
             visual,coverage=plates(u);u['essential_visual_coverage']=coverage
             html+='<h2>Unit plates · the required visual vocabulary</h2><p>Figure numbers with .0 denote unit-level reference plates. Chapter figures retain their chapter numbers.</p>'+LEGEND+visual
-        else:u['essential_visual_coverage']=[dict(required=t,figure=f,status='available') for t,f in zip(u['illustrations'],['fig-1-1-3','fig-1-2-4','fig-1-3-2','fig-1-4-1'])]
+        else:u['essential_visual_coverage']=[dict(required=t,figure=f,status='available') for t,f in zip(u['illustrations'],['fig-1-1-4','fig-1-2-4','fig-1-3-2','fig-1-4-1'])]
     else:
         html+='<h2>The complete review protocol</h2><ol class="two-column">'+''.join('<li>'+e(t)+'</li>' for t in B['case_review'])+'</ol><p>Each of the twelve designs above contains every section, including the implementation challenge. Optional next subjects: '+e(' · '.join(B['optional_cases']))+'.</p>'
     return html+refs(u['references'])

@@ -11,8 +11,8 @@ PARTS = ['System design foundations', 'Low-level design & software architecture'
 # Each chapter's exact syllabus allocation is explicit, so future editorial work
 # cannot accidentally turn a checkmarked unit into a partially covered unit.
 OUTLINES = {
-1: [('A system is a promise', [1,2,3,5,8]), ('Boundaries that make change local', [6,7]),
-    ('Requirements become decisions', [4,9,11,12,13]), ('One application, many architectural views', [10])],
+1: [('From a program to a system', [1,2,3,5,8]), ('Organising code into modules', [6,7]),
+    ('From requirements to design choices', [4,9,11,12,13]), ('Drawing the system at different levels', [10])],
 2: [('Turn user journeys into workloads', list(range(1,4))), ('Measure the experience', list(range(4,8))), ('Estimate the resources', list(range(8,11))), ('Queues, bottlenecks & defensible decisions', list(range(11,16)))],
 3: [('Addresses, sockets & transports', list(range(1,4))), ('A secure request, one round trip at a time', list(range(4,9))), ('Intermediaries & persistent connections', list(range(9,13))), ('Discover, route & survive the network', list(range(13,18)))],
 4: [('The runtime owns your resources', list(range(1,6))), ('Tasks, threads & event loops', list(range(6,10))), ('Shared memory & coordination', list(range(10,14))), ('Visibility, cancellation & overload', list(range(14,18)))],

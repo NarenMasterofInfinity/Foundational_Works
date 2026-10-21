@@ -10,7 +10,7 @@ Status: available. Direct prerequisites: [].
 
 Worked example: Design a basic to-do application. Begin with a single program and progressively identify modules, persistent storage, a web API, and deployment boundaries.
 
-### 1.1 A system is a promise — available
+### 1.1 From a program to a system — available
 
 Content source: src/chapter-1.html
 
@@ -24,11 +24,11 @@ Content source: src/chapter-1.html
 
 - State, data, computation, and communication.
 
-Figures: 1.1.1 The boundary follows the promise; 1.1.2 Data becomes state through a transition; 1.1.3 HLD and LLD ask connected questions; 1.1.4 From a working demo to a recoverable write
+Figures: 1.1.1 The application and storage work together; 1.1.2 Creating a task changes the stored state; 1.1.3 Save before reporting success; 1.1.4 Two levels of detail in one design
 
 References: https://www.sqlite.org/atomiccommit.html · https://www.rfc-editor.org/rfc/rfc9110.html
 
-### 1.2 Boundaries that make change local — available
+### 1.2 Organising code into modules — available
 
 Content source: src/chapter-2.html
 
@@ -36,11 +36,11 @@ Content source: src/chapter-2.html
 
 - Abstraction layers.
 
-Figures: 1.2.1 An innocent feature crosses every responsibility; 1.2.2 Separate responsibilities inside one process; 1.2.3 Dependency direction differs from execution direction; 1.2.4 Abstraction narrows the question at each layer
+Figures: 1.2.1 Shared storage details make changes spread; 1.2.2 Separate responsibilities inside one process; 1.2.3 The service uses a repository contract; 1.2.4 Each layer works at a different level of detail
 
 References: https://doi.org/10.1145/361598.361623 · https://martinfowler.com/articles/injection.html
 
-### 1.3 Requirements become decisions — available
+### 1.3 From requirements to design choices — available
 
 Content source: src/chapter-3.html
 
@@ -54,17 +54,17 @@ Content source: src/chapter-3.html
 
 - Why the simplest sufficient design is often preferable.
 
-Figures: 1.3.1 Make a vague quality measurable; 1.3.2 A decision is a testable hypothesis; 1.3.3 A hard constraint comes before a preference score; 1.3.4 Healthy traffic does not prove durable data
+Figures: 1.3.1 Turn “safe” into a checkable requirement; 1.3.2 Choose, record, and review a design; 1.3.3 Check requirements before scoring preferences; 1.3.4 Availability and durability answer different questions
 
 References: https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions · https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html
 
-### 1.4 One application, many architectural views — available
+### 1.4 Drawing the system at different levels — available
 
 Content source: src/chapter-4.html
 
 - Architecture diagrams: C4 model, context, container, component, deployment, sequence.
 
-Figures: 1.4.1 C4 changes the level of detail; 1.4.2 A deployment view locates the single points of failure; 1.4.3 A lost response makes the outcome uncertain; 1.4.4 Architecture evolves when an assumption fails
+Figures: 1.4.1 C4: zoom from the system into its code; 1.4.2 The application and database share one machine; 1.4.3 The task is saved, but the reply is lost; 1.4.4 Each design change answers a new need
 
 References: https://c4model.com/diagrams · https://c4model.com/abstractions/container · https://www.rfc-editor.org/rfc/rfc9110.html
 

@@ -54,7 +54,7 @@
         {
           "id": "ch-1-1",
           "number": "1.1",
-          "title": "A system is a promise",
+          "title": "From a program to a system",
           "topics": [
             "What is a software system?",
             "What does it mean to design a system?",
@@ -80,41 +80,41 @@
               "id": "fig-1-1-1",
               "chapter": "ch-1-1",
               "number": "1.1.1",
-              "title": "The boundary follows the promise",
-              "caption": "A user asks the application to remember a task. The store is inside the service responsibility boundary even if a different team operates it.",
-              "why": "It separates the user-visible obligation from the process that happens to run the code.",
+              "title": "The application and storage work together",
+              "caption": "The application needs storage to keep a task after restart. We include both inside the boundary when discussing that requirement.",
+              "why": "Include the parts needed to explain the behaviour you are studying.",
               "status": "available"
             },
             {
               "id": "fig-1-1-2",
               "chapter": "ch-1-1",
               "number": "1.1.2",
-              "title": "Data becomes state through a transition",
-              "caption": "Given an empty collection and the create command, the state gains task 7 and the caller receives its identifier. Repeating that command is a separate design question.",
-              "why": "A concrete transition exposes both the state owner and the effect that a retry could duplicate.",
+              "title": "Creating a task changes the stored state",
+              "caption": "Before creation, the collection is empty. After create(7, “Read”), it contains task 7, marked incomplete. The function returns the task details.",
+              "why": "Read the state before and after the operation to see exactly what changed.",
               "status": "available"
             },
             {
               "id": "fig-1-1-3",
               "chapter": "ch-1-1",
               "number": "1.1.3",
-              "title": "HLD and LLD ask connected questions",
-              "caption": "The high-level view places persistent state and communication boundaries. The low-level view explains how application components enforce behavior inside a process.",
-              "why": "Both views must agree about who commits state and who reports success.",
+              "title": "Save before reporting success",
+              "caption": "Memory-only tasks disappear after restart. In the revised version, the application commits the task before reporting success. The task remains after a process restart if committed storage is intact.",
+              "why": "Compare the two versions by restarting the process.",
               "status": "available"
             },
             {
               "id": "fig-1-1-4",
               "chapter": "ch-1-1",
               "number": "1.1.4",
-              "title": "From a working demo to a recoverable write",
-              "caption": "The naive program works within one run. A restart disproves its persistence promise. Committing before success fixes that failure under the storage assumptions; it does not by itself solve lost replies.",
-              "why": "The improvement is tied to a reproducible failure rather than an arbitrary desire for more components.",
+              "title": "Two levels of detail in one design",
+              "caption": "The high-level view shows the application and database. The low-level view shows the service, repository interface, and rules inside the application.",
+              "why": "Check that both views agree about saving a task before reporting success.",
               "status": "available"
             }
           ],
           "content_file": "src/chapter-1.html",
-          "rendered_words": 1970,
+          "rendered_words": 2181,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -125,7 +125,7 @@
         {
           "id": "ch-1-2",
           "number": "1.2",
-          "title": "Boundaries that make change local",
+          "title": "Organising code into modules",
           "topics": [
             "Coupling, cohesion, modularity, separation of concerns.",
             "Abstraction layers."
@@ -147,9 +147,9 @@
               "id": "fig-1-2-1",
               "chapter": "ch-1-2",
               "number": "1.2.1",
-              "title": "An innocent feature crosses every responsibility",
-              "caption": "In the tangled implementation, formatting, business rules, and persistence all know the mutable representation. Changing a field or invariant can break several paths.",
-              "why": "Dependency arrows identify the concrete knowledge that makes a change spread.",
+              "title": "Shared storage details make changes spread",
+              "caption": "Several parts read or change the same task data directly. A change to a field or rule may therefore require edits in several places.",
+              "why": "Follow the arrows to find which parts know about the shared data.",
               "status": "available"
             },
             {
@@ -157,31 +157,31 @@
               "chapter": "ch-1-2",
               "number": "1.2.2",
               "title": "Separate responsibilities inside one process",
-              "caption": "The adapter translates input, the service owns task rules, and the repository owns persistence operations. All three can be ordinary functions in one deployment.",
-              "why": "A module boundary can reduce change propagation without adding a network boundary.",
+              "caption": "The adapter reads input, the service checks task rules, and the repository saves and reads tasks. These parts all run inside one application process.",
+              "why": "Each kind of work has a clear place in the code.",
               "status": "available"
             },
             {
               "id": "fig-1-2-3",
               "chapter": "ch-1-2",
               "number": "1.2.3",
-              "title": "Dependency direction differs from execution direction",
-              "caption": "Dashed arrows mean source-level dependencies. At runtime the task service calls the concrete adapter through the agreed contract; there is no extra repository server.",
-              "why": "It prevents the common mistake of interpreting every diagram arrow as a network request.",
+              "title": "The service uses a repository contract",
+              "caption": "The service uses the repository interface. The SQLite adapter implements that interface. Startup code creates the adapter and passes it to the service; during execution, the service calls it.",
+              "why": "The dashed arrows show code dependencies. These objects can run in the same process.",
               "status": "available"
             },
             {
               "id": "fig-1-2-4",
               "chapter": "ch-1-2",
               "number": "1.2.4",
-              "title": "Abstraction narrows the question at each layer",
-              "caption": "Each layer hides details but relies on a narrower promise below it. A successful application call cannot offer stronger persistence than its storage and operating assumptions support.",
-              "why": "Abstraction reduces what a caller must know; it cannot remove physical dependencies.",
+              "title": "Each layer works at a different level of detail",
+              "caption": "The user asks to remember a task. The application applies task rules and requests a storage write. Storage uses files and the underlying device to carry out the write.",
+              "why": "Follow one request through the layers to connect the user’s action to the work below it.",
               "status": "available"
             }
           ],
           "content_file": "src/chapter-2.html",
-          "rendered_words": 1922,
+          "rendered_words": 2193,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -192,7 +192,7 @@
         {
           "id": "ch-1-3",
           "number": "1.3",
-          "title": "Requirements become decisions",
+          "title": "From requirements to design choices",
           "topics": [
             "Functional and nonfunctional requirements.",
             "Constraints, assumptions, risks, and trade-offs.",
@@ -220,41 +220,41 @@
               "id": "fig-1-3-1",
               "chapter": "ch-1-3",
               "number": "1.3.1",
-              "title": "Make a vague quality measurable",
-              "caption": "The quality scenario names a stimulus, an environment, and a response. This example concerns process restart; it makes no claim about losing the only disk or an entire region.",
-              "why": "A precise scope makes a design falsifiable and reveals the assumptions still needing discussion.",
+              "title": "Turn “safe” into a checkable requirement",
+              "caption": "Create a task successfully, restart the process, and check that the task remains. This requirement concerns a process restart with committed storage intact.",
+              "why": "A specific requirement tells us which test to run.",
               "status": "available"
             },
             {
               "id": "fig-1-3-2",
               "chapter": "ch-1-3",
               "number": "1.3.2",
-              "title": "A decision is a testable hypothesis",
-              "caption": "An ADR records why a choice fits current evidence and when to revisit it. The feedback dependency returns changed evidence to requirements analysis.",
-              "why": "It keeps a previously sensible choice from becoming an unquestioned permanent rule.",
+              "title": "Choose, record, and review a design",
+              "caption": "Write down the requirements, compare choices, and record the decision. Later, use measurements and changed requirements to decide whether the design still fits.",
+              "why": "Keep the reasons for a decision alongside the decision itself.",
               "status": "available"
             },
             {
               "id": "fig-1-3-3",
               "chapter": "ch-1-3",
               "number": "1.3.3",
-              "title": "A hard constraint comes before a preference score",
-              "caption": "An in-memory design is infeasible for the chosen restart promise, however cheap or quick it is. Weighted scores compare only candidates that pass the hard constraints.",
-              "why": "It distinguishes a preference trade-off from violating an invariant.",
+              "title": "Check requirements before scoring preferences",
+              "caption": "Memory-only storage loses tasks after restart, so we reject it for this application. We compare preference scores only for choices that meet the required behaviour.",
+              "why": "An easy-to-run choice is useful only if it meets the requirements.",
               "status": "available"
             },
             {
               "id": "fig-1-3-4",
               "chapter": "ch-1-3",
               "number": "1.3.4",
-              "title": "Healthy traffic does not prove durable data",
-              "caption": "Availability and durability require different observations. A fully reachable service can lose data; a temporarily unreachable store can retain all committed data.",
-              "why": "Separate evidence prevents an uptime dashboard from being treated as proof of data safety.",
+              "title": "Availability and durability answer different questions",
+              "caption": "A service may reply to requests yet lose tasks after restart. Another may keep every committed task but stop accepting requests while it recovers.",
+              "why": "Check both whether requests succeed and whether saved data survives the stated failure.",
               "status": "available"
             }
           ],
           "content_file": "src/chapter-3.html",
-          "rendered_words": 1927,
+          "rendered_words": 2246,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -265,7 +265,7 @@
         {
           "id": "ch-1-4",
           "number": "1.4",
-          "title": "One application, many architectural views",
+          "title": "Drawing the system at different levels",
           "topics": [
             "Architecture diagrams: C4 model, context, container, component, deployment, sequence."
           ],
@@ -286,41 +286,41 @@
               "id": "fig-1-4-1",
               "chapter": "ch-1-4",
               "number": "1.4.1",
-              "title": "C4 changes the level of detail",
-              "caption": "The dashed arrows mean a change in abstraction, not a runtime call. C4 containers are applications or data stores; they are not synonymous with operating-system containers.",
-              "why": "Choose the view that answers a real reader question, rather than drawing all four levels automatically.",
+              "title": "C4: zoom from the system into its code",
+              "caption": "Each step shows more internal detail. The dashed arrows mean “zoom in.” In C4, a container is an application or data store; it need not be a Docker container.",
+              "why": "Select the level that helps your reader answer a particular question.",
               "status": "available"
             },
             {
               "id": "fig-1-4-2",
               "chapter": "ch-1-4",
               "number": "1.4.2",
-              "title": "A deployment view locates the single points of failure",
-              "caption": "The example has one machine with a local store. Module separation has not created redundancy; host or disk loss can still remove the whole service.",
-              "why": "Deployment placement exposes correlated failure that logical component boxes can hide.",
+              "title": "The application and database share one machine",
+              "caption": "The browser sends requests to an application on one machine. The database file is on that same machine. If the machine fails, the application and access to the file are both affected.",
+              "why": "Show physical placement when asking what can fail together.",
               "status": "available"
             },
             {
               "id": "fig-1-4-3",
               "chapter": "ch-1-4",
               "number": "1.4.3",
-              "title": "A lost response makes the outcome uncertain",
-              "caption": "Commit precedes the lost response. A timeout cannot distinguish this case from a failure before commit. Retrying a create without a deduplication contract can create another task.",
-              "why": "A sequence explains the ambiguity that a static architecture diagram leaves out.",
+              "title": "The task is saved, but the reply is lost",
+              "caption": "Task 7 is committed before its reply is lost. The client cannot tell what happened. A fresh create request may add task 8 unless the application recognises it as a retry.",
+              "why": "Trace the events in order to see why the client can be unsure even when a task exists.",
               "status": "available"
             },
             {
               "id": "fig-1-4-4",
               "chapter": "ch-1-4",
               "number": "1.4.4",
-              "title": "Architecture evolves when an assumption fails",
-              "caption": "Persistence addresses restart. An API addresses shared remote access. Redundancy and data distribution require their own failure, correctness, and load analysis; they are not a free final step.",
-              "why": "The sequence is a set of justified changes, not a universal maturity ladder.",
+              "title": "Each design change answers a new need",
+              "caption": "Add storage when tasks must survive restart. Add a remote interface when people need shared access. Extra machines require further decisions about data, failures, and load.",
+              "why": "State the requirement that makes each change necessary.",
               "status": "available"
             }
           ],
           "content_file": "src/chapter-4.html",
-          "rendered_words": 1846,
+          "rendered_words": 2006,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -369,7 +369,7 @@
       "essential_visual_coverage": [
         {
           "required": "HLD vs LLD comparison",
-          "figure": "fig-1-1-3",
+          "figure": "fig-1-1-4",
           "status": "available"
         },
         {
@@ -14077,45 +14077,45 @@
       "id": "fig-1-1-1",
       "chapter": "ch-1-1",
       "number": "1.1.1",
-      "title": "The boundary follows the promise",
-      "caption": "A user asks the application to remember a task. The store is inside the service responsibility boundary even if a different team operates it.",
-      "why": "It separates the user-visible obligation from the process that happens to run the code.",
+      "title": "The application and storage work together",
+      "caption": "The application needs storage to keep a task after restart. We include both inside the boundary when discussing that requirement.",
+      "why": "Include the parts needed to explain the behaviour you are studying.",
       "status": "available"
     },
     {
       "id": "fig-1-1-2",
       "chapter": "ch-1-1",
       "number": "1.1.2",
-      "title": "Data becomes state through a transition",
-      "caption": "Given an empty collection and the create command, the state gains task 7 and the caller receives its identifier. Repeating that command is a separate design question.",
-      "why": "A concrete transition exposes both the state owner and the effect that a retry could duplicate.",
+      "title": "Creating a task changes the stored state",
+      "caption": "Before creation, the collection is empty. After create(7, “Read”), it contains task 7, marked incomplete. The function returns the task details.",
+      "why": "Read the state before and after the operation to see exactly what changed.",
       "status": "available"
     },
     {
       "id": "fig-1-1-3",
       "chapter": "ch-1-1",
       "number": "1.1.3",
-      "title": "HLD and LLD ask connected questions",
-      "caption": "The high-level view places persistent state and communication boundaries. The low-level view explains how application components enforce behavior inside a process.",
-      "why": "Both views must agree about who commits state and who reports success.",
+      "title": "Save before reporting success",
+      "caption": "Memory-only tasks disappear after restart. In the revised version, the application commits the task before reporting success. The task remains after a process restart if committed storage is intact.",
+      "why": "Compare the two versions by restarting the process.",
       "status": "available"
     },
     {
       "id": "fig-1-1-4",
       "chapter": "ch-1-1",
       "number": "1.1.4",
-      "title": "From a working demo to a recoverable write",
-      "caption": "The naive program works within one run. A restart disproves its persistence promise. Committing before success fixes that failure under the storage assumptions; it does not by itself solve lost replies.",
-      "why": "The improvement is tied to a reproducible failure rather than an arbitrary desire for more components.",
+      "title": "Two levels of detail in one design",
+      "caption": "The high-level view shows the application and database. The low-level view shows the service, repository interface, and rules inside the application.",
+      "why": "Check that both views agree about saving a task before reporting success.",
       "status": "available"
     },
     {
       "id": "fig-1-2-1",
       "chapter": "ch-1-2",
       "number": "1.2.1",
-      "title": "An innocent feature crosses every responsibility",
-      "caption": "In the tangled implementation, formatting, business rules, and persistence all know the mutable representation. Changing a field or invariant can break several paths.",
-      "why": "Dependency arrows identify the concrete knowledge that makes a change spread.",
+      "title": "Shared storage details make changes spread",
+      "caption": "Several parts read or change the same task data directly. A change to a field or rule may therefore require edits in several places.",
+      "why": "Follow the arrows to find which parts know about the shared data.",
       "status": "available"
     },
     {
@@ -14123,98 +14123,98 @@
       "chapter": "ch-1-2",
       "number": "1.2.2",
       "title": "Separate responsibilities inside one process",
-      "caption": "The adapter translates input, the service owns task rules, and the repository owns persistence operations. All three can be ordinary functions in one deployment.",
-      "why": "A module boundary can reduce change propagation without adding a network boundary.",
+      "caption": "The adapter reads input, the service checks task rules, and the repository saves and reads tasks. These parts all run inside one application process.",
+      "why": "Each kind of work has a clear place in the code.",
       "status": "available"
     },
     {
       "id": "fig-1-2-3",
       "chapter": "ch-1-2",
       "number": "1.2.3",
-      "title": "Dependency direction differs from execution direction",
-      "caption": "Dashed arrows mean source-level dependencies. At runtime the task service calls the concrete adapter through the agreed contract; there is no extra repository server.",
-      "why": "It prevents the common mistake of interpreting every diagram arrow as a network request.",
+      "title": "The service uses a repository contract",
+      "caption": "The service uses the repository interface. The SQLite adapter implements that interface. Startup code creates the adapter and passes it to the service; during execution, the service calls it.",
+      "why": "The dashed arrows show code dependencies. These objects can run in the same process.",
       "status": "available"
     },
     {
       "id": "fig-1-2-4",
       "chapter": "ch-1-2",
       "number": "1.2.4",
-      "title": "Abstraction narrows the question at each layer",
-      "caption": "Each layer hides details but relies on a narrower promise below it. A successful application call cannot offer stronger persistence than its storage and operating assumptions support.",
-      "why": "Abstraction reduces what a caller must know; it cannot remove physical dependencies.",
+      "title": "Each layer works at a different level of detail",
+      "caption": "The user asks to remember a task. The application applies task rules and requests a storage write. Storage uses files and the underlying device to carry out the write.",
+      "why": "Follow one request through the layers to connect the user’s action to the work below it.",
       "status": "available"
     },
     {
       "id": "fig-1-3-1",
       "chapter": "ch-1-3",
       "number": "1.3.1",
-      "title": "Make a vague quality measurable",
-      "caption": "The quality scenario names a stimulus, an environment, and a response. This example concerns process restart; it makes no claim about losing the only disk or an entire region.",
-      "why": "A precise scope makes a design falsifiable and reveals the assumptions still needing discussion.",
+      "title": "Turn “safe” into a checkable requirement",
+      "caption": "Create a task successfully, restart the process, and check that the task remains. This requirement concerns a process restart with committed storage intact.",
+      "why": "A specific requirement tells us which test to run.",
       "status": "available"
     },
     {
       "id": "fig-1-3-2",
       "chapter": "ch-1-3",
       "number": "1.3.2",
-      "title": "A decision is a testable hypothesis",
-      "caption": "An ADR records why a choice fits current evidence and when to revisit it. The feedback dependency returns changed evidence to requirements analysis.",
-      "why": "It keeps a previously sensible choice from becoming an unquestioned permanent rule.",
+      "title": "Choose, record, and review a design",
+      "caption": "Write down the requirements, compare choices, and record the decision. Later, use measurements and changed requirements to decide whether the design still fits.",
+      "why": "Keep the reasons for a decision alongside the decision itself.",
       "status": "available"
     },
     {
       "id": "fig-1-3-3",
       "chapter": "ch-1-3",
       "number": "1.3.3",
-      "title": "A hard constraint comes before a preference score",
-      "caption": "An in-memory design is infeasible for the chosen restart promise, however cheap or quick it is. Weighted scores compare only candidates that pass the hard constraints.",
-      "why": "It distinguishes a preference trade-off from violating an invariant.",
+      "title": "Check requirements before scoring preferences",
+      "caption": "Memory-only storage loses tasks after restart, so we reject it for this application. We compare preference scores only for choices that meet the required behaviour.",
+      "why": "An easy-to-run choice is useful only if it meets the requirements.",
       "status": "available"
     },
     {
       "id": "fig-1-3-4",
       "chapter": "ch-1-3",
       "number": "1.3.4",
-      "title": "Healthy traffic does not prove durable data",
-      "caption": "Availability and durability require different observations. A fully reachable service can lose data; a temporarily unreachable store can retain all committed data.",
-      "why": "Separate evidence prevents an uptime dashboard from being treated as proof of data safety.",
+      "title": "Availability and durability answer different questions",
+      "caption": "A service may reply to requests yet lose tasks after restart. Another may keep every committed task but stop accepting requests while it recovers.",
+      "why": "Check both whether requests succeed and whether saved data survives the stated failure.",
       "status": "available"
     },
     {
       "id": "fig-1-4-1",
       "chapter": "ch-1-4",
       "number": "1.4.1",
-      "title": "C4 changes the level of detail",
-      "caption": "The dashed arrows mean a change in abstraction, not a runtime call. C4 containers are applications or data stores; they are not synonymous with operating-system containers.",
-      "why": "Choose the view that answers a real reader question, rather than drawing all four levels automatically.",
+      "title": "C4: zoom from the system into its code",
+      "caption": "Each step shows more internal detail. The dashed arrows mean “zoom in.” In C4, a container is an application or data store; it need not be a Docker container.",
+      "why": "Select the level that helps your reader answer a particular question.",
       "status": "available"
     },
     {
       "id": "fig-1-4-2",
       "chapter": "ch-1-4",
       "number": "1.4.2",
-      "title": "A deployment view locates the single points of failure",
-      "caption": "The example has one machine with a local store. Module separation has not created redundancy; host or disk loss can still remove the whole service.",
-      "why": "Deployment placement exposes correlated failure that logical component boxes can hide.",
+      "title": "The application and database share one machine",
+      "caption": "The browser sends requests to an application on one machine. The database file is on that same machine. If the machine fails, the application and access to the file are both affected.",
+      "why": "Show physical placement when asking what can fail together.",
       "status": "available"
     },
     {
       "id": "fig-1-4-3",
       "chapter": "ch-1-4",
       "number": "1.4.3",
-      "title": "A lost response makes the outcome uncertain",
-      "caption": "Commit precedes the lost response. A timeout cannot distinguish this case from a failure before commit. Retrying a create without a deduplication contract can create another task.",
-      "why": "A sequence explains the ambiguity that a static architecture diagram leaves out.",
+      "title": "The task is saved, but the reply is lost",
+      "caption": "Task 7 is committed before its reply is lost. The client cannot tell what happened. A fresh create request may add task 8 unless the application recognises it as a retry.",
+      "why": "Trace the events in order to see why the client can be unsure even when a task exists.",
       "status": "available"
     },
     {
       "id": "fig-1-4-4",
       "chapter": "ch-1-4",
       "number": "1.4.4",
-      "title": "Architecture evolves when an assumption fails",
-      "caption": "Persistence addresses restart. An API addresses shared remote access. Redundancy and data distribution require their own failure, correctness, and load analysis; they are not a free final step.",
-      "why": "The sequence is a set of justified changes, not a universal maturity ladder.",
+      "title": "Each design change answers a new need",
+      "caption": "Add storage when tasks must survive restart. Add a remote interface when people need shared access. Extra machines require further decisions about data, failures, and load.",
+      "why": "State the requirement that makes each change necessary.",
       "status": "available"
     },
     {
@@ -19841,7 +19841,7 @@
     "case_review_sections": 264,
     "exercises_produced": 242,
     "solutions_produced": 242,
-    "authored_lesson_words": 49478
+    "authored_lesson_words": 50392
   },
   "review": {
     "stage_1": "complete: exact syllabus and prerequisite allocation",

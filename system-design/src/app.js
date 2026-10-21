@@ -49,16 +49,16 @@ function advanceCrash(s){
  if(s.restarted||s.step>=crashEvents[s.policy].length)return s;
  const next={...s,trace:[...s.trace]},event=crashEvents[s.policy][s.step];next.step++;
  if(event==='receive')next.trace.push('1 · Request received: create “Read”.');
- if(event==='mutate'){next.memory=true;next.trace.push('2 · Task added to volatile application memory.');}
- if(event==='commit'){next.stored=true;next.trace.push(next.step+' · Atomic storage commit completed.');}
- if(event==='ack'){next.ack=true;next.trace.push(next.step+' · Caller received “saved” acknowledgment.');}
+ if(event==='mutate'){next.memory=true;next.trace.push('2 · Task added to the running program’s memory.');}
+ if(event==='commit'){next.stored=true;next.trace.push(next.step+' · Database commit completed: the task is saved.');}
+ if(event==='ack'){next.ack=true;next.trace.push(next.step+' · Caller received the “Saved” reply.');}
  return next;
 }
-function restartCrash(s){return {...s,memory:s.stored,restarted:true,trace:[...s.trace,'Restart · volatile state discarded; committed state reloaded.']};}
+function restartCrash(s){return {...s,memory:s.stored,restarted:true,trace:[...s.trace,'Restart · memory is cleared; saved tasks are read from storage.']};}
 function renderCrash(){
  const s=crash,finished=s.step===crashEvents[s.policy].length,violation=s.restarted&&s.ack&&!s.stored;
- const title=violation?'Promise broken: an acknowledged task was lost.':s.restarted&&s.stored?'Task recovered from committed storage.':s.restarted?'No committed task recovered.':s.ack?'The caller has received success.':'The caller has not received success.';
- $('#crash-state').innerHTML=`<p>Policy: ${escapeHTML($('#crash-policy').selectedOptions[0].textContent)} · ${s.step} events executed${s.restarted?' · restarted':''}</p><strong class="${violation?'bad':'good'}">${title}</strong><div class="state-grid"><div><small>APPLICATION MEMORY</small>${s.memory?'Task 7: Read':'Empty'}</div><div><small>COMMITTED STORE</small>${s.stored?'Task 7: Read':'Empty'}</div><div><small>CALLER’S KNOWLEDGE</small>${s.ack?'Received “saved”':'No success received'}</div></div><p style="margin:10px 0 0">${s.restarted&&!s.ack?'No successful response was received; the caller cannot infer whether a commit happened.':violation?'The early success message promised more than the recovered state can support.':s.stored&&!s.ack?'A commit exists before the caller knows the result. A timeout here would leave an uncertain outcome.':'Step the request, or restart to test the current state.'}</p>`;
+ const title=violation?'Promise broken: the user was told “Saved,” but the task was lost.':s.restarted&&s.stored?'Task recovered from storage after restart.':s.restarted?'No saved task found after restart.':s.ack?'The caller has received success.':'The caller has not received success.';
+ $('#crash-state').innerHTML=`<p>Choice: ${escapeHTML($('#crash-policy').selectedOptions[0].textContent)} · ${s.step} events completed${s.restarted?' · restarted':''}</p><strong class="${violation?'bad':'good'}">${title}</strong><div class="state-grid"><div><small>APPLICATION MEMORY</small>${s.memory?'Task 7: Read':'Empty'}</div><div><small>SAVED IN STORAGE</small>${s.stored?'Task 7: Read':'Empty'}</div><div><small>WHAT THE CALLER SEES</small>${s.ack?'Received “saved”':'No success received'}</div></div><p style="margin:10px 0 0">${s.restarted&&!s.ack?'The caller received no success reply. It cannot tell from that alone whether the task was saved.':violation?'The application reported success before saving the task. Restart removed the only copy.':s.stored&&!s.ack?'The task is saved, but the caller has not received its reply yet.':'Choose “Next event” to continue, or restart to see what remains.'}</p>`;
  $('#crash-next').disabled=s.restarted||finished;$('#crash-restart').disabled=s.restarted;
  $('#crash-trace').innerHTML=s.trace.map(t=>'<li>'+escapeHTML(t)+'</li>').join('');
 }
@@ -66,10 +66,10 @@ function resetCrash(){crash=freshCrash($('#crash-policy').value);renderCrash();}
 $('#crash-policy').addEventListener('change',resetCrash);$('#crash-next').addEventListener('click',()=>{crash=advanceCrash(crash);renderCrash();});$('#crash-restart').addEventListener('click',()=>{crash=restartCrash(crash);renderCrash();});$('#crash-reset').addEventListener('click',resetCrash);renderCrash();
 
 const changeImpact={
- format:{tangled:['Handler','Task logic','Storage access embedded in handler'],separated:['Input adapter'],reason:'Change the transport parser. The application command and persistent representation remain the same.'},
- rule:{tangled:['HTTP validation copy','CLI validation copy','Storage constraint, if present'],separated:['Task service','Storage constraint, if present'],reason:'The service owns the authoritative rule. A storage guard must remain compatible; this is intentional invariant protection.'},
- schema:{tangled:['HTTP handler SQL','Task logic SQL','Exporter SQL'],separated:['Storage adapter','Migration'],reason:'Hide the representation behind the repository. Still test the migration against existing data.'},
- retry:{tangled:['Handler','Task state','Persistence','Caller protocol'],separated:['Input contract','Task service','Repository contract','Caller protocol'],reason:'This changes observable semantics. Good boundaries expose the required agreement; they do not make a cross-boundary behavior local.'}
+ format:{tangled:['Handler','Task logic','SQL inside the handler'],separated:['Input adapter'],reason:'Update the adapter that reads input. It can pass the same title to the service, which saves it in the same way.'},
+ rule:{tangled:['Title check in web adapter','Title check in command-line adapter','Matching database constraint, if present'],separated:['Task service','Matching database constraint, if present'],reason:'Change the shared title rule in the service. If the database also restricts title length, update that restriction to agree with the rule.'},
+ schema:{tangled:['HTTP handler SQL','Task logic SQL','Exporter SQL'],separated:['Storage adapter','Database update'],reason:'Change the SQL in the repository and update existing data as needed. Check that previously saved tasks can still be read.'},
+ retry:{tangled:['Handler','Task state','Persistence','How the caller identifies retries'],separated:['Input contract','Task service','Repository contract','How the caller identifies retries'],reason:'The caller must identify a retry, and the application must recognise it and return the stored result. This new behaviour needs changes in several parts.'}
 };
  function renderChange(){const d=changeImpact[$('#change-scenario').value];$('#change-result').innerHTML=`<div class="lab-output"><p><strong>Scenario:</strong> ${escapeHTML($('#change-scenario').selectedOptions[0].textContent)}</p><p><strong>Tangled design:</strong> ${d.tangled.map(escapeHTML).join(' · ')}</p><p><strong>Separated design:</strong> ${d.separated.map(escapeHTML).join(' · ')}</p><p style="margin:0">${escapeHTML(d.reason)}</p></div>`;}
 $('#change-scenario').addEventListener('change',renderChange);renderChange();
@@ -80,18 +80,18 @@ function decisionScores(weights){
 }
 function renderDecision(){
  const ids=['simple','growth','independent'],weights=ids.map(id=>Number($('#weight-'+id).value));ids.forEach((id,i)=>$('#out-'+id).textContent=weights[i]);const scores=decisionScores(weights);
- if(!scores){$('#decision-result').innerHTML='<div class="lab-output">All weights are zero. Choose a positive preference weight to compare candidates. Memory-only remains infeasible.</div>';return;}
+ if(!scores){$('#decision-result').innerHTML='<div class="lab-output">All weights are zero. Increase at least one weight to compare the choices. Memory alone still fails the restart requirement.</div>';return;}
  const row=(name,v,cls='')=>`<div class="bar-row"><span>${name}</span><span class="bar-track ${cls}"><i style="width:${v/5*100}%"></i></span><strong>${v.toFixed(2)}</strong></div>`;
  const tie=Math.abs(scores.embedded-scores.separate)<1e-10;
- $('#decision-result').innerHTML=`<div class="lab-output"><p>Weights (simplicity, growth, host independence): ${weights.join(', ')}.</p>`+row('Embedded store',scores.embedded)+row('Separate database',scores.separate,'purple')+`<p>${tie?'The candidates tie under these judgments.':(scores.embedded>scores.separate?'Embedded store':'Separate database')+' ranks higher under the selected preferences.'} The scores do not establish throughput or availability.</p><p class="bad" style="margin:0">Memory only: rejected by mandatory restart persistence.</p></div>`;
+ $('#decision-result').innerHTML=`<div class="lab-output"><p>Weights (simplicity, multiple app machines, separate storage): ${weights.join(', ')}.</p>`+row('Embedded store',scores.embedded)+row('Separate database',scores.separate,'purple')+`<p>${tie?'Both choices have the same score with these weights.':(scores.embedded>scores.separate?'Embedded store':'Separate database')+' has the higher score with these weights.'} These are preference scores; they do not measure speed or availability.</p><p class="bad" style="margin:0">Memory only: rejected because tasks disappear after restart.</p></div>`;
 }
 ['simple','growth','independent'].forEach(id=>$('#weight-'+id).addEventListener('input',renderDecision));renderDecision();
 
 const views={
- context:{question:'Who uses the system?',boxes:['Team member','→ uses →','Task system'],reason:'The system boundary includes responsibility for task behavior. Internal deployment is intentionally hidden.'},
- container:{question:'Which applications and data stores cooperate?',boxes:['Browser client','→ HTTPS →','Server application','→ local I/O →','Task store'],reason:'The application and store are C4 containers. The store can be a local file; this is not a claim that it is a separate server.'},
- component:{question:'Which responsibilities collaborate inside the server?',boxes:['Input adapter','→ create command →','Task service','→ save →','Storage adapter'],reason:'These are modules within the same application process. All share the process and host failure domain.'},
- code:{question:'Which interfaces and types implement the task operation?',boxes:['TaskService.create(title)','→ calls →','TaskRepository.insert(title)','→ returns →','Task(id, title, done)'],reason:'The service owns validation; the repository contract owns commit-before-return. The runtime adapter is supplied at composition.'}
+ context:{question:'Who uses the system?',boxes:['Team member','→ uses →','Task system'],reason:'This view shows who uses the system. It leaves the internal parts for a closer view.'},
+ container:{question:'Which applications and data stores cooperate?',boxes:['Browser client','→ HTTPS →','Server application','→ local I/O →','Task store'],reason:'This view opens up the system into applications and data stores. Our task store is a local file used by the server application.'},
+ component:{question:'Which responsibilities collaborate inside the server?',boxes:['Input adapter','→ create command →','Task service','→ save →','Storage adapter'],reason:'These modules run inside the same server application. If its process stops, all three stop.'},
+ code:{question:'Which interfaces and types implement the task operation?',boxes:['TaskService.create(title)','→ calls →','TaskRepository.insert(title)','→ returns →','Task(id, title, done)'],reason:'The service checks the title and calls the repository. The repository commits the task before returning. Startup code passes the repository to the service.'}
 };
 function renderView(view='context'){
  const d=views[view];$$('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));
