@@ -10,7 +10,7 @@ Each unit has its own folder and opens as a self-contained HTML page. Navigation
 
 ## GitHub Pages
 
-For this repository, enable **Settings → Pages → Build and deployment → Deploy from a branch → main → / (root)**. Commit and push the site files to `main`. With that source configured, GitHub Pages serves the root `index.html` and each unit folder's `index.html`. `.nojekyll` keeps the site as plain static files.
+This repository includes `.github/workflows/static.yml`, which deploys the static site on pushes to `main`. In **Settings → Pages → Build and deployment**, use **GitHub Actions** as the source. Commit and push site updates to `main`; the workflow serves the root `index.html` and each unit folder’s `index.html`. `.nojekyll` keeps the content as plain static files. See [GitHub’s publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 Repository: `NarenMasterofInfinity/Foundational_Works`. The expected default Pages address is `https://narenmasterofinfinity.github.io/Foundational_Works/` once Pages is enabled and deployed. This is a setup address, not a claim that deployment has been performed.
 
@@ -23,12 +23,14 @@ retrieval-methods/
   index.html                 # Self-contained published unit
   README.md                  # Scope, demos, references and verification
   src/
-    content.py               # Explanations, sources, timeline, teaching collection
+    content.py               # Methods, sources, timeline, teaching collection
+    teaching.py              # Intuition-first stories, definitions and method lessons
     template.html            # Page shell
     style.css                # Responsive styles
     app.js                   # Navigation and all browser-side calculations
     build.py                 # Standard-library-only HTML builder
-    verify_browser.mjs       # Behavioral checks through an isolated Chrome instance
+    verify_browser.mjs       # Browser, interaction, print and independent-math checks
+    math_reference.py        # Independent reference values for 221 calculation cases
 ```
 
 Add future topics as sibling folders, each with an `index.html`, then add an entry to the root contents page. Keep links relative; do not prefix unit URLs with `/`, which would drop the repository subpath on GitHub Pages.

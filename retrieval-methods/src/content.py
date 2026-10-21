@@ -49,6 +49,8 @@ source('beir',2021,'BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of I
 source('bright',2024,'BRIGHT: A Realistic and Challenging Benchmark for Reasoning-Intensive Retrieval','Su et al.','https://arxiv.org/abs/2407.12883','Paper','Evaluation','A benchmark for relevance that requires reasoning beyond surface similarity.')
 source('retrievearticle',2026,'Retrieve & Re-Rank · Sentence Transformers documentation','Sentence Transformers maintainers','https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html','Practical guide','Ranking','An implementation-oriented explanation of bi-encoders, cross-encoders and candidate pipelines. Accessed October 2026; date is not a publication claim.')
 source('booldocs',2026,'Boolean query · Elasticsearch reference','Elastic','https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-bool-query','Documentation','Boolean','Modern Boolean clauses combine scoring with filters; pure Boolean matching and scored queries are different. Accessed October 2026.')
+source('wordforms',2008,'Stemming and lemmatization','Manning, Raghavan & Schütze','https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html','Book chapter','Boolean','Explains why lowercasing, matching word forms and matching synonyms are different choices. Added to the teaching review on 21 October 2026.')
+source('similarityguide',2026,'Measuring similarity from embeddings','Google Machine Learning course','https://developers.google.com/machine-learning/clustering/dnn-clustering/supervised-similarity','Practical guide','Dense','A visual introduction to numerical similarity: dot product depends on vector length, while cosine removes that scale effect. Accessed 21 October 2026.')
 
 CATEGORIES=[]
 def category(id, name, subtitle, era, question, intro, insight, sources):
@@ -199,4 +201,4 @@ CORPUS = [
  dict(id='D8',title='Browser data storage',text='browser storage cache database software keys',year=2024,type='article',rel=0),
 ]
 
-DATA=dict(sources=SOURCES,categories=CATEGORIES,timeline=[dict(year=y,title=t,text=s,category=c,source=r) for y,t,s,c,r in TIMELINE],corpus=CORPUS,checked='20 October 2026')
+DATA=dict(sources=SOURCES,categories=CATEGORIES,timeline=[dict(year=y,title=t,text=s,category=c,source=r) for y,t,s,c,r in TIMELINE],corpus=CORPUS,checked='20–21 October 2026')

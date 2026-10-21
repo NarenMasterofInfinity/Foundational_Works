@@ -3,6 +3,9 @@
 import json
 from pathlib import Path
 from content import DATA
+from teaching import attach
+
+attach(DATA)
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE.parent / 'index.html'
