@@ -2,12 +2,12 @@
 
 **From Objects to Planet-Scale Systems** — the complete first edition in the Learn · Research · Visualise design language.
 
-Open [the digital edition](index.html) or download [the complete PDF](System-Design-Atlas-Complete.pdf) (1,012 tagged A4 pages, approximately 13 MB). The earlier [foundations PDF](System-Design-Atlas-Foundations.pdf) is retained as a separately scoped historical installment.
+Open [the digital edition](index.html) or download [the complete PDF](System-Design-Atlas-Complete.pdf) (973 tagged A4 pages, approximately 13 MB). The earlier [foundations PDF](System-Design-Atlas-Foundations.pdf) is retained as a separately scoped historical installment.
 
 ## What is included
 
 - All **22 units and 99 chapters**, covering all **390 exact supplied syllabus items**.
-- **50,392 words of authored lesson, pattern, and case-study prose**, excluding the separate solutions and much of the reader/reference material.
+- **65,488 words of authored lesson, pattern, and case-study prose**, excluding the separate solutions and much of the reader/reference material.
 - **575 original SVG figures**, including at least four per chapter and all 94 required unit illustration assignments. Four Unit 1 assignments refer to its existing chapter figures; 90 additional unit plates cover the other required visual vocabulary. The master concept map is separately numbered M.1.
 - All **12 mandatory end-to-end designs**, each with all **22 required review sections**, explicit assumptions, APIs, logical schemas, LLD, HLD, flows, calculations, failures, security, deployment, observability, costs, alternatives, evolution, review, and an implementation challenge.
 - **242 questions and 242 separate explained answers**: five conceptual, three scenarios, one design/debugging challenge, one implementation exercise, and one advanced thought experiment for every unit.
@@ -15,7 +15,7 @@ Open [the digital edition](index.html) or download [the complete PDF](System-Des
 - **13 browser-local workbenches**: acknowledgment/crash ordering, change propagation, weighted design preferences, C4 views, capacity, bounded queues, last-seat claims, LRU, rendezvous assignment, pipeline fencing, quorum intersection, token bucket, and cost per useful outcome.
 - A **441-entry glossary and concept reference**, complete contents, dependency-closed reading paths, formula reference, pattern destinations, diagram index, and **61 selected production sources**.
 
-Unit 1 has been revised to introduce each idea through the to-do application before naming it. The four chapters use shorter paragraphs, worked sequences, and optional sections for extra detail; their figures, workbenches, questions, and answers use the same approach. Units 2–22 retain their existing text.
+All 22 units now use clear textbook prose inspired by NCERT. Examples establish unfamiliar ideas before introducing their terms, mechanisms explain the steps that matter, and concise definitions support recall. The revision covers all 377 concept lessons in Units 2–21, 26 pattern explanations, all 264 case-study sections, and the corresponding chapter guidance, captions, workbench instructions, glossary summaries, questions, and explained answers. The previously revised Unit 1 chapters are preserved.
 
 The content-driven [manifest](completion-manifest.json) records actual produced artifacts and review boundaries. The [book blueprint](BLUEPRINT.md) retains stable chapter IDs and exact topic allocation. The original request remains in [BRIEF.txt](BRIEF.txt).
 
@@ -39,7 +39,7 @@ python3 system-design/src/verify_mechanisms.py
 
 The builder produces `index.html`, `BLUEPRINT.md`, and `completion-manifest.json`, validating actual content, exact topic allocation, chapter figures, all case sections, assessment counts, unique IDs, anchors, and prerequisite order. Production status follows authored lessons and figures through `src/edition.py`; it is not inferred from a topic checklist alone.
 
-The teaching content lives in `src/teaching/`, separated into foundations, LLD, data, distributed systems, production, cases, patterns, assessment, sources, and miniature implementations. Existing Unit 1 HTML and workbench controls retain stable links. Required unit plates are implemented in `src/essential_plates.py` and subject-specific graphics in `src/atlas_figures.py`.
+The teaching content lives in `src/teaching/`, separated into foundations, LLD, data, distributed systems, production, cases, patterns, assessment, sources, and miniature implementations. Chapter guidance, review questions, and concise reference definitions are in `guides.py`, `review.py`, and `summaries.py`. Existing Unit 1 HTML and workbench controls retain stable links. Required unit plates are implemented in `src/essential_plates.py` and subject-specific graphics in `src/atlas_figures.py`.
 
 ## Browser verification and PDF
 

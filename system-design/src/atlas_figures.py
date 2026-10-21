@@ -18,7 +18,7 @@ def shell(n,j,k,title,body,caption,why,height=260,width=900):
     ident=f'fig-{n}-{j}-{k}';number=f'{n}.{j}.{k}'
     svg=f'<svg viewBox="0 0 {width} {height}" role="img" aria-labelledby="{ident}-title {ident}-desc"><title id="{ident}-title">Figure {number}: {e(title)}</title><desc id="{ident}-desc">{e(caption)}</desc>{body}</svg>'
     FIGURES.append(dict(id=ident,number=number,chapter=f'ch-{n}-{j}',title=title,caption=caption,why=why,status='available'))
-    return f'<figure class="figure" id="{ident}"><div class="figure-drawing">{svg}</div><figcaption><span>FIG. {number}</span><strong>{e(title)}</strong><p>{e(caption)}</p><p class="figure-why">Why this view: {e(why)} <em>Author-created illustration. Numbers are illustrative unless stated otherwise.</em></p></figcaption></figure>'
+    return f'<figure class="figure" id="{ident}"><div class="figure-drawing">{svg}</div><figcaption><span>FIG. {number}</span><strong>{e(title)}</strong><p>{e(caption)}</p><p class="figure-why"><em>Author-created illustration. Numbers are illustrative unless stated otherwise.</em></p></figcaption></figure>'
 
 def snapshots(n,j,k,title,items,caption,why='Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.'):
     body=''

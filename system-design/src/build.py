@@ -15,6 +15,8 @@ from teaching.foundations import LESSONS
 from teaching.cases import CASES
 from teaching.patterns import PATTERN_LESSONS
 from teaching.sources import SOURCES
+from teaching.summaries import SUMMARIES,PATTERN_SUMMARIES
+from teaching.guides import GUIDES
 from resources import GLOSSARY,FORMULAS,PATTERNS
 
 HERE=Path(__file__).resolve().parent;OUT=HERE.parent
@@ -62,6 +64,8 @@ def render_chapter(u,c,j):
     reading=refs(c['references'])
     if n==1:
         reading=reading.replace('Start with the introductory guidance, then inspect original specifications, research, or implementation details. Access and stated use checked 21 October 2026. Author-created examples and assumed numbers are separate from source guarantees.','These sources explain the ideas and mechanisms used in this chapter. The to-do application is our own teaching example. Links were reviewed on 21 October 2026.')
+    else:
+        reading=reading.replace('Start with the introductory guidance, then inspect original specifications, research, or implementation details. Access and stated use checked 21 October 2026. Author-created examples and assumed numbers are separate from source guarantees.','These sources explain the mechanisms used in this chapter. The worked designs and numerical assumptions are our own teaching examples. Links were reviewed on 21 October 2026.')
     return heading(f'PART {u["part"]+1} / UNIT {n:02} / CHAPTER {c["number"]}',c['title'])+meta+legend+body+end+reading+f'<div class="chapter-end">{previous}{nxt}</div>'
 
 def render_unit(u):
@@ -70,6 +74,10 @@ def render_unit(u):
     html+='<p class="prereq"><strong>Before this unit:</strong> '+(', '.join(link(f'unit-{p}',f'Unit {p}') for p in u['prerequisites']) or 'Basic programming')+'</p>'
     if n==1:
         html+='<p class="lead">How do we turn a small program into an application people can rely on? We will build a to-do application, one decision at a time.</p><p>Begin with a task kept in memory. Save it between runs, organise the code into modules, and work out what the application must do. Then draw the design and trace a request through it.</p>'
+    elif n<22:
+        html+='<p class="lead">'+e(GUIDES[n][0][0])+'</p>'
+    else:
+        html+='<p class="lead">We can now bring the earlier ideas together. Each design starts with a concrete workload, follows its main operation, and examines what happens when part of the system fails.</p>'
     html+='<div class="chapter-list">'+''.join(card(c) for c in u['chapters'])+'</div><h2>The running example</h2>'+paragraphs(u['example'])
     html+='<p>'+link(f'questions-unit-{n}',f'Unit {n} assessment →','primary')+' '+link(f'answers-unit-{n}','Explained solutions →','text-link')+'</p>'
     if n<22:
@@ -130,10 +138,11 @@ def reference_pages():
     for u in B['units']:
         n=u['n']
         if 1<n<22:
+            assert len(SUMMARIES[n])==len(u['topics']),n
             for i,title in enumerate(u['topics'],1):
-                term=title.rstrip('.?');glossary.setdefault(term,(LESSONS[n][i-1]['prose'].split('. ')[0]+'.',f'topic-{n}-{i}'))
+                term=title.rstrip('.?');glossary.setdefault(term,(SUMMARIES[n][i-1],f'topic-{n}-{i}'))
     for group in PATTERN_LESSONS.values():
-        for name,prose,_,_ in group:glossary[name]=(prose.split('. ')[0]+'.','pattern-'+slug(name))
+        for name,prose,_,_ in group:glossary[name]=(PATTERN_SUMMARIES[name],'pattern-'+slug(name))
     html=heading('THE REFERENCE DESK','A searchable glossary','Definitions and concept summaries link directly to their complete treatment, including individual patterns.')+'<label class="filter-label">Find a term<input type="search" id="glossary-search" placeholder="e.g. fencing, isolation, factory"></label><p id="glossary-count" aria-live="polite"></p><dl class="glossary">'
     for term,(meaning,target) in sorted(glossary.items(),key=lambda row:row[0].casefold()):html+=f'<div data-term="{e((term+" "+meaning).lower())}"><dt>{e(term)}</dt><dd>{e(meaning)} {link(target,"Read the lesson →")}</dd></div>'
     pages.append(panel('glossary',html+'</dl><p id="glossary-empty" hidden>No terms match that search.</p>'))
@@ -142,7 +151,7 @@ def reference_pages():
     for f in FIGURES:html+=f'<a href="#{f["id"]}"><span class="eyebrow">FIG. {f["number"]}</span><h3>{e(f["title"])}</h3><p>{e(f["why"])}</p></a>'
     pages.append(panel('figure-index',html+'</div>'))
     formulas=[(name,formula,caveat,target) for name,formula,caveat,target,_ in FORMULAS]+[
-      ('Ideal M/M/1 mean residence','W = S / (1 − rho)','Stable single-server Markovian model, rho < 1. A mean model, not a p99 prediction.','fig-2-0-2'),
+      ('Ideal M/M/1 mean residence','W = S / (1 − rho)','S is mean service time and rho is utilization, below one. This single-server model assumes Poisson arrivals and independent exponential service times. W includes waiting and service; it is a mean, so it cannot predict p99.','fig-2-0-2'),
       ('Fan-out slow probability','P(any slow) = 1 − (1 − p)^N','Requires independent equal-probability call outcomes in this model. Shared failures can correlate tails.','topic-2-13'),
       ('Retry amplification','maximum attempts = a^L','a allowed attempts at each of L nested independently retrying layers; actual execution can terminate earlier.','topic-17-7'),
       ('Busy-capacity worksheet','instances = ceil(peak RPS / (assumed capacity × utilization target))','Capacity is an explicit hypothetical or tested input; other bottlenecks and surviving failure capacity remain separate.','topic-2-9'),
