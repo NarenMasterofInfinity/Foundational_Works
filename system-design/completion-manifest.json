@@ -494,23 +494,23 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 102,
+              "words": 163,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 98,
+              "words": 144,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 101,
+              "words": 172,
               "worked_trace": true
             }
           ],
-          "rendered_words": 746,
+          "rendered_words": 1058,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -586,29 +586,29 @@
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 101,
+              "words": 162,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 104,
+              "words": 188,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 103,
+              "words": 151,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 113,
+              "words": 186,
               "worked_trace": true
             }
           ],
-          "rendered_words": 886,
+          "rendered_words": 1281,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -682,23 +682,23 @@
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 100,
+              "words": 166,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 109,
+              "words": 212,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 105,
+              "words": 173,
               "worked_trace": true
             }
           ],
-          "rendered_words": 831,
+          "rendered_words": 1203,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -785,35 +785,35 @@
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 104,
+              "words": 196,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 100,
+              "words": 163,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 106,
+              "words": 201,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 96,
+              "words": 151,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 100,
+              "words": 178,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1229,
+          "rendered_words": 1855,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -984,23 +984,23 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 103,
+              "words": 204,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 110,
+              "words": 205,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 106,
+              "words": 235,
               "worked_trace": true
             }
           ],
-          "rendered_words": 768,
+          "rendered_words": 1245,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1087,35 +1087,35 @@
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 108,
+              "words": 193,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 100,
+              "words": 187,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 108,
+              "words": 200,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 105,
+              "words": 210,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 101,
+              "words": 204,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1061,
+          "rendered_words": 1687,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1191,29 +1191,29 @@
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 107,
+              "words": 211,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 103,
+              "words": 194,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 100,
+              "words": 203,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 99,
+              "words": 214,
               "worked_trace": true
             }
           ],
-          "rendered_words": 875,
+          "rendered_words": 1431,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1300,35 +1300,35 @@
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 98,
+              "words": 205,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 100,
+              "words": 193,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 101,
+              "words": 205,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 104,
+              "words": 213,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 103,
+              "words": 218,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1117,
+          "rendered_words": 1847,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1512,35 +1512,35 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 99,
+              "words": 168,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 105,
+              "words": 180,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 106,
+              "words": 166,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 104,
+              "words": 170,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 102,
+              "words": 165,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1060,
+          "rendered_words": 1544,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1615,29 +1615,29 @@
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 99,
+              "words": 173,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 101,
+              "words": 152,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 101,
+              "words": 177,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 101,
+              "words": 173,
               "worked_trace": true
             }
           ],
-          "rendered_words": 849,
+          "rendered_words": 1280,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1712,29 +1712,29 @@
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 101,
+              "words": 172,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 103,
+              "words": 184,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 97,
+              "words": 196,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 102,
+              "words": 167,
               "worked_trace": true
             }
           ],
-          "rendered_words": 872,
+          "rendered_words": 1334,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1809,29 +1809,29 @@
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 107,
+              "words": 179,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 102,
+              "words": 165,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 101,
+              "words": 175,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 107,
+              "words": 179,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1272,
+          "rendered_words": 1808,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2015,35 +2015,35 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 100,
+              "words": 308,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 100,
+              "words": 189,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 102,
+              "words": 185,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 109,
+              "words": 183,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 102,
+              "words": 284,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1042,
+          "rendered_words": 1828,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2118,29 +2118,29 @@
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 102,
+              "words": 167,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 94,
+              "words": 158,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 100,
+              "words": 187,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 95,
+              "words": 165,
               "worked_trace": true
             }
           ],
-          "rendered_words": 823,
+          "rendered_words": 1247,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2215,29 +2215,29 @@
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 105,
+              "words": 184,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 107,
+              "words": 202,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 106,
+              "words": 196,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 101,
+              "words": 178,
               "worked_trace": true
             }
           ],
-          "rendered_words": 875,
+          "rendered_words": 1353,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2308,17 +2308,17 @@
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 103,
+              "words": 194,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 106,
+              "words": 201,
               "worked_trace": true
             }
           ],
-          "rendered_words": 728,
+          "rendered_words": 1118,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2512,41 +2512,41 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 102,
+              "words": 195,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 98,
+              "words": 175,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 99,
+              "words": 171,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 105,
+              "words": 190,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 101,
+              "words": 170,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 94,
+              "words": 195,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1218,
+          "rendered_words": 1852,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2643,41 +2643,41 @@
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 104,
+              "words": 180,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 105,
+              "words": 184,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 101,
+              "words": 193,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 99,
+              "words": 174,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 98,
+              "words": 169,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 107,
+              "words": 183,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1252,
+          "rendered_words": 1851,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2748,17 +2748,17 @@
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 95,
+              "words": 171,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 97,
+              "words": 178,
               "worked_trace": true
             }
           ],
-          "rendered_words": 633,
+          "rendered_words": 906,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2845,11 +2845,11 @@
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 108,
+              "words": 106,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1160,
+          "rendered_words": 1672,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2954,11 +2954,11 @@
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 100,
+              "words": 111,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1445,
+          "rendered_words": 2106,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -3090,11 +3090,11 @@
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 97,
+              "words": 113,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1944,
+          "rendered_words": 2884,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -3172,11 +3172,11 @@
             {
               "syllabus_item": 18,
               "status": "available",
-              "words": 106,
+              "words": 118,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1099,
+          "rendered_words": 1633,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -5051,41 +5051,41 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 103,
+              "words": 168,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 98,
+              "words": 181,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 99,
+              "words": 177,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 99,
+              "words": 187,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 95,
+              "words": 171,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 96,
+              "words": 175,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1223,
+          "rendered_words": 1858,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -5162,29 +5162,29 @@
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 102,
+              "words": 162,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 99,
+              "words": 168,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 98,
+              "words": 177,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 94,
+              "words": 173,
               "worked_trace": true
             }
           ],
-          "rendered_words": 858,
+          "rendered_words": 1308,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -5272,35 +5272,35 @@
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 98,
+              "words": 202,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 96,
+              "words": 187,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 92,
+              "words": 206,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 105,
+              "words": 181,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 98,
+              "words": 179,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1031,
+          "rendered_words": 1659,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -5375,23 +5375,23 @@
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 99,
+              "words": 179,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 95,
+              "words": 178,
               "worked_trace": true
             },
             {
               "syllabus_item": 18,
               "status": "available",
-              "words": 96,
+              "words": 175,
               "worked_trace": true
             }
           ],
-          "rendered_words": 880,
+          "rendered_words": 1403,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -6115,41 +6115,41 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 92,
+              "words": 256,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 92,
+              "words": 246,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 95,
+              "words": 256,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 105,
+              "words": 242,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 97,
+              "words": 231,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 101,
+              "words": 242,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1183,
+          "rendered_words": 2310,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -6246,41 +6246,41 @@
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 101,
+              "words": 241,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 98,
+              "words": 238,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 95,
+              "words": 232,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 100,
+              "words": 260,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 95,
+              "words": 245,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 94,
+              "words": 227,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1193,
+          "rendered_words": 2271,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -6366,35 +6366,35 @@
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 101,
+              "words": 232,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 101,
+              "words": 255,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 93,
+              "words": 228,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 96,
+              "words": 228,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 96,
+              "words": 240,
               "worked_trace": true
             }
           ],
-          "rendered_words": 995,
+          "rendered_words": 1907,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -6480,35 +6480,35 @@
             {
               "syllabus_item": 18,
               "status": "available",
-              "words": 100,
+              "words": 242,
               "worked_trace": true
             },
             {
               "syllabus_item": 19,
               "status": "available",
-              "words": 96,
+              "words": 220,
               "worked_trace": true
             },
             {
               "syllabus_item": 20,
               "status": "available",
-              "words": 94,
+              "words": 240,
               "worked_trace": true
             },
             {
               "syllabus_item": 21,
               "status": "available",
-              "words": 102,
+              "words": 224,
               "worked_trace": true
             },
             {
               "syllabus_item": 22,
               "status": "available",
-              "words": 93,
+              "words": 235,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1173,
+          "rendered_words": 2197,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -6696,35 +6696,35 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 94,
+              "words": 248,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 99,
+              "words": 243,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 101,
+              "words": 261,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 97,
+              "words": 247,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 92,
+              "words": 168,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1024,
+          "rendered_words": 1847,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -6798,23 +6798,23 @@
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 96,
+              "words": 233,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 91,
+              "words": 257,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 97,
+              "words": 248,
               "worked_trace": true
             }
           ],
-          "rendered_words": 716,
+          "rendered_words": 1305,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -6901,35 +6901,35 @@
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 96,
+              "words": 240,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 95,
+              "words": 157,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 96,
+              "words": 231,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 97,
+              "words": 168,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 95,
+              "words": 254,
               "worked_trace": true
             }
           ],
-          "rendered_words": 993,
+          "rendered_words": 1691,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -7005,29 +7005,29 @@
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 96,
+              "words": 163,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 96,
+              "words": 252,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 96,
+              "words": 234,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 94,
+              "words": 254,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1018,
+          "rendered_words": 1783,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -7235,7 +7235,7 @@
               "number": "14.1.7",
               "chapter": "ch-14-1",
               "title": "Vector comparison exposes concurrent events",
-              "caption": "Componentwise comparison identifies causality under the chosen participant model; it does not choose a business merge.",
+              "caption": "The componentwise maximum combines known progress. A receive event then advances the receiver’s own entry; neither step chooses a business merge.",
               "why": "Make the internal structure or state relation visible before claiming its behavior.",
               "status": "available"
             }
@@ -7245,47 +7245,47 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 101,
+              "words": 201,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 101,
+              "words": 217,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 98,
+              "words": 203,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 96,
+              "words": 207,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 101,
+              "words": 237,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 104,
+              "words": 214,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 103,
+              "words": 306,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1395,
+          "rendered_words": 2416,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -7383,41 +7383,41 @@
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 103,
+              "words": 204,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 99,
+              "words": 210,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 95,
+              "words": 180,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 95,
+              "words": 205,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 102,
+              "words": 220,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 101,
+              "words": 221,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1182,
+          "rendered_words": 1966,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -7493,29 +7493,29 @@
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 101,
+              "words": 184,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 93,
+              "words": 199,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 95,
+              "words": 291,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 102,
+              "words": 203,
               "worked_trace": true
             }
           ],
-          "rendered_words": 878,
+          "rendered_words": 1511,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -7589,23 +7589,23 @@
             {
               "syllabus_item": 18,
               "status": "available",
-              "words": 95,
+              "words": 256,
               "worked_trace": true
             },
             {
               "syllabus_item": 19,
               "status": "available",
-              "words": 96,
+              "words": 216,
               "worked_trace": true
             },
             {
               "syllabus_item": 20,
               "status": "available",
-              "words": 93,
+              "words": 257,
               "worked_trace": true
             }
           ],
-          "rendered_words": 873,
+          "rendered_words": 1542,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -7803,41 +7803,41 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 96,
+              "words": 216,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 98,
+              "words": 211,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 96,
+              "words": 221,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 97,
+              "words": 215,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 98,
+              "words": 217,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 97,
+              "words": 211,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1139,
+          "rendered_words": 2011,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -7925,35 +7925,35 @@
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 105,
+              "words": 250,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 108,
+              "words": 392,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 103,
+              "words": 264,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 94,
+              "words": 231,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 91,
+              "words": 204,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1098,
+          "rendered_words": 2099,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -8030,29 +8030,29 @@
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 101,
+              "words": 240,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 95,
+              "words": 199,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 95,
+              "words": 228,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 99,
+              "words": 225,
               "worked_trace": true
             }
           ],
-          "rendered_words": 844,
+          "rendered_words": 1512,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -8125,17 +8125,17 @@
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 99,
+              "words": 266,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 98,
+              "words": 234,
               "worked_trace": true
             }
           ],
-          "rendered_words": 749,
+          "rendered_words": 1405,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -8380,59 +8380,59 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 91,
+              "words": 157,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 100,
+              "words": 159,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 89,
+              "words": 157,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 99,
+              "words": 174,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 95,
+              "words": 152,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 99,
+              "words": 159,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 101,
+              "words": 168,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 95,
+              "words": 155,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 93,
+              "words": 169,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1710,
+          "rendered_words": 2414,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -8508,29 +8508,29 @@
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 99,
+              "words": 154,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 98,
+              "words": 157,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 101,
+              "words": 171,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 102,
+              "words": 169,
               "worked_trace": true
             }
           ],
-          "rendered_words": 822,
+          "rendered_words": 1188,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -8604,23 +8604,23 @@
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 95,
+              "words": 152,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 97,
+              "words": 162,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 94,
+              "words": 159,
               "worked_trace": true
             }
           ],
-          "rendered_words": 743,
+          "rendered_words": 1043,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -8718,41 +8718,41 @@
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 95,
+              "words": 154,
               "worked_trace": true
             },
             {
               "syllabus_item": 18,
               "status": "available",
-              "words": 98,
+              "words": 160,
               "worked_trace": true
             },
             {
               "syllabus_item": 19,
               "status": "available",
-              "words": 99,
+              "words": 159,
               "worked_trace": true
             },
             {
               "syllabus_item": 20,
               "status": "available",
-              "words": 92,
+              "words": 159,
               "worked_trace": true
             },
             {
               "syllabus_item": 21,
               "status": "available",
-              "words": 93,
+              "words": 161,
               "worked_trace": true
             },
             {
               "syllabus_item": 22,
               "status": "available",
-              "words": 90,
+              "words": 164,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1267,
+          "rendered_words": 1841,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -8943,29 +8943,29 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 95,
+              "words": 155,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 99,
+              "words": 153,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 94,
+              "words": 161,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 99,
+              "words": 158,
               "worked_trace": true
             }
           ],
-          "rendered_words": 804,
+          "rendered_words": 1171,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -9063,41 +9063,41 @@
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 104,
+              "words": 177,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 93,
+              "words": 165,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 96,
+              "words": 156,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 97,
+              "words": 155,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 98,
+              "words": 158,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 101,
+              "words": 178,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1183,
+          "rendered_words": 1695,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -9173,29 +9173,29 @@
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 99,
+              "words": 151,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 91,
+              "words": 146,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 92,
+              "words": 165,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 91,
+              "words": 161,
               "worked_trace": true
             }
           ],
-          "rendered_words": 779,
+          "rendered_words": 1142,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -9315,53 +9315,53 @@
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 94,
+              "words": 156,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 97,
+              "words": 164,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 91,
+              "words": 149,
               "worked_trace": true
             },
             {
               "syllabus_item": 18,
               "status": "available",
-              "words": 87,
+              "words": 149,
               "worked_trace": true
             },
             {
               "syllabus_item": 19,
               "status": "available",
-              "words": 91,
+              "words": 154,
               "worked_trace": true
             },
             {
               "syllabus_item": 20,
               "status": "available",
-              "words": 96,
+              "words": 163,
               "worked_trace": true
             },
             {
               "syllabus_item": 21,
               "status": "available",
-              "words": 88,
+              "words": 165,
               "worked_trace": true
             },
             {
               "syllabus_item": 22,
               "status": "available",
-              "words": 100,
+              "words": 158,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1581,
+          "rendered_words": 2271,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -9585,47 +9585,47 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 97,
+              "words": 160,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 95,
+              "words": 156,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 97,
+              "words": 159,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 106,
+              "words": 184,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 102,
+              "words": 233,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 95,
+              "words": 168,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 98,
+              "words": 165,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1358,
+          "rendered_words": 2033,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -9735,47 +9735,47 @@
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 90,
+              "words": 158,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 92,
+              "words": 164,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 95,
+              "words": 164,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 96,
+              "words": 159,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 94,
+              "words": 171,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 87,
+              "words": 154,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 96,
+              "words": 160,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1316,
+          "rendered_words": 1912,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -9863,35 +9863,35 @@
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 92,
+              "words": 159,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 97,
+              "words": 168,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 91,
+              "words": 150,
               "worked_trace": true
             },
             {
               "syllabus_item": 18,
               "status": "available",
-              "words": 91,
+              "words": 161,
               "worked_trace": true
             },
             {
               "syllabus_item": 19,
               "status": "available",
-              "words": 93,
+              "words": 168,
               "worked_trace": true
             }
           ],
-          "rendered_words": 979,
+          "rendered_words": 1433,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -9966,23 +9966,23 @@
             {
               "syllabus_item": 20,
               "status": "available",
-              "words": 94,
+              "words": 162,
               "worked_trace": true
             },
             {
               "syllabus_item": 21,
               "status": "available",
-              "words": 88,
+              "words": 155,
               "worked_trace": true
             },
             {
               "syllabus_item": 22,
               "status": "available",
-              "words": 96,
+              "words": 183,
               "worked_trace": true
             }
           ],
-          "rendered_words": 778,
+          "rendered_words": 1185,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -10184,41 +10184,41 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 94,
+              "words": 150,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 98,
+              "words": 157,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 102,
+              "words": 145,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 98,
+              "words": 151,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 97,
+              "words": 165,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 87,
+              "words": 147,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1181,
+          "rendered_words": 1646,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -10305,35 +10305,35 @@
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 89,
+              "words": 156,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 97,
+              "words": 176,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 94,
+              "words": 150,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 100,
+              "words": 167,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 89,
+              "words": 150,
               "worked_trace": true
             }
           ],
-          "rendered_words": 985,
+          "rendered_words": 1449,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -10420,35 +10420,35 @@
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 96,
+              "words": 156,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 92,
+              "words": 165,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 84,
+              "words": 153,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 93,
+              "words": 156,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 91,
+              "words": 155,
               "worked_trace": true
             }
           ],
-          "rendered_words": 952,
+          "rendered_words": 1419,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -10522,23 +10522,23 @@
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 91,
+              "words": 151,
               "worked_trace": true
             },
             {
               "syllabus_item": 18,
               "status": "available",
-              "words": 98,
+              "words": 154,
               "worked_trace": true
             },
             {
               "syllabus_item": 19,
               "status": "available",
-              "words": 94,
+              "words": 165,
               "worked_trace": true
             }
           ],
-          "rendered_words": 801,
+          "rendered_words": 1191,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -11997,7 +11997,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2164,
+          "rendered_words": 2460,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -12176,7 +12176,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2256,
+          "rendered_words": 2377,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -12356,7 +12356,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2202,
+          "rendered_words": 2226,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -12536,7 +12536,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2207,
+          "rendered_words": 2158,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -12716,7 +12716,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2168,
+          "rendered_words": 2062,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -12896,7 +12896,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2149,
+          "rendered_words": 2021,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -13076,7 +13076,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2135,
+          "rendered_words": 2051,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -13256,7 +13256,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2205,
+          "rendered_words": 2057,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -13437,7 +13437,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2210,
+          "rendered_words": 2116,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -13617,7 +13617,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2166,
+          "rendered_words": 2149,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -13797,7 +13797,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2190,
+          "rendered_words": 2101,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -13980,7 +13980,7 @@
               "status": "available"
             }
           ],
-          "rendered_words": 2173,
+          "rendered_words": 2054,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -16544,7 +16544,7 @@
       "number": "14.1.7",
       "chapter": "ch-14-1",
       "title": "Vector comparison exposes concurrent events",
-      "caption": "Componentwise comparison identifies causality under the chosen participant model; it does not choose a business merge.",
+      "caption": "The componentwise maximum combines known progress. A receive event then advances the receiver’s own entry; neither step chooses a business merge.",
       "why": "Make the internal structure or state relation visible before claiming its behavior.",
       "status": "available"
     },
@@ -19841,7 +19841,7 @@
     "case_review_sections": 264,
     "exercises_produced": 242,
     "solutions_produced": 242,
-    "authored_lesson_words": 65488
+    "authored_lesson_words": 90555
   },
   "review": {
     "stage_1": "complete: exact syllabus and prerequisite allocation",

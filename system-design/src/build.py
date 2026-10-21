@@ -75,7 +75,7 @@ def render_unit(u):
     if n==1:
         html+='<p class="lead">How do we turn a small program into an application people can rely on? We will build a to-do application, one decision at a time.</p><p>Begin with a task kept in memory. Save it between runs, organise the code into modules, and work out what the application must do. Then draw the design and trace a request through it.</p>'
     elif n<22:
-        html+='<p class="lead">'+e(GUIDES[n][0][0])+'</p>'
+        html+='<p class="lead">'+e(GUIDES[n][0][0].split('\n\n')[0])+'</p>'
     else:
         html+='<p class="lead">We can now bring the earlier ideas together. Each design starts with a concrete workload, follows its main operation, and examines what happens when part of the system fails.</p>'
     html+='<div class="chapter-list">'+''.join(card(c) for c in u['chapters'])+'</div><h2>The running example</h2>'+paragraphs(u['example'])
