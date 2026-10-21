@@ -10,9 +10,9 @@ Each unit has its own folder and opens as a self-contained HTML page. Navigation
 
 ## GitHub Pages
 
-This repository includes `.github/workflows/static.yml`, which deploys the static site on pushes to `main`. In **Settings → Pages → Build and deployment**, use **GitHub Actions** as the source. Commit and push site updates to `main`; the workflow serves the root `index.html` and each unit folder’s `index.html`. `.nojekyll` keeps the content as plain static files. See [GitHub’s publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+This repository publishes through GitHub’s built-in Pages deployment from **main → / (root)**. In **Settings → Pages → Build and deployment**, the source is **Deploy from a branch**. Commit and push site updates to `main`; Pages serves the root `index.html` and each unit folder’s `index.html`. `.nojekyll` keeps the content as plain static files. See [GitHub’s publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
-Repository: `NarenMasterofInfinity/Foundational_Works`. The expected default Pages address is `https://narenmasterofinfinity.github.io/Foundational_Works/` once Pages is enabled and deployed. This is a setup address, not a claim that deployment has been performed.
+Repository: `NarenMasterofInfinity/Foundational_Works`. The live library is `https://narenmasterofinfinity.github.io/Foundational_Works/`. The 21 October 2026 retrieval revision was verified against the exact HTML served by Pages. The separate custom workflow at `.github/workflows/static.yml` is blocked by the repository’s owner-only action policy; built-in branch publishing succeeds independently.
 
 ## Unit structure
 
