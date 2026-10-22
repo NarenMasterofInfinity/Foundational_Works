@@ -1,17 +1,19 @@
-# Units 2–22 writing revision
+# Current writing revision: Units 3 and 4
 
-Use the installed `ncert-style-writing` skill and the revised Unit 1 as the editorial reference. Preserve Unit 1, the supplied syllabus, the technical distinctions, the original visual language, working controls, and stable chapter links.
+Completed on **22 October 2026**. The user narrowed the work to these two units and made the `ncert-style-writing` approach mandatory: engaging, very simple language, with the necessary explanations before relying on unfamiliar terms. Unit 1 is the reference.
 
-1. Rewrite every concept lesson in Units 2–21. Begin with a situation or operation where that helps; introduce terminology after its meaning is established. Use separate paragraphs for the example, mechanism, and necessary qualification. Vary depth according to the reasoning required.
-2. Revise the 26 individual pattern explanations and the unit worked-example commentary. Keep code and explanations consistent.
-3. Rewrite all twelve Unit 22 designs, retaining each of the 22 required sections, numerical assumptions, APIs, logical schemas, failure sequences, and implementation challenges.
-4. Replace generic chapter introductions and mechanically extracted conclusions with useful, chapter-specific teaching text. Revise related diagram captions, interactive instructions, reference summaries, questions, and explained answers.
-5. Check exact coverage and technical claims, run executable and browser verification, inspect representative screens and printed pages, and regenerate the complete PDF. Record completed work and verification evidence without treating readability metrics as proof of good teaching.
+## What changed
 
-This is an editorial revision. Illustrative quantities remain assumptions. Local executable examples retain their stated scope. No new deployment or push is part of this request.
+Unit 3 follows a browser opening the task application. It shows URL parts and an HTTP request, a packet reaching a listening program, a missing TCP byte range, DNS caching, certificate checks, the TCP handshake, NAT return mapping, and a request whose reply is lost. Operation identity is distinguished from the created task's identity.
 
-## Completed
+Unit 4 follows uploaded files. It explains process/thread and stack/heap meanings before using them, follows a task through an event loop, reproduces a lost counter update, traces lock and condition-variable operations, and shows publication, backpressure, and cancellation. The worker pseudocode declares its queue acceptance rule and cleanup, with the example's limits stated before or beside it.
 
-All five steps are complete. The revised edition contains 65,488 words of authored lesson, pattern, and case-study prose. Every one of the 377 concept explanations, 26 pattern explanations, and 264 case sections differs from the previous edition. The 95 revised chapters include 83 specific chapter guides and twelve case introductions. All 231 Unit 2–22 questions and their answers were rewritten. Unit 1 is preserved.
+All 34 lessons and eight chapter introductions were rewritten. Related traces, captions, reference summaries, code explanations, queue instructions, and 22 assessments were revised. Plain-language section headings replace topic-list headings in these lessons; syllabus items and stable links remain. The memory layout comes after stack/heap explanation, and an unrelated URL-shortener diagram was replaced by the task-list request. Unit-level advanced questions occur at the end of these units rather than after every chapter.
 
-The build and executable checks pass. The full browser suite passes across all 133 views and five widths, including all thirteen workbenches, internal navigation, offline reading, JavaScript-disabled reading, SVG bounds, and printing. The refreshed tagged A4 PDF has 973 pages and contains all 99 chapter headers, 575 figure labels, and 264 case-section headings. Representative reading views and printed pages were inspected. See [QA.md](QA.md) for the verification scope and [SOURCE_REVIEW.md](SOURCE_REVIEW.md) for the preserved technical distinctions.
+The lesson prose changed from 6,435 to 5,528 words. The aim was to remove repeated advice and use the space for missing steps, rather than target a uniform length. Important technical conditions remain beside the claims they qualify.
+
+## Scope and verification
+
+All other 91 generated chapter panels match baseline commit `3721887` byte for byte, including Unit 1. Non-target lesson, guide, reference-summary, assessment, and worked-code data are unchanged. All assessment kinds and IDs remain.
+
+The complete build, executable checks, browser suite at five widths, and scoped preservation checks pass. Desktop/mobile readings and representative PDF pages were inspected. The refreshed complete PDF has 1,070 tagged A4 pages. It exports the current book; only the two target units' chapter content changed in this pass. See [QA.md](QA.md).

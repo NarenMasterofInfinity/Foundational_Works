@@ -13,23 +13,23 @@ A traffic spike ends before new instances can start. What protects the service? 
 Only 80% of a job can run in parallel. What ideal speedup can four workers give? || Imagine a 100-second job: twenty seconds must run sequentially, while eighty can be divided perfectly. Four workers reduce the shareable part to 80/4 = 20 seconds, giving 20 + 20 = 40 seconds overall. The ideal speedup is 100/40 = 2.5 times. ¶ Equivalently, the new duration is 0.2 + 0.8/4 = 0.4 of the original. Coordination can reduce the actual gain further. The unchanged sequential part also limits ideal speedup to five times even with arbitrarily many workers.
 Why can requiring fifty parallel calls increase tail latency? || The request waits for its slowest required result. If each call independently has a 1% chance of exceeding a threshold, its chance of staying within the threshold is 0.99. All fifty are fast with probability 0.99⁵⁰ ≈ 0.605. Thus at least one is slow with probability 1 − 0.605 ≈ 0.395, or about 39.5%. ¶ Independence is an assumption; shared dependencies can correlate delays. Parallel initiation removes the need to start calls one after another, but it does not remove the wait for the last required result.''')
 
-add(3, '''A server listens on port 443. Why might a remote caller still fail to use it? || The listener may be bound only to a local address. The client may have no working route to the server, a firewall may block traffic, or replies may have no working return path. Trace the destination address and both directions of communication rather than stopping at the listening port. ¶ Once communication works, the application must still establish the caller's identity and check permissions. A reachable port does not grant access to every task.
-What does the application receive from TCP, UDP, and QUIC? || TCP provides an ordered reliable byte stream while the connection works. Sender writes can be split or combined across receiver reads, so the application needs a framing rule such as a message length. Connection failure remains possible, and byte delivery does not prove that the remote application committed an operation. ¶ UDP provides datagrams without TCP's stream reliability and ordering. QUIC builds a secure transport over UDP with separate streams and its own reliability rules. Loss in one stream need not stop delivery on another, though streams share network capacity. Choose by the required behaviour and deployment support.
-Why does changing DNS not move every client immediately? || A resolver may still hold the earlier answer within its cache lifetime, so it can return that answer without asking the authoritative server again. Negative answers can also remain cached. In addition, a client with an open connection may send another request without doing any DNS lookup. ¶ The published record can therefore change before actual traffic moves. Evaluate DNS refresh alongside the lifetimes and replacement rules of existing connections when testing failover.
-Which access checks can a gateway perform, and which need domain information? || A gateway can validate the boundary credentials it supports and enforce admission rules such as a caller's request quota. Those checks establish information about the caller and whether the request may enter. ¶ Whether that caller may read payment 42 requires trustworthy ownership and membership information. Keep that rule enforced where the needed domain information is known. Passing a credential check at the gateway does not by itself grant permission for every object.
-What work does streaming save compared with polling, and what work does it add? || Streaming can avoid repeated requests and empty responses when nothing changes. Polling may already reuse connections, so the amount of setup saved depends on the actual polling implementation. ¶ Streaming keeps connections and buffers alive and needs heartbeat, buffer-limit, reconnect, and recovery rules. If a client receives event 20 and misses events 21–23 while disconnected, a new live connection alone cannot supply those missing updates. Use retained history with a replay position or a fresh snapshot, according to the application's recovery contract.
-The server commits a write, but the client times out. What can the client conclude? || The client knows that it did not receive a timely reply. Its observation alone does not establish whether the request arrived or the write committed. In the given history, the committed effect remains even though its acknowledgement is missing. ¶ Use a stable operation identity with a server-supported retry or status contract to recover evidence of the earlier result. Keep attempts within the overall deadline. If no evidence is yet available, keep the outcome uncertain rather than treating it as a failed write and creating a new effect.
-Why might a cold HTTPS request take longer than a warm request with the same server work? || The cold path can require DNS, transport setup, and secure setup before sending the application request. In the illustrative sequential model, these stages take 20 + 40 + 40 = 100 ms. Adding the 55 ms request/work stage gives 155 ms. ¶ If the later request can reuse all that preparation, the same 55 ms stage remains. Reuse removes only steps actually reused; it does not remove request travel or server work. Caching, protocol choices, and overlap can change the path, so these values describe an assumed model rather than a benchmark.
-A database pool is full while CPU is low. What should you inspect first? || Measure how long requests wait to borrow connections and how long borrowers hold them. Then inspect what happens during those holds: slow queries, lock waits, idle transactions, external calls, or failure to return a connection can all keep the pool occupied without high application CPU. ¶ Include acquisition waiting in request deadlines. Increasing the pool before finding the cause can add database contention and make holds longer. Release unused connections promptly and change the pool size using evidence about both the application and database.''')
+add(3, '''A web service listens on port 443. Why might a browser on another machine still fail to reach it? || The listener may be attached only to the local loopback address. Or the request or reply may have no usable route, or a firewall may block it. Check the server address, listening address, and both directions of the path. Reaching the program still leaves the application’s permission checks to perform.
+A sender writes HELLO and then WORLD through TCP. Why might the receiver not get two separate reads? || TCP carries an ordered byte stream, not the sender’s write boundaries. One read could contain HELLOWO and the next RLD. The application needs a framing rule to recover its messages, such as a length before each one. UDP instead preserves datagram boundaries; QUIC provides its own ordered streams over UDP.
+The DNS address changes. Why do some clients still use the old server? || A resolver or client can still have a usable cached answer. An already open connection may also continue without another lookup. Updating the published record does not replace every saved answer or close existing connections. Their lifetimes affect when traffic moves.
+The gateway recognises the signed-in user. Why must the task application still check ownership of task 42? || Knowing who the caller is does not establish which tasks the caller may read. The task application can compare the recognised user with task 42’s owner and enforce the permission rule. The gateway can perform common sign-in and allowance checks, while the application uses its resource information.
+What work can SSE or WebSockets save, and what work do they add? || They can avoid repeated empty polls by keeping a path open for messages. The system then maintains connections and buffers and must handle slow or disconnected clients. If updates occur during disconnection, it needs retained events or a fresh snapshot. A new connection alone cannot recover the missing history.
+The server saves task 7, but the reply is lost. What does the client learn from its timeout? || It learns only that a reply did not arrive in time. The task can already exist. If the request carried op-9 and the server saved that identity with its result, the client can look up or resend op-9 to recover task 7. Sending a new operation would risk a duplicate.
+Our cold request takes 155 ms. Why can the next request take 55 ms with the same server work? || The assumed cold stages are DNS 20 ms, TCP setup 40 ms, TLS setup 40 ms, and request plus work 55 ms. They add to 155 ms. A usable warm connection and lookup remove the first three stages in this model. The 55 ms stage already includes its request and reply travel. These durations are assumed, not measured.
+All twenty pool connections are borrowed, but CPU has free time. Why can the next request still wait? || The request needs an available connection, not just CPU time. Existing borrowers may be waiting on storage, locks, or another operation. Find why they still hold their connections and whether every exit returns them. Adding connections helps only if the database can use the extra work effectively.''')
 
-add(4, '''How do processes and threads differ from modules in the source code? || A module organises code; it does not by itself own a separate running instance. A process has an address space and runtime resources, and its threads provide execution paths within that process. The threads commonly share heap memory and resources while keeping separate stacks and execution state. Several modules may run in that one process, so a process crash can stop them together. Identify the runtime boundaries when reasoning about sharing and failure.
-An upload handler is declared async. Why might it still delay other requests on the same event loop? || Follow what the handler actually executes. A blocking library call can hold the event-loop thread while waiting, and a long computation can occupy it without yielding. Other ready tasks then wait for that same thread. An asynchronous interface separates initiation from completion, but its syntax does not make every underlying call nonblocking or supply another CPU core. Inspect the driver and execution path to choose an appropriate repair.
-Can a one-core program be concurrent without executing tasks simultaneously? || Yes. A can start and then wait for storage while the core runs B. Their lifetimes overlap, so both are in progress during the same period: they are concurrent. Parallelism would require simultaneous execution. A one-core interleaving can also cause interference: if A pauses between a counter read and its matching write, B may change the counter before A resumes. Simultaneous instructions are unnecessary for that compound-update race.
-A transfer subtracts from one balance and adds to another. Why might atomic balance fields be insufficient? || Each supported atomic action may be indivisible while the transfer remains two separate actions. After the subtraction and before the addition, another caller can observe or act on an incomplete transfer. A failure between the actions can also leave only part completed. The invariant spans the two balances, so the combined operation needs an appropriate coordination or transaction boundary. Every relevant reader and writer must follow the resulting rules.
-A log shows that the writer initialised an object before another thread read it. Why is that timestamp order insufficient to establish safe publication? || The timestamps describe observed time order, while visibility guarantees come from the language memory model. The writer and reader need a supported synchronisation relationship, such as the appropriate use of a lock, channel, or atomic publication mechanism under that language's rules. A happens-before relationship can establish the required visibility of the initialised fields. Earlier wall-clock time alone supplies no such guarantee, even if the object will never change again.
-A and B both read counter zero, then each writes one. Explain the lost update and why locking only the assignments would fail. || Both callers calculate from the same old value. A writes one, and B then replaces that result with the one it independently calculated. Locking the final writes still permits both earlier reads of zero. Protect the entire read–modify–write sequence with the same suitable lock, or use a supported atomic increment. Under the shared lock, B reads the one left by A and writes two. Separate private locks would not exclude the callers from each other.
-A callback computes for two seconds on the only event-loop thread. During that time an upload read completes. When can the upload task continue? || The completed read can make the task's continuation ready, but that continuation needs time on the event-loop thread. It cannot execute there until the running callback yields or finishes. More queued async tasks do not change this. Keep loop turns bounded, split suitable work into turns, or move appropriate computation to a bounded execution resource. Actual CPU parallelism also depends on the chosen runtime and available execution resources.
-Jobs arrive at 150/s and complete at 100/s. Assume every job is accepted, the workers remain busy, and none is abandoned. How much does the queue grow in ten seconds, and does a larger queue fix the mismatch? || The excess is 150 − 100 = 50 jobs/s, so ten seconds add 50 × 10 = 500 waiting jobs. A larger queue delays reaching the limit without changing that growth rate. Reduce admitted arrivals, increase useful completions, or change the work required. Bound the queue and admission wait, report overload clearly, and observe job age as well as queue length so that waiting work remains useful.''')
+add(4, '''How are a program, a process, a thread, and a source-code module different? || A program is saved instructions; a process is one running instance. Threads execute within a process and can share its data. A module organises source code. Several modules can run in the same process and stop together when it crashes, so separate modules do not automatically create separate failure boundaries.
+An upload handler is marked async. Why might other work on its event loop still wait? || The handler may call a blocking library function or keep calculating without yielding. That occupies the loop’s thread. Other tasks can become ready but cannot run there until the current work gives up the thread. Async describes how the operation presents completion; it does not change every library call underneath.
+Can one core make progress on two uploads without running them at the same instant? || Yes. A can start, wait for storage, and resume after the core has run B. Their progress overlaps, so they are concurrent. Running instructions for both at the same instant would require parallel execution resources. Taking turns can still cause a race if both use a shared old value.
+A transfer changes balances from 100,100 through 90,100 to 90,110. Why are separate atomic writes insufficient? || Each write can be indivisible while the pair still passes through an incomplete state. A reader could see 90,100. Protect both changes as one operation and make readers of the pair follow the same rule, such as taking the same lock. A database transaction can supply a different appropriate boundary for stored balances.
+A log says A set the title before B read it. Why do we still need safe publication? || Clock order alone does not supply the language’s memory-visibility guarantee. Use a defined synchronisation relationship. For example, A sets and shares the record while holding a mutex, releases it, and B later acquires the same mutex before reading. Under the required memory-model rules, A’s writes happen before B’s read.
+A and B read count zero, then both write one. Which steps must the shared lock protect? || Protect the read, addition, and write together. If A completes those steps first, B reads one and writes two. Protecting only the assignments still allows both to calculate from zero. Separate private locks also fail because neither makes one caller wait for the other.
+An upload read completes while a callback uses the only event-loop thread for two seconds. When can the upload task continue? || Its result is ready, but its continuation still needs a turn on the thread. It waits until the callback yields or finishes. The distinction is between a completed I/O operation and execution of the code that uses its result. More queued tasks do not let that one thread run both pieces at once.
+150 jobs arrive and 100 finish each second. If all are accepted, how much extra work remains after ten seconds? || Each second adds 150 − 100 = 50 unfinished jobs. Ten seconds add 500, assuming none are rejected or abandoned. More queue space stores the excess without changing its growth. A bounded queue can reject or wait when full, and the producer must react to that feedback for arrivals to slow.''')
 
 add(5, '''When can composition avoid many subclasses? || A payment service may vary both its gateway and its fraud policy. Combining those choices through inheritance can require a subclass for each combination. With composition, the service receives a policy and gateway and calls each for its own work. Either can be replaced while keeping the other. ¶ This needs clear collaborator contracts and wiring. Inheritance remains appropriate when specialisation preserves the behaviour callers are promised. Similar fields alone do not establish that relationship.
 What must a payment gateway contract explain beyond charge(amount)? || State the currency and amount units, the operation identity, repeated-operation behaviour, and the meanings of results and errors. For example, 100 USD minor units means one dollar, while “accepted” may mean only that processing has begun. ¶ A timeout after submission can leave a charge uncertain because the provider may have performed it before the reply was lost. The contract should preserve this distinction and explain a supported recovery path. A Boolean cannot express approval, definite decline, and uncertainty separately. Merely including an operation identifier does not make duplicate handling work.
@@ -185,8 +185,9 @@ What does killing a process only before work begins fail to test? || It misses g
 Source and destination counts match but tenant owners differ. Why did validation miss it? || A count compares quantity, not identity or meaning. Compare keys, versions, relationships, ownership, and business invariants as appropriate. State whether the check examines all records or samples. Migration, replay, and recovery need evidence that the right data reached the right scope.''')
 
 THOUGHT={2: 'How would simultaneous retries change an estimate based on average user sessions?',
- 3: 'What changes when a local dependency becomes a cross-region call?',
- 4: 'An upload has been accepted when its initiating request is cancelled. Who should now own the work?',
+ 3: (((('Our application used to call a local function. Now it calls a service in another region. What new '
+ 'events can affect the result?')))),
+ 4: 'The client disconnects after an upload job is accepted. Should processing stop?',
  5: 'Which payment rules should remain the same when objects are replaced by pure functions?',
  6: 'A notification job runs after both the creating request and the user session have ended. How should it '
     'obtain resources, and which authority should permit its action?',
@@ -217,21 +218,14 @@ THOUGHT_ANSWERS={2: 'Retries add attempts without adding new user intentions. A 
     'Model the timing and maximum number of attempts separately from normal sessions. Bound retries and '
     'admission, and test useful completions, queue growth, and recovery under that burst. A peak factor '
     'based only on ordinary user arrivals may not cover the retry wave.',
- 3: 'The caller must now encode a request, reach an endpoint, establish the required trust, and wait for '
-    'communication across regions. Travel and connection setup can increase delay. Some participants can '
-    'fail or become unreachable while others continue working.\n'
-    '\n'
-    'A timeout after the remote side commits leaves an uncertain result, unlike a local validation error '
-    'that happens before work starts. Revisit deadlines, connection reuse, credentials, operation identity, '
-    'status recovery, and fallback. A fallback must preserve the required business meaning rather than '
-    'silently presenting an unverified outcome. Measure the whole request path under the stated workload and '
-    'failure conditions.',
- 4: 'First decide what acceptance promises. If processing must continue, a durable job or workflow should '
-    'retain the identity, input reference, and progress needed to resume it. Release request-owned resources '
-    'without discarding that obligation. If the business instead allows cancellation of the work, record and '
-    'enforce that decision so later workers do not complete it inappropriately. A cancellation request '
-    'cannot prove that a remote side effect was undone; uncertain effects need status recovery or '
-    'reconciliation.',
+ 3: (((('The request must travel to another machine and the reply must travel back. Setup and travel add time. '
+ 'The server can finish while the reply is lost, leaving the caller uncertain. The interface now needs '
+ 'a waiting limit and a way to recognise or find the original operation when repeating it could cause '
+ 'another effect.')))),
+ 4: (((('First decide what acceptance promised. If the job must continue, its saved record and a worker '
+ 'outside the request scope own the remaining work. Request-owned children can stop and release their '
+ 'resources. If cancellation of the job is allowed, record that decision so later workers can obey it. '
+ 'Closing the connection alone neither deletes the saved job nor reverses work already completed.')))),
  5: 'Currency, units, allowed state transitions, operation identity, and the meaning of uncertainty remain '
     'requirements regardless of representation. For the same inputs and observed provider outcomes, the new '
     'design should make the same business decisions. Tests can check these decisions through explicit '
@@ -350,24 +344,17 @@ TASKS={2: ('Implement a capacity worksheet with explicit user activity, peak, an
      'Keep the inputs and intermediate results in the output so changes can be checked. The arithmetic '
      'covers this request-serving resource and one-instance loss; database capacity, image delivery, '
      'routing, and failures that remove several instances still need their own evidence.'),
- 3: ('Implement a cold/warm request calculator and check invalid stage times.',
-     'Accept stage durations in one declared unit, such as milliseconds. Reject negative durations before '
-     'summing. Keep an explicit record of which stages run so that a warm calculation removes only the setup '
-     'that remains reusable.\n'
-     '\n'
-     'Check that DNS 20, TCP 40, TLS 40, and request/work 55 produce 155 ms. Reusing all three setup stages '
-     'should produce 55 ms; reusing only the DNS answer while establishing a new secure connection should '
-     'produce 135 ms. Also check that a zero duration is accepted and a negative duration is rejected. Label '
-     'the result as an arithmetic model: it does not establish that a real connection can be reused or '
-     'measure a protocol.'),
- 4: ('Reproduce a lost counter update, repair it, and build a bounded upload-work model. What observations '
-     'should the model demonstrate?',
-     'Arrange a controlled interleaving in which A and B both read zero before either writes, then show the '
-     "final value of one. Use the language's supported coordination to protect the complete update and "
-     'demonstrate a final value of two. For uploads, set separate limits for active workers and waiting '
-     'references, then show what happens when the queue is full or an admission deadline expires. '
-     'Distinguish simulated I/O waiting from CPU work. Finally, identify the durable job state needed to '
-     'recover accepted work if the process-local queue disappears.'),
+ 3: ('Write a cold/warm request calculator. How will you check it?',
+ 'Store each stage’s time in milliseconds and add the stages actually needed. Check that 20, 40, 40, '
+ 'and 55 total 155, and that reusing setup leaves 55. Reject negative and non-finite times rather than '
+ 'producing a misleading total. Also check zero-duration stages and a request that reuses only some '
+ 'setup.'),
+ 4: ('Build a lost-update demonstration and a bounded upload queue. What should each show?',
+ 'Arrange for A and B to read zero before either writes, producing one. Then protect the complete '
+ 'update with a shared lock and show two. For uploads, set limits on both workers and waiting '
+ 'identifiers. Fill the queue and show the busy response. Also make conversion fail and check that its '
+ 'files and other resources are released. An in-memory demonstration needs saved job records before it '
+ 'can promise restart recovery.'),
  5: ('Replace hardcoded payment-provider construction with an injected recording gateway.',
      'Pass the gateway as an argument or constructor dependency. Its charge method should record the '
      'supplied command and return a controlled result. Use it to exercise approved, declined, and uncertain '
@@ -516,24 +503,19 @@ DESIGN={2: ('A team sizes servers from daily average RPS alone. Identify the mis
      'Treat the worksheet as a workload to test. Verify user latency, rejection, queue growth, and recovery '
      'under normal, peak, and degraded conditions. A calculated instance count alone cannot establish that '
      'the complete design meets its requirements.'),
- 3: ('A payment client retries every timeout as a new request. Trace a duplicate effect and repair the '
-     'contract.',
-     'The client sends charge A. The provider commits A, but its reply is lost. The client interprets the '
-     'timeout as failure and sends a new charge B. If the provider treats B as an independent operation, '
-     'both charges can take effect.\n'
-     '\n'
-     'Give one intended charge a stable operation identity and use a provider contract that recognises '
-     'repeats or lets the client query its result. The provider must enforce that meaning; merely adding an '
-     'identifier to the request is insufficient. Bound total waiting and attempts, and retain an uncertain '
-     'state until verified evidence resolves it.'),
- 4: ('A server starts an unbounded background task for every upload. Explain overload and process-loss '
-     'behaviour, then redesign acceptance for uploads that must survive a crash.',
-     'As arrivals outpace completion, tasks retain more buffers, connections, and other resources. A process '
-     'crash also destroys tasks and queue entries held only in memory, even if upload bytes happen to remain '
-     'in storage. Bound active workers and waiting jobs separately. Store required input references and job '
-     'identity durably, and define the point at which the service reports acceptance. If a queue handoff '
-     'fails, retain a discoverable durable job or reject under an explicit policy. Choose I/O concurrency '
-     'and CPU execution capacity from the actual service demand.'),
+ 3: ('“Read” appears twice after a create request times out and is sent again. How would you change the '
+ 'request flow?',
+ 'Give the original request a stable operation identifier. Save the new task and that operation’s '
+ 'result together. An identical retry uses the same identifier and receives the saved result; a changed '
+ 'request must not reuse that identity as if it were identical. This repairs task creation within the '
+ 'stored-operation rules. A remote provider would need its own repetition and recovery rules.'),
+ 4: ('Every upload starts another background task. How would you limit the work and keep accepted jobs '
+ 'through a restart?',
+ 'Use a worker limit for active conversions and a queue limit for waiting jobs. Store large file bytes '
+ 'separately and queue small references. Give each accepted job a saved identity, input reference, and '
+ 'progress record. Replacement workers can then find unfinished jobs after restart. Return acceptance '
+ 'only after the required record is saved; define a clear busy or waiting result when capacity is '
+ 'unavailable.'),
  5: ('A payment class mixes fee rules, HTTP parsing, provider calls, and storage. Plan a '
      'behaviour-preserving refactor.',
      'First record the required outcomes for approval, decline, timeout, and storage failure, including '

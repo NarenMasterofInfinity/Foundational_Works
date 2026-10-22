@@ -18,40 +18,40 @@ Amdahl's Law bounds fixed-work speedup when part of the job remains sequential.
 A request needing many results can be delayed by its slowest dependency; budget the complete path.
 Feasible designs must satisfy mandatory security, cost, and operating constraints before preferences are ranked.
 A decision matrix makes weighted judgments explicit; it does not replace correctness evidence or measurements.''')
-add(3, '''A page request can include name resolution, transport setup, security, server work, resource transfer, and rendering.
-Addresses, ports, sockets, and routing connect application endpoints through actual network paths.
-TCP supplies a byte stream, UDP datagrams, and QUIC secure streams under their respective transport rules.
-DNS resolves names through records and caches; existing answers and connections delay the effect of a record change.
-TLS protects and authenticates transport under its trust configuration; application resource authorisation remains necessary.
-HTTP versions carry common application semantics using different connection and stream mechanisms.
-Reusing a connection can avoid setup work while introducing lifetime, endpoint freshness, and replacement decisions.
-Each required network exchange adds travel and waiting to the operation's end-to-end path.
-A forward proxy acts for clients; a reverse proxy fronts servers, with explicit forwarding and trust rules.
-Balancers select backends; gateways commonly add API boundary policy. Products can combine those responsibilities.
-L4 routing uses transport information; L7 routing can inspect application messages where encryption and policy permit it.
-Polling repeats requests; SSE streams server events; WebSockets supports two-way messages. Recovery remains an application concern.
-NAT changes addressing, firewalls enforce traffic rules, and ingress/egress describe traffic entering or leaving a boundary.
-Service discovery maps logical services to endpoints whose readiness and capacity still require handling.
-A CDN caches permitted representations near users, with keys, freshness, and origin recovery requirements.
-A timeout ends the caller's wait without establishing whether the remote operation executed.
-A pool bounds and reuses connections; acquisition waiting and resource hold time belong in capacity and deadline reasoning.''')
-add(4, '''A program is code; a process is an executing instance; threads are execution paths sharing process resources under runtime rules.
-Stack, heap, and references have runtime-specific lifetimes; external resources also need explicit timely release.
-Scheduling assigns CPU time; context switches and excessive runnable work can add overhead and waiting.
-CPU-bound work is limited by computation, while I/O-bound work spends important time waiting on external operations.
-Asynchronous interfaces separate initiation from completion; their underlying operations can still block.
-Nonblocking I/O lets a thread perform other ready work during waits, using supported readiness or completion mechanisms.
-Concurrency permits overlapping progress; parallelism requires simultaneous execution resources.
-An event loop runs ready work; futures or promises represent later results under the runtime's rules.
-A worker pool bounds active jobs; a bounded queue separately limits waiting jobs and retained payloads.
-Shared memory needs access coordination; message passing needs ownership, delivery, and recovery rules.
-A race can make an outcome depend on interleaving; protect the full critical state transition.
-Mutexes, semaphores, atomics, and condition variables coordinate different kinds of access, permits, operations, and waiting.
-Deadlock blocks progress through dependencies; starvation denies service; livelock keeps work active without useful progress.
-Happens-before describes memory-model ordering and visibility; earlier wall-clock time alone does not establish it.
-Thread safety states allowed concurrent behaviour; immutable values still need valid publication and surrounding ownership.
-Backpressure limits upstream work according to available capacity; larger queues do not repair sustained overload.
-Structured concurrency gives child work a scope owner; cancellation requires cleanup and cannot automatically undo remote effects.''')
+add(3, '''A browser sends an HTTP request for a resource, and the server returns a response that the browser can display.
+An IP address leads toward a machine. Its operating system uses ports and sockets to deliver data to the right program.
+TCP carries an ordered byte stream; UDP carries datagrams; QUIC supplies secure streams over UDP. The application still interprets the data.
+DNS finds records for a name. Cached answers can remain in use until their permitted lifetime ends.
+TLS checks peer identity and protects messages in transit. The application separately checks permission to use a resource.
+HTTP/2 shares a TCP connection between streams; HTTP/3 uses QUIC streams. HTTP request and response meanings remain.
+A handshake prepares a new connection. Reusing a usable connection avoids repeating that setup for every request.
+The four assumed stages take 20 + 40 + 40 + 55 = 155 ms. Reusing setup leaves the same 55 ms request stage.
+A forward proxy acts for clients. A reverse proxy receives requests in front of application servers.
+A load balancer chooses an application instance. An API gateway can perform common API checks before application work.
+L4 routing uses transport addresses and ports. L7 routing can use HTTP content such as the requested path.
+Polling repeatedly asks for updates. SSE sends server events; WebSockets allows both ends to send. Missed updates still need recovery.
+NAT translates addresses and remembers return mappings. A firewall allows or blocks traffic. Ingress enters a boundary; egress leaves it.
+Service discovery supplies possible destinations. A destination can stop after the list is obtained, so callers must handle that change.
+A CDN can reuse a permitted nearby copy. Its cache key, freshness rule, and access rules determine whether reuse is valid.
+A timeout leaves the remote outcome uncertain. A recorded operation identity can let the client find or retry the original operation.
+A connection pool lends reusable connections. Borrowers wait when it is full and must return connections when their use ends.''')
+add(4, '''A program is saved instructions. A process runs them. Threads within a process execute work and can share data.
+The call stack records unfinished calls. Objects can outlive a call when later work still needs them.
+The scheduler chooses a ready thread. A context switch saves one thread’s execution state and restores another’s.
+I/O-bound work mainly waits for input or output. CPU-bound work mainly needs instructions to be executed.
+A synchronous interface returns completion before the caller proceeds; an asynchronous interface separates starting from receiving the result.
+A blocking read holds the calling thread waiting. Nonblocking I/O lets that thread do other work while data is unavailable.
+Concurrent work overlaps in progress. Parallel work executes simultaneously. Taking turns can still interfere with shared updates.
+A task can pause on an unfinished future. Completion makes it ready; the event loop must still give it a turn.
+A pool limits active workers. A separate queue limit controls waiting jobs. Restart recovery also needs saved job records.
+Shared memory lets callers change the same value. Message passing can give one owner control of that value.
+Both callers read zero before either writes. Protecting the whole read–modify–write sequence lets two increments produce two.
+A mutex gives exclusive entry; a semaphore counts permits; an atomic operation protects one action; a condition variable lets a waiter recheck shared state.
+Deadlock waits in a cycle; starvation denies one caller progress; livelock repeats activity without completing the work.
+Safe publication uses the language’s synchronisation rules so the reader can observe the completed value.
+Immutable records stay unchanged. Their mutable collection still needs rules for concurrent access.
+If arrivals exceed completions, waiting work grows. Backpressure makes the producer respond to the receiving side’s limited capacity.
+A parent scope accounts for its children. Cancellation lets them stop and release resources; saved continuing jobs need a longer-lived owner.''')
 add(5, '''Abstraction presents needed behaviour; encapsulation controls representation; polymorphism permits compatible implementations; inheritance specialises a relationship.
 Composition combines collaborators, while inheritance requires subclasses to preserve their callers' behavioural expectations.
 A contract specifies valid inputs, outcomes, effects, errors, and relevant timing or repetition rules beyond a signature.

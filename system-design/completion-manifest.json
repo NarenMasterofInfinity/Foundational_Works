@@ -946,8 +946,8 @@
               "id": "fig-3-1-1",
               "number": "3.1.1",
               "chapter": "ch-3-1",
-              "title": "How the internet works from the application perspective · the example",
-              "caption": "A page request can include name resolution, transport setup, security, server work, resource transfer, and rendering.",
+              "title": "Follow a request from the browser · the example",
+              "caption": "A browser sends an HTTP request for a resource, and the server returns a response that the browser can display.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -955,8 +955,8 @@
               "id": "fig-3-1-2",
               "number": "3.1.2",
               "chapter": "ch-3-1",
-              "title": "IP addresses, ports, sockets, routing · the example",
-              "caption": "Addresses, ports, sockets, and routing connect application endpoints through actual network paths.",
+              "title": "Find the machine and the program · the example",
+              "caption": "An IP address leads toward a machine. Its operating system uses ports and sockets to deliver data to the right program.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -964,18 +964,18 @@
               "id": "fig-3-1-3",
               "number": "3.1.3",
               "chapter": "ch-3-1",
-              "title": "TCP vs UDP vs QUIC · the example",
-              "caption": "TCP supplies a byte stream, UDP datagrams, and QUIC secure streams under their respective transport rules.",
-              "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
+              "title": "What does each transport deliver?",
+              "caption": "TCP and QUIC repair loss under their transport rules. UDP does not supply that service. The application still interprets messages and records their effects.",
+              "why": "Make the internal structure or state relation visible before claiming its behavior.",
               "status": "available"
             },
             {
               "id": "fig-3-1-4",
               "number": "3.1.4",
               "chapter": "ch-3-1",
-              "title": "State and ownership in the related design",
-              "caption": "A link has one owner and a unique code. The stored operation identifies its creation result.",
-              "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
+              "title": "Follow the task-list request",
+              "caption": "Addresses and ports bring data to the program. HTTP tells the program what was requested and gives the response its meaning.",
+              "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             }
           ],
@@ -984,23 +984,23 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 204,
+              "words": 144,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 205,
+              "words": 189,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 235,
+              "words": 252,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1245,
+          "rendered_words": 1104,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1040,8 +1040,8 @@
               "id": "fig-3-2-1",
               "number": "3.2.1",
               "chapter": "ch-3-2",
-              "title": "DNS resolution and DNS caching · the example",
-              "caption": "DNS resolves names through records and caches; existing answers and connections delay the effect of a record change.",
+              "title": "Find an address from a name · the example",
+              "caption": "DNS finds records for a name. Cached answers can remain in use until their permitted lifetime ends.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1049,8 +1049,8 @@
               "id": "fig-3-2-2",
               "number": "3.2.2",
               "chapter": "ch-3-2",
-              "title": "TLS and HTTPS · the example",
-              "caption": "TLS protects and authenticates transport under its trust configuration; application resource authorisation remains necessary.",
+              "title": "Protect the conversation with TLS · the example",
+              "caption": "TLS checks peer identity and protects messages in transit. The application separately checks permission to use a resource.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1058,8 +1058,8 @@
               "id": "fig-3-2-3",
               "number": "3.2.3",
               "chapter": "ch-3-2",
-              "title": "HTTP/1.1, HTTP/2, HTTP/3 · the example",
-              "caption": "HTTP versions carry common application semantics using different connection and stream mechanisms.",
+              "title": "Carry several HTTP exchanges · the example",
+              "caption": "HTTP/2 shares a TCP connection between streams; HTTP/3 uses QUIC streams. HTTP request and response meanings remain.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1067,9 +1067,9 @@
               "id": "fig-3-2-4",
               "number": "3.2.4",
               "chapter": "ch-3-2",
-              "title": "Connection establishment and connection reuse · the example",
-              "caption": "Reusing a connection can avoid setup work while introducing lifetime, endpoint freshness, and replacement decisions.",
-              "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
+              "title": "Three messages prepare the TCP connection",
+              "caption": "Each end announces its starting sequence number and acknowledges the other. HTTPS over TCP then needs its TLS protection setup.",
+              "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
             {
@@ -1087,35 +1087,35 @@
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 193,
+              "words": 184,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 187,
+              "words": 211,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 200,
+              "words": 148,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 210,
+              "words": 138,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 204,
+              "words": 140,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1687,
+          "rendered_words": 1395,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1153,8 +1153,8 @@
               "id": "fig-3-3-1",
               "number": "3.3.1",
               "chapter": "ch-3-3",
-              "title": "Reverse proxies vs forward proxies · the example",
-              "caption": "A forward proxy acts for clients; a reverse proxy fronts servers, with explicit forwarding and trust rules.",
+              "title": "Forward a request through a proxy · the example",
+              "caption": "A forward proxy acts for clients. A reverse proxy receives requests in front of application servers.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1162,8 +1162,8 @@
               "id": "fig-3-3-2",
               "number": "3.3.2",
               "chapter": "ch-3-3",
-              "title": "Load balancers vs API gateways · the example",
-              "caption": "Balancers select backends; gateways commonly add API boundary policy. Products can combine those responsibilities.",
+              "title": "Share traffic and check common rules · the example",
+              "caption": "A load balancer chooses an application instance. An API gateway can perform common API checks before application work.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1171,8 +1171,8 @@
               "id": "fig-3-3-3",
               "number": "3.3.3",
               "chapter": "ch-3-3",
-              "title": "L4 vs L7 load balancing · the example",
-              "caption": "L4 routing uses transport information; L7 routing can inspect application messages where encryption and policy permit it.",
+              "title": "Route by port or by path · the example",
+              "caption": "L4 routing uses transport addresses and ports. L7 routing can use HTTP content such as the requested path.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1180,8 +1180,8 @@
               "id": "fig-3-3-4",
               "number": "3.3.4",
               "chapter": "ch-3-3",
-              "title": "WebSockets, Server-Sent Events, and polling · the example",
-              "caption": "Polling repeats requests; SSE streams server events; WebSockets supports two-way messages. Recovery remains an application concern.",
+              "title": "Send updates to the browser · the example",
+              "caption": "Polling repeatedly asks for updates. SSE sends server events; WebSockets allows both ends to send. Missed updates still need recovery.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -1191,29 +1191,29 @@
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 211,
+              "words": 150,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 194,
+              "words": 136,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 203,
+              "words": 120,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 214,
+              "words": 151,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1431,
+          "rendered_words": 1040,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1253,8 +1253,8 @@
               "id": "fig-3-4-1",
               "number": "3.4.1",
               "chapter": "ch-3-4",
-              "title": "NAT, firewalls, ingress, egress · the example",
-              "caption": "NAT changes addressing, firewalls enforce traffic rules, and ingress/egress describe traffic entering or leaving a boundary.",
+              "title": "Follow traffic out and back · the example",
+              "caption": "NAT translates addresses and remembers return mappings. A firewall allows or blocks traffic. Ingress enters a boundary; egress leaves it.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1262,8 +1262,8 @@
               "id": "fig-3-4-2",
               "number": "3.4.2",
               "chapter": "ch-3-4",
-              "title": "Service discovery · the example",
-              "caption": "Service discovery maps logical services to endpoints whose readiness and capacity still require handling.",
+              "title": "Find a service whose address can change · the example",
+              "caption": "Service discovery supplies possible destinations. A destination can stop after the list is obtained, so callers must handle that change.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1271,8 +1271,8 @@
               "id": "fig-3-4-3",
               "number": "3.4.3",
               "chapter": "ch-3-4",
-              "title": "CDN and edge networking · the example",
-              "caption": "A CDN caches permitted representations near users, with keys, freshness, and origin recovery requirements.",
+              "title": "Reuse a nearby copy · the example",
+              "caption": "A CDN can reuse a permitted nearby copy. Its cache key, freshness rule, and access rules determine whether reuse is valid.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1280,8 +1280,8 @@
               "id": "fig-3-4-4",
               "number": "3.4.4",
               "chapter": "ch-3-4",
-              "title": "Network partitions, timeouts, packet loss · the example",
-              "caption": "A timeout ends the caller's wait without establishing whether the remote operation executed.",
+              "title": "What does a timeout tell us · the example",
+              "caption": "A timeout leaves the remote outcome uncertain. A recorded operation identity can let the client find or retry the original operation.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1289,8 +1289,8 @@
               "id": "fig-3-4-5",
               "number": "3.4.5",
               "chapter": "ch-3-4",
-              "title": "Connection pooling and keepalive · the example",
-              "caption": "A pool bounds and reuses connections; acquisition waiting and resource hold time belong in capacity and deadline reasoning.",
+              "title": "Borrow and return connections · the example",
+              "caption": "A connection pool lends reusable connections. Borrowers wait when it is full and must return connections when their use ends.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -1300,35 +1300,35 @@
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 205,
+              "words": 156,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 193,
+              "words": 117,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 205,
+              "words": 143,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 213,
+              "words": 196,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 218,
+              "words": 180,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1847,
+          "rendered_words": 1575,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1465,26 +1465,26 @@
               "id": "fig-4-1-1",
               "number": "4.1.1",
               "chapter": "ch-4-1",
-              "title": "Threads share a heap but have execution-local stacks",
-              "caption": "One process contains three thread contexts and a shared heap/resource region. Source-module boundaries do not isolate their failures.",
-              "why": "Make the internal structure or state relation visible before claiming its behavior.",
+              "title": "Start a program and follow its threads · the example",
+              "caption": "A program is saved instructions. A process runs them. Threads within a process execute work and can share data.",
+              "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
             {
               "id": "fig-4-1-2",
               "number": "4.1.2",
               "chapter": "ch-4-1",
-              "title": "Memory, stack, heap, and object lifetimes · the example",
-              "caption": "Stack, heap, and references have runtime-specific lifetimes; external resources also need explicit timely release.",
-              "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
+              "title": "Each thread has a call stack; objects can be shared",
+              "caption": "This common layout shows three threads in one process. Each has a call stack, while heap objects and process resources can be shared. Actual storage details depend on the runtime.",
+              "why": "Make the internal structure or state relation visible before claiming its behavior.",
               "status": "available"
             },
             {
               "id": "fig-4-1-3",
               "number": "4.1.3",
               "chapter": "ch-4-1",
-              "title": "Scheduling and context switching · the example",
-              "caption": "Scheduling assigns CPU time; context switches and excessive runnable work can add overhead and waiting.",
+              "title": "Let threads take turns · the example",
+              "caption": "The scheduler chooses a ready thread. A context switch saves one thread’s execution state and restores another’s.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1492,8 +1492,8 @@
               "id": "fig-4-1-4",
               "number": "4.1.4",
               "chapter": "ch-4-1",
-              "title": "CPU-bound vs I/O-bound workloads · the example",
-              "caption": "CPU-bound work is limited by computation, while I/O-bound work spends important time waiting on external operations.",
+              "title": "Find out whether work calculates or waits · the example",
+              "caption": "I/O-bound work mainly waits for input or output. CPU-bound work mainly needs instructions to be executed.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1501,8 +1501,8 @@
               "id": "fig-4-1-5",
               "number": "4.1.5",
               "chapter": "ch-4-1",
-              "title": "Synchronous vs asynchronous execution · the example",
-              "caption": "Asynchronous interfaces separate initiation from completion; their underlying operations can still block.",
+              "title": "Start now and receive a result later · the example",
+              "caption": "A synchronous interface returns completion before the caller proceeds; an asynchronous interface separates starting from receiving the result.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -1512,35 +1512,35 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 168,
+              "words": 171,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 180,
+              "words": 195,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 166,
+              "words": 143,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 170,
+              "words": 154,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 165,
+              "words": 112,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1544,
+          "rendered_words": 1404,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1577,8 +1577,8 @@
               "id": "fig-4-2-1",
               "number": "4.2.1",
               "chapter": "ch-4-2",
-              "title": "Blocking vs nonblocking I/O · the example",
-              "caption": "Nonblocking I/O lets a thread perform other ready work during waits, using supported readiness or completion mechanisms.",
+              "title": "Wait without holding the thread · the example",
+              "caption": "A blocking read holds the calling thread waiting. Nonblocking I/O lets that thread do other work while data is unavailable.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1586,8 +1586,8 @@
               "id": "fig-4-2-2",
               "number": "4.2.2",
               "chapter": "ch-4-2",
-              "title": "Concurrency vs parallelism · the example",
-              "caption": "Concurrency permits overlapping progress; parallelism requires simultaneous execution resources.",
+              "title": "Distinguish overlap from simultaneous work · the example",
+              "caption": "Concurrent work overlaps in progress. Parallel work executes simultaneously. Taking turns can still interfere with shared updates.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1595,8 +1595,8 @@
               "id": "fig-4-2-3",
               "number": "4.2.3",
               "chapter": "ch-4-2",
-              "title": "Event loops, tasks, futures, promises · the example",
-              "caption": "An event loop runs ready work; futures or promises represent later results under the runtime's rules.",
+              "title": "Follow a task through an event loop · the example",
+              "caption": "A task can pause on an unfinished future. Completion makes it ready; the event loop must still give it a turn.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1604,8 +1604,8 @@
               "id": "fig-4-2-4",
               "number": "4.2.4",
               "chapter": "ch-4-2",
-              "title": "Thread pools and worker pools · the example",
-              "caption": "A worker pool bounds active jobs; a bounded queue separately limits waiting jobs and retained payloads.",
+              "title": "Give workers a bounded waiting queue · the example",
+              "caption": "A pool limits active workers. A separate queue limit controls waiting jobs. Restart recovery also needs saved job records.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -1615,29 +1615,29 @@
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 173,
+              "words": 140,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 152,
+              "words": 115,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 177,
+              "words": 200,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 173,
+              "words": 163,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1280,
+          "rendered_words": 1109,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1674,8 +1674,8 @@
               "id": "fig-4-3-1",
               "number": "4.3.1",
               "chapter": "ch-4-3",
-              "title": "Shared memory vs message passing · the example",
-              "caption": "Shared memory needs access coordination; message passing needs ownership, delivery, and recovery rules.",
+              "title": "Share a value or send a message · the example",
+              "caption": "Shared memory lets callers change the same value. Message passing can give one owner control of that value.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1683,8 +1683,8 @@
               "id": "fig-4-3-2",
               "number": "4.3.2",
               "chapter": "ch-4-3",
-              "title": "Race conditions and critical sections · the example",
-              "caption": "A race can make an outcome depend on interleaving; protect the full critical state transition.",
+              "title": "Follow a lost counter update · the example",
+              "caption": "Both callers read zero before either writes. Protecting the whole read–modify–write sequence lets two increments produce two.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1692,8 +1692,8 @@
               "id": "fig-4-3-3",
               "number": "4.3.3",
               "chapter": "ch-4-3",
-              "title": "Mutexes, semaphores, atomics, condition variables · the example",
-              "caption": "Mutexes, semaphores, atomics, and condition variables coordinate different kinds of access, permits, operations, and waiting.",
+              "title": "Choose the right coordination tool · the example",
+              "caption": "A mutex gives exclusive entry; a semaphore counts permits; an atomic operation protects one action; a condition variable lets a waiter recheck shared state.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1701,8 +1701,8 @@
               "id": "fig-4-3-4",
               "number": "4.3.4",
               "chapter": "ch-4-3",
-              "title": "A circular wait prevents both participants progressing",
-              "caption": "A holds inventory and waits for payment; B holds payment and waits for inventory. Consistent resource ordering or redesigned ownership can remove this cycle.",
+              "title": "Each worker waits for a lock held by the other",
+              "caption": "A holds the file lock and waits for the counter lock. B holds the counter lock and waits for the file lock. Requiring both workers to take the file lock first removes this cycle.",
               "why": "Make the internal structure or state relation visible before claiming its behavior.",
               "status": "available"
             }
@@ -1712,29 +1712,29 @@
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 172,
+              "words": 135,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 184,
+              "words": 152,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 196,
+              "words": 242,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 167,
+              "words": 172,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1334,
+          "rendered_words": 1235,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -1771,8 +1771,8 @@
               "id": "fig-4-4-1",
               "number": "4.4.1",
               "chapter": "ch-4-4",
-              "title": "Memory visibility and happens-before relationships · the example",
-              "caption": "Happens-before describes memory-model ordering and visibility; earlier wall-clock time alone does not establish it.",
+              "title": "Make a completed value visible to a reader · the example",
+              "caption": "Safe publication uses the language’s synchronisation rules so the reader can observe the completed value.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1780,8 +1780,8 @@
               "id": "fig-4-4-2",
               "number": "4.4.2",
               "chapter": "ch-4-4",
-              "title": "Thread safety and immutability · the example",
-              "caption": "Thread safety states allowed concurrent behaviour; immutable values still need valid publication and surrounding ownership.",
+              "title": "Keep shared data safe to use · the example",
+              "caption": "Immutable records stay unchanged. Their mutable collection still needs rules for concurrent access.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1789,8 +1789,8 @@
               "id": "fig-4-4-3",
               "number": "4.4.3",
               "chapter": "ch-4-4",
-              "title": "Resource exhaustion and backpressure · the example",
-              "caption": "Backpressure limits upstream work according to available capacity; larger queues do not repair sustained overload.",
+              "title": "Slow arrivals when workers cannot keep up · the example",
+              "caption": "If arrivals exceed completions, waiting work grows. Backpressure makes the producer respond to the receiving side’s limited capacity.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1798,8 +1798,8 @@
               "id": "fig-4-4-4",
               "number": "4.4.4",
               "chapter": "ch-4-4",
-              "title": "Cancellation and structured concurrency · the example",
-              "caption": "Structured concurrency gives child work a scope owner; cancellation requires cleanup and cannot automatically undo remote effects.",
+              "title": "End related tasks and release their resources · the example",
+              "caption": "A parent scope accounts for its children. Cancellation lets them stop and release resources; saved continuing jobs need a longer-lived owner.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -1809,29 +1809,29 @@
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 179,
+              "words": 198,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 165,
+              "words": 147,
               "worked_trace": true
             },
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 175,
+              "words": 167,
               "worked_trace": true
             },
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 179,
+              "words": 167,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1808,
+          "rendered_words": 1855,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -14374,8 +14374,8 @@
       "id": "fig-3-1-1",
       "number": "3.1.1",
       "chapter": "ch-3-1",
-      "title": "How the internet works from the application perspective · the example",
-      "caption": "A page request can include name resolution, transport setup, security, server work, resource transfer, and rendering.",
+      "title": "Follow a request from the browser · the example",
+      "caption": "A browser sends an HTTP request for a resource, and the server returns a response that the browser can display.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14383,8 +14383,8 @@
       "id": "fig-3-1-2",
       "number": "3.1.2",
       "chapter": "ch-3-1",
-      "title": "IP addresses, ports, sockets, routing · the example",
-      "caption": "Addresses, ports, sockets, and routing connect application endpoints through actual network paths.",
+      "title": "Find the machine and the program · the example",
+      "caption": "An IP address leads toward a machine. Its operating system uses ports and sockets to deliver data to the right program.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14392,26 +14392,26 @@
       "id": "fig-3-1-3",
       "number": "3.1.3",
       "chapter": "ch-3-1",
-      "title": "TCP vs UDP vs QUIC · the example",
-      "caption": "TCP supplies a byte stream, UDP datagrams, and QUIC secure streams under their respective transport rules.",
-      "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
+      "title": "What does each transport deliver?",
+      "caption": "TCP and QUIC repair loss under their transport rules. UDP does not supply that service. The application still interprets messages and records their effects.",
+      "why": "Make the internal structure or state relation visible before claiming its behavior.",
       "status": "available"
     },
     {
       "id": "fig-3-1-4",
       "number": "3.1.4",
       "chapter": "ch-3-1",
-      "title": "State and ownership in the related design",
-      "caption": "A link has one owner and a unique code. The stored operation identifies its creation result.",
-      "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
+      "title": "Follow the task-list request",
+      "caption": "Addresses and ports bring data to the program. HTTP tells the program what was requested and gives the response its meaning.",
+      "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
     {
       "id": "fig-3-2-1",
       "number": "3.2.1",
       "chapter": "ch-3-2",
-      "title": "DNS resolution and DNS caching · the example",
-      "caption": "DNS resolves names through records and caches; existing answers and connections delay the effect of a record change.",
+      "title": "Find an address from a name · the example",
+      "caption": "DNS finds records for a name. Cached answers can remain in use until their permitted lifetime ends.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14419,8 +14419,8 @@
       "id": "fig-3-2-2",
       "number": "3.2.2",
       "chapter": "ch-3-2",
-      "title": "TLS and HTTPS · the example",
-      "caption": "TLS protects and authenticates transport under its trust configuration; application resource authorisation remains necessary.",
+      "title": "Protect the conversation with TLS · the example",
+      "caption": "TLS checks peer identity and protects messages in transit. The application separately checks permission to use a resource.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14428,8 +14428,8 @@
       "id": "fig-3-2-3",
       "number": "3.2.3",
       "chapter": "ch-3-2",
-      "title": "HTTP/1.1, HTTP/2, HTTP/3 · the example",
-      "caption": "HTTP versions carry common application semantics using different connection and stream mechanisms.",
+      "title": "Carry several HTTP exchanges · the example",
+      "caption": "HTTP/2 shares a TCP connection between streams; HTTP/3 uses QUIC streams. HTTP request and response meanings remain.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14437,9 +14437,9 @@
       "id": "fig-3-2-4",
       "number": "3.2.4",
       "chapter": "ch-3-2",
-      "title": "Connection establishment and connection reuse · the example",
-      "caption": "Reusing a connection can avoid setup work while introducing lifetime, endpoint freshness, and replacement decisions.",
-      "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
+      "title": "Three messages prepare the TCP connection",
+      "caption": "Each end announces its starting sequence number and acknowledges the other. HTTPS over TCP then needs its TLS protection setup.",
+      "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
     {
@@ -14455,8 +14455,8 @@
       "id": "fig-3-3-1",
       "number": "3.3.1",
       "chapter": "ch-3-3",
-      "title": "Reverse proxies vs forward proxies · the example",
-      "caption": "A forward proxy acts for clients; a reverse proxy fronts servers, with explicit forwarding and trust rules.",
+      "title": "Forward a request through a proxy · the example",
+      "caption": "A forward proxy acts for clients. A reverse proxy receives requests in front of application servers.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14464,8 +14464,8 @@
       "id": "fig-3-3-2",
       "number": "3.3.2",
       "chapter": "ch-3-3",
-      "title": "Load balancers vs API gateways · the example",
-      "caption": "Balancers select backends; gateways commonly add API boundary policy. Products can combine those responsibilities.",
+      "title": "Share traffic and check common rules · the example",
+      "caption": "A load balancer chooses an application instance. An API gateway can perform common API checks before application work.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14473,8 +14473,8 @@
       "id": "fig-3-3-3",
       "number": "3.3.3",
       "chapter": "ch-3-3",
-      "title": "L4 vs L7 load balancing · the example",
-      "caption": "L4 routing uses transport information; L7 routing can inspect application messages where encryption and policy permit it.",
+      "title": "Route by port or by path · the example",
+      "caption": "L4 routing uses transport addresses and ports. L7 routing can use HTTP content such as the requested path.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14482,8 +14482,8 @@
       "id": "fig-3-3-4",
       "number": "3.3.4",
       "chapter": "ch-3-3",
-      "title": "WebSockets, Server-Sent Events, and polling · the example",
-      "caption": "Polling repeats requests; SSE streams server events; WebSockets supports two-way messages. Recovery remains an application concern.",
+      "title": "Send updates to the browser · the example",
+      "caption": "Polling repeatedly asks for updates. SSE sends server events; WebSockets allows both ends to send. Missed updates still need recovery.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14491,8 +14491,8 @@
       "id": "fig-3-4-1",
       "number": "3.4.1",
       "chapter": "ch-3-4",
-      "title": "NAT, firewalls, ingress, egress · the example",
-      "caption": "NAT changes addressing, firewalls enforce traffic rules, and ingress/egress describe traffic entering or leaving a boundary.",
+      "title": "Follow traffic out and back · the example",
+      "caption": "NAT translates addresses and remembers return mappings. A firewall allows or blocks traffic. Ingress enters a boundary; egress leaves it.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14500,8 +14500,8 @@
       "id": "fig-3-4-2",
       "number": "3.4.2",
       "chapter": "ch-3-4",
-      "title": "Service discovery · the example",
-      "caption": "Service discovery maps logical services to endpoints whose readiness and capacity still require handling.",
+      "title": "Find a service whose address can change · the example",
+      "caption": "Service discovery supplies possible destinations. A destination can stop after the list is obtained, so callers must handle that change.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14509,8 +14509,8 @@
       "id": "fig-3-4-3",
       "number": "3.4.3",
       "chapter": "ch-3-4",
-      "title": "CDN and edge networking · the example",
-      "caption": "A CDN caches permitted representations near users, with keys, freshness, and origin recovery requirements.",
+      "title": "Reuse a nearby copy · the example",
+      "caption": "A CDN can reuse a permitted nearby copy. Its cache key, freshness rule, and access rules determine whether reuse is valid.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14518,8 +14518,8 @@
       "id": "fig-3-4-4",
       "number": "3.4.4",
       "chapter": "ch-3-4",
-      "title": "Network partitions, timeouts, packet loss · the example",
-      "caption": "A timeout ends the caller's wait without establishing whether the remote operation executed.",
+      "title": "What does a timeout tell us · the example",
+      "caption": "A timeout leaves the remote outcome uncertain. A recorded operation identity can let the client find or retry the original operation.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14527,8 +14527,8 @@
       "id": "fig-3-4-5",
       "number": "3.4.5",
       "chapter": "ch-3-4",
-      "title": "Connection pooling and keepalive · the example",
-      "caption": "A pool bounds and reuses connections; acquisition waiting and resource hold time belong in capacity and deadline reasoning.",
+      "title": "Borrow and return connections · the example",
+      "caption": "A connection pool lends reusable connections. Borrowers wait when it is full and must return connections when their use ends.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14536,26 +14536,26 @@
       "id": "fig-4-1-1",
       "number": "4.1.1",
       "chapter": "ch-4-1",
-      "title": "Threads share a heap but have execution-local stacks",
-      "caption": "One process contains three thread contexts and a shared heap/resource region. Source-module boundaries do not isolate their failures.",
-      "why": "Make the internal structure or state relation visible before claiming its behavior.",
+      "title": "Start a program and follow its threads · the example",
+      "caption": "A program is saved instructions. A process runs them. Threads within a process execute work and can share data.",
+      "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
     {
       "id": "fig-4-1-2",
       "number": "4.1.2",
       "chapter": "ch-4-1",
-      "title": "Memory, stack, heap, and object lifetimes · the example",
-      "caption": "Stack, heap, and references have runtime-specific lifetimes; external resources also need explicit timely release.",
-      "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
+      "title": "Each thread has a call stack; objects can be shared",
+      "caption": "This common layout shows three threads in one process. Each has a call stack, while heap objects and process resources can be shared. Actual storage details depend on the runtime.",
+      "why": "Make the internal structure or state relation visible before claiming its behavior.",
       "status": "available"
     },
     {
       "id": "fig-4-1-3",
       "number": "4.1.3",
       "chapter": "ch-4-1",
-      "title": "Scheduling and context switching · the example",
-      "caption": "Scheduling assigns CPU time; context switches and excessive runnable work can add overhead and waiting.",
+      "title": "Let threads take turns · the example",
+      "caption": "The scheduler chooses a ready thread. A context switch saves one thread’s execution state and restores another’s.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14563,8 +14563,8 @@
       "id": "fig-4-1-4",
       "number": "4.1.4",
       "chapter": "ch-4-1",
-      "title": "CPU-bound vs I/O-bound workloads · the example",
-      "caption": "CPU-bound work is limited by computation, while I/O-bound work spends important time waiting on external operations.",
+      "title": "Find out whether work calculates or waits · the example",
+      "caption": "I/O-bound work mainly waits for input or output. CPU-bound work mainly needs instructions to be executed.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14572,8 +14572,8 @@
       "id": "fig-4-1-5",
       "number": "4.1.5",
       "chapter": "ch-4-1",
-      "title": "Synchronous vs asynchronous execution · the example",
-      "caption": "Asynchronous interfaces separate initiation from completion; their underlying operations can still block.",
+      "title": "Start now and receive a result later · the example",
+      "caption": "A synchronous interface returns completion before the caller proceeds; an asynchronous interface separates starting from receiving the result.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14581,8 +14581,8 @@
       "id": "fig-4-2-1",
       "number": "4.2.1",
       "chapter": "ch-4-2",
-      "title": "Blocking vs nonblocking I/O · the example",
-      "caption": "Nonblocking I/O lets a thread perform other ready work during waits, using supported readiness or completion mechanisms.",
+      "title": "Wait without holding the thread · the example",
+      "caption": "A blocking read holds the calling thread waiting. Nonblocking I/O lets that thread do other work while data is unavailable.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14590,8 +14590,8 @@
       "id": "fig-4-2-2",
       "number": "4.2.2",
       "chapter": "ch-4-2",
-      "title": "Concurrency vs parallelism · the example",
-      "caption": "Concurrency permits overlapping progress; parallelism requires simultaneous execution resources.",
+      "title": "Distinguish overlap from simultaneous work · the example",
+      "caption": "Concurrent work overlaps in progress. Parallel work executes simultaneously. Taking turns can still interfere with shared updates.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14599,8 +14599,8 @@
       "id": "fig-4-2-3",
       "number": "4.2.3",
       "chapter": "ch-4-2",
-      "title": "Event loops, tasks, futures, promises · the example",
-      "caption": "An event loop runs ready work; futures or promises represent later results under the runtime's rules.",
+      "title": "Follow a task through an event loop · the example",
+      "caption": "A task can pause on an unfinished future. Completion makes it ready; the event loop must still give it a turn.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14608,8 +14608,8 @@
       "id": "fig-4-2-4",
       "number": "4.2.4",
       "chapter": "ch-4-2",
-      "title": "Thread pools and worker pools · the example",
-      "caption": "A worker pool bounds active jobs; a bounded queue separately limits waiting jobs and retained payloads.",
+      "title": "Give workers a bounded waiting queue · the example",
+      "caption": "A pool limits active workers. A separate queue limit controls waiting jobs. Restart recovery also needs saved job records.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14617,8 +14617,8 @@
       "id": "fig-4-3-1",
       "number": "4.3.1",
       "chapter": "ch-4-3",
-      "title": "Shared memory vs message passing · the example",
-      "caption": "Shared memory needs access coordination; message passing needs ownership, delivery, and recovery rules.",
+      "title": "Share a value or send a message · the example",
+      "caption": "Shared memory lets callers change the same value. Message passing can give one owner control of that value.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14626,8 +14626,8 @@
       "id": "fig-4-3-2",
       "number": "4.3.2",
       "chapter": "ch-4-3",
-      "title": "Race conditions and critical sections · the example",
-      "caption": "A race can make an outcome depend on interleaving; protect the full critical state transition.",
+      "title": "Follow a lost counter update · the example",
+      "caption": "Both callers read zero before either writes. Protecting the whole read–modify–write sequence lets two increments produce two.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14635,8 +14635,8 @@
       "id": "fig-4-3-3",
       "number": "4.3.3",
       "chapter": "ch-4-3",
-      "title": "Mutexes, semaphores, atomics, condition variables · the example",
-      "caption": "Mutexes, semaphores, atomics, and condition variables coordinate different kinds of access, permits, operations, and waiting.",
+      "title": "Choose the right coordination tool · the example",
+      "caption": "A mutex gives exclusive entry; a semaphore counts permits; an atomic operation protects one action; a condition variable lets a waiter recheck shared state.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14644,8 +14644,8 @@
       "id": "fig-4-3-4",
       "number": "4.3.4",
       "chapter": "ch-4-3",
-      "title": "A circular wait prevents both participants progressing",
-      "caption": "A holds inventory and waits for payment; B holds payment and waits for inventory. Consistent resource ordering or redesigned ownership can remove this cycle.",
+      "title": "Each worker waits for a lock held by the other",
+      "caption": "A holds the file lock and waits for the counter lock. B holds the counter lock and waits for the file lock. Requiring both workers to take the file lock first removes this cycle.",
       "why": "Make the internal structure or state relation visible before claiming its behavior.",
       "status": "available"
     },
@@ -14653,8 +14653,8 @@
       "id": "fig-4-4-1",
       "number": "4.4.1",
       "chapter": "ch-4-4",
-      "title": "Memory visibility and happens-before relationships · the example",
-      "caption": "Happens-before describes memory-model ordering and visibility; earlier wall-clock time alone does not establish it.",
+      "title": "Make a completed value visible to a reader · the example",
+      "caption": "Safe publication uses the language’s synchronisation rules so the reader can observe the completed value.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14662,8 +14662,8 @@
       "id": "fig-4-4-2",
       "number": "4.4.2",
       "chapter": "ch-4-4",
-      "title": "Thread safety and immutability · the example",
-      "caption": "Thread safety states allowed concurrent behaviour; immutable values still need valid publication and surrounding ownership.",
+      "title": "Keep shared data safe to use · the example",
+      "caption": "Immutable records stay unchanged. Their mutable collection still needs rules for concurrent access.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14671,8 +14671,8 @@
       "id": "fig-4-4-3",
       "number": "4.4.3",
       "chapter": "ch-4-4",
-      "title": "Resource exhaustion and backpressure · the example",
-      "caption": "Backpressure limits upstream work according to available capacity; larger queues do not repair sustained overload.",
+      "title": "Slow arrivals when workers cannot keep up · the example",
+      "caption": "If arrivals exceed completions, waiting work grows. Backpressure makes the producer respond to the receiving side’s limited capacity.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14680,8 +14680,8 @@
       "id": "fig-4-4-4",
       "number": "4.4.4",
       "chapter": "ch-4-4",
-      "title": "Cancellation and structured concurrency · the example",
-      "caption": "Structured concurrency gives child work a scope owner; cancellation requires cleanup and cannot automatically undo remote effects.",
+      "title": "End related tasks and release their resources · the example",
+      "caption": "A parent scope accounts for its children. Cancellation lets them stop and release resources; saved continuing jobs need a longer-lived owner.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -18483,7 +18483,7 @@
       "number": "3.0.1",
       "chapter": "unit-3",
       "title": "Complete HTTP request timeline",
-      "caption": "The full request includes name resolution, connection/security setup, execution and rendering. This is a simplified ordered scenario.",
+      "caption": "Follow one request from the browser to the site and back. A saved address or existing connection can avoid some setup.",
       "why": "Follow explicit message ordering and locate the acknowledgment or effect boundary.",
       "status": "available",
       "essential_title": "Complete HTTP request timeline"
@@ -18493,7 +18493,7 @@
       "number": "3.0.2",
       "chapter": "unit-3",
       "title": "TCP/TLS interaction",
-      "caption": "TCP/TLS interaction is shown at protocol-stage granularity; it is not a packet-exact capture or a universal RTT count.",
+      "caption": "These rows show protocol stages rather than every packet. The cold/warm calculation uses assumed times for these stages.",
       "why": "Follow explicit message ordering and locate the acknowledgment or effect boundary.",
       "status": "available",
       "essential_title": "TCP/TLS interaction"
@@ -18503,7 +18503,7 @@
       "number": "3.0.3",
       "chapter": "unit-3",
       "title": "load-balancing topology",
-      "caption": "Balancing distributes suitable request paths, while state and failure ownership remain explicit.",
+      "caption": "The balancer spreads traffic between application instances. A shared database can still limit all of them.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available",
       "essential_title": "load-balancing topology"
@@ -18513,7 +18513,7 @@
       "number": "3.0.4",
       "chapter": "unit-3",
       "title": "WebSocket vs polling communication",
-      "caption": "Transport patterns differ in connection and polling work; none automatically supplies durable business delivery.",
+      "caption": "A live connection carries messages. The application must separately decide how a returning client recovers what it missed.",
       "why": "Compare the stated dimensions under one explicit contract.",
       "status": "available",
       "essential_title": "WebSocket vs polling communication"
@@ -18522,8 +18522,8 @@
       "id": "fig-4-0-1",
       "number": "4.0.1",
       "chapter": "unit-4",
-      "title": "Threads share a heap but have execution-local stacks",
-      "caption": "One process contains three thread contexts and a shared heap/resource region. Source-module boundaries do not isolate their failures.",
+      "title": "Each thread has a call stack; objects can be shared",
+      "caption": "This common layout shows three threads in one process. Each has a call stack, while heap objects and process resources can be shared. Actual storage details depend on the runtime.",
       "why": "Make the internal structure or state relation visible before claiming its behavior.",
       "status": "available",
       "essential_title": "Process/thread memory model"
@@ -18533,7 +18533,7 @@
       "number": "4.0.2",
       "chapter": "unit-4",
       "title": "scheduling timeline",
-      "caption": "Concurrency interleaves activities; parallel execution requires actual simultaneous resources.",
+      "caption": "A and B overlap in progress on one core. Simultaneous execution requires parallel resources.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available",
       "essential_title": "scheduling timeline"
@@ -18543,7 +18543,7 @@
       "number": "4.0.3",
       "chapter": "unit-4",
       "title": "race-condition interleaving",
-      "caption": "Two increments become one without an atomic read-modify-write boundary.",
+      "caption": "Both callers used the same old value. A common lock must cover reading, adding, and writing.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available",
       "essential_title": "race-condition interleaving"
@@ -18552,8 +18552,8 @@
       "id": "fig-4-0-4",
       "number": "4.0.4",
       "chapter": "unit-4",
-      "title": "A circular wait prevents both participants progressing",
-      "caption": "A holds inventory and waits for payment; B holds payment and waits for inventory. Consistent resource ordering or redesigned ownership can remove this cycle.",
+      "title": "Each worker waits for a lock held by the other",
+      "caption": "A holds the file lock and waits for the counter lock. B holds the counter lock and waits for the file lock. Requiring both workers to take the file lock first removes this cycle.",
       "why": "Make the internal structure or state relation visible before claiming its behavior.",
       "status": "available",
       "essential_title": "deadlock wait graph"
@@ -18563,7 +18563,7 @@
       "number": "4.0.5",
       "chapter": "unit-4",
       "title": "event-loop flow",
-      "caption": "The event loop cannot serve other work during a long blocking callback.",
+      "caption": "Completing the read makes A ready. A can continue only when the loop thread runs it.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available",
       "essential_title": "event-loop flow"
@@ -19841,7 +19841,7 @@
     "case_review_sections": 264,
     "exercises_produced": 242,
     "solutions_produced": 242,
-    "authored_lesson_words": 90555
+    "authored_lesson_words": 89648
   },
   "review": {
     "stage_1": "complete: exact syllabus and prerequisite allocation",

@@ -154,7 +154,7 @@ Content source: src/teaching/foundations.py
 
 - TCP vs UDP vs QUIC.
 
-Figures: 3.1.1 How the internet works from the application perspective · the example; 3.1.2 IP addresses, ports, sockets, routing · the example; 3.1.3 TCP vs UDP vs QUIC · the example; 3.1.4 State and ownership in the related design
+Figures: 3.1.1 Follow a request from the browser · the example; 3.1.2 Find the machine and the program · the example; 3.1.3 What does each transport deliver?; 3.1.4 Follow the task-list request
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
@@ -172,7 +172,7 @@ Content source: src/teaching/foundations.py
 
 - Latency caused by network round trips.
 
-Figures: 3.2.1 DNS resolution and DNS caching · the example; 3.2.2 TLS and HTTPS · the example; 3.2.3 HTTP/1.1, HTTP/2, HTTP/3 · the example; 3.2.4 Connection establishment and connection reuse · the example; 3.2.5 A cold request spends time before server work
+Figures: 3.2.1 Find an address from a name · the example; 3.2.2 Protect the conversation with TLS · the example; 3.2.3 Carry several HTTP exchanges · the example; 3.2.4 Three messages prepare the TCP connection; 3.2.5 A cold request spends time before server work
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
@@ -188,7 +188,7 @@ Content source: src/teaching/foundations.py
 
 - WebSockets, Server-Sent Events, and polling.
 
-Figures: 3.3.1 Reverse proxies vs forward proxies · the example; 3.3.2 Load balancers vs API gateways · the example; 3.3.3 L4 vs L7 load balancing · the example; 3.3.4 WebSockets, Server-Sent Events, and polling · the example
+Figures: 3.3.1 Forward a request through a proxy · the example; 3.3.2 Share traffic and check common rules · the example; 3.3.3 Route by port or by path · the example; 3.3.4 Send updates to the browser · the example
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
@@ -206,7 +206,7 @@ Content source: src/teaching/foundations.py
 
 - Connection pooling and keepalive.
 
-Figures: 3.4.1 NAT, firewalls, ingress, egress · the example; 3.4.2 Service discovery · the example; 3.4.3 CDN and edge networking · the example; 3.4.4 Network partitions, timeouts, packet loss · the example; 3.4.5 Connection pooling and keepalive · the example
+Figures: 3.4.1 Follow traffic out and back · the example; 3.4.2 Find a service whose address can change · the example; 3.4.3 Reuse a nearby copy · the example; 3.4.4 What does a timeout tell us · the example; 3.4.5 Borrow and return connections · the example
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
@@ -231,7 +231,7 @@ Content source: src/teaching/foundations.py
 
 - Synchronous vs asynchronous execution.
 
-Figures: 4.1.1 Threads share a heap but have execution-local stacks; 4.1.2 Memory, stack, heap, and object lifetimes · the example; 4.1.3 Scheduling and context switching · the example; 4.1.4 CPU-bound vs I/O-bound workloads · the example; 4.1.5 Synchronous vs asynchronous execution · the example
+Figures: 4.1.1 Start a program and follow its threads · the example; 4.1.2 Each thread has a call stack; objects can be shared; 4.1.3 Let threads take turns · the example; 4.1.4 Find out whether work calculates or waits · the example; 4.1.5 Start now and receive a result later · the example
 
 References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
@@ -247,7 +247,7 @@ Content source: src/teaching/foundations.py
 
 - Thread pools and worker pools.
 
-Figures: 4.2.1 Blocking vs nonblocking I/O · the example; 4.2.2 Concurrency vs parallelism · the example; 4.2.3 Event loops, tasks, futures, promises · the example; 4.2.4 Thread pools and worker pools · the example
+Figures: 4.2.1 Wait without holding the thread · the example; 4.2.2 Distinguish overlap from simultaneous work · the example; 4.2.3 Follow a task through an event loop · the example; 4.2.4 Give workers a bounded waiting queue · the example
 
 References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
@@ -263,7 +263,7 @@ Content source: src/teaching/foundations.py
 
 - Deadlocks, starvation, livelocks.
 
-Figures: 4.3.1 Shared memory vs message passing · the example; 4.3.2 Race conditions and critical sections · the example; 4.3.3 Mutexes, semaphores, atomics, condition variables · the example; 4.3.4 A circular wait prevents both participants progressing
+Figures: 4.3.1 Share a value or send a message · the example; 4.3.2 Follow a lost counter update · the example; 4.3.3 Choose the right coordination tool · the example; 4.3.4 Each worker waits for a lock held by the other
 
 References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
@@ -279,7 +279,7 @@ Content source: src/teaching/foundations.py
 
 - Cancellation and structured concurrency.
 
-Figures: 4.4.1 Memory visibility and happens-before relationships · the example; 4.4.2 Thread safety and immutability · the example; 4.4.3 Resource exhaustion and backpressure · the example; 4.4.4 Cancellation and structured concurrency · the example
+Figures: 4.4.1 Make a completed value visible to a reader · the example; 4.4.2 Keep shared data safe to use · the example; 4.4.3 Slow arrivals when workers cannot keep up · the example; 4.4.4 End related tasks and release their resources · the example
 
 References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 

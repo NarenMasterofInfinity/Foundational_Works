@@ -2,12 +2,12 @@
 
 **From Objects to Planet-Scale Systems** — the complete first edition in the Learn · Research · Visualise design language.
 
-Open [the digital edition](index.html) or download [the complete PDF](System-Design-Atlas-Complete.pdf) (973 tagged A4 pages, approximately 13 MB). The earlier [foundations PDF](System-Design-Atlas-Foundations.pdf) is retained as a separately scoped historical installment.
+Open [the digital edition](index.html) or download [the complete PDF](System-Design-Atlas-Complete.pdf) (1,070 tagged A4 pages, approximately 14 MB). The earlier [foundations PDF](System-Design-Atlas-Foundations.pdf) is retained as a separately scoped historical installment.
 
 ## What is included
 
 - All **22 units and 99 chapters**, covering all **390 exact supplied syllabus items**.
-- **65,488 words of authored lesson, pattern, and case-study prose**, excluding the separate solutions and much of the reader/reference material.
+- **89,648 words of authored lesson, pattern, and case-study prose**, excluding the separate solutions and much of the reader/reference material.
 - **575 original SVG figures**, including at least four per chapter and all 94 required unit illustration assignments. Four Unit 1 assignments refer to its existing chapter figures; 90 additional unit plates cover the other required visual vocabulary. The master concept map is separately numbered M.1.
 - All **12 mandatory end-to-end designs**, each with all **22 required review sections**, explicit assumptions, APIs, logical schemas, LLD, HLD, flows, calculations, failures, security, deployment, observability, costs, alternatives, evolution, review, and an implementation challenge.
 - **242 questions and 242 separate explained answers**: five conceptual, three scenarios, one design/debugging challenge, one implementation exercise, and one advanced thought experiment for every unit.
@@ -15,7 +15,9 @@ Open [the digital edition](index.html) or download [the complete PDF](System-Des
 - **13 browser-local workbenches**: acknowledgment/crash ordering, change propagation, weighted design preferences, C4 views, capacity, bounded queues, last-seat claims, LRU, rendezvous assignment, pipeline fencing, quorum intersection, token bucket, and cost per useful outcome.
 - A **441-entry glossary and concept reference**, complete contents, dependency-closed reading paths, formula reference, pattern destinations, diagram index, and **61 selected production sources**.
 
-All 22 units now use clear textbook prose inspired by NCERT. Examples establish unfamiliar ideas before introducing their terms, mechanisms explain the steps that matter, and concise definitions support recall. The revision covers all 377 concept lessons in Units 2–21, 26 pattern explanations, all 264 case-study sections, and the corresponding chapter guidance, captions, workbench instructions, glossary summaries, questions, and explained answers. The previously revised Unit 1 chapters are preserved.
+The current writing revision focuses on Units 3 and 4. Following Unit 1's teaching approach, Unit 3 follows a browser opening the task application, and Unit 4 follows file uploads through the runtime. Terms are explained where they first become useful. Concrete request, waiting, and update sequences replace compressed lists and repeated design advice. Definitions and code fragments are highlighted for reading.
+
+All 34 lessons, eight chapter introductions, related figure labels/captions, worked explanations, and 22 assessments in these two units were revised. The other 91 chapter pages, including Unit 1, are unchanged. Earlier broad revisions remain in the book; this focused pass makes no claim that the remaining units have received the same final language review. See [the revision review](WRITING_REVISION_PLAN.md) and [verification evidence](QA.md).
 
 The content-driven [manifest](completion-manifest.json) records actual produced artifacts and review boundaries. The [book blueprint](BLUEPRINT.md) retains stable chapter IDs and exact topic allocation. The original request remains in [BRIEF.txt](BRIEF.txt).
 

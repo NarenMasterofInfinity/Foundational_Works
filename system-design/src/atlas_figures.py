@@ -60,8 +60,10 @@ def waterfall(n,j,k,title,rows,caption):
 # Topic-specific views replace generic snapshots at the corresponding exact
 # syllabus position. The surrounding prose states the formal/implementation limits.
 SPECIAL={
-(4,1):('memory','Threads share a heap but have execution-local stacks',None,'One process contains three thread contexts and a shared heap/resource region. Source-module boundaries do not isolate their failures.'),
-(4,13):('deadlock','A circular wait prevents both participants progressing',None,'A holds inventory and waits for payment; B holds payment and waits for inventory. Consistent resource ordering or redesigned ownership can remove this cycle.'),
+(3,3):('matrix','What does each transport deliver?',[['Transport','What the receiver gets','Application responsibility'],['TCP','Ordered bytes in one stream','Recognise message boundaries'],['UDP','Separate datagrams; loss or reordering possible','Arrange any required recovery'],['QUIC','Ordered bytes in separate streams','Recognise messages within streams']],'TCP and QUIC repair loss under their transport rules. UDP does not supply that service. The application still interprets messages and records their effects.'),
+(3,7):('flow','Three messages prepare the TCP connection',['Client SYN: starting number','Server SYN-ACK: reply and own number','Client ACK: acknowledges server','Connection ready for stream data'],'Each end announces its starting sequence number and acknowledges the other. HTTPS over TCP then needs its TLS protection setup.'),
+(4,2):('memory','Each thread has a call stack; objects can be shared',None,'This common layout shows three threads in one process. Each has a call stack, while heap objects and process resources can be shared. Actual storage details depend on the runtime.'),
+(4,13):('deadlock','Each worker waits for a lock held by the other',None,'A holds the file lock and waits for the counter lock. B holds the counter lock and waits for the file lock. Requiring both workers to take the file lock first removes this cycle.'),
 (6,7):('matrix','Scope identities make lifetime semantics visible',[['Resolution','Request scope 1','Request scope 2'],['Scoped: first / second','A / A','B / B'],['Transient: first / second','C / D','E / F'],['Singleton in this process','S / S','S / S']],'These are identity observations in one application. Framework registration and disposal rules must still be checked.'),
 (7,8):('flow','Context boundaries protect different business meanings',['Catalog: Product description','Explicit model translation','Fulfillment: Item location'],'The source-dependency boundary is not automatically a network deployment. Translation prevents one universal schema from erasing meaningful domain differences.',True),
 (9,14):('er','An order schema preserves relationships and history',None,'Customer has many Orders, Order has many Lines, and each Line references a Product identity while retaining purchase-time values.'),
@@ -113,12 +115,12 @@ def special(n,j,k,topic):
     if kind=='matrix':body,height=matrix_body(data)
     elif kind=='memory':
         body='<rect x="25" y="20" width="850" height="275" rx="9" fill="#edf1e9" stroke="#7b65a8" stroke-dasharray="5 4"/>'+text(450,45,'ONE PROCESS ADDRESS SPACE',size=12,color=C['control'])
-        for i in range(3):body+=box(55+i*280,75,230,80,f'Thread {i+1}: stack','flow','call-local execution state')
-        body+=box(120,195,660,70,'Shared heap, handles, and process resources','control');height=320
+        for i in range(3):body+=box(55+i*280,75,230,80,f'Thread {i+1}: call stack','flow','unfinished function calls')
+        body+=box(120,195,660,70,'Shared heap objects, files, and connections','control');height=320
     elif kind=='deadlock':
-        body=box(60,55,300,90,'A holds inventory','caution')+box(540,55,300,90,'B holds payment','caution')
-        body+='<path d="M360 82H540M540 125H360" stroke="#b94b48" stroke-width="2"/>'+text(450,67,'A waits for payment',size=12,color=C['failure'])+text(450,154,'B waits for inventory',size=12,color=C['failure'])
-        body+=text(450,215,'Two opposing wait dependencies form a cycle; neither holder can proceed.',size=13);height=245
+        body=box(60,55,300,90,'A holds the file lock','caution')+box(540,55,300,90,'B holds the counter lock','caution')
+        body+='<path d="M360 82H540M540 125H360" stroke="#b94b48" stroke-width="2"/>'+text(450,67,'A waits for counter lock',size=12,color=C['failure'])+text(450,154,'B waits for file lock',size=12,color=C['failure'])
+        body+=text(450,215,'Both workers keep a lock while waiting for the other; neither can finish.',size=13);height=245
     elif kind=='er':
         body=box(35,35,240,70,'Customer','control')+box(330,35,240,70,'Order','flow')+box(330,180,240,70,'Order line','healthy')+box(625,180,240,70,'Product','control')
         body+='<path d="M275 70H330M450 105V180M570 215H625" stroke="#3978a8" stroke-width="2"/>'+text(300,58,'1 : N',size=12)+text(490,150,'1 : N',size=12)+text(598,204,'N : 1',size=12)

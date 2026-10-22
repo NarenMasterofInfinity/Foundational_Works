@@ -36,40 +36,42 @@ CODE={2: ('Python · examples/mechanisms.py',
      'speedup is 1/0.4 = 2.5. This model keeps the amount of work fixed and omits the cost of coordinating '
      'workers.'),
  3: ('Python · arithmetic model',
-     'cold = dict(dns=20, tcp=40, tls=40, request_and_work=55)\n'
-     'assert sum(cold.values()) == 155\n'
-     'warm = dict(request_and_work=55)\n'
-     'assert sum(warm.values()) == 55',
-     'The cold dictionary records four assumed stage durations in milliseconds. Its sum is 20 + 40 + 40 + 55 '
-     '= 155 ms. The warm dictionary contains only request_and_work, so its sum is 55 ms: the same '
-     'request/work stage after the lookup and connection preparation have already been handled and remain '
-     'reusable.\n'
-     '\n'
-     'The difference is 100 ms of omitted setup, not faster application execution. The assertions check '
-     'arithmetic in a sequential model. They do not open a connection, verify a certificate, measure a '
-     'handshake, or prove that a particular connection is reusable. Real caching, protocol behaviour, '
-     'connection state, and overlap determine which stages an actual request needs.'),
- 4: ('Pseudocode · bounded upload ownership',
-     'queue = bounded_queue(capacity=100)\n'
-     'start_workers(count=50)\n'
-     'for upload in arrivals:\n'
-     '    reference = persist_upload_or_reject(upload)\n'
-     '    queue.put_with_deadline(reference)\n'
-     'worker():\n'
-     '    while reference = queue.take():\n'
-     '        try: process(reference)\n'
-     '        finally: release_owned_resources()',
-     'The queue can hold at most one hundred waiting references, while fifty workers limit active jobs in '
-     'this pseudocode. These worker counts differ from the earlier eight-worker illustration. The large '
-     'upload bytes remain in storage, so waiting references need not retain all those bytes in memory. Each '
-     'worker runs its resource cleanup when processing finishes or exits through an error.\n'
-     '\n'
-     'Follow an upload through the two handoff steps. First persist_upload_or_reject stores its input or '
-     'rejects it. Then put_with_deadline tries to hand its reference to the queue. If that handoff times '
-     'out, stored bytes alone do not establish whether a job has been accepted or who will process it. '
-     'Define a durable job record and recovery path, or an explicit rejection and cleanup policy, before '
-     'promising acceptance. A process-local queue disappears with its process; the bounded queue and worker '
-     'count control resources but do not themselves make accepted work recoverable.'),
+ 'cold = dict(dns=20, tcp=40, tls=40, request_and_work=55)\n'
+ 'assert sum(cold.values()) == 155\n'
+ 'warm = dict(request_and_work=55)\n'
+ 'assert sum(warm.values()) == 55',
+ 'The first assertion checks 155 ms. The second checks 55 ms. Both use assumed durations; the code '
+ 'performs arithmetic rather than measuring a network connection.'),
+ 4: ('Pseudocode · fifty workers and at most one hundred waiting jobs',
+ 'waiting = bounded_queue(capacity=100)\n'
+ '\n'
+ 'def accept(upload):\n'
+ '    file_id = save_temporary_upload(upload)\n'
+ '    if not waiting.try_put(file_id):\n'
+ '        delete_temporary_upload(file_id)\n'
+ '        return "busy"\n'
+ '    return "queued for this run"\n'
+ '\n'
+ 'def worker():\n'
+ '    while True:\n'
+ '        file_id = waiting.take()\n'
+ '        try:\n'
+ '            convert(file_id)\n'
+ '            record_success(file_id)\n'
+ '        except ConversionError:\n'
+ '            record_failure(file_id)\n'
+ '        finally:\n'
+ '            close_job_resources()\n'
+ '            delete_temporary_upload(file_id)\n'
+ '\n'
+ 'start_workers(worker, count=50)',
+ 'When fifty workers are busy and one hundred jobs are waiting, the next attempted queue insertion '
+ 'fails. That upload’s temporary file is removed and its caller receives “busy.” When a worker '
+ 'finishes, it takes another waiting identifier.\n'
+ '\n'
+ 'This example assumes the shown storage and cleanup operations succeed. Its queue is in memory, so '
+ 'restart loses queued entries. To promise restart recovery, store a job record before reporting '
+ 'durable acceptance and let replacement workers find unfinished records.'),
  5: ('Python · injected collaborator',
      'class RecordingGateway:\n'
      '    def __init__(self): self.calls = []\n'
@@ -342,3 +344,18 @@ CODE={2: ('Python · examples/mechanisms.py',
       '\n'
       'Check equal requirements before ranking price. The additional latency and availability models have '
       'explicit synthetic inputs; real capacity, tails, and recovery require corresponding tests.')}
+
+# Context comes before the code in these introductory units.
+CODE_CONTEXT={3: ((('The following Python code adds the four times in our example. The dictionary stores a name and '
+ 'duration for each stage. On the warm path, the earlier setup is reused, so only the request-and-work '
+ 'stage remains.'))),
+ 4: ((('Let us connect the worker pool to a definite acceptance rule. This pseudocode stores each upload as a '
+ 'temporary file and tries to add its identifier to a queue. A full queue returns “busy”; it does not '
+ 'accept that job. An accepted entry is queued for this process run.\n'
+ '\n'
+ 'The queue holds at most 100 waiting identifiers. Fifty copies of worker run. try_put adds an '
+ 'identifier only if there is space; take waits while the queue is empty. convert either finishes or '
+ 'raises ConversionError. The finally block releases that job’s resources on either exit.\n'
+ '\n'
+ 'These limits cover conversion jobs. The service also needs separate limits on file sizes and '
+ 'simultaneous upload reception, since accept saves the file before checking queue space.')))}

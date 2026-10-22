@@ -1,29 +1,27 @@
 # Complete-edition verification
 
-Verified locally on **21 October 2026** against the final generated HTML and complete PDF.
+Verified on **22 October 2026** after the focused Units 3 and 4 writing revision.
 
-- The standard-library build validates **22 units, 99 produced chapters, 390 exact syllabus items, 575 original figures, 12 complete designs, 264 case sections, 242 questions, and 242 separate explained answers**. Each chapter contains at least four figures. The separately numbered master map is M.1.
-- Topic assignments cover the supplied syllabus exactly once. Prerequisites are acyclic, element IDs are unique, internal anchors resolve, and all twelve designs contain their 22 required review sections. All 26 individual pattern treatments and 94 essential unit illustration assignments are present.
-- The original executable task example passes validation, persistence, repeat completion, missing-task, propagated-storage-error, reopen, and abrupt-process-loss checks before and after commit.
-- The additional executable models pass independent arithmetic and invariant checks for capacity, Amdahl, M/M/1, token budgets, LRU, keyset continuation, vector order, rendezvous remapping, conflicting seat claims, balanced per-currency idempotent postings, duplicate outbox delivery with one local effect, workflow fencing/deletion, tenant policy, and fictional architecture costs. Constructed p99 traces and independent-component availability calculations are also checked. These local tests do not establish distributed production guarantees.
-- Browser checks confirm all **13 workbenches**, including invalid inputs and relevant failure paths. They cover early acknowledgment loss and durable recovery, capacity headroom, bounded-queue accounting, conditional seat ownership, cache eviction, ownership remapping, stale pipeline completion, quorum intersection, token refill/debit, and cost per useful outcome. Arbitrary cache-input text is safely rendered.
-- All **133 views** fit **1440, 1024, 768, 390, and 360 px**. Large diagrams and code scroll inside their own regions. Automated SVG text bounds pass for all figures. Desktop/mobile composition and representative memory, tree, ring, partition, trust, payment, editing, pipeline, and queue figures were inspected visually.
-- Search, glossary/source filters, empty states, topic/pattern/solution deep links, mobile navigation, and persistent read marks work across all 99 chapters. The root library search still distinguishes both atlases.
-- Every chapter remains readable with JavaScript disabled. File-based reading loads no external resources. Opening a cited source uses the internet.
-- Print exposes all 99 chapters, opens advanced material, clears filters for printing, and restores the reader's filters afterward. Print excludes the skip link and interactive controls.
-- **System-Design-Atlas-Complete.pdf** exports successfully as a tagged **973-page A4 PDF**, **12,749,638 bytes**. Text extraction confirms all 99 chapter body headers, all 575 figure numbers, and all 264 case-section headings. Representative printed cost tables, upload comparisons, and the final document-processing implementation were inspected. The original 76-page foundations PDF remains a separate artifact.
-- Python compilation, JavaScript syntax checks, and `git diff --check` pass. Relative local asset/download links resolve. Deployment and git push are not part of these verification commands.
+## Writing scope
 
-Reproduction commands are in [README.md](README.md). The complete browser suite is `src/verify_complete.mjs`; `src/verify_browser.mjs` remains a compatible entry point. Browser and PDF inspection artifacts are under `/tmp/system-design-complete-qa` and are not runtime dependencies. [SOURCE_REVIEW.md](SOURCE_REVIEW.md) records source scope and the technical distinctions reviewed.
+- All **34 target lessons**, **eight chapter introductions**, and **22 target assessments** were revised with their traces, captions, reference summaries, and worked explanations. Definitions precede their use, and the two units use connected examples. See [WRITING_REVISION_PLAN.md](WRITING_REVISION_PLAN.md).
+- All **91 other chapter panels** are byte-for-byte unchanged from baseline commit `3721887`, including all four Unit 1 chapters. Other units' lesson, guide, summary, worked-code, and assessment data are unchanged. The historical foundations PDF is preserved.
+- All syllabus assignments and assessment kinds/IDs remain. The changed upload snippet is explicitly pseudocode; queue-full, conversion-failure, and cleanup sequences were reviewed as an illustration, not reported as a running server test.
 
-Coverage validation and local examples establish the stated evidence only. They do not constitute formal protocol verification, infrastructure benchmarks, production integration testing, or independent subject-matter review.
+## Build and executable checks
 
-## Writing revision across all units
+- The build validates **22 units, 99 chapters, 390 syllabus items, 575 figures, 12 designs with 264 sections, and 242 questions with separate answers**. IDs, internal links, relative downloads, exact coverage, and prerequisite ordering pass.
+- The original executable task example passes validation, persistence, repeated completion, storage-failure, reopen, and process-loss checks before/after commit.
+- The executable mechanism suite passes queue/capacity arithmetic, token budgets, eviction, keyset continuation, vector order, ownership remapping, seat claims, balanced/idempotent postings, duplicate delivery, workflow fencing/deletion, tenant policy, and fictional costs.
+- Python compilation, JavaScript syntax checks, and `git diff --check` pass.
 
-Unit 1 was revised first around the to-do application. This revision applies the same editorial approach to all remaining 95 chapters in Units 2–22. A source comparison confirms changes to all **377 concept explanations, 26 individual pattern explanations, and 264 case-study sections**. All four Unit 1 chapter sections compare identically with the preceding edition, and their source-file hashes are unchanged.
+## Browser and PDF
 
-The revision includes **83 chapter-specific openings, takeaways, and application questions**, twelve case-study introductions, twenty worked-code explanations, and **231 rewritten questions with direct explained answers** for Units 2–22. Concise glossary summaries replace extracted opening sentences. Captions and interactive instructions now explain the relevant idea or observation without repeating generic review language. Technical conditions, numerical assumptions, executable examples, stable links, and the existing visual language are preserved.
+- All **133 views** fit **1440, 1024, 768, 390, and 360 px**. SVG text fits its viewBox. All **13 workbenches**, navigation, filters, search, deep links, read marks, and mobile controls pass.
+- Offline file reading loads no external resources. Chapters remain readable without JavaScript. No uncaught browser exceptions occur. Print exposes all chapters and restores filters afterward.
+- Revised desktop/mobile views were inspected, including the request introduction, TLS, event loop, and coordination tools. Key terms and code fragments render as emphasis/code, with no raw formatting markers.
+- The complete PDF is a tagged **1,070-page A4 export**, **13,666,267 bytes**. Text extraction confirms all **99 chapter headers, 575 figure labels, and 264 case-section headings**. Representative revised pages were rendered and inspected.
 
-The final generated edition passes the complete build, executable examples, browser suite, five-width layout checks, SVG bounds, offline reading, JavaScript-disabled reading, and print checks listed above. Six representative reading views across object design, transactions, distributed systems, security, payments, and document processing were inspected at desktop or mobile widths. Four representative pages from the refreshed PDF were rendered and inspected. Text extraction confirms all chapter, figure, and case-section headings in the 973-page export. The earlier foundations PDF remains a 76-page historical installment.
+The build records **89,648 authored lesson words** across the book. Counts verify coverage, not teaching quality. Runtime tests exercise the stated local models; they do not establish production protocol correctness.
 
-Editorial working files, browser logs, screenshots, extracted PDF text, and rendered print samples are under `/tmp/system-design-complete-qa` (with baseline comparisons under `/tmp/atlas-writing-baseline`). They are verification artifacts and are not needed to build or read the atlas.
+Reproduction commands are in [README.md](README.md). Working review artifacts are under `/tmp/atlas-units-3-4` and `/tmp/system-design-complete-qa`; they are not runtime dependencies. Build and verification scripts do not commit or push changes.
