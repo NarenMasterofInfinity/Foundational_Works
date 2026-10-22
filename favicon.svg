@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Learn · Research · Visualise</title>
+  <rect width="64" height="64" rx="12" fill="#f7f5ef"/>
+  <g transform="rotate(-8 32 32)">
+    <rect x="10" y="10" width="19" height="19" rx="3" fill="#1f6657"/>
+    <rect x="35" y="10" width="19" height="19" rx="3" fill="#b96740"/>
+    <rect x="10" y="35" width="19" height="19" rx="3" fill="#1f6657"/>
+    <circle cx="44.5" cy="44.5" r="8.65" fill="none" stroke="#1f6657" stroke-width="1.7"/>
+  </g>
+</svg>
