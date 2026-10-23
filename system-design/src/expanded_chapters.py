@@ -2,6 +2,7 @@
 from html import escape as e
 import re
 from atlas_figures import snapshots,flow,special
+from textbook_chapter_2_2 import TOPICS as TEXTBOOK_TOPICS, figure as textbook_figure
 from figures import FIGURES
 from teaching.foundations import LESSONS
 from teaching.cases import CASES,FAILURE_TRACES,EVOLUTION
@@ -36,8 +37,8 @@ def slug(value):return re.sub(r'[^a-z0-9]+','-',value.lower()).strip('-')
 
 
 def concept_body(unit,chapter,bench=''):
-    n=unit['n'];j=int(chapter['number'].split('.')[1]);rows=[(i,LESSONS[n][i-1]) for i in chapter['topic_numbers']]
-    render_paragraphs=lesson_paragraphs if n in (3,4,5,6) else paragraphs
+    n=unit['n'];j=int(chapter['number'].split('.')[1]);rows=[(i,TEXTBOOK_TOPICS[i] if (n,j)==(2,2) else LESSONS[n][i-1]) for i in chapter['topic_numbers']]
+    render_paragraphs=lesson_paragraphs if n in (2,3,4,5,6) else paragraphs
     opening,takeaway,question=GUIDES[n][j-1]
     html=introduction(opening)
     fig_no=0
@@ -46,7 +47,7 @@ def concept_body(unit,chapter,bench=''):
         display_title=row.get('heading',title)
         html+=f'<section class="concept-lesson" id="topic-{n}-{i}" data-syllabus-topic="{n}:{i}"><h2>{chapter["number"]}.{sub} · {e(display_title)}</h2>'+render_paragraphs(row['prose'])
         fig_no+=1
-        visual=special(n,j,fig_no,i)
+        visual=textbook_figure(n,j,fig_no,i) if (n,j)==(2,2) else special(n,j,fig_no,i)
         if visual is None:visual=snapshots(n,j,fig_no,display_title.rstrip('?')+' · the example',row['trace'],SUMMARIES[n][i-1])
         html+=visual+'</section>'
     if n==6 and j in PATTERN_LESSONS:
@@ -59,7 +60,9 @@ def concept_body(unit,chapter,bench=''):
     case=CASES[CASE_FOR_UNIT[n]]
     while fig_no<4:
         fig_no+=1
-        if n==3 and j==1:
+        if (n,j)==(2,2):
+            html+=textbook_figure(n,j,fig_no,0)
+        elif n==3 and j==1:
             html+=flow(n,j,fig_no,'Follow the task-list request',['Browser asks: GET /tasks','Address and port lead to service','Application obtains the task list','Response returns to the browser'],'Addresses and ports bring data to the program. HTTP tells the program what was requested and gives the response its meaning.')
         elif n==5 and j==4:
             if fig_no==3:
