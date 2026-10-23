@@ -2,6 +2,7 @@
 from html import escape as e
 import re
 from atlas_figures import snapshots,flow,special
+from textbook_chapter_5_4 import INTRO as TEXTBOOK_INTRO, LESSONS as TEXTBOOK_LESSONS, drawing as textbook_drawing
 from figures import FIGURES
 from teaching.foundations import LESSONS
 from teaching.cases import CASES,FAILURE_TRACES,EVOLUTION
@@ -40,13 +41,18 @@ def concept_body(unit,chapter,bench=''):
     render_paragraphs=lesson_paragraphs if n in (3,4,5,6) else paragraphs
     opening,takeaway,question=GUIDES[n][j-1]
     html=introduction(opening)
+    if (n,j)==(5,4):html+='<div class="chapter-intro"><p>'+e(TEXTBOOK_INTRO)+'</p></div>'
     fig_no=0
     for sub,(i,row) in enumerate(rows,1):
         title=unit['topics'][i-1].rstrip('.')
         display_title=row.get('heading',title)
-        html+=f'<section class="concept-lesson" id="topic-{n}-{i}" data-syllabus-topic="{n}:{i}"><h2>{chapter["number"]}.{sub} · {e(display_title)}</h2>'+render_paragraphs(row['prose'])
+        if (n,j)==(5,4):
+            lesson=TEXTBOOK_LESSONS[sub-1]
+            html+=f'<section class="concept-lesson" id="topic-{n}-{i}" data-syllabus-topic="{n}:{i}"><h2>{chapter["number"]}.{sub} · {e(lesson["title"])}</h2>'+render_paragraphs(lesson['text'])+render_paragraphs(row['prose'])
+        else:
+            html+=f'<section class="concept-lesson" id="topic-{n}-{i}" data-syllabus-topic="{n}:{i}"><h2>{chapter["number"]}.{sub} · {e(display_title)}</h2>'+render_paragraphs(row['prose'])
         fig_no+=1
-        visual=special(n,j,fig_no,i)
+        visual=textbook_drawing(n,j,fig_no,sub-1) if (n,j)==(5,4) else special(n,j,fig_no,i)
         if visual is None:visual=snapshots(n,j,fig_no,display_title.rstrip('?')+' · the example',row['trace'],SUMMARIES[n][i-1])
         html+=visual+'</section>'
     if n==6 and j in PATTERN_LESSONS:
