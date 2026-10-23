@@ -66,7 +66,7 @@ def concept_body(unit,chapter,bench=''):
     extended=None
     if 11 <= n <= 21:
         module=import_module(f'textbook_unit_{n}_extended')
-        extended=module.CHAPTERS.get(j)
+        extended=module.CHAPTERS.get(str(j))
     if extended:html+='<div class="chapter-intro"><p>'+e(extended['intro'])+'</p></div>'
     if textbook:html+='<div class="chapter-intro"><p>'+e(textbook.INTRO)+'</p></div>
     if (n,j)==(5,4):html+='<p>'+e(INTRO_5_4)+'</p>'
@@ -171,7 +171,7 @@ def concept_body(unit,chapter,bench=''):
 
 def case_body(chapter):
     j=int(chapter['number'].split('.')[1]);case=CASES[j]
-    companion=import_module('textbook_unit_22_extended').CHAPTERS.get(j)
+    companion=import_module('textbook_unit_22_extended').CHAPTERS.get(str(j))
     html=introduction(CASE_OPENINGS[j],'The workload, timing, and prices in this design are teaching assumptions. They are not measured benchmarks or a description of a particular company.')
     if companion:
         html+='<div class="chapter-intro"><p>'+e(companion['intro'])+'</p></div>'
