@@ -1968,8 +1968,8 @@
               "id": "fig-5-1-1",
               "number": "5.1.1",
               "chapter": "ch-5-1",
-              "title": "Abstraction, encapsulation, polymorphism, inheritance · the example",
-              "caption": "Abstraction presents needed behaviour; encapsulation controls representation; polymorphism permits compatible implementations; inheritance specialises a relationship.",
+              "title": "Four ways to organise an object · the example",
+              "caption": "Abstraction hides details behind an operation. Encapsulation controls state changes. Polymorphism lets compatible implementations share a calling form. Inheritance derives a class from another class.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1977,8 +1977,8 @@
               "id": "fig-5-1-2",
               "number": "5.1.2",
               "chapter": "ch-5-1",
-              "title": "Composition vs inheritance · the example",
-              "caption": "Composition combines collaborators, while inheritance requires subclasses to preserve their callers' behavioural expectations.",
+              "title": "Build with parts or derive a class · the example",
+              "caption": "Composition connects objects with separate jobs. Inheritance is suitable only when the subclass preserves the behaviour callers expect from its parent.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1986,8 +1986,8 @@
               "id": "fig-5-1-3",
               "number": "5.1.3",
               "chapter": "ch-5-1",
-              "title": "Interfaces and contracts · the example",
-              "caption": "A contract specifies valid inputs, outcomes, effects, errors, and relevant timing or repetition rules beyond a signature.",
+              "title": "State exactly what a charge means · the example",
+              "caption": "An interface names operations. A contract explains valid inputs, result meanings, effects, and failure or retry behaviour.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -1995,8 +1995,8 @@
               "id": "fig-5-1-4",
               "number": "5.1.4",
               "chapter": "ch-5-1",
-              "title": "High cohesion and low coupling · the example",
-              "caption": "Cohesion concerns related work inside a module; coupling concerns dependencies and knowledge between modules.",
+              "title": "Keep related work together · the example",
+              "caption": "Cohesion concerns related work within a module. Coupling concerns what one module must know about another.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2004,8 +2004,8 @@
               "id": "fig-5-1-5",
               "number": "5.1.5",
               "chapter": "ch-5-1",
-              "title": "SOLID principles, including their limitations · the example",
-              "caption": "SOLID offers guidelines for responsibilities, useful extension, substitution, focused interfaces, and dependency direction.",
+              "title": "Use SOLID to examine a real change · the example",
+              "caption": "SOLID examines responsibilities, extension, valid replacement, focused interfaces, and dependency direction. Apply each principle to an actual change, rather than adding layers by habit.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -2015,35 +2015,35 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 308,
+              "words": 250,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 189,
+              "words": 163,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 185,
+              "words": 193,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 183,
+              "words": 159,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 284,
+              "words": 251,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1828,
+          "rendered_words": 1654,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2080,8 +2080,8 @@
               "id": "fig-5-2-1",
               "number": "5.2.1",
               "chapter": "ch-5-2",
-              "title": "DRY, KISS, YAGNI · the example",
-              "caption": "DRY avoids duplicated knowledge; KISS favours understandable required design; YAGNI defers unsupported speculative capability.",
+              "title": "Keep one copy of a shared rule · the example",
+              "caption": "DRY avoids duplicate knowledge. KISS favours an understandable solution. YAGNI defers speculative features while keeping present requirements complete.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2089,8 +2089,8 @@
               "id": "fig-5-2-2",
               "number": "5.2.2",
               "chapter": "ch-5-2",
-              "title": "Law of Demeter · the example",
-              "caption": "The Law of Demeter discourages unnecessary dependence on distant objects' internal structure.",
+              "title": "Avoid knowing the whole object chain · the example",
+              "caption": "The Law of Demeter limits knowledge of distant objects. A caller should use a useful operation instead of depending on an internal lookup path.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2098,8 +2098,8 @@
               "id": "fig-5-2-3",
               "number": "5.2.3",
               "chapter": "ch-5-2",
-              "title": "Tell, Don't Ask · the example",
-              "caption": "Tell, Don't Ask favours sending intentions to the owner that can protect the relevant state rule.",
+              "title": "Ask the owner to perform the change · the example",
+              "caption": "Tell, Don’t Ask keeps a state-changing rule with its owner. Concurrent writers still need an atomic check and update at the shared storage boundary.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2107,8 +2107,8 @@
               "id": "fig-5-2-4",
               "number": "5.2.4",
               "chapter": "ch-5-2",
-              "title": "Command-query separation · the example",
-              "caption": "Command-query separation makes state-changing operations distinguishable from reads without requiring separate deployments.",
+              "title": "Make reads and changes easy to distinguish · the example",
+              "caption": "Queries report information; commands request changes. Clear operation meanings do not require separate read and write infrastructure.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -2118,29 +2118,29 @@
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 167,
+              "words": 172,
               "worked_trace": true
             },
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 158,
+              "words": 151,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 187,
+              "words": 179,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 165,
+              "words": 154,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1247,
+          "rendered_words": 1195,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2177,8 +2177,8 @@
               "id": "fig-5-3-1",
               "number": "5.3.1",
               "chapter": "ch-5-3",
-              "title": "Immutability and side-effect management · the example",
-              "caption": "Immutable values and explicit effects make changes easier to follow, with allocation and execution costs still considered.",
+              "title": "Calculate new values, then perform effects · the example",
+              "caption": "Immutable values cannot be edited after creation. Pure functions calculate from inputs without external effects. Provider calls and writes still need explicit execution and recovery.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2186,8 +2186,8 @@
               "id": "fig-5-3-2",
               "number": "5.3.2",
               "chapter": "ch-5-3",
-              "title": "Domain models, entities, value objects · the example",
-              "caption": "Entities retain identity; value objects represent equal values; domain models express meaningful concepts and rules.",
+              "title": "Distinguish identity from value · the example",
+              "caption": "An entity is recognised by identity; a value object by its value. A domain model gives business concepts and their rules a clear representation.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2195,8 +2195,8 @@
               "id": "fig-5-3-3",
               "number": "5.3.3",
               "chapter": "ch-5-3",
-              "title": "Object collaboration · the example",
-              "caption": "Object collaboration describes requests, results, and ownership between components, including partial-failure handling.",
+              "title": "Follow the conversation between objects · the example",
+              "caption": "Object collaboration follows requests, results, and ownership. A coordinator tracks progress; an error does not undo earlier effects.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2204,8 +2204,8 @@
               "id": "fig-5-3-4",
               "number": "5.3.4",
               "chapter": "ch-5-3",
-              "title": "Testability and design for change · the example",
-              "caption": "Testable design gives controlled inputs and visible outcomes; substitutes and real integration tests establish different evidence.",
+              "title": "Test decisions with a replaceable gateway · the example",
+              "caption": "A test double makes outcomes controllable. Dependency injection supplies the collaborator from outside. Tests must also check the real provider and storage boundaries.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -2221,23 +2221,23 @@
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 202,
+              "words": 230,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 196,
+              "words": 172,
               "worked_trace": true
             },
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 178,
+              "words": 171,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1353,
+          "rendered_words": 1289,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2270,8 +2270,8 @@
               "id": "fig-5-4-1",
               "number": "5.4.1",
               "chapter": "ch-5-4",
-              "title": "Refactoring and recognizing code smells · the example",
-              "caption": "Refactoring improves structure while preserving the intended observable behaviour.",
+              "title": "Improve the structure one step at a time · the example",
+              "caption": "Refactoring changes structure while preserving observable behaviour. Code smells guide investigation; the repair should address a concrete difficulty.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2279,8 +2279,8 @@
               "id": "fig-5-4-2",
               "number": "5.4.2",
               "chapter": "ch-5-4",
-              "title": "Functional programming alternatives to object-centric design · the example",
-              "caption": "Pure functions can express decisions, while an explicit effect layer owns durable execution and external calls.",
+              "title": "Express decisions as functions · the example",
+              "caption": "Pure functions expose decisions as inputs and outputs. Separate code performs and records effects, including recovery from uncertain results.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2288,8 +2288,8 @@
               "id": "fig-5-4-3",
               "number": "5.4.3",
               "chapter": "ch-5-4",
-              "title": "Follow the related complete design",
-              "caption": "Persist intent, obtain or reconcile provider evidence, and commit the required local result.",
+              "title": "Test the payment rule without making a payment",
+              "caption": "The test controls the gateway result and checks the service’s decision. A separate test must check communication with the real provider.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2297,8 +2297,8 @@
               "id": "fig-5-4-4",
               "number": "5.4.4",
               "chapter": "ch-5-4",
-              "title": "State and ownership in the related design",
-              "caption": "Operation identity links provider evidence to payment state and balanced accounting entries.",
+              "title": "Keep calculation separate from effects",
+              "caption": "Calculating a fee need not send a request or change stored data. Separating these steps lets us test the calculation directly.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -2308,17 +2308,17 @@
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 194,
+              "words": 174,
               "worked_trace": true
             },
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 201,
+              "words": 193,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1118,
+          "rendered_words": 1144,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2456,8 +2456,8 @@
               "id": "fig-6-1-1",
               "number": "6.1.1",
               "chapter": "ch-6-1",
-              "title": "Dependency, dependency direction, and inversion · the example",
-              "caption": "Dependency inversion lets important policy rely on suitable abstractions rather than changeable implementation details.",
+              "title": "See what the service needs · the example",
+              "caption": "A dependency is something code needs; a contract states how that dependency may be used.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2465,8 +2465,8 @@
               "id": "fig-6-1-2",
               "number": "6.1.2",
               "chapter": "ch-6-1",
-              "title": "Inversion of Control (IoC) · the example",
-              "caption": "Inversion of Control delegates some calling or construction decisions to an external coordinator or framework.",
+              "title": "Let another part of the program make the call · the example",
+              "caption": "IoC lets a framework or coordinator control when some application code runs.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2474,8 +2474,8 @@
               "id": "fig-6-1-3",
               "number": "6.1.3",
               "chapter": "ch-6-1",
-              "title": "Dependency Injection (DI) · the example",
-              "caption": "Dependency Injection supplies collaborators through construction or calls instead of hiding their creation or lookup.",
+              "title": "Pass the sender into the service · the example",
+              "caption": "DI supplies a dependency from outside the object or operation that uses it.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2483,8 +2483,8 @@
               "id": "fig-6-1-4",
               "number": "6.1.4",
               "chapter": "ch-6-1",
-              "title": "Constructor, property/setter, and method injection · the example",
-              "caption": "Constructor, setter, and method injection provide dependencies at different points with different validity and lifetime implications.",
+              "title": "Supply a dependency when it becomes necessary · the example",
+              "caption": "Constructor, setter, and method injection supply dependencies at different times.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2492,8 +2492,8 @@
               "id": "fig-6-1-5",
               "number": "6.1.5",
               "chapter": "ch-6-1",
-              "title": "Dependency inversion principle vs DI · the example",
-              "caption": "Dependency inversion concerns knowledge direction; DI concerns supplying collaborators. Either term alone does not establish the other.",
+              "title": "Separate injection from dependency inversion · the example",
+              "caption": "DI concerns how a dependency is supplied; DIP concerns which contracts the code depends on.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2501,8 +2501,8 @@
               "id": "fig-6-1-6",
               "number": "6.1.6",
               "chapter": "ch-6-1",
-              "title": "Composition roots and DI containers · the example",
-              "caption": "A composition root assembles collaborators; a DI container automates selected construction and lifetime rules.",
+              "title": "Assemble the application in one clear place · the example",
+              "caption": "The composition root connects concrete objects; a DI container can automate their construction and reuse.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -2512,41 +2512,41 @@
             {
               "syllabus_item": 1,
               "status": "available",
-              "words": 195,
+              "words": 172,
               "worked_trace": true
             },
             {
               "syllabus_item": 2,
               "status": "available",
-              "words": 175,
+              "words": 147,
               "worked_trace": true
             },
             {
               "syllabus_item": 3,
               "status": "available",
-              "words": 171,
+              "words": 135,
               "worked_trace": true
             },
             {
               "syllabus_item": 4,
               "status": "available",
-              "words": 190,
+              "words": 154,
               "worked_trace": true
             },
             {
               "syllabus_item": 5,
               "status": "available",
-              "words": 170,
+              "words": 150,
               "worked_trace": true
             },
             {
               "syllabus_item": 6,
               "status": "available",
-              "words": 195,
+              "words": 149,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1852,
+          "rendered_words": 1569,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2587,8 +2587,8 @@
               "id": "fig-6-2-1",
               "number": "6.2.1",
               "chapter": "ch-6-2",
-              "title": "Scope identities make lifetime semantics visible",
-              "caption": "These are identity observations in one application. Framework registration and disposal rules must still be checked.",
+              "title": "Which requests receive the same object?",
+              "caption": "Matching letters name the same object. Here, scoped means one per request scope, transient means a new object per lookup, and singleton means one reused by this container. Framework rules determine the actual boundaries and cleanup.",
               "why": "Make the internal structure or state relation visible before claiming its behavior.",
               "status": "available"
             },
@@ -2596,8 +2596,8 @@
               "id": "fig-6-2-2",
               "number": "6.2.2",
               "chapter": "ch-6-2",
-              "title": "Request scopes, session scopes, and custom scopes · the example",
-              "caption": "Scopes define resource lifetimes for requests, sessions, or jobs; their meanings need explicit ownership and cleanup.",
+              "title": "Give each request or job its own boundary · the example",
+              "caption": "A scope names a boundary for reuse and cleanup; a later job needs its own valid resources.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2605,8 +2605,8 @@
               "id": "fig-6-2-3",
               "number": "6.2.3",
               "chapter": "ch-6-2",
-              "title": "Object creation vs object ownership · the example",
-              "caption": "Creating or holding a resource does not determine who owns its disposal.",
+              "title": "Decide who must close the resource · the example",
+              "caption": "Ownership determines who releases a resource; a reference alone does not transfer that responsibility.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2614,8 +2614,8 @@
               "id": "fig-6-2-4",
               "number": "6.2.4",
               "chapter": "ch-6-2",
-              "title": "Disposal, cleanup, and resource lifecycles · the example",
-              "caption": "Cleanup must release owned resources on success, failure, and cancellation under the relevant contract.",
+              "title": "Release resources on every exit path · the example",
+              "caption": "Structured cleanup returns owned resources when work ends, including supported error and cancellation paths.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2623,8 +2623,8 @@
               "id": "fig-6-2-5",
               "number": "6.2.5",
               "chapter": "ch-6-2",
-              "title": "Lazy initialization · the example",
-              "caption": "Lazy initialisation defers work to first use, requiring concurrency, publication, failure, and latency decisions.",
+              "title": "Create an expensive object only when needed · the example",
+              "caption": "Lazy initialisation moves construction to first use, together with its delay and possible failure.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2632,8 +2632,8 @@
               "id": "fig-6-2-6",
               "number": "6.2.6",
               "chapter": "ch-6-2",
-              "title": "Dependency cycles and captive dependencies · the example",
-              "caption": "Cycles can signal unclear responsibilities; captive dependencies retain collaborators beyond their valid shorter lifetime.",
+              "title": "Find cycles and dependencies kept too long · the example",
+              "caption": "A cycle blocks construction; a captive dependency can survive construction but be retained beyond its valid lifetime.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             }
@@ -2643,41 +2643,41 @@
             {
               "syllabus_item": 7,
               "status": "available",
-              "words": 180,
+              "words": 149,
               "worked_trace": true
             },
             {
               "syllabus_item": 8,
               "status": "available",
-              "words": 184,
+              "words": 155,
               "worked_trace": true
             },
             {
               "syllabus_item": 9,
               "status": "available",
-              "words": 193,
+              "words": 146,
               "worked_trace": true
             },
             {
               "syllabus_item": 10,
               "status": "available",
-              "words": 174,
+              "words": 148,
               "worked_trace": true
             },
             {
               "syllabus_item": 11,
               "status": "available",
-              "words": 169,
+              "words": 147,
               "worked_trace": true
             },
             {
               "syllabus_item": 12,
               "status": "available",
-              "words": 183,
+              "words": 155,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1851,
+          "rendered_words": 1622,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2710,8 +2710,8 @@
               "id": "fig-6-3-1",
               "number": "6.3.1",
               "chapter": "ch-6-3",
-              "title": "DI vs service locator · the example",
-              "caption": "A service locator hides dependencies behind runtime lookup; DI can make them explicit at the appropriate boundary.",
+              "title": "Show dependencies instead of looking them up inside · the example",
+              "caption": "A service locator obtains dependencies through lookup; explicit injection makes the receiver’s needs visible.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2719,8 +2719,8 @@
               "id": "fig-6-3-2",
               "number": "6.3.2",
               "chapter": "ch-6-3",
-              "title": "DI vs factory pattern · the example",
-              "caption": "A factory chooses or creates a collaborator; injection supplies it or the factory, with ownership still specified.",
+              "title": "Inject a factory for a choice made later · the example",
+              "caption": "DI can supply a factory that selects or constructs a dependency when later input is available.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2728,8 +2728,8 @@
               "id": "fig-6-3-3",
               "number": "6.3.3",
               "chapter": "ch-6-3",
-              "title": "Follow the related complete design",
-              "caption": "Durable intent reaches a bounded channel worker and a provider with explicit outcome meanings.",
+              "title": "Supply the sender from outside",
+              "caption": "The constructor shows that the service needs a sender. It does not need to search a global registry during the operation.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2737,9 +2737,9 @@
               "id": "fig-6-3-4",
               "number": "6.3.4",
               "chapter": "ch-6-3",
-              "title": "State and ownership in the related design",
-              "caption": "Intent, delivery tasks, attempts, and callbacks record different stages of the notification.",
-              "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
+              "title": "Choose a sender when the message arrives",
+              "caption": "Injection supplies the factory at construction. The factory handles the choice that becomes known only when a message arrives.",
+              "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             }
           ],
@@ -2748,17 +2748,17 @@
             {
               "syllabus_item": 13,
               "status": "available",
-              "words": 171,
+              "words": 150,
               "worked_trace": true
             },
             {
               "syllabus_item": 14,
               "status": "available",
-              "words": 178,
+              "words": 143,
               "worked_trace": true
             }
           ],
-          "rendered_words": 906,
+          "rendered_words": 762,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2789,8 +2789,8 @@
               "id": "fig-6-4-1",
               "number": "6.4.1",
               "chapter": "ch-6-4",
-              "title": "Factory Method, Abstract Factory, Builder, Prototype, Singleton · the example",
-              "caption": "Creational patterns organise different construction choices, families, staged assembly, copying, and bounded instance access.",
+              "title": "Choose how an object is created · the example",
+              "caption": "Creational patterns organise how objects are selected, assembled, copied, or shared.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2799,7 +2799,7 @@
               "number": "6.4.2",
               "chapter": "ch-6-4",
               "title": "Factory Method · the example",
-              "caption": "Varies a creation operation so processing code can use a product without selecting its concrete implementation.",
+              "caption": "A subclass overrides a creation operation while the surrounding processing steps stay shared.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2808,7 +2808,7 @@
               "number": "6.4.3",
               "chapter": "ch-6-4",
               "title": "Abstract Factory · the example",
-              "caption": "Creates a compatible family of collaborators through one selected construction interface.",
+              "caption": "One selected factory supplies a compatible family of related objects.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2817,7 +2817,7 @@
               "number": "6.4.4",
               "chapter": "ch-6-4",
               "title": "Builder · the example",
-              "caption": "Collects construction choices and validates them before producing a usable value.",
+              "caption": "A builder collects choices in stages and validates them before returning a finished object.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2826,7 +2826,7 @@
               "number": "6.4.5",
               "chapter": "ch-6-4",
               "title": "Prototype · the example",
-              "caption": "Creates an object by copying configured state under explicit sharing and ownership rules.",
+              "caption": "Prototype creates an object by copying configured state with explicit rules for copied and shared values.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2835,7 +2835,7 @@
               "number": "6.4.6",
               "chapter": "ch-6-4",
               "title": "Singleton · the example",
-              "caption": "Restricts instance access within a specified program or container boundary, without implying global uniqueness or safe mutation.",
+              "caption": "Singleton restricts access to one instance within a stated program boundary; it supplies no cross-process uniqueness.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             }
@@ -2845,11 +2845,11 @@
             {
               "syllabus_item": 15,
               "status": "available",
-              "words": 106,
+              "words": 107,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1672,
+          "rendered_words": 1341,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2880,8 +2880,8 @@
               "id": "fig-6-5-1",
               "number": "6.5.1",
               "chapter": "ch-6-5",
-              "title": "Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy · the example",
-              "caption": "Structural patterns organise interface translation, composition, grouping, added behaviour, simplified access, sharing, and mediation to a target.",
+              "title": "Arrange objects around an existing operation · the example",
+              "caption": "Structural patterns arrange objects to translate, extend, group, simplify, share, or control access.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2890,7 +2890,7 @@
               "number": "6.5.2",
               "chapter": "ch-6-5",
               "title": "Adapter · the example",
-              "caption": "Translates an existing interface or representation into a caller’s required behavioural contract.",
+              "caption": "Adapter translates an existing interface and its outcomes into the contract a caller needs.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2899,7 +2899,7 @@
               "number": "6.5.3",
               "chapter": "ch-6-5",
               "title": "Bridge · the example",
-              "caption": "Uses composition to let two dimensions of variation evolve independently.",
+              "caption": "Bridge keeps two kinds of variation separate by having one object use another through a contract.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2908,7 +2908,7 @@
               "number": "6.5.4",
               "chapter": "ch-6-5",
               "title": "Composite · the example",
-              "caption": "Lets callers use leaves and groups through a compatible interface, with explicit traversal and partial-failure rules.",
+              "caption": "Composite lets callers use single objects and groups through the same operation.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2917,7 +2917,7 @@
               "number": "6.5.5",
               "chapter": "ch-6-5",
               "title": "Decorator · the example",
-              "caption": "Adds behaviour around a collaborator while retaining its interface, with composition order affecting meaning.",
+              "caption": "Decorator adds behaviour around an operation while preserving its interface; wrapper order can change the meaning.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2926,7 +2926,7 @@
               "number": "6.5.6",
               "chapter": "ch-6-5",
               "title": "Facade · the example",
-              "caption": "Offers a focused entry to cooperating subsystem operations without hiding consequential outcomes.",
+              "caption": "Facade provides a focused entry point to several cooperating operations with clear result meanings.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2935,7 +2935,7 @@
               "number": "6.5.7",
               "chapter": "ch-6-5",
               "title": "Flyweight · the example",
-              "caption": "Shares suitable immutable intrinsic state while keeping per-use context separate.",
+              "caption": "Flyweight shares suitable unchanged data while each use supplies its own changing context.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -2944,7 +2944,7 @@
               "number": "6.5.8",
               "chapter": "ch-6-5",
               "title": "Proxy · the example",
-              "caption": "Represents a target interface while controlling access, creation, or location with explicit cost and failure behaviour.",
+              "caption": "Proxy represents a target through its interface while controlling access, creation, or location.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             }
@@ -2954,11 +2954,11 @@
             {
               "syllabus_item": 16,
               "status": "available",
-              "words": 111,
+              "words": 115,
               "worked_trace": true
             }
           ],
-          "rendered_words": 2106,
+          "rendered_words": 1731,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -2989,8 +2989,8 @@
               "id": "fig-6-6-1",
               "number": "6.6.1",
               "chapter": "ch-6-6",
-              "title": "Strategy, Observer, Command, State, Chain of Responsibility, Template Method, Iterator, Mediator, Memento, Visitor · the example",
-              "caption": "Behavioural patterns organise algorithms, notifications, intentions, state transitions, traversal, and coordination at chosen extension points.",
+              "title": "Give each behaviour a clear home · the example",
+              "caption": "Behavioural patterns organise decisions, actions, reactions, and coordination between objects.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -2999,7 +2999,7 @@
               "number": "6.6.2",
               "chapter": "ch-6-6",
               "title": "Strategy · the example",
-              "caption": "Supplies an interchangeable algorithm or policy behind a stable behavioural contract.",
+              "caption": "Strategy supplies a replaceable algorithm through a shared operation.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3008,7 +3008,7 @@
               "number": "6.6.3",
               "chapter": "ch-6-6",
               "title": "Observer · the example",
-              "caption": "Notifies subscribed listeners under defined timing, lifetime, ordering, and failure rules.",
+              "caption": "Observer calls subscribed listeners when an event occurs under explicit timing and failure rules.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3017,7 +3017,7 @@
               "number": "6.6.4",
               "chapter": "ch-6-6",
               "title": "Command · the example",
-              "caption": "Represents a requested action as explicit data and identity for an appropriate handler.",
+              "caption": "Command represents a requested action as data so its execution can be handled separately.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3026,7 +3026,7 @@
               "number": "6.6.5",
               "chapter": "ch-6-6",
               "title": "State · the example",
-              "caption": "Organises behaviour around a lifecycle whose guarded transitions follow entity history.",
+              "caption": "State changes an object’s permitted behaviour as its lifecycle advances through allowed transitions.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3035,7 +3035,7 @@
               "number": "6.6.6",
               "chapter": "ch-6-6",
               "title": "Chain of Responsibility · the example",
-              "caption": "Passes a request through ordered handlers with explicit continuation, rejection, and handling rules.",
+              "caption": "Chain of Responsibility passes work through handlers that explicitly stop or continue the request.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3044,7 +3044,7 @@
               "number": "6.6.7",
               "chapter": "ch-6-6",
               "title": "Template Method · the example",
-              "caption": "Preserves a process skeleton while allowing selected implementation steps to vary.",
+              "caption": "Template Method fixes a sequence of steps while letting subclasses replace selected steps.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3053,7 +3053,7 @@
               "number": "6.6.8",
               "chapter": "ch-6-6",
               "title": "Iterator · the example",
-              "caption": "Exposes traversal without revealing collection representation, while retaining ordering and resource-lifetime obligations.",
+              "caption": "Iterator supplies items in sequence while hiding the traversal details and respecting resource lifetimes.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3062,7 +3062,7 @@
               "number": "6.6.9",
               "chapter": "ch-6-6",
               "title": "Mediator · the example",
-              "caption": "Coordinates collaborators through a focused owner instead of many direct relationships.",
+              "caption": "Mediator places a focused coordination rule between collaborators instead of linking each directly to the others.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3071,7 +3071,7 @@
               "number": "6.6.10",
               "chapter": "ch-6-6",
               "title": "Memento · the example",
-              "caption": "Captures and restores supported local state without claiming to reverse independent external effects.",
+              "caption": "Memento captures supported local state so its owner can restore it later.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3080,7 +3080,7 @@
               "number": "6.6.11",
               "chapter": "ch-6-6",
               "title": "Visitor · the example",
-              "caption": "Adds operations across a known structure, trading easier new operations for more work when element types change.",
+              "caption": "Visitor groups an operation across known element kinds; adding a kind can require changes to many visitors.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             }
@@ -3090,11 +3090,11 @@
             {
               "syllabus_item": 17,
               "status": "available",
-              "words": 113,
+              "words": 108,
               "worked_trace": true
             }
           ],
-          "rendered_words": 2884,
+          "rendered_words": 2396,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -3125,8 +3125,8 @@
               "id": "fig-6-7-1",
               "number": "6.7.1",
               "chapter": "ch-6-7",
-              "title": "Repository, Unit of Work, Specification, CQRS, and dependency boundaries · the example",
-              "caption": "Repository, Unit of Work, Specification, and CQRS clarify data access, commit ownership, predicates, and distinct read/write models.",
+              "title": "Separate data access, rules, and commit decisions · the example",
+              "caption": "Data access, rule evaluation, grouped changes, and read models solve different problems.",
               "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
               "status": "available"
             },
@@ -3135,7 +3135,7 @@
               "number": "6.7.2",
               "chapter": "ch-6-7",
               "title": "Repository · the example",
-              "caption": "Offers application-oriented persistence operations through a contract defining transactions, bounds, errors, and lifetimes.",
+              "caption": "Repository supplies application-level operations for finding and saving data under an explicit storage contract.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3144,7 +3144,7 @@
               "number": "6.7.3",
               "chapter": "ch-6-7",
               "title": "Unit of Work · the example",
-              "caption": "Owns related local changes under one commit and cleanup boundary.",
+              "caption": "Unit of Work tracks related data changes and coordinates writing them within a defined transaction boundary.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3153,7 +3153,7 @@
               "number": "6.7.4",
               "chapter": "ch-6-7",
               "title": "Specification · the example",
-              "caption": "Names a reusable eligibility or selection predicate whose later state-changing use may need atomic revalidation.",
+              "caption": "Specification names a reusable condition; changing data later still requires checking the current rule.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             },
@@ -3162,7 +3162,7 @@
               "number": "6.7.5",
               "chapter": "ch-6-7",
               "title": "CQRS · the example",
-              "caption": "Uses different command and query models where their needs justify extra projection and freshness work.",
+              "caption": "CQRS separates models for changing and reading data when their different needs justify the extra work.",
               "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
               "status": "available"
             }
@@ -3172,11 +3172,11 @@
             {
               "syllabus_item": 18,
               "status": "available",
-              "words": 118,
+              "words": 122,
               "worked_trace": true
             }
           ],
-          "rendered_words": 1633,
+          "rendered_words": 1657,
           "review": {
             "source_links": "checked for stated use",
             "numbers": "assumptions labeled; executable models verified separately",
@@ -14689,8 +14689,8 @@
       "id": "fig-5-1-1",
       "number": "5.1.1",
       "chapter": "ch-5-1",
-      "title": "Abstraction, encapsulation, polymorphism, inheritance · the example",
-      "caption": "Abstraction presents needed behaviour; encapsulation controls representation; polymorphism permits compatible implementations; inheritance specialises a relationship.",
+      "title": "Four ways to organise an object · the example",
+      "caption": "Abstraction hides details behind an operation. Encapsulation controls state changes. Polymorphism lets compatible implementations share a calling form. Inheritance derives a class from another class.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14698,8 +14698,8 @@
       "id": "fig-5-1-2",
       "number": "5.1.2",
       "chapter": "ch-5-1",
-      "title": "Composition vs inheritance · the example",
-      "caption": "Composition combines collaborators, while inheritance requires subclasses to preserve their callers' behavioural expectations.",
+      "title": "Build with parts or derive a class · the example",
+      "caption": "Composition connects objects with separate jobs. Inheritance is suitable only when the subclass preserves the behaviour callers expect from its parent.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14707,8 +14707,8 @@
       "id": "fig-5-1-3",
       "number": "5.1.3",
       "chapter": "ch-5-1",
-      "title": "Interfaces and contracts · the example",
-      "caption": "A contract specifies valid inputs, outcomes, effects, errors, and relevant timing or repetition rules beyond a signature.",
+      "title": "State exactly what a charge means · the example",
+      "caption": "An interface names operations. A contract explains valid inputs, result meanings, effects, and failure or retry behaviour.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14716,8 +14716,8 @@
       "id": "fig-5-1-4",
       "number": "5.1.4",
       "chapter": "ch-5-1",
-      "title": "High cohesion and low coupling · the example",
-      "caption": "Cohesion concerns related work inside a module; coupling concerns dependencies and knowledge between modules.",
+      "title": "Keep related work together · the example",
+      "caption": "Cohesion concerns related work within a module. Coupling concerns what one module must know about another.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14725,8 +14725,8 @@
       "id": "fig-5-1-5",
       "number": "5.1.5",
       "chapter": "ch-5-1",
-      "title": "SOLID principles, including their limitations · the example",
-      "caption": "SOLID offers guidelines for responsibilities, useful extension, substitution, focused interfaces, and dependency direction.",
+      "title": "Use SOLID to examine a real change · the example",
+      "caption": "SOLID examines responsibilities, extension, valid replacement, focused interfaces, and dependency direction. Apply each principle to an actual change, rather than adding layers by habit.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14734,8 +14734,8 @@
       "id": "fig-5-2-1",
       "number": "5.2.1",
       "chapter": "ch-5-2",
-      "title": "DRY, KISS, YAGNI · the example",
-      "caption": "DRY avoids duplicated knowledge; KISS favours understandable required design; YAGNI defers unsupported speculative capability.",
+      "title": "Keep one copy of a shared rule · the example",
+      "caption": "DRY avoids duplicate knowledge. KISS favours an understandable solution. YAGNI defers speculative features while keeping present requirements complete.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14743,8 +14743,8 @@
       "id": "fig-5-2-2",
       "number": "5.2.2",
       "chapter": "ch-5-2",
-      "title": "Law of Demeter · the example",
-      "caption": "The Law of Demeter discourages unnecessary dependence on distant objects' internal structure.",
+      "title": "Avoid knowing the whole object chain · the example",
+      "caption": "The Law of Demeter limits knowledge of distant objects. A caller should use a useful operation instead of depending on an internal lookup path.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14752,8 +14752,8 @@
       "id": "fig-5-2-3",
       "number": "5.2.3",
       "chapter": "ch-5-2",
-      "title": "Tell, Don't Ask · the example",
-      "caption": "Tell, Don't Ask favours sending intentions to the owner that can protect the relevant state rule.",
+      "title": "Ask the owner to perform the change · the example",
+      "caption": "Tell, Don’t Ask keeps a state-changing rule with its owner. Concurrent writers still need an atomic check and update at the shared storage boundary.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14761,8 +14761,8 @@
       "id": "fig-5-2-4",
       "number": "5.2.4",
       "chapter": "ch-5-2",
-      "title": "Command-query separation · the example",
-      "caption": "Command-query separation makes state-changing operations distinguishable from reads without requiring separate deployments.",
+      "title": "Make reads and changes easy to distinguish · the example",
+      "caption": "Queries report information; commands request changes. Clear operation meanings do not require separate read and write infrastructure.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14770,8 +14770,8 @@
       "id": "fig-5-3-1",
       "number": "5.3.1",
       "chapter": "ch-5-3",
-      "title": "Immutability and side-effect management · the example",
-      "caption": "Immutable values and explicit effects make changes easier to follow, with allocation and execution costs still considered.",
+      "title": "Calculate new values, then perform effects · the example",
+      "caption": "Immutable values cannot be edited after creation. Pure functions calculate from inputs without external effects. Provider calls and writes still need explicit execution and recovery.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14779,8 +14779,8 @@
       "id": "fig-5-3-2",
       "number": "5.3.2",
       "chapter": "ch-5-3",
-      "title": "Domain models, entities, value objects · the example",
-      "caption": "Entities retain identity; value objects represent equal values; domain models express meaningful concepts and rules.",
+      "title": "Distinguish identity from value · the example",
+      "caption": "An entity is recognised by identity; a value object by its value. A domain model gives business concepts and their rules a clear representation.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14788,8 +14788,8 @@
       "id": "fig-5-3-3",
       "number": "5.3.3",
       "chapter": "ch-5-3",
-      "title": "Object collaboration · the example",
-      "caption": "Object collaboration describes requests, results, and ownership between components, including partial-failure handling.",
+      "title": "Follow the conversation between objects · the example",
+      "caption": "Object collaboration follows requests, results, and ownership. A coordinator tracks progress; an error does not undo earlier effects.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14797,8 +14797,8 @@
       "id": "fig-5-3-4",
       "number": "5.3.4",
       "chapter": "ch-5-3",
-      "title": "Testability and design for change · the example",
-      "caption": "Testable design gives controlled inputs and visible outcomes; substitutes and real integration tests establish different evidence.",
+      "title": "Test decisions with a replaceable gateway · the example",
+      "caption": "A test double makes outcomes controllable. Dependency injection supplies the collaborator from outside. Tests must also check the real provider and storage boundaries.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14806,8 +14806,8 @@
       "id": "fig-5-4-1",
       "number": "5.4.1",
       "chapter": "ch-5-4",
-      "title": "Refactoring and recognizing code smells · the example",
-      "caption": "Refactoring improves structure while preserving the intended observable behaviour.",
+      "title": "Improve the structure one step at a time · the example",
+      "caption": "Refactoring changes structure while preserving observable behaviour. Code smells guide investigation; the repair should address a concrete difficulty.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14815,8 +14815,8 @@
       "id": "fig-5-4-2",
       "number": "5.4.2",
       "chapter": "ch-5-4",
-      "title": "Functional programming alternatives to object-centric design · the example",
-      "caption": "Pure functions can express decisions, while an explicit effect layer owns durable execution and external calls.",
+      "title": "Express decisions as functions · the example",
+      "caption": "Pure functions expose decisions as inputs and outputs. Separate code performs and records effects, including recovery from uncertain results.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14824,8 +14824,8 @@
       "id": "fig-5-4-3",
       "number": "5.4.3",
       "chapter": "ch-5-4",
-      "title": "Follow the related complete design",
-      "caption": "Persist intent, obtain or reconcile provider evidence, and commit the required local result.",
+      "title": "Test the payment rule without making a payment",
+      "caption": "The test controls the gateway result and checks the service’s decision. A separate test must check communication with the real provider.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -14833,8 +14833,8 @@
       "id": "fig-5-4-4",
       "number": "5.4.4",
       "chapter": "ch-5-4",
-      "title": "State and ownership in the related design",
-      "caption": "Operation identity links provider evidence to payment state and balanced accounting entries.",
+      "title": "Keep calculation separate from effects",
+      "caption": "Calculating a fee need not send a request or change stored data. Separating these steps lets us test the calculation directly.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14842,8 +14842,8 @@
       "id": "fig-6-1-1",
       "number": "6.1.1",
       "chapter": "ch-6-1",
-      "title": "Dependency, dependency direction, and inversion · the example",
-      "caption": "Dependency inversion lets important policy rely on suitable abstractions rather than changeable implementation details.",
+      "title": "See what the service needs · the example",
+      "caption": "A dependency is something code needs; a contract states how that dependency may be used.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14851,8 +14851,8 @@
       "id": "fig-6-1-2",
       "number": "6.1.2",
       "chapter": "ch-6-1",
-      "title": "Inversion of Control (IoC) · the example",
-      "caption": "Inversion of Control delegates some calling or construction decisions to an external coordinator or framework.",
+      "title": "Let another part of the program make the call · the example",
+      "caption": "IoC lets a framework or coordinator control when some application code runs.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14860,8 +14860,8 @@
       "id": "fig-6-1-3",
       "number": "6.1.3",
       "chapter": "ch-6-1",
-      "title": "Dependency Injection (DI) · the example",
-      "caption": "Dependency Injection supplies collaborators through construction or calls instead of hiding their creation or lookup.",
+      "title": "Pass the sender into the service · the example",
+      "caption": "DI supplies a dependency from outside the object or operation that uses it.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14869,8 +14869,8 @@
       "id": "fig-6-1-4",
       "number": "6.1.4",
       "chapter": "ch-6-1",
-      "title": "Constructor, property/setter, and method injection · the example",
-      "caption": "Constructor, setter, and method injection provide dependencies at different points with different validity and lifetime implications.",
+      "title": "Supply a dependency when it becomes necessary · the example",
+      "caption": "Constructor, setter, and method injection supply dependencies at different times.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14878,8 +14878,8 @@
       "id": "fig-6-1-5",
       "number": "6.1.5",
       "chapter": "ch-6-1",
-      "title": "Dependency inversion principle vs DI · the example",
-      "caption": "Dependency inversion concerns knowledge direction; DI concerns supplying collaborators. Either term alone does not establish the other.",
+      "title": "Separate injection from dependency inversion · the example",
+      "caption": "DI concerns how a dependency is supplied; DIP concerns which contracts the code depends on.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14887,8 +14887,8 @@
       "id": "fig-6-1-6",
       "number": "6.1.6",
       "chapter": "ch-6-1",
-      "title": "Composition roots and DI containers · the example",
-      "caption": "A composition root assembles collaborators; a DI container automates selected construction and lifetime rules.",
+      "title": "Assemble the application in one clear place · the example",
+      "caption": "The composition root connects concrete objects; a DI container can automate their construction and reuse.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14896,8 +14896,8 @@
       "id": "fig-6-2-1",
       "number": "6.2.1",
       "chapter": "ch-6-2",
-      "title": "Scope identities make lifetime semantics visible",
-      "caption": "These are identity observations in one application. Framework registration and disposal rules must still be checked.",
+      "title": "Which requests receive the same object?",
+      "caption": "Matching letters name the same object. Here, scoped means one per request scope, transient means a new object per lookup, and singleton means one reused by this container. Framework rules determine the actual boundaries and cleanup.",
       "why": "Make the internal structure or state relation visible before claiming its behavior.",
       "status": "available"
     },
@@ -14905,8 +14905,8 @@
       "id": "fig-6-2-2",
       "number": "6.2.2",
       "chapter": "ch-6-2",
-      "title": "Request scopes, session scopes, and custom scopes · the example",
-      "caption": "Scopes define resource lifetimes for requests, sessions, or jobs; their meanings need explicit ownership and cleanup.",
+      "title": "Give each request or job its own boundary · the example",
+      "caption": "A scope names a boundary for reuse and cleanup; a later job needs its own valid resources.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14914,8 +14914,8 @@
       "id": "fig-6-2-3",
       "number": "6.2.3",
       "chapter": "ch-6-2",
-      "title": "Object creation vs object ownership · the example",
-      "caption": "Creating or holding a resource does not determine who owns its disposal.",
+      "title": "Decide who must close the resource · the example",
+      "caption": "Ownership determines who releases a resource; a reference alone does not transfer that responsibility.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14923,8 +14923,8 @@
       "id": "fig-6-2-4",
       "number": "6.2.4",
       "chapter": "ch-6-2",
-      "title": "Disposal, cleanup, and resource lifecycles · the example",
-      "caption": "Cleanup must release owned resources on success, failure, and cancellation under the relevant contract.",
+      "title": "Release resources on every exit path · the example",
+      "caption": "Structured cleanup returns owned resources when work ends, including supported error and cancellation paths.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14932,8 +14932,8 @@
       "id": "fig-6-2-5",
       "number": "6.2.5",
       "chapter": "ch-6-2",
-      "title": "Lazy initialization · the example",
-      "caption": "Lazy initialisation defers work to first use, requiring concurrency, publication, failure, and latency decisions.",
+      "title": "Create an expensive object only when needed · the example",
+      "caption": "Lazy initialisation moves construction to first use, together with its delay and possible failure.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14941,8 +14941,8 @@
       "id": "fig-6-2-6",
       "number": "6.2.6",
       "chapter": "ch-6-2",
-      "title": "Dependency cycles and captive dependencies · the example",
-      "caption": "Cycles can signal unclear responsibilities; captive dependencies retain collaborators beyond their valid shorter lifetime.",
+      "title": "Find cycles and dependencies kept too long · the example",
+      "caption": "A cycle blocks construction; a captive dependency can survive construction but be retained beyond its valid lifetime.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14950,8 +14950,8 @@
       "id": "fig-6-3-1",
       "number": "6.3.1",
       "chapter": "ch-6-3",
-      "title": "DI vs service locator · the example",
-      "caption": "A service locator hides dependencies behind runtime lookup; DI can make them explicit at the appropriate boundary.",
+      "title": "Show dependencies instead of looking them up inside · the example",
+      "caption": "A service locator obtains dependencies through lookup; explicit injection makes the receiver’s needs visible.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14959,8 +14959,8 @@
       "id": "fig-6-3-2",
       "number": "6.3.2",
       "chapter": "ch-6-3",
-      "title": "DI vs factory pattern · the example",
-      "caption": "A factory chooses or creates a collaborator; injection supplies it or the factory, with ownership still specified.",
+      "title": "Inject a factory for a choice made later · the example",
+      "caption": "DI can supply a factory that selects or constructs a dependency when later input is available.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14968,8 +14968,8 @@
       "id": "fig-6-3-3",
       "number": "6.3.3",
       "chapter": "ch-6-3",
-      "title": "Follow the related complete design",
-      "caption": "Durable intent reaches a bounded channel worker and a provider with explicit outcome meanings.",
+      "title": "Supply the sender from outside",
+      "caption": "The constructor shows that the service needs a sender. It does not need to search a global registry during the operation.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -14977,17 +14977,17 @@
       "id": "fig-6-3-4",
       "number": "6.3.4",
       "chapter": "ch-6-3",
-      "title": "State and ownership in the related design",
-      "caption": "Intent, delivery tasks, attempts, and callbacks record different stages of the notification.",
-      "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
+      "title": "Choose a sender when the message arrives",
+      "caption": "Injection supplies the factory at construction. The factory handles the choice that becomes known only when a message arrives.",
+      "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
     {
       "id": "fig-6-4-1",
       "number": "6.4.1",
       "chapter": "ch-6-4",
-      "title": "Factory Method, Abstract Factory, Builder, Prototype, Singleton · the example",
-      "caption": "Creational patterns organise different construction choices, families, staged assembly, copying, and bounded instance access.",
+      "title": "Choose how an object is created · the example",
+      "caption": "Creational patterns organise how objects are selected, assembled, copied, or shared.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -14996,7 +14996,7 @@
       "number": "6.4.2",
       "chapter": "ch-6-4",
       "title": "Factory Method · the example",
-      "caption": "Varies a creation operation so processing code can use a product without selecting its concrete implementation.",
+      "caption": "A subclass overrides a creation operation while the surrounding processing steps stay shared.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15005,7 +15005,7 @@
       "number": "6.4.3",
       "chapter": "ch-6-4",
       "title": "Abstract Factory · the example",
-      "caption": "Creates a compatible family of collaborators through one selected construction interface.",
+      "caption": "One selected factory supplies a compatible family of related objects.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15014,7 +15014,7 @@
       "number": "6.4.4",
       "chapter": "ch-6-4",
       "title": "Builder · the example",
-      "caption": "Collects construction choices and validates them before producing a usable value.",
+      "caption": "A builder collects choices in stages and validates them before returning a finished object.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15023,7 +15023,7 @@
       "number": "6.4.5",
       "chapter": "ch-6-4",
       "title": "Prototype · the example",
-      "caption": "Creates an object by copying configured state under explicit sharing and ownership rules.",
+      "caption": "Prototype creates an object by copying configured state with explicit rules for copied and shared values.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15032,7 +15032,7 @@
       "number": "6.4.6",
       "chapter": "ch-6-4",
       "title": "Singleton · the example",
-      "caption": "Restricts instance access within a specified program or container boundary, without implying global uniqueness or safe mutation.",
+      "caption": "Singleton restricts access to one instance within a stated program boundary; it supplies no cross-process uniqueness.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15040,8 +15040,8 @@
       "id": "fig-6-5-1",
       "number": "6.5.1",
       "chapter": "ch-6-5",
-      "title": "Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy · the example",
-      "caption": "Structural patterns organise interface translation, composition, grouping, added behaviour, simplified access, sharing, and mediation to a target.",
+      "title": "Arrange objects around an existing operation · the example",
+      "caption": "Structural patterns arrange objects to translate, extend, group, simplify, share, or control access.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -15050,7 +15050,7 @@
       "number": "6.5.2",
       "chapter": "ch-6-5",
       "title": "Adapter · the example",
-      "caption": "Translates an existing interface or representation into a caller’s required behavioural contract.",
+      "caption": "Adapter translates an existing interface and its outcomes into the contract a caller needs.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15059,7 +15059,7 @@
       "number": "6.5.3",
       "chapter": "ch-6-5",
       "title": "Bridge · the example",
-      "caption": "Uses composition to let two dimensions of variation evolve independently.",
+      "caption": "Bridge keeps two kinds of variation separate by having one object use another through a contract.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15068,7 +15068,7 @@
       "number": "6.5.4",
       "chapter": "ch-6-5",
       "title": "Composite · the example",
-      "caption": "Lets callers use leaves and groups through a compatible interface, with explicit traversal and partial-failure rules.",
+      "caption": "Composite lets callers use single objects and groups through the same operation.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15077,7 +15077,7 @@
       "number": "6.5.5",
       "chapter": "ch-6-5",
       "title": "Decorator · the example",
-      "caption": "Adds behaviour around a collaborator while retaining its interface, with composition order affecting meaning.",
+      "caption": "Decorator adds behaviour around an operation while preserving its interface; wrapper order can change the meaning.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15086,7 +15086,7 @@
       "number": "6.5.6",
       "chapter": "ch-6-5",
       "title": "Facade · the example",
-      "caption": "Offers a focused entry to cooperating subsystem operations without hiding consequential outcomes.",
+      "caption": "Facade provides a focused entry point to several cooperating operations with clear result meanings.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15095,7 +15095,7 @@
       "number": "6.5.7",
       "chapter": "ch-6-5",
       "title": "Flyweight · the example",
-      "caption": "Shares suitable immutable intrinsic state while keeping per-use context separate.",
+      "caption": "Flyweight shares suitable unchanged data while each use supplies its own changing context.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15104,7 +15104,7 @@
       "number": "6.5.8",
       "chapter": "ch-6-5",
       "title": "Proxy · the example",
-      "caption": "Represents a target interface while controlling access, creation, or location with explicit cost and failure behaviour.",
+      "caption": "Proxy represents a target through its interface while controlling access, creation, or location.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15112,8 +15112,8 @@
       "id": "fig-6-6-1",
       "number": "6.6.1",
       "chapter": "ch-6-6",
-      "title": "Strategy, Observer, Command, State, Chain of Responsibility, Template Method, Iterator, Mediator, Memento, Visitor · the example",
-      "caption": "Behavioural patterns organise algorithms, notifications, intentions, state transitions, traversal, and coordination at chosen extension points.",
+      "title": "Give each behaviour a clear home · the example",
+      "caption": "Behavioural patterns organise decisions, actions, reactions, and coordination between objects.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -15122,7 +15122,7 @@
       "number": "6.6.2",
       "chapter": "ch-6-6",
       "title": "Strategy · the example",
-      "caption": "Supplies an interchangeable algorithm or policy behind a stable behavioural contract.",
+      "caption": "Strategy supplies a replaceable algorithm through a shared operation.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15131,7 +15131,7 @@
       "number": "6.6.3",
       "chapter": "ch-6-6",
       "title": "Observer · the example",
-      "caption": "Notifies subscribed listeners under defined timing, lifetime, ordering, and failure rules.",
+      "caption": "Observer calls subscribed listeners when an event occurs under explicit timing and failure rules.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15140,7 +15140,7 @@
       "number": "6.6.4",
       "chapter": "ch-6-6",
       "title": "Command · the example",
-      "caption": "Represents a requested action as explicit data and identity for an appropriate handler.",
+      "caption": "Command represents a requested action as data so its execution can be handled separately.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15149,7 +15149,7 @@
       "number": "6.6.5",
       "chapter": "ch-6-6",
       "title": "State · the example",
-      "caption": "Organises behaviour around a lifecycle whose guarded transitions follow entity history.",
+      "caption": "State changes an object’s permitted behaviour as its lifecycle advances through allowed transitions.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15158,7 +15158,7 @@
       "number": "6.6.6",
       "chapter": "ch-6-6",
       "title": "Chain of Responsibility · the example",
-      "caption": "Passes a request through ordered handlers with explicit continuation, rejection, and handling rules.",
+      "caption": "Chain of Responsibility passes work through handlers that explicitly stop or continue the request.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15167,7 +15167,7 @@
       "number": "6.6.7",
       "chapter": "ch-6-6",
       "title": "Template Method · the example",
-      "caption": "Preserves a process skeleton while allowing selected implementation steps to vary.",
+      "caption": "Template Method fixes a sequence of steps while letting subclasses replace selected steps.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15176,7 +15176,7 @@
       "number": "6.6.8",
       "chapter": "ch-6-6",
       "title": "Iterator · the example",
-      "caption": "Exposes traversal without revealing collection representation, while retaining ordering and resource-lifetime obligations.",
+      "caption": "Iterator supplies items in sequence while hiding the traversal details and respecting resource lifetimes.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15185,7 +15185,7 @@
       "number": "6.6.9",
       "chapter": "ch-6-6",
       "title": "Mediator · the example",
-      "caption": "Coordinates collaborators through a focused owner instead of many direct relationships.",
+      "caption": "Mediator places a focused coordination rule between collaborators instead of linking each directly to the others.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15194,7 +15194,7 @@
       "number": "6.6.10",
       "chapter": "ch-6-6",
       "title": "Memento · the example",
-      "caption": "Captures and restores supported local state without claiming to reverse independent external effects.",
+      "caption": "Memento captures supported local state so its owner can restore it later.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15203,7 +15203,7 @@
       "number": "6.6.11",
       "chapter": "ch-6-6",
       "title": "Visitor · the example",
-      "caption": "Adds operations across a known structure, trading easier new operations for more work when element types change.",
+      "caption": "Visitor groups an operation across known element kinds; adding a kind can require changes to many visitors.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15211,8 +15211,8 @@
       "id": "fig-6-7-1",
       "number": "6.7.1",
       "chapter": "ch-6-7",
-      "title": "Repository, Unit of Work, Specification, CQRS, and dependency boundaries · the example",
-      "caption": "Repository, Unit of Work, Specification, and CQRS clarify data access, commit ownership, predicates, and distinct read/write models.",
+      "title": "Separate data access, rules, and commit decisions · the example",
+      "caption": "Data access, rule evaluation, grouped changes, and read models solve different problems.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available"
     },
@@ -15221,7 +15221,7 @@
       "number": "6.7.2",
       "chapter": "ch-6-7",
       "title": "Repository · the example",
-      "caption": "Offers application-oriented persistence operations through a contract defining transactions, bounds, errors, and lifetimes.",
+      "caption": "Repository supplies application-level operations for finding and saving data under an explicit storage contract.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15230,7 +15230,7 @@
       "number": "6.7.3",
       "chapter": "ch-6-7",
       "title": "Unit of Work · the example",
-      "caption": "Owns related local changes under one commit and cleanup boundary.",
+      "caption": "Unit of Work tracks related data changes and coordinates writing them within a defined transaction boundary.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15239,7 +15239,7 @@
       "number": "6.7.4",
       "chapter": "ch-6-7",
       "title": "Specification · the example",
-      "caption": "Names a reusable eligibility or selection predicate whose later state-changing use may need atomic revalidation.",
+      "caption": "Specification names a reusable condition; changing data later still requires checking the current rule.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -15248,7 +15248,7 @@
       "number": "6.7.5",
       "chapter": "ch-6-7",
       "title": "CQRS · the example",
-      "caption": "Uses different command and query models where their needs justify extra projection and freshness work.",
+      "caption": "CQRS separates models for changing and reading data when their different needs justify the extra work.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available"
     },
@@ -18573,7 +18573,7 @@
       "number": "5.0.1",
       "chapter": "unit-5",
       "title": "Before/after class diagrams",
-      "caption": "Refactoring moves knowledge while preserving approved, declined, and uncertain outcomes.",
+      "caption": "Each part now owns a specific kind of work. A provider field change can stay inside the adapter while the payment rule remains the same.",
       "why": "Compare the stated dimensions under one explicit contract.",
       "status": "available",
       "essential_title": "Before/after class diagrams"
@@ -18583,8 +18583,8 @@
       "number": "5.0.2",
       "chapter": "unit-5",
       "title": "dependency graph",
-      "caption": "Dashed arrows denote source dependencies around an application-owned contract.",
-      "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
+      "caption": "The service uses the application’s gateway contract. The provider adapter implements that contract. The contract does not need to name a provider library.",
+      "why": "Read these as source relationships, not network calls.",
       "status": "available",
       "essential_title": "dependency graph"
     },
@@ -18593,7 +18593,7 @@
       "number": "5.0.3",
       "chapter": "unit-5",
       "title": "inheritance vs composition",
-      "caption": "Composition can separate independent variation; inheritance is appropriate only with valid behavioral substitution.",
+      "caption": "A service can receive a fraud policy and a gateway independently. Inheritance is useful when the specialised class preserves what base-class callers may do.",
       "why": "Compare the stated dimensions under one explicit contract.",
       "status": "available",
       "essential_title": "inheritance vs composition"
@@ -18603,7 +18603,7 @@
       "number": "5.0.4",
       "chapter": "unit-5",
       "title": "cohesion/coupling illustrations",
-      "caption": "Cohesion and coupling are evaluated through concrete change propagation, not class-count metrics.",
+      "caption": "These examples show which parts need to change together. Keeping related decisions together helps a change stay in one place.",
       "why": "Inspect the concrete state, values, and assumptions rather than infer a guarantee from a component name.",
       "status": "available",
       "essential_title": "cohesion/coupling illustrations"
@@ -18613,7 +18613,7 @@
       "number": "6.0.1",
       "chapter": "unit-6",
       "title": "Object creation timelines",
-      "caption": "Construction, borrowing, and disposal form a timeline; background jobs need independent scopes.",
+      "caption": "This example reuses the sender for the application and the session for one request. The scope owner closes its session; a later job needs a current session of its own.",
       "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
       "status": "available",
       "essential_title": "Object creation timelines"
@@ -18622,8 +18622,8 @@
       "id": "fig-6-0-2",
       "number": "6.0.2",
       "chapter": "unit-6",
-      "title": "Scope identities make lifetime semantics visible",
-      "caption": "These are identity observations in one application. Framework registration and disposal rules must still be checked.",
+      "title": "Which requests receive the same object?",
+      "caption": "Matching letters name the same object. Here, scoped means one per request scope, transient means a new object per lookup, and singleton means one reused by this container. Framework rules determine the actual boundaries and cleanup.",
       "why": "Make the internal structure or state relation visible before claiming its behavior.",
       "status": "available",
       "essential_title": "singleton/scoped/transient identity illustration"
@@ -18633,8 +18633,8 @@
       "number": "6.0.3",
       "chapter": "unit-6",
       "title": "UML class relationships",
-      "caption": "Roles are source-level class/interface relationships, not separate deployed services.",
-      "why": "Follow the stated ordering and identify which step owns the relevant outcome.",
+      "caption": "The service uses the Sender operation, and EmailSender implements it. These are code relationships between objects; they can all run in the same process.",
+      "why": "Read these as source relationships, not network calls.",
       "status": "available",
       "essential_title": "UML class relationships"
     },
@@ -18643,7 +18643,7 @@
       "number": "6.0.4",
       "chapter": "unit-6",
       "title": "dependency inversion before/after",
-      "caption": "Injection and inversion are different: supplying a concrete SDK alone may retain its semantic coupling.",
+      "caption": "Two decisions changed: the service uses its own contract, and startup supplies an implementation. Supplying the provider library alone would only change construction.",
       "why": "Compare the stated dimensions under one explicit contract.",
       "status": "available",
       "essential_title": "dependency inversion before/after"
@@ -18653,7 +18653,7 @@
       "number": "6.0.5",
       "chapter": "unit-6",
       "title": "pattern comparisons",
-      "caption": "Pattern intent and contract matter more than all three being implemented as wrappers or interfaces.",
+      "caption": "Similar-looking objects can solve different problems. Follow the operation each one performs before choosing a pattern name.",
       "why": "Compare the stated dimensions under one explicit contract.",
       "status": "available",
       "essential_title": "pattern comparisons"
@@ -19841,7 +19841,7 @@
     "case_review_sections": 264,
     "exercises_produced": 242,
     "solutions_produced": 242,
-    "authored_lesson_words": 89648
+    "authored_lesson_words": 87826
   },
   "review": {
     "stage_1": "complete: exact syllabus and prerequisite allocation",

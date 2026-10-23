@@ -2,12 +2,12 @@
 
 **From Objects to Planet-Scale Systems** — the complete first edition in the Learn · Research · Visualise design language.
 
-Open [the digital edition](index.html) or download [the complete PDF](System-Design-Atlas-Complete.pdf) (1,070 tagged A4 pages, approximately 14 MB). The earlier [foundations PDF](System-Design-Atlas-Foundations.pdf) is retained as a separately scoped historical installment.
+Open [the digital edition](index.html) or download [the complete PDF](System-Design-Atlas-Complete.pdf) (1,068 tagged A4 pages, approximately 14 MB). The earlier [foundations PDF](System-Design-Atlas-Foundations.pdf) is retained as a separately scoped historical installment.
 
 ## What is included
 
 - All **22 units and 99 chapters**, covering all **390 exact supplied syllabus items**.
-- **89,648 words of authored lesson, pattern, and case-study prose**, excluding the separate solutions and much of the reader/reference material.
+- **87,826 words of authored lesson, pattern, and case-study prose**, excluding the separate solutions and much of the reader/reference material.
 - **575 original SVG figures**, including at least four per chapter and all 94 required unit illustration assignments. Four Unit 1 assignments refer to its existing chapter figures; 90 additional unit plates cover the other required visual vocabulary. The master concept map is separately numbered M.1.
 - All **12 mandatory end-to-end designs**, each with all **22 required review sections**, explicit assumptions, APIs, logical schemas, LLD, HLD, flows, calculations, failures, security, deployment, observability, costs, alternatives, evolution, review, and an implementation challenge.
 - **242 questions and 242 separate explained answers**: five conceptual, three scenarios, one design/debugging challenge, one implementation exercise, and one advanced thought experiment for every unit.
@@ -15,9 +15,9 @@ Open [the digital edition](index.html) or download [the complete PDF](System-Des
 - **13 browser-local workbenches**: acknowledgment/crash ordering, change propagation, weighted design preferences, C4 views, capacity, bounded queues, last-seat claims, LRU, rendezvous assignment, pipeline fencing, quorum intersection, token bucket, and cost per useful outcome.
 - A **441-entry glossary and concept reference**, complete contents, dependency-closed reading paths, formula reference, pattern destinations, diagram index, and **61 selected production sources**.
 
-The current writing revision focuses on Units 3 and 4. Following Unit 1's teaching approach, Unit 3 follows a browser opening the task application, and Unit 4 follows file uploads through the runtime. Terms are explained where they first become useful. Concrete request, waiting, and update sequences replace compressed lists and repeated design advice. Definitions and code fragments are highlighted for reading.
+The latest writing revision covers Units 5 and 6, using the same simple textbook approach as Units 1, 3, and 4. Unit 5 follows changes to a payment service. Unit 6 follows notification delivery, then uses small examples to explain each design pattern. New terms name ideas that the text has already begun to explain. Concrete steps show why the design works.
 
-All 34 lessons, eight chapter introductions, related figure labels/captions, worked explanations, and 22 assessments in these two units were revised. The other 91 chapter pages, including Unit 1, are unchanged. Earlier broad revisions remain in the book; this focused pass makes no claim that the remaining units have received the same final language review. See [the revision review](WRITING_REVISION_PLAN.md) and [verification evidence](QA.md).
+All 33 concept lessons, 26 pattern explanations, 11 chapter introductions, and 22 assessments in these two units were revised, along with their captions, reference definitions, and worked examples. The other 88 chapter pages are unchanged in this pass, including Units 1, 3, and 4. The remaining units still need their own focused language review. See [the revision review](WRITING_REVISION_PLAN.md) and [verification evidence](QA.md).
 
 The content-driven [manifest](completion-manifest.json) records actual produced artifacts and review boundaries. The [book blueprint](BLUEPRINT.md) retains stable chapter IDs and exact topic allocation. The original request remains in [BRIEF.txt](BRIEF.txt).
 

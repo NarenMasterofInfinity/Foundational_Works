@@ -67,3 +67,13 @@ TCP byte-stream boundaries, recovery, and handshake wording were checked against
 The concurrency explanation was compared with OSTEP's [thread introduction](https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf) and [condition variables](https://pages.cs.wisc.edu/~remzi/OSTEP/threads-cv.pdf). Publication uses the [Go memory model](https://go.dev/ref/mem) as a concrete unlock/later-lock guarantee, rather than asserting a universal language rule. Readers and writers of the paired-balance example use the same protection. Stack/heap layout remains a common model with runtime-dependent storage details.
 
 Timings and rates remain illustrative inputs. The upload pseudocode limits processing workers and waiting identifiers; reception size/concurrency need separate limits. Acceptance is for the current process run, while restart recovery needs saved job records. Cleanup operations are assumed to succeed in the illustration.
+
+## Focused Units 5 and 6 revision · 23 October 2026
+
+This pass revises the 33 concept lessons and 26 pattern explanations in Units 5 and 6, with their associated teaching material. Other chapter panels, including the accepted Units 3 and 4, remain unchanged.
+
+Dependency injection, inversion of control, and service location were checked against [Fowler's original DI article](https://martinfowler.com/articles/injection.html). Lifetime and disposal wording was checked against [Microsoft's DI documentation](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection) and its [guidelines](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines). Reuse examples state their container/request boundaries; they do not imply that every framework has identical scope or ownership behaviour.
+
+The enterprise pattern explanations retain the distinction between [Unit of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html) tracking local changes and a transaction that encompasses a remote provider, and between [CQRS](https://martinfowler.com/bliki/CQRS.html) and separate deployment or event sourcing. Creation, translation, wrapping, and state-dependent behaviour are explained as different mechanisms.
+
+Payment examples preserve amount units, currency, and operation identity. A timeout remains uncertain; an operation identifier alone does not establish provider duplicate handling. The recording gateway makes no remote charge. Code and diagram examples show their declared mechanisms rather than claiming production guarantees.

@@ -43,8 +43,59 @@ MODELS={
  ('flow',
   ['A starts a read', 'A pauses; loop runs B', 'Read completes; A is ready', 'Loop gives A another turn'],
   'Completing the read makes A ready. A can continue only when the loop thread runs it.')],
-5:[('matrix',[['Responsibility','Before','After'],['Validation','Payment god class','Task/domain policy'],['Provider calls','Hardcoded SDK creation','Injected gateway adapter'],['Persistence','Mixed with rendering','Owned repository contract']],'Refactoring moves knowledge while preserving approved, declined, and uncertain outcomes.'),('flow',['Payment policy','Gateway contract','Provider adapter'],'Dashed arrows denote source dependencies around an application-owned contract.',True),('matrix',[['Variation','Inheritance approach','Composition approach'],['Channel × content','Subclass combinations','Content receives transport'],['Behavioral contract','Subclass must substitute','Collaborator contract explicit'],['Cost','Hierarchy coupling','Wiring and interfaces']],'Composition can separate independent variation; inheritance is appropriate only with valid behavioral substitution.'),('snap',['Fee rule changes inside policy','Provider format changes in adapter','Receipt rendering changes in renderer','Ledger invariant stays owned'],'Cohesion and coupling are evaluated through concrete change propagation, not class-count metrics.')],
-6:[('flow',['Startup creates shared config','Request opens scope R','R resolves owned unit of work','Request end disposes R'],'Construction, borrowing, and disposal form a timeline; background jobs need independent scopes.'),('special',7,'Identity observations across two request scopes.'),('flow',['NotificationService','Sender interface','Email/SMS implementations'],'Roles are source-level class/interface relationships, not separate deployed services.',True),('matrix',[['Question','Before inversion','After inversion'],['High-level dependency','Concrete provider SDK','Application-owned contract'],['Creation','Inside service','Composition root'],['Testing','Real effect coupled','Controlled collaborator']],'Injection and inversion are different: supplying a concrete SDK alone may retain its semantic coupling.'),('matrix',[['Compare','Principal intent','Extra responsibility'],['Adapter / Decorator','Translate / add behavior','Preserve outcome meaning'],['Factory / DI','Create / supply','Define returned lifetime'],['Strategy / State','Algorithm / lifecycle','Validate allowed state change']],'Pattern intent and contract matter more than all three being implemented as wrappers or interfaces.')],
+5:[('matrix',
+  [['Work', 'Before separation', 'After separation'],
+   ['Check payment rule', 'One large payment class', 'Payment rule object'],
+   ['Call provider', 'Same payment class', 'Provider adapter'],
+   ['Save result', 'Same payment class', 'Repository']],
+  'Each part now owns a specific kind of work. A provider field change can stay inside the adapter '
+  'while the payment rule remains the same.'),
+ ('dependencies',
+  ['Payment service', 'Gateway contract', 'Provider adapter'],
+  'The service uses the application’s gateway contract. The provider adapter implements that '
+  'contract. The contract does not need to name a provider library.'),
+ ('matrix',
+  [['Question', 'Inheritance', 'Composition'],
+   ['How is behaviour built?', 'Specialise a base class', 'Connect cooperating objects'],
+   ['Two independent choices', 'May need many subclasses', 'Supply each choice separately'],
+   ['What must callers rely on?',
+    'Subclass keeps base promises',
+    'Each object keeps its contract']],
+  'A service can receive a fraud policy and a gateway independently. Inheritance is useful when the '
+  'specialised class preserves what base-class callers may do.'),
+ ('snap',
+  ['Fee change: edit the fee policy',
+   'Provider field change: edit the adapter',
+   'Receipt layout: edit the renderer',
+   'Allowed payment states: edit the payment model'],
+  'These examples show which parts need to change together. Keeping related decisions together '
+  'helps a change stay in one place.')],
+6:[('flow',
+  ['Startup creates shared sender',
+   'Request opens its scope',
+   'Scope supplies a database session',
+   'Request ends; session is closed'],
+  'This example reuses the sender for the application and the session for one request. The scope '
+  'owner closes its session; a later job needs a current session of its own.'),
+ ('special', 7, 'Compare which requests receive the same object.'),
+ ('dependencies',
+  ['NotificationService', 'Sender interface', 'EmailSender adapter'],
+  'The service uses the Sender operation, and EmailSender implements it. These are code '
+  'relationships between objects; they can all run in the same process.'),
+ ('matrix',
+  [['Question', 'Before the change', 'After the change'],
+   ['Service knows', 'Provider request types', 'Application’s Sender contract'],
+   ['Who builds the sender?', 'The service itself', 'Startup code'],
+   ['Test collaborator', 'Provider library', 'Recording sender']],
+  'Two decisions changed: the service uses its own contract, and startup supplies an '
+  'implementation. Supplying the provider library alone would only change construction.'),
+ ('matrix',
+  [['Comparison', 'First arrangement', 'Second arrangement'],
+   ['Adapter / Decorator', 'Translate an interface', 'Add work around the same interface'],
+   ['Factory / DI', 'Choose or create an object', 'Supply a needed object'],
+   ['Strategy / State', 'Choose an algorithm', 'Change behaviour with lifecycle state']],
+  'Similar-looking objects can solve different problems. Follow the operation each one performs '
+  'before choosing a pattern name.')],
 7:[('matrix',[['View','Boundary rule','Runtime implication'],['Layered','Separate technical roles','Can remain one process'],['Hexagonal','Ports express app needs','Adapters call in or out'],['Clean/Onion','Policy dependencies inward','Runtime effects still reach adapters']],'The styles organize source responsibilities, not mandatory physical deployment layers.'),('matrix',[['Design','Deployment','Main cost'],['Modular monolith','One release unit','Must enforce internal ownership'],['Microservices','Independent processes','Network, versions, operations'],['Distributed monolith','Many coupled processes','Costs without independence']],'Choose according to actual independent operation and change needs.'),('flow',['Order use case','Payment contract','Provider adapter'],'Dependency arrows express knowledge; runtime execution reaches the selected adapter.',True),('flow',['Catalog Product model','Translation contract','Fulfillment Item model'],'Bounded contexts retain different valid meanings rather than sharing every field globally.',True)],
 8:[('sequence',[('Client','API','POST payment with key K'),('API','Store','Commit intent and key result'),('Store','API','Committed identity'),('API','Client','201 with pending resource')],'HTTP creation and financial completion are different outcomes.'),('flow',['Authenticated client','Gateway edge policy','Domain ownership authorization','Application operation'],'An edge gateway cannot decide every resource-specific permission without the appropriate domain context.'),('matrix',[['Contract','Caller observes','State owner'],['Synchronous completion','Waits for final result','Operation still may be uncertain'],['Asynchronous acceptance','Receives operation ID','Durable workflow'],['Status query','Reads current progress','Authoritative or stated-freshness view']],'An accepted operation needs durable ownership beyond the request lifetime.'),('flow',['Pending payment','Provider result or uncertain','Reconcile verified evidence','Captured or declined outcome'],'Uncertain is not synonymous with declined; refunds form a separately tracked lifecycle.')],
 9:[('matrix',[['Access pattern','Candidate family','Important cost'],['Relationships and invariants','Relational','Index/write and transaction cost'],['Nested aggregate','Document','Cross-document rules'],['Direct key access','Key-value','Secondary query maintenance'],['Relationship traversal','Graph','Degree and traversal bounds']],'Families describe useful access patterns; no category label establishes all guarantees.'),('matrix',[['Layout','Physical grouping','Suitable operation'],['Row','Fields of one record','Bounded point read'],['Column','One field across records','Analytical aggregation'],['Object','Named immutable bytes','Large file transfer']],'Logical data modeling and physical layout are separate decisions.'),('matrix',[['Fact','Normalized source','Legitimate copy'],['Current profile address','Customer profile','Cache with freshness policy'],['Purchase-time address','Order history','Historical fact, not stale profile'],['Display name','User record','Projection with update policy']],'Not all duplication is an anomaly: distinguish historical snapshots from copies meant to track current state.'),('special',14,'Keys, cardinalities, and historical values in an order schema.')],
@@ -78,6 +129,15 @@ def sequence(n,k,title,events,caption):
     return shell(n,0,k,title,body,caption,'Follow explicit message ordering and locate the acknowledgment or effect boundary.',height=height)
 
 
+def dependency_graph(n,k,title,roles,caption):
+    service,contract,adapter=roles
+    body=box(25,55,240,100,service,'control')+box(330,55,240,100,contract,'control')+box(635,55,240,100,adapter,'control')
+    body+='<path d="M265 105H323M635 105H577" stroke="#7b65a8" stroke-width="1.7" stroke-dasharray="5 4" fill="none"/><path d="M323 100L330 105L323 110M577 100L570 105L577 110" stroke="#7b65a8" stroke-width="1.7" fill="none"/>'
+    body+=text(298,40,'uses',size=12)+text(602,40,'implements',size=12)
+    body+=text(450,202,'Arrows point to the contract each implementation must know.',size=12)
+    return shell(n,0,k,title,body,caption,'Read these as source relationships, not network calls.',230)
+
+
 def plates(unit):
     n=unit['n'];html='';coverage=[]
     if n==1:return '',[]
@@ -86,6 +146,7 @@ def plates(unit):
     for k,(title,spec) in enumerate(zip(unit['illustrations'],rows),1):
         kind,data,caption,*rest=spec
         if kind=='special':visual=special(n,0,k,data)
+        elif kind=='dependencies':visual=dependency_graph(n,k,title,data,caption)
         elif kind=='sequence':visual=sequence(n,k,title,data,caption)
         elif kind=='flow':visual=flow(n,0,k,title,data,caption,rest[0] if rest else False)
         elif kind=='snap':visual=snapshots(n,0,k,title,data,caption)

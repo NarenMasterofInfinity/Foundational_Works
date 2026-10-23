@@ -52,39 +52,8 @@ Safe publication uses the language’s synchronisation rules so the reader can o
 Immutable records stay unchanged. Their mutable collection still needs rules for concurrent access.
 If arrivals exceed completions, waiting work grows. Backpressure makes the producer respond to the receiving side’s limited capacity.
 A parent scope accounts for its children. Cancellation lets them stop and release resources; saved continuing jobs need a longer-lived owner.''')
-add(5, '''Abstraction presents needed behaviour; encapsulation controls representation; polymorphism permits compatible implementations; inheritance specialises a relationship.
-Composition combines collaborators, while inheritance requires subclasses to preserve their callers' behavioural expectations.
-A contract specifies valid inputs, outcomes, effects, errors, and relevant timing or repetition rules beyond a signature.
-Cohesion concerns related work inside a module; coupling concerns dependencies and knowledge between modules.
-SOLID offers guidelines for responsibilities, useful extension, substitution, focused interfaces, and dependency direction.
-DRY avoids duplicated knowledge; KISS favours understandable required design; YAGNI defers unsupported speculative capability.
-The Law of Demeter discourages unnecessary dependence on distant objects' internal structure.
-Tell, Don't Ask favours sending intentions to the owner that can protect the relevant state rule.
-Command-query separation makes state-changing operations distinguishable from reads without requiring separate deployments.
-Immutable values and explicit effects make changes easier to follow, with allocation and execution costs still considered.
-Entities retain identity; value objects represent equal values; domain models express meaningful concepts and rules.
-Object collaboration describes requests, results, and ownership between components, including partial-failure handling.
-Testable design gives controlled inputs and visible outcomes; substitutes and real integration tests establish different evidence.
-Refactoring improves structure while preserving the intended observable behaviour.
-Pure functions can express decisions, while an explicit effect layer owns durable execution and external calls.''')
-add(6, '''Dependency inversion lets important policy rely on suitable abstractions rather than changeable implementation details.
-Inversion of Control delegates some calling or construction decisions to an external coordinator or framework.
-Dependency Injection supplies collaborators through construction or calls instead of hiding their creation or lookup.
-Constructor, setter, and method injection provide dependencies at different points with different validity and lifetime implications.
-Dependency inversion concerns knowledge direction; DI concerns supplying collaborators. Either term alone does not establish the other.
-A composition root assembles collaborators; a DI container automates selected construction and lifetime rules.
-Transient, scoped, and singleton describe reuse within defined framework boundaries, not universal global identity or safety.
-Scopes define resource lifetimes for requests, sessions, or jobs; their meanings need explicit ownership and cleanup.
-Creating or holding a resource does not determine who owns its disposal.
-Cleanup must release owned resources on success, failure, and cancellation under the relevant contract.
-Lazy initialisation defers work to first use, requiring concurrency, publication, failure, and latency decisions.
-Cycles can signal unclear responsibilities; captive dependencies retain collaborators beyond their valid shorter lifetime.
-A service locator hides dependencies behind runtime lookup; DI can make them explicit at the appropriate boundary.
-A factory chooses or creates a collaborator; injection supplies it or the factory, with ownership still specified.
-Creational patterns organise different construction choices, families, staged assembly, copying, and bounded instance access.
-Structural patterns organise interface translation, composition, grouping, added behaviour, simplified access, sharing, and mediation to a target.
-Behavioural patterns organise algorithms, notifications, intentions, state transitions, traversal, and coordination at chosen extension points.
-Repository, Unit of Work, Specification, and CQRS clarify data access, commit ownership, predicates, and distinct read/write models.''')
+add(5, 'Abstraction hides details behind an operation. Encapsulation controls state changes. Polymorphism lets compatible implementations share a calling form. Inheritance derives a class from another class.\nComposition connects objects with separate jobs. Inheritance is suitable only when the subclass preserves the behaviour callers expect from its parent.\nAn interface names operations. A contract explains valid inputs, result meanings, effects, and failure or retry behaviour.\nCohesion concerns related work within a module. Coupling concerns what one module must know about another.\nSOLID examines responsibilities, extension, valid replacement, focused interfaces, and dependency direction. Apply each principle to an actual change, rather than adding layers by habit.\nDRY avoids duplicate knowledge. KISS favours an understandable solution. YAGNI defers speculative features while keeping present requirements complete.\nThe Law of Demeter limits knowledge of distant objects. A caller should use a useful operation instead of depending on an internal lookup path.\nTell, Don’t Ask keeps a state-changing rule with its owner. Concurrent writers still need an atomic check and update at the shared storage boundary.\nQueries report information; commands request changes. Clear operation meanings do not require separate read and write infrastructure.\nImmutable values cannot be edited after creation. Pure functions calculate from inputs without external effects. Provider calls and writes still need explicit execution and recovery.\nAn entity is recognised by identity; a value object by its value. A domain model gives business concepts and their rules a clear representation.\nObject collaboration follows requests, results, and ownership. A coordinator tracks progress; an error does not undo earlier effects.\nA test double makes outcomes controllable. Dependency injection supplies the collaborator from outside. Tests must also check the real provider and storage boundaries.\nRefactoring changes structure while preserving observable behaviour. Code smells guide investigation; the repair should address a concrete difficulty.\nPure functions expose decisions as inputs and outputs. Separate code performs and records effects, including recovery from uncertain results.')
+add(6, 'A dependency is something code needs; a contract states how that dependency may be used.\nIoC lets a framework or coordinator control when some application code runs.\nDI supplies a dependency from outside the object or operation that uses it.\nConstructor, setter, and method injection supply dependencies at different times.\nDI concerns how a dependency is supplied; DIP concerns which contracts the code depends on.\nThe composition root connects concrete objects; a DI container can automate their construction and reuse.\nTransient creates per lookup, scoped reuses within a scope, and singleton reuses within its stated container boundary.\nA scope names a boundary for reuse and cleanup; a later job needs its own valid resources.\nOwnership determines who releases a resource; a reference alone does not transfer that responsibility.\nStructured cleanup returns owned resources when work ends, including supported error and cancellation paths.\nLazy initialisation moves construction to first use, together with its delay and possible failure.\nA cycle blocks construction; a captive dependency can survive construction but be retained beyond its valid lifetime.\nA service locator obtains dependencies through lookup; explicit injection makes the receiver’s needs visible.\nDI can supply a factory that selects or constructs a dependency when later input is available.\nCreational patterns organise how objects are selected, assembled, copied, or shared.\nStructural patterns arrange objects to translate, extend, group, simplify, share, or control access.\nBehavioural patterns organise decisions, actions, reactions, and coordination between objects.\nData access, rule evaluation, grouped changes, and read models solve different problems.')
 add(7, '''Layered architecture separates kinds of responsibility; physical tiers are a separate deployment choice.
 A modular monolith has one release unit with enforced internal contracts and data ownership.
 Microservices seek useful independent deployment and operation while adding network, version, and coordination work.
@@ -382,29 +351,37 @@ Regression tests preserve important behaviour while allowing deliberate contract
 Design validation traces original requirements to tests, measurements, reviews, and clearly unresolved assumptions.''')
 
 PATTERN_SUMMARIES={
-'Factory Method':'Varies a creation operation so processing code can use a product without selecting its concrete implementation.',
-'Abstract Factory':'Creates a compatible family of collaborators through one selected construction interface.',
-'Builder':'Collects construction choices and validates them before producing a usable value.',
-'Prototype':'Creates an object by copying configured state under explicit sharing and ownership rules.',
-'Singleton':'Restricts instance access within a specified program or container boundary, without implying global uniqueness or safe mutation.',
-'Adapter':'Translates an existing interface or representation into a caller’s required behavioural contract.',
-'Bridge':'Uses composition to let two dimensions of variation evolve independently.',
-'Composite':'Lets callers use leaves and groups through a compatible interface, with explicit traversal and partial-failure rules.',
-'Decorator':'Adds behaviour around a collaborator while retaining its interface, with composition order affecting meaning.',
-'Facade':'Offers a focused entry to cooperating subsystem operations without hiding consequential outcomes.',
-'Flyweight':'Shares suitable immutable intrinsic state while keeping per-use context separate.',
-'Proxy':'Represents a target interface while controlling access, creation, or location with explicit cost and failure behaviour.',
-'Strategy':'Supplies an interchangeable algorithm or policy behind a stable behavioural contract.',
-'Observer':'Notifies subscribed listeners under defined timing, lifetime, ordering, and failure rules.',
-'Command':'Represents a requested action as explicit data and identity for an appropriate handler.',
-'State':'Organises behaviour around a lifecycle whose guarded transitions follow entity history.',
-'Chain of Responsibility':'Passes a request through ordered handlers with explicit continuation, rejection, and handling rules.',
-'Template Method':'Preserves a process skeleton while allowing selected implementation steps to vary.',
-'Iterator':'Exposes traversal without revealing collection representation, while retaining ordering and resource-lifetime obligations.',
-'Mediator':'Coordinates collaborators through a focused owner instead of many direct relationships.',
-'Memento':'Captures and restores supported local state without claiming to reverse independent external effects.',
-'Visitor':'Adds operations across a known structure, trading easier new operations for more work when element types change.',
-'Repository':'Offers application-oriented persistence operations through a contract defining transactions, bounds, errors, and lifetimes.',
-'Unit of Work':'Owns related local changes under one commit and cleanup boundary.',
-'Specification':'Names a reusable eligibility or selection predicate whose later state-changing use may need atomic revalidation.',
-'CQRS':'Uses different command and query models where their needs justify extra projection and freshness work.'}
+'Factory Method':'A subclass overrides a creation operation while the surrounding processing steps stay shared.',
+'Abstract Factory':'One selected factory supplies a compatible family of related objects.',
+'Builder':'A builder collects choices in stages and validates them before returning a finished object.',
+'Prototype':(('Prototype creates an object by copying configured state with explicit rules for copied and shared '
+ 'values.')),
+'Singleton':(('Singleton restricts access to one instance within a stated program boundary; it supplies no '
+ 'cross-process uniqueness.')),
+'Adapter':'Adapter translates an existing interface and its outcomes into the contract a caller needs.',
+'Bridge':'Bridge keeps two kinds of variation separate by having one object use another through a contract.',
+'Composite':'Composite lets callers use single objects and groups through the same operation.',
+'Decorator':(('Decorator adds behaviour around an operation while preserving its interface; wrapper order can change '
+ 'the meaning.')),
+'Facade':'Facade provides a focused entry point to several cooperating operations with clear result meanings.',
+'Flyweight':'Flyweight shares suitable unchanged data while each use supplies its own changing context.',
+'Proxy':'Proxy represents a target through its interface while controlling access, creation, or location.',
+'Strategy':'Strategy supplies a replaceable algorithm through a shared operation.',
+'Observer':'Observer calls subscribed listeners when an event occurs under explicit timing and failure rules.',
+'Command':'Command represents a requested action as data so its execution can be handled separately.',
+'State':'State changes an object’s permitted behaviour as its lifecycle advances through allowed transitions.',
+'Chain of Responsibility':'Chain of Responsibility passes work through handlers that explicitly stop or continue the request.',
+'Template Method':'Template Method fixes a sequence of steps while letting subclasses replace selected steps.',
+'Iterator':(('Iterator supplies items in sequence while hiding the traversal details and respecting resource '
+ 'lifetimes.')),
+'Mediator':(('Mediator places a focused coordination rule between collaborators instead of linking each directly to '
+ 'the others.')),
+'Memento':'Memento captures supported local state so its owner can restore it later.',
+'Visitor':(('Visitor groups an operation across known element kinds; adding a kind can require changes to many '
+ 'visitors.')),
+'Repository':(('Repository supplies application-level operations for finding and saving data under an explicit '
+ 'storage contract.')),
+'Unit of Work':(('Unit of Work tracks related data changes and coordinates writing them within a defined transaction '
+ 'boundary.')),
+'Specification':'Specification names a reusable condition; changing data later still requires checking the current rule.',
+'CQRS':'CQRS separates models for changing and reading data when their different needs justify the extra work.'}

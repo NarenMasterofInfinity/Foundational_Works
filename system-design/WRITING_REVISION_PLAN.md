@@ -1,19 +1,23 @@
-# Current writing revision: Units 3 and 4
+# Current writing revision: Units 5 and 6
 
-Completed on **22 October 2026**. The user narrowed the work to these two units and made the `ncert-style-writing` approach mandatory: engaging, very simple language, with the necessary explanations before relying on unfamiliar terms. Unit 1 is the reference.
+Completed on **23 October 2026**, following the focused revision of Units 3 and 4. The `ncert-style-writing` skill and Unit 1 remain the teaching reference: very simple, engaging language with enough explanation to follow each step.
 
 ## What changed
 
-Unit 3 follows a browser opening the task application. It shows URL parts and an HTTP request, a packet reaching a listening program, a missing TCP byte range, DNS caching, certificate checks, the TCP handshake, NAT return mapping, and a request whose reply is lost. Operation identity is distinguished from the created task's identity.
+Unit 5 follows a payment service. It explains objects and their operations, then uses concrete changes to distinguish abstraction, encapsulation, polymorphism, inheritance, and composition. A charge contract states units, currency, identity, and result meanings. Reservation examples show why putting a rule inside a method still needs a suitable database operation. Payment examples retain the difference between decline and uncertainty.
 
-Unit 4 follows uploaded files. It explains process/thread and stack/heap meanings before using them, follows a task through an event loop, reproduces a lost counter update, traces lock and condition-variable operations, and shows publication, backpressure, and cancellation. The worker pseudocode declares its queue acceptance rule and cleanup, with the example's limits stated before or beside it.
+Unit 6 follows notification delivery. Startup construction, source dependencies, runtime calls, object reuse, and resource ownership are explained separately. Each of the 26 design patterns has its own problem, mechanism, example, and relevant limit. Pattern diagrams show ordered actions; source relationship diagrams point toward the interface used or implemented.
 
-All 34 lessons and eight chapter introductions were rewritten. Related traces, captions, reference summaries, code explanations, queue instructions, and 22 assessments were revised. Plain-language section headings replace topic-list headings in these lessons; syllabus items and stable links remain. The memory layout comes after stack/heap explanation, and an unrelated URL-shortener diagram was replaced by the task-list request. Unit-level advanced questions occur at the end of these units rather than after every chapter.
+All 33 concept lessons, 26 pattern explanations, 11 chapter introductions, related captions and reference summaries, worked-code explanations, and 22 assessments were revised. The short chapters now use diagrams matching their own examples. The unit-level advanced question appears at the end of each target unit. Syllabus items, pattern names, assessment IDs, and stable reading links remain.
 
-The lesson prose changed from 6,435 to 5,528 words. The aim was to remove repeated advice and use the space for missing steps, rather than target a uniform length. Important technical conditions remain beside the claims they qualify.
+Concept and pattern prose changed from 10,268 to 8,446 words. Length is determined by the explanation needed, rather than a target per heading. Calculations, state changes, and unfamiliar terms are explained where they first become useful.
 
-## Scope and verification
+## Verification
 
-All other 91 generated chapter panels match baseline commit `3721887` byte for byte, including Unit 1. Non-target lesson, guide, reference-summary, assessment, and worked-code data are unchanged. All assessment kinds and IDs remain.
+All other 88 chapter panels match baseline `cfcb650` byte for byte, including Units 1, 3, and 4. Their lesson, guide, reference-summary, assessment, and worked-code data are preserved. The earlier foundations PDF remains unchanged.
 
-The complete build, executable checks, browser suite at five widths, and scoped preservation checks pass. Desktop/mobile readings and representative PDF pages were inspected. The refreshed complete PDF has 1,070 tagged A4 pages. It exports the current book; only the two target units' chapter content changed in this pass. See [QA.md](QA.md).
+The build, executable checks, five-width browser suite, scope comparison, and PDF text checks pass. Revised desktop/mobile views and printed pages were inspected. The complete PDF has 1,068 tagged A4 pages and includes all chapter, figure, and case-section headings. See [QA.md](QA.md).
+
+## Previous focused revision
+
+Units 3 and 4 were revised on 22 October 2026. Their 34 lessons follow a browser request and uploaded files, respectively. That pass preserved the other 91 chapter panels. Their content is preserved in this revision.

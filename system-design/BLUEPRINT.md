@@ -304,7 +304,7 @@ Content source: src/teaching/lld.py
 
 - SOLID principles, including their limitations.
 
-Figures: 5.1.1 Abstraction, encapsulation, polymorphism, inheritance · the example; 5.1.2 Composition vs inheritance · the example; 5.1.3 Interfaces and contracts · the example; 5.1.4 High cohesion and low coupling · the example; 5.1.5 SOLID principles, including their limitations · the example
+Figures: 5.1.1 Four ways to organise an object · the example; 5.1.2 Build with parts or derive a class · the example; 5.1.3 State exactly what a charge means · the example; 5.1.4 Keep related work together · the example; 5.1.5 Use SOLID to examine a real change · the example
 
 References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
@@ -320,7 +320,7 @@ Content source: src/teaching/lld.py
 
 - Command-query separation.
 
-Figures: 5.2.1 DRY, KISS, YAGNI · the example; 5.2.2 Law of Demeter · the example; 5.2.3 Tell, Don't Ask · the example; 5.2.4 Command-query separation · the example
+Figures: 5.2.1 Keep one copy of a shared rule · the example; 5.2.2 Avoid knowing the whole object chain · the example; 5.2.3 Ask the owner to perform the change · the example; 5.2.4 Make reads and changes easy to distinguish · the example
 
 References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
@@ -336,7 +336,7 @@ Content source: src/teaching/lld.py
 
 - Testability and design for change.
 
-Figures: 5.3.1 Immutability and side-effect management · the example; 5.3.2 Domain models, entities, value objects · the example; 5.3.3 Object collaboration · the example; 5.3.4 Testability and design for change · the example
+Figures: 5.3.1 Calculate new values, then perform effects · the example; 5.3.2 Distinguish identity from value · the example; 5.3.3 Follow the conversation between objects · the example; 5.3.4 Test decisions with a replaceable gateway · the example
 
 References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
@@ -348,7 +348,7 @@ Content source: src/teaching/lld.py
 
 - Functional programming alternatives to object-centric design.
 
-Figures: 5.4.1 Refactoring and recognizing code smells · the example; 5.4.2 Functional programming alternatives to object-centric design · the example; 5.4.3 Follow the related complete design; 5.4.4 State and ownership in the related design
+Figures: 5.4.1 Improve the structure one step at a time · the example; 5.4.2 Express decisions as functions · the example; 5.4.3 Test the payment rule without making a payment; 5.4.4 Keep calculation separate from effects
 
 References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
@@ -375,7 +375,7 @@ Content source: src/teaching/lld.py
 
 - Composition roots and DI containers.
 
-Figures: 6.1.1 Dependency, dependency direction, and inversion · the example; 6.1.2 Inversion of Control (IoC) · the example; 6.1.3 Dependency Injection (DI) · the example; 6.1.4 Constructor, property/setter, and method injection · the example; 6.1.5 Dependency inversion principle vs DI · the example; 6.1.6 Composition roots and DI containers · the example
+Figures: 6.1.1 See what the service needs · the example; 6.1.2 Let another part of the program make the call · the example; 6.1.3 Pass the sender into the service · the example; 6.1.4 Supply a dependency when it becomes necessary · the example; 6.1.5 Separate injection from dependency inversion · the example; 6.1.6 Assemble the application in one clear place · the example
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -395,7 +395,7 @@ Content source: src/teaching/lld.py
 
 - Dependency cycles and captive dependencies.
 
-Figures: 6.2.1 Scope identities make lifetime semantics visible; 6.2.2 Request scopes, session scopes, and custom scopes · the example; 6.2.3 Object creation vs object ownership · the example; 6.2.4 Disposal, cleanup, and resource lifecycles · the example; 6.2.5 Lazy initialization · the example; 6.2.6 Dependency cycles and captive dependencies · the example
+Figures: 6.2.1 Which requests receive the same object?; 6.2.2 Give each request or job its own boundary · the example; 6.2.3 Decide who must close the resource · the example; 6.2.4 Release resources on every exit path · the example; 6.2.5 Create an expensive object only when needed · the example; 6.2.6 Find cycles and dependencies kept too long · the example
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -407,7 +407,7 @@ Content source: src/teaching/lld.py
 
 - DI vs factory pattern.
 
-Figures: 6.3.1 DI vs service locator · the example; 6.3.2 DI vs factory pattern · the example; 6.3.3 Follow the related complete design; 6.3.4 State and ownership in the related design
+Figures: 6.3.1 Show dependencies instead of looking them up inside · the example; 6.3.2 Inject a factory for a choice made later · the example; 6.3.3 Supply the sender from outside; 6.3.4 Choose a sender when the message arrives
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -417,7 +417,7 @@ Content source: src/teaching/lld.py
 
 - Factory Method, Abstract Factory, Builder, Prototype, Singleton.
 
-Figures: 6.4.1 Factory Method, Abstract Factory, Builder, Prototype, Singleton · the example; 6.4.2 Factory Method · the example; 6.4.3 Abstract Factory · the example; 6.4.4 Builder · the example; 6.4.5 Prototype · the example; 6.4.6 Singleton · the example
+Figures: 6.4.1 Choose how an object is created · the example; 6.4.2 Factory Method · the example; 6.4.3 Abstract Factory · the example; 6.4.4 Builder · the example; 6.4.5 Prototype · the example; 6.4.6 Singleton · the example
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -427,7 +427,7 @@ Content source: src/teaching/lld.py
 
 - Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy.
 
-Figures: 6.5.1 Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy · the example; 6.5.2 Adapter · the example; 6.5.3 Bridge · the example; 6.5.4 Composite · the example; 6.5.5 Decorator · the example; 6.5.6 Facade · the example; 6.5.7 Flyweight · the example; 6.5.8 Proxy · the example
+Figures: 6.5.1 Arrange objects around an existing operation · the example; 6.5.2 Adapter · the example; 6.5.3 Bridge · the example; 6.5.4 Composite · the example; 6.5.5 Decorator · the example; 6.5.6 Facade · the example; 6.5.7 Flyweight · the example; 6.5.8 Proxy · the example
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -437,7 +437,7 @@ Content source: src/teaching/lld.py
 
 - Strategy, Observer, Command, State, Chain of Responsibility, Template Method, Iterator, Mediator, Memento, Visitor.
 
-Figures: 6.6.1 Strategy, Observer, Command, State, Chain of Responsibility, Template Method, Iterator, Mediator, Memento, Visitor · the example; 6.6.2 Strategy · the example; 6.6.3 Observer · the example; 6.6.4 Command · the example; 6.6.5 State · the example; 6.6.6 Chain of Responsibility · the example; 6.6.7 Template Method · the example; 6.6.8 Iterator · the example; 6.6.9 Mediator · the example; 6.6.10 Memento · the example; 6.6.11 Visitor · the example
+Figures: 6.6.1 Give each behaviour a clear home · the example; 6.6.2 Strategy · the example; 6.6.3 Observer · the example; 6.6.4 Command · the example; 6.6.5 State · the example; 6.6.6 Chain of Responsibility · the example; 6.6.7 Template Method · the example; 6.6.8 Iterator · the example; 6.6.9 Mediator · the example; 6.6.10 Memento · the example; 6.6.11 Visitor · the example
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -447,7 +447,7 @@ Content source: src/teaching/lld.py
 
 - Repository, Unit of Work, Specification, CQRS, and dependency boundaries.
 
-Figures: 6.7.1 Repository, Unit of Work, Specification, CQRS, and dependency boundaries · the example; 6.7.2 Repository · the example; 6.7.3 Unit of Work · the example; 6.7.4 Specification · the example; 6.7.5 CQRS · the example
+Figures: 6.7.1 Separate data access, rules, and commit decisions · the example; 6.7.2 Repository · the example; 6.7.3 Unit of Work · the example; 6.7.4 Specification · the example; 6.7.5 CQRS · the example
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 

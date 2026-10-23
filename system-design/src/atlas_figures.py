@@ -64,7 +64,15 @@ SPECIAL={
 (3,7):('flow','Three messages prepare the TCP connection',['Client SYN: starting number','Server SYN-ACK: reply and own number','Client ACK: acknowledges server','Connection ready for stream data'],'Each end announces its starting sequence number and acknowledges the other. HTTPS over TCP then needs its TLS protection setup.'),
 (4,2):('memory','Each thread has a call stack; objects can be shared',None,'This common layout shows three threads in one process. Each has a call stack, while heap objects and process resources can be shared. Actual storage details depend on the runtime.'),
 (4,13):('deadlock','Each worker waits for a lock held by the other',None,'A holds the file lock and waits for the counter lock. B holds the counter lock and waits for the file lock. Requiring both workers to take the file lock first removes this cycle.'),
-(6,7):('matrix','Scope identities make lifetime semantics visible',[['Resolution','Request scope 1','Request scope 2'],['Scoped: first / second','A / A','B / B'],['Transient: first / second','C / D','E / F'],['Singleton in this process','S / S','S / S']],'These are identity observations in one application. Framework registration and disposal rules must still be checked.'),
+(6,7):('matrix',
+ 'Which requests receive the same object?',
+ [['Lifetime in this example', 'Request A: two lookups', 'Request B: two lookups'],
+  ['Scoped', 'A1 / A1', 'B1 / B1'],
+  ['Transient', 'T1 / T2', 'T3 / T4'],
+  ['Singleton in this container', 'S / S', 'S / S']],
+ 'Matching letters name the same object. Here, scoped means one per request scope, transient means '
+ 'a new object per lookup, and singleton means one reused by this container. Framework rules '
+ 'determine the actual boundaries and cleanup.'),
 (7,8):('flow','Context boundaries protect different business meanings',['Catalog: Product description','Explicit model translation','Fulfillment: Item location'],'The source-dependency boundary is not automatically a network deployment. Translation prevents one universal schema from erasing meaningful domain differences.',True),
 (9,14):('er','An order schema preserves relationships and history',None,'Customer has many Orders, Order has many Lines, and each Line references a Product identity while retaining purchase-time values.'),
 (11,7):('matrix','A stale cache is a separate state copy',[['Location','Version and value','Authority'],['Database','v2: price 12','current authoritative value'],['App cache A','v1: price 10','stale representation'],['Checkout','revalidates database','does not trust display cache']],'Invalidation and propagation policy decide when copies agree. The critical checkout operation uses the required authoritative contract.'),

@@ -62,7 +62,7 @@ def render_chapter(u,c,j):
     meta=f'<div class="chapter-meta"><span>Prerequisites: {prereq}</span><span>{len(c["illustrations"])} original figures</span><button class="read-toggle quiet" data-read="{c["id"]}" aria-pressed="false" type="button">Mark as read ○</button></div>'
     end='<p>'+link(f'questions-unit-{n}',f'Unit {n} exercises →')+' · '+link(f'answers-unit-{n}',f'Unit {n} explained solutions →')+'</p>'
     legend=LEGEND if n!=1 else '<div class="visual-legend" aria-label="Diagram legend"><span>Reading the figures: boxes name parts or states; arrow labels explain how they relate. Dashed arrows show a code dependency or a change in the level of detail. Each caption explains the example.</span></div>'
-    if n in (3,4):legend=INTRO_LEGEND
+    if n in (3,4,5,6):legend=INTRO_LEGEND
     reading=refs(c['references'])
     if n==1:
         reading=reading.replace('Start with the introductory guidance, then inspect original specifications, research, or implementation details. Access and stated use checked 21 October 2026. Author-created examples and assumed numbers are separate from source guarantees.','These sources explain the ideas and mechanisms used in this chapter. The to-do application is our own teaching example. Links were reviewed on 21 October 2026.')
@@ -89,7 +89,7 @@ def render_unit(u):
         html+='</div>'
         if n>1:
             visual,coverage=plates(u);u['essential_visual_coverage']=coverage
-            html+='<h2>Unit plates · the required visual vocabulary</h2><p>Figure numbers with .0 denote unit-level reference plates. Chapter figures retain their chapter numbers.</p>'+(INTRO_LEGEND if n in (3,4) else LEGEND)+visual
+            html+='<h2>Unit plates · the required visual vocabulary</h2><p>Figure numbers with .0 denote unit-level reference plates. Chapter figures retain their chapter numbers.</p>'+(INTRO_LEGEND if n in (3,4,5,6) else LEGEND)+visual
         else:u['essential_visual_coverage']=[dict(required=t,figure=f,status='available') for t,f in zip(u['illustrations'],['fig-1-1-4','fig-1-2-4','fig-1-3-2','fig-1-4-1'])]
     else:
         html+='<h2>The complete review protocol</h2><ol class="two-column">'+''.join('<li>'+e(t)+'</li>' for t in B['case_review'])+'</ol><p>Each of the twelve designs above contains every section, including the implementation challenge. Optional next subjects: '+e(' · '.join(B['optional_cases']))+'.</p>'
@@ -217,7 +217,7 @@ def build():
         if 1<u['n']<22:
             for i,title in enumerate(u['topics'],1):
                 row=LESSONS[u['n']][i-1]
-                prose=re.sub(r'\*\*|`','',row['prose']) if u['n'] in (3,4) else row['prose']
+                prose=re.sub(r'\*\*|`','',row['prose']) if u['n'] in (3,4,5,6) else row['prose']
                 search.append(dict(id=f'topic-{u["n"]}-{i}',title=row.get('heading',title),text=prose,status='available'))
     for term,(meaning,target) in glossary.items():search.append(dict(id=target,title=term,text=meaning,status='available'))
     for target,title in [('exercises','Exercises'),('solutions','Solutions'),('glossary','Glossary'),('figure-index','Diagrams'),('formulas','Formulas'),('patterns','Patterns'),('sources','Bibliography'),('manifest','Completion manifest')]:search.append(dict(id=target,title=title,text=title,status='available'))

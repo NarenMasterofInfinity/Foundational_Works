@@ -1,507 +1,542 @@
 """Pattern mechanisms, applications, and costs in the notification example."""
 PATTERN_LESSONS={4: [('Factory Method',
-      'An exporter has a stable job: obtain a writer and ask it to write the rows. A CSV exporter needs a '
-      'CSV writer, while another exporter may choose a different format. We can put that construction '
-      'decision in make_writer(). The shared export operation calls it and then uses the returned writer '
-      'through the writer contract.\n'
-      '\n'
-      'Factory Method makes this creation operation a point that a concrete creator can customise. In an '
-      'inheritance-based implementation, a specialised exporter overrides make_writer(); in a smaller '
-      'design, a supplied creation function may express the same needed variation. The processing code does '
-      'not have to name each concrete writer.\n'
-      '\n'
-      'Use this arrangement when the creator genuinely needs a construction choice. A direct constructor '
-      "call is clearer if the choice never varies. Also define the returned writer's ownership: if it holds "
-      'an output stream, someone must close it after writing. Abstract Factory addresses a related but '
-      'larger choice, producing a compatible family of objects rather than customising one creation '
-      'operation.',
-      ['Exporter calls factory method',
-       'Concrete creator selects CSV writer',
-       'Writer satisfies output contract'],
-      'export(rows):\n    writer = make_writer()\n    writer.write(rows)'),
-     ('Abstract Factory',
-      'An HTML notification needs a renderer and a template that use the same content model. If the '
-      'application chooses each independently, it could accidentally pass a plain-text template to an '
-      'HTML-specific renderer. The two objects form a compatible family.\n'
-      '\n'
-      'We first select HtmlNotificationFactory. The client asks that factory for renderer() and template(), '
-      'then passes the template and data to the renderer. A plain-text factory can supply the corresponding '
-      'plain-text family through the same product contracts. Abstract Factory keeps these related creation '
-      'choices together, so clients can switch families without assembling each combination themselves.\n'
-      '\n'
-      'The arrangement is useful when complete families really vary. Its maintenance cost appears when we '
-      'add a new kind of product: every supported factory may need another creation operation. If one stable '
-      "renderer and template are all the application needs, direct assembly can be clearer. The family's "
-      'contracts must still explain compatibility and any resource ownership; using one factory does not by '
-      'itself validate every possible input.',
-      ['Select HTML family', 'Create HTML renderer and template', 'Both share compatible content model'],
-      'family = HtmlNotificationFactory()\n'
-      'renderer = family.renderer()\n'
-      'template = family.template()\n'
-      'renderer.render(template, data)'),
-     ('Builder',
-      'A notification needs a recipient and a template. A caller may also choose its locale and expiry. With '
-      'a Builder, the caller records these choices in stages: set the recipient, select the template, and '
-      'optionally set an expiry. The builder holds the unfinished choices until build() is called.\n'
-      '\n'
-      'The build step checks required fields and their relationships. For example, it can reject an expiry '
-      'earlier than the permitted send time, or a template that does not support the chosen locale. Only '
-      'after those checks does it return a usable notification. The partly configured builder is therefore '
-      'distinct from the completed value; code should not send it as if it were already valid.\n'
-      '\n'
-      'Builder is helpful when staged assembly makes a complicated set of choices easier to express. It '
-      'solves a different problem from Abstract Factory, which selects compatible kinds of products. For a '
-      'small notification value, a constructor with named arguments may collect and validate every field '
-      'just as clearly. Add the stages when they help the caller construct a valid result.',
-      ['Set recipient and template', 'Add optional expiry', 'Build validates required fields'],
-      'builder.to(recipient).template(template_id)\n'
-      'notification = builder.expires_at(deadline).build()\n'
-      '# build rejects missing recipient or incompatible fields'),
-     ('Prototype',
-      'A report layout already contains carefully chosen margins, sections, styles, and a title. We want a '
-      'second layout with most of those settings and a different title. Prototype creates it by copying the '
-      "configured instance, then allowing the copy's owned values to change.\n"
-      '\n'
-      'Follow what happens to a nested editable section. A shallow copy of the layout may leave both layouts '
-      'pointing to the same section. Editing that section through the copy then changes what the original '
-      'sees too. A clone operation can copy the mutable values that should belong to the new layout while '
-      'retaining references to suitable immutable data, such as shared font definitions.\n'
-      '\n'
-      'The copying contract must identify these choices. A deeper copy is not automatically correct: copying '
-      'a connection handle does not create another independently owned connection. Resource ownership needs '
-      'its own rule. Prototype is useful when copying configured values is clearer than reconstructing every '
-      'setting; fresh per-request state built from immutable configuration may be simpler when the ownership '
-      'rules would otherwise be difficult to follow.',
-      ['Configured layout prototype', 'Copy layout-owned values', 'Do not duplicate resource ownership'],
-      'layout = prototype.clone_owned_values()\n'
-      'layout.title = "Monthly report"\n'
-      '# Shared immutable font data remains shared'),
-     ('Singleton',
-      'Suppose the application loads immutable configuration once at startup. Each service can receive the '
-      'same configuration object because they all use the same values and none changes them. A Singleton '
-      'arrangement restricts access to an instance within a stated program or container boundary.\n'
-      '\n'
-      'State that boundary explicitly. Process A can have instance S1, while process B has S2. Neither is a '
-      'single object shared across every host. A container-managed singleton describes a reuse lifetime; a '
-      'class that constructs its own sole instance and offers global access also determines how callers '
-      'obtain it. These are related arrangements with different effects on visibility and testing.\n'
-      '\n'
-      'An application-owned instance can be passed to its users through ordinary injection. Its owner '
-      'remains responsible for any required cleanup. Sharing mutable request data in one instance is '
-      "riskier: concurrent callers can interfere, and tests can retain one another's state. A singleton "
-      'lifetime does not make an object safe for concurrent use or make its shorter-lived dependencies valid '
-      'indefinitely.',
-      ['Process A has instance S1', 'Process B has instance S2', 'Global uniqueness is not implied'],
-      'configuration = load_immutable_configuration()\n'
-      'service = Service(configuration)\n'
-      '# One application-owned instance; no hidden global lookup')],
+  'Suppose an exporter always writes the same rows, but one version produces CSV and another produces '
+  'HTML. We can keep the export steps in a base class and let each subclass choose its writer.\n'
+  '\n'
+  'The base operation calls `make_writer()`, then uses the returned writer. `CsvExporter` overrides '
+  'that creation operation to return `CsvWriter`; `HtmlExporter` returns `HtmlWriter`. This overridable '
+  'creation operation is the **Factory Method**. The export code knows the writer contract without '
+  'choosing the concrete class.\n'
+  '\n'
+  'This fits an existing class hierarchy with a varying creation step. If there is no reason for '
+  'exporter subclasses, passing a writer into one exporter can be simpler. Both arrangements separate '
+  'choice from use, but the override is what defines Factory Method here.',
+  ['Base exporter calls make_writer',
+   'CSV subclass returns CsvWriter',
+   'Exporter calls writer.write',
+   'HTML subclass can choose HtmlWriter'],
+  'class Exporter:\n'
+  '    export(rows):\n'
+  '        writer = self.make_writer()\n'
+  '        return writer.write(rows)\n'
+  '    make_writer(): raise NotImplemented\n'
+  '\n'
+  'class CsvExporter(Exporter):\n'
+  '    make_writer(): return CsvWriter()'),
+ ('Abstract Factory',
+  'An HTML email renderer expects HTML templates. A plain-text renderer expects plain-text templates. '
+  'Choosing them independently can produce a pair that cannot work together.\n'
+  '\n'
+  'An **Abstract Factory** supplies a whole family of related objects. Choose '
+  '`HtmlNotificationFactory`, then obtain both its renderer and its template. The caller uses their '
+  'common contracts. Switching to the plain-text factory switches both choices together.\n'
+  '\n'
+  'The family must actually preserve compatibility: the HTML factory cannot return a plain-text '
+  'template merely because the method names match. This arrangement helps when several products vary '
+  'together. If we need only one sender, a factory for that single sender is enough.',
+  ['Choose the HTML family',
+   'Factory creates HTML renderer',
+   'Factory supplies HTML template',
+   'Renderer uses the matching template'],
+  'family = HtmlNotificationFactory()\n'
+  'renderer = family.renderer()\n'
+  'template = family.template()\n'
+  'output = renderer.render(template, data)'),
+ ('Builder',
+  'A notification needs a recipient and template, while expiry and delivery options may arrive from '
+  'later steps in a form. We can collect these choices in a **Builder**.\n'
+  '\n'
+  "Calls such as `to(recipient)` and `template(template_id)` update the builder's draft settings. "
+  '`build()` checks that required fields are present and that the options agree. Only then does it '
+  'return a usable notification. An incomplete builder is allowed; an invalid finished notification is '
+  'rejected.\n'
+  '\n'
+  'The builder should copy any mutable settings the finished object must own. Otherwise, changing the '
+  'builder later might change an already built notification. When all inputs are already available '
+  'together, a constructor with named arguments and validation may express the same task more simply.',
+  ['Collect recipient and template',
+   'Add optional expiry',
+   'build checks the complete settings',
+   'Return a valid notification'],
+  'builder.to(recipient).template(template_id)\n'
+  'notification = builder.expires_at(deadline).build()\n'
+  '# build rejects missing fields and copies owned settings'),
+ ('Prototype',
+  'Many notification layouts start from the same configured layout. Rather than repeat its setup, we '
+  'can create a new layout by copying that example. The configured example is a **Prototype**.\n'
+  '\n'
+  'The copy must have its own editable values. If both layouts refer to one mutable list of paragraphs, '
+  'editing the copy can change the original too. `clone_owned_values()` copies that list and the '
+  'editable paragraph data it contains. Immutable font data can remain shared because neither layout '
+  'changes it.\n'
+  '\n'
+  'Decide what copying means for each field. A live connection or lock usually cannot be duplicated '
+  'like paragraph text. Prototype is useful when copying the supported configuration is clearer than '
+  'rebuilding it; it does not make every object safe to clone.',
+  ['Start with configured prototype',
+   'Copy its editable owned values',
+   'Keep immutable font data shared',
+   'Edit the copy independently'],
+  'layout = prototype.clone_owned_values()\n'
+  'layout.title = "Monthly report"\n'
+  'layout.paragraphs[0].text = "Your summary"\n'
+  '# Original editable values stay unchanged'),
+ ('Singleton',
+  'Several parts of one application need the same immutable routing configuration. A **Singleton** '
+  'restricts access to one instance within a defined boundary.\n'
+  '\n'
+  'In a traditional implementation, callers cannot invoke the constructor directly. An accessor '
+  'constructs the instance on first use and returns that same instance afterward. If callers can arrive '
+  'concurrently, the construction step needs coordination. Here the lock protects the check and '
+  'construction together.\n'
+  '\n'
+  'The boundary in this example is one loaded module in one process. Another process has its own '
+  'instance. Reusing one object also does not make its mutable fields safe for concurrent changes.\n'
+  '\n'
+  'A DI container can provide similar reuse without a global accessor: create one configuration at '
+  'startup and inject it wherever needed. That often makes the dependency easier to see.',
+  ['Caller uses the restricted accessor',
+   'Lock protects first construction',
+   'Later calls return the same instance',
+   'Other processes have their own instances'],
+  '# Module-private constructor and state; illustrative pseudocode\n'
+  'instance = None\n'
+  'get_configuration():\n'
+  '    with creation_lock:\n'
+  '        if instance is None:\n'
+  '            instance = Configuration.load()\n'
+  '        return instance')],
  5: [('Adapter',
-      'Our application asks a Sender to send a message and return an outcome such as accepted, declined, or '
-      'uncertain, together with a reference when available. An SMS provider instead expects its own request '
-      'format and returns its own status codes. An Adapter connects these different interfaces.\n'
-      '\n'
-      'The service calls adapter.send(message). The adapter encodes the message for sdk.submit(), invokes '
-      "the provider, and maps the provider's response into the application's outcome. The service can then "
-      'apply notification policy using its own vocabulary. SDK request objects and exceptions can stay '
-      'inside the adapter rather than spreading through the service.\n'
-      '\n'
-      'The mapping must preserve meaning. If a timeout leaves it unclear whether the provider accepted the '
-      'message, the adapter must not report a definite decline merely to fit a convenient branch. Check '
-      'these mappings against the provider contract and its real integration behaviour. A Decorator usually '
-      "retains an interface while adding behaviour around it; an Adapter's main purpose is to reconcile a "
-      'mismatch in interface or representation.',
-      ['Application Sender contract', 'Translate request and outcomes', 'Foreign SMS provider API'],
-      'send(message):\n    raw = sdk.submit(encode(message))\n    return map_provider_outcome(raw)'),
-     ('Bridge',
-      'Notifications vary in content: an alert and a receipt format different information. They also vary in '
-      'transport: either might go by email or SMS. If we create a subclass for every combination, changes to '
-      'content and transport become tangled across AlertEmail, AlertSms, ReceiptEmail, and ReceiptSms.\n'
-      '\n'
-      'A Bridge separates these dimensions through composition. A Receipt receives a transport object during '
-      'construction. Its deliver(data) operation formats receipt content and calls transport.send(content). '
-      'An Alert can use the same transport contract while formatting different content. We can add a '
-      'transport implementation without rewriting every content class, provided it supports the agreed '
-      'contract.\n'
-      '\n'
-      'The contract still needs to accommodate the actual transports, including their limits and outcomes. '
-      'This separation earns its cost when both dimensions vary independently. One fixed sender may need far '
-      'less structure. Adapter commonly reconciles an existing interface mismatch; Bridge deliberately '
-      'arranges two kinds of variation so they can develop separately.',
-      ['Alert or receipt content', 'Composes transport interface', 'Email or SMS transport'],
-      'class Receipt:\n'
-      '    constructor(transport): self.transport = transport\n'
-      '    deliver(data): return self.transport.send(format_receipt(data))'),
-     ('Composite',
-      'A notification audience may be one user, a department group, or a group containing other groups. The '
-      'caller needs to obtain the recipients without writing separate traversal code for every shape. '
-      'Composite gives an individual audience and a group a compatible operation.\n'
-      '\n'
-      'A leaf returns its authorised recipient. A group applies the same operation to its children and '
-      'combines the results. Repeating this rule lets the caller traverse a nested audience. The example '
-      'records visited node identifiers in seen so revisiting a node does not continue the same traversal '
-      'indefinitely. The recipient contract must also say how repeated users from different groups are '
-      'deduplicated.\n'
-      '\n'
-      'Real audience graphs need depth or size bounds and a policy for cycles and failures. A group send can '
-      'reach some recipients before another send fails; the common interface does not make all deliveries '
-      'atomic. Separate recipient selection from delivery where useful so the caller can inspect a bounded '
-      'plan. When the domain has no meaningful nested structure, a simple collection and loop may be easier '
-      'to understand.',
-      ['Audience group contains audiences',
-       'Leaf is one authorized recipient',
-       'Traversal bounds and deduplicates'],
-      'recipients(node, seen):\n'
-      '    if node.id in seen: return []\n'
-      '    seen.add(node.id)\n'
-      '    return node.users_or_recursive_children(seen)'),
-     ('Decorator',
-      'We want to measure Sender.send() without placing timing code inside every provider adapter. A '
-      'TimingSender receives another Sender, called inner. Its send(message) records a start time, calls '
-      'inner.send(message), and records the elapsed time when that call finishes, including an error exit. '
-      'It returns the original result or lets the original error continue.\n'
-      '\n'
-      'This is Decorator: an object adds behaviour around a collaborator while retaining its interface. '
-      'Because TimingSender is also a Sender, the service can use it through the same contract. Startup code '
-      'makes the added behaviour visible by assembling the wrapper around the selected adapter.\n'
-      '\n'
-      'Wrapper order matters. TimingSender(RetrySender(sender)) measures the whole logical call, including '
-      'its attempts and waits. RetrySender(TimingSender(sender)) measures each attempt separately. A retry '
-      'can also repeat an external effect, so it needs a contract for safe repetition and uncertain '
-      'outcomes. Metrics alone cannot provide that contract. Keep essential notification decisions visible '
-      'instead of scattering them through a long, difficult-to-inspect stack of wrappers.',
-      ['Metrics wraps Sender', 'Sender returns explicit outcome', 'Wrapper records duration and result'],
-      'send(message):\n'
-      '    start = clock()\n'
-      '    try: return inner.send(message)\n'
-      '    finally: metrics.observe(clock() - start)'),
-     ('Facade',
-      'A client that submits a notification should not have to coordinate every internal step itself. The '
-      'subsystem may validate the command, select a template, build a delivery plan, and save a notification '
-      'intent. A Facade offers a focused entry operation, such as submit(command), that carries out this '
-      'coordination for its clients.\n'
-      '\n'
-      'In the example, submit first validates the command. It constructs the plan from the validated data '
-      'and asks the intent store to persist it. The returned intent identifier tells the caller which '
-      'accepted piece of work it can inspect later. Internal responsibilities can remain in separate '
-      'collaborators even though the caller uses one entry point.\n'
-      '\n'
-      "The facade's response must state what has happened. Saving an intent is different from completing "
-      'delivery to the recipient. Keep the facade focused on a coherent subsystem; adding every unrelated '
-      'operation makes it difficult to change. A Proxy usually represents the same conceptual target while '
-      'controlling its use. A Facade primarily simplifies how a caller works with several cooperating parts.',
-      ['Client uses one submit operation',
-       'Facade coordinates subsystem roles',
-       'Returns accepted intent identity'],
-      'submit(command):\n'
-      '    validated = validate(command)\n'
-      '    return intents.persist(render_plan(validated))'),
-     ('Flyweight',
-      'Suppose ten thousand notifications use the same version of a template. Parsing that template '
-      'separately for every notification repeats data that does not change. Flyweight shares the reusable '
-      "part while keeping each use's changing context separate.\n"
-      '\n'
-      'The application obtains one immutable parsed template for the selected version. To render '
-      "notification A, it supplies A's recipient and variables; to render B, it supplies B's context to the "
-      'same template. The template contains the common structure. The per-recipient context contains the '
-      'information that must remain separate. This division reduces repeated storage without making '
-      'recipients share their personal values.\n'
-      '\n'
-      'Putting recipient fields into the shared object could let one rendering affect another or disclose '
-      "another user's data. Keep the shared part suitable for its allowed concurrent use. Measure memory "
-      'pressure before adding complex pools: ordinary immutable reuse may be sufficient. Version selection, '
-      'expiry, cache bounds, and lifetime still need their own rules. Flyweight identifies what can be '
-      'shared; it does not supply a complete cache-management policy.',
-      ['Shared immutable template parse', 'Recipient A context separate', 'Recipient B context separate'],
-      'template = parsed_templates.get(version)\n'
-      'output_a = render(template, context_a)\n'
-      'output_b = render(template, context_b)'),
-     ('Proxy',
-      'A caller wants to read a document through read(document_id, actor). A Proxy presents that operation '
-      'and controls access before forwarding it to the actual document reader. In the example, it checks the '
-      "actor's current permission and calls target.read(document_id) only when the check permits it.\n"
-      '\n'
-      "The caller works through the target's interface while the proxy handles a particular aspect of its "
-      'use. Other proxies can defer creating an expensive target until first use, or represent an object '
-      'reached through a network. In each case, the proxy stands in for the same conceptual target, with '
-      'additional rules around reaching it.\n'
-      '\n'
-      'Those rules remain part of the observable contract. A remote read may take time or fail with an '
-      'uncertain result; a local-looking method name does not remove that behaviour. Avoid hiding unbounded '
-      'retries or unlimited loading behind the interface. Facade usually offers a simpler entry to a '
-      'cooperating subsystem, while Proxy controls access to a target that the caller conceptually already '
-      'wants to use.',
-      ['Client requests document read', 'Proxy checks current access', 'Authorized target returns data'],
-      'read(document_id, actor):\n    authorize(actor, document_id)\n    return target.read(document_id)')],
+  'Our service calls `send(message)`, but an older SMS library accepts a phone number, text, and '
+  'provider-specific options. We want to use that library without making the service learn its '
+  'interface.\n'
+  '\n'
+  "An **Adapter** receives the application's message, converts it into the library's arguments, and "
+  'calls the library. It then converts the reply into the outcomes expected by `Sender`.\n'
+  '\n'
+  'The reply conversion matters as much as the argument conversion. If the provider says “queued,” the '
+  'adapter must not report “delivered.” When an outcome cannot be represented faithfully, the contract '
+  'needs to expose that difference. An adapter translates an interface; it cannot create a guarantee '
+  'the provider does not offer.',
+  ['Service supplies its message',
+   'Adapter converts provider arguments',
+   'Provider returns its own outcome',
+   'Adapter maps the outcome faithfully'],
+  'send(message):\n    raw = sdk.submit(encode(message))\n    return map_provider_outcome(raw)'),
+ ('Bridge',
+  'We send both receipts and alerts, and each can travel by email or SMS. A subclass for every '
+  'combination would give us EmailReceipt, SmsReceipt, EmailAlert, and SmsAlert. A third transport '
+  'would add still more classes.\n'
+  '\n'
+  'With a **Bridge**, the message object holds a transport object. `Receipt` formats receipt data and '
+  'passes the result to its transport. `Alert` formats alert data in its own way. Either can receive an '
+  'email or SMS transport through the same sending contract.\n'
+  '\n'
+  'The two choices can now vary separately: message behaviour and transport behaviour. Their contract '
+  'must still fit real constraints. If SMS has a length limit, the design must define splitting or '
+  'rejection rather than assume any email body can be sent unchanged.',
+  ['Choose Receipt or Alert',
+   'Supply EmailTransport or SmsTransport',
+   'Message object formats the content',
+   'Transport handles channel delivery'],
+  'class Receipt:\n'
+  '    constructor(transport): self.transport = transport\n'
+  '    deliver(data):\n'
+  '        text = format_receipt(data)\n'
+  '        return self.transport.send(text)'),
+ ('Composite',
+  'A notification can target one person or a group containing people and smaller groups. Callers should '
+  'not need a separate traversal algorithm for every nesting level.\n'
+  '\n'
+  'A **Composite** gives a person and a group the same operation, such as `recipients()`. A person '
+  'returns their identifier. A group asks its children for their recipients and combines the results. '
+  'The caller can start with either kind.\n'
+  '\n'
+  'Give every person and group a distinct identifier. Our groups may overlap, so the traversal records '
+  'visited identifiers. A person in two groups then appears once. The same check stops a group cycle '
+  'from looping forever. This defines membership expansion, not delivery: sending to the resulting '
+  'people still needs its own per-recipient outcomes and failure handling.',
+  ['Start at a person or group',
+   'Group visits its children',
+   'Seen identifiers prevent repeats',
+   'Return the unique recipient list'],
+  'Person.recipients(seen):\n'
+  '    if self.id in seen: return []\n'
+  '    seen.add(self.id)\n'
+  '    return [self.id]\n'
+  '\n'
+  'Group.recipients(seen):\n'
+  '    if self.id in seen: return []\n'
+  '    seen.add(self.id)\n'
+  '    return flatten(child.recipients(seen)\n'
+  '                   for child in self.children)\n'
+  '\n'
+  'people = root.recipients(set())'),
+ ('Decorator',
+  'We want to time sends without putting timing code into every provider adapter. A `TimingSender` '
+  'holds another sender and offers the same `send` operation.\n'
+  '\n'
+  'It records the start time, calls the inner sender, and records the duration when that call ends. '
+  'This is a **Decorator**: it adds behaviour around a collaborator while keeping its interface. The '
+  '`finally` step records duration when the send raises an error too.\n'
+  '\n'
+  'Order changes what is measured. `TimingSender(RetrySender(sender))` times the whole call, including '
+  'retries. `RetrySender(TimingSender(sender))` times each attempt. Before adding retries, define how '
+  'repeated attempts avoid unwanted duplicate sends. Wrapping the call does not settle that delivery '
+  'question.',
+  ['Timing wrapper records start',
+   'Wrapper calls the inner sender',
+   'Inner call returns or raises',
+   'Finally records elapsed time'],
+  'send(message):\n'
+  '    start = clock()\n'
+  '    try: return inner.send(message)\n'
+  '    finally: metrics.observe(clock() - start)'),
+ ('Facade',
+  'Submitting a notification requires checking its fields, preparing a rendering plan, and saving a '
+  'delivery request. A caller should not have to coordinate all three helpers for every submission.\n'
+  '\n'
+  'A **Facade** offers a focused entry point such as `submit(command)`. It performs those steps in the '
+  'required order and returns a useful result. The helpers remain responsible for their own work; the '
+  'facade provides a simpler way to use them together.\n'
+  '\n'
+  'Here success means the delivery request was saved. Actual sending happens later, so the facade '
+  'returns an accepted identifier rather than claiming delivery. A simple entry point must still expose '
+  'meaningful outcomes, such as invalid input or failure to save the request. Simpler calling code '
+  'should not require guessing what happened.',
+  ['Caller submits one command',
+   'Facade validates the fields',
+   'Facade prepares and saves the plan',
+   'Result identifies accepted work'],
+  'submit(command):\n'
+  '    validated = validate(command)\n'
+  '    plan = render_plan(validated)\n'
+  '    return intents.persist(plan)'),
+ ('Flyweight',
+  'Ten thousand notifications use the same template version. Parsing a separate copy of that template '
+  'for every message wastes memory.\n'
+  '\n'
+  'A **Flyweight** shares the part that is the same across uses. We store one parsed, immutable '
+  "template for that version. Rendering supplies the recipient's name and other changing values "
+  'separately. Two messages can use the same template without sharing their personal data.\n'
+  '\n'
+  "This separation is essential. Putting a recipient's name into the shared template would let one "
+  'render change what another sees. Keep shared data unchanged and pass per-message values as separate '
+  'context. The collection holding shared templates also needs a size or eviction policy if new '
+  'versions keep arriving; sharing does not make an unlimited collection small.',
+  ['Find shared template version',
+   'Supply recipient A’s values',
+   'Supply recipient B’s values',
+   'Keep shared template unchanged'],
+  'template = parsed_templates.get(version)\n'
+  'output_a = render(template, context_a)\n'
+  'output_b = render(template, context_b)'),
+ ('Proxy',
+  'A caller wants to read a saved notification, but it must first have permission. We can place an '
+  'object with the same read operation in front of the actual storage object.\n'
+  '\n'
+  "This **Proxy** checks the actor's access and only then calls the target. The caller uses the "
+  'familiar read interface. The proxy controls access to the object behind it.\n'
+  '\n'
+  'Other proxies can delay creating an expensive target or represent a remote target. Their purpose '
+  'should be clear to the caller where it affects behaviour. A remote read can time out even though an '
+  'ordinary local field read would not. Our access proxy must also prevent callers from bypassing its '
+  'check through another unguarded route.',
+  ['Caller requests saved notification',
+   'Proxy checks the actor’s access',
+   'Allowed call reaches the target',
+   'Target returns the result'],
+  'read(notification_id, actor):\n'
+  '    authorize(actor, notification_id)\n'
+  '    return target.read(notification_id)')],
  6: [('Strategy',
-      'A shop calculates an order price using either its ordinary pricing policy or an agreed partner '
-      'policy. The order operation needs the resulting price, but it need not contain every formula. '
-      'Strategy supplies the selected algorithm through a shared operation such as calculate(order).\n'
-      '\n'
-      'Assembly or policy-selection code chooses a strategy, and the caller invokes that strategy through '
-      'the calculation contract. Adding another pricing policy then adds an implementation rather than '
-      'another branch throughout the callers. The strategies must agree on what the result means: its amount '
-      'and currency, permitted rounding, errors, and any effects. Matching a method name alone is '
-      'insufficient.\n'
-      '\n'
-      'A function can serve as a strategy when that is the simplest expression of the algorithm. One stable '
-      'formula may need no additional structure. Strategy varies a policy that can be selected for an '
-      "operation. State, by comparison, varies behaviour according to an entity's valid lifecycle: a caller "
-      "cannot choose a payment's captured state simply as a different calculation preference.",
-      ['Policy selects strategy', 'Caller invokes stable operation', 'Algorithm returns defined result'],
-      'price = pricing_strategy.calculate(order)\nrequire(price.currency == order.currency)'),
-     ('Observer',
-      'A local draft changes, and both a preview and a word-count display should update. The draft can keep '
-      'a set of subscribed observers and notify them after a change. Each observer implements the agreed '
-      'callback, so the draft does not have to know the concrete preview or counter. This is Observer, a '
-      'one-to-many arrangement for reactions to change.\n'
-      '\n'
-      'First an observer subscribes. After the subject changes, it obtains the defined subscriber set and '
-      'calls each observer according to the notification policy. The example takes a snapshot of the set for '
-      "traversal, so subscription changes during a callback do not silently change that traversal's "
-      'membership. The policy must still define ordering and whether callbacks run inline.\n'
-      '\n'
-      'If one callback is slow or throws, decide whether later observers continue and how the problem is '
-      'reported. End subscriptions when their owners finish, or the subject may retain unwanted objects. '
-      'These callbacks and subscriptions live in process memory. A reaction that must survive a crash needs '
-      'durable publication and recovery rules in addition to local observation.',
-      ['Subject changes state', 'Subscribed observers notified', 'Failure policy defines isolation'],
-      'for observer in snapshot(subscribers):\n    notify_under_defined_failure_policy(observer, event)'),
-     ('Command',
-      'Instead of immediately calling a receipt-sending function, the application can create '
-      'SendReceipt(order_id, operation_id). This object represents a requested action as explicit data. A '
-      'handler later reads the command, checks whether the action is currently allowed, and performs it. '
-      'This is Command.\n'
-      '\n'
-      'Giving the intention its own representation lets the application pass it between components, record '
-      'it for audit, or schedule it for later execution. The order identifier names the subject, while the '
-      'operation identifier can help identify repeated attempts under a defined duplicate-handling policy. '
-      'An event serves a different purpose: it records a fact already accepted, rather than asking a handler '
-      'to act.\n'
-      '\n'
-      'If commands must survive restart, save versioned, serialisable domain data. A closure holding a '
-      "request's open connection cannot provide that lifetime. At execution, the handler obtains valid "
-      'resources and applies the chosen authorisation and current-state rules. Repeating a command can '
-      'repeat an external effect unless the handler and provider protocol prevent it. Representing or '
-      'storing the intention alone does not establish safe retry behaviour.',
-      ['Command: send receipt', 'Queue stores versioned intention', 'Handler validates and executes'],
-      'command = SendReceipt(order_id, operation_id)\n'
-      'handler.handle(command)\n'
-      '# Handler checks current authorization and state'),
-     ('State',
-      'A payment awaiting capture and a captured payment permit different actions. The captured payment may '
-      'accept a refund request; the pending one must not behave as if money has already been captured. State '
-      "organises these behaviour changes around the payment's lifecycle.\n"
-      '\n'
-      'When evidence arrives, the application checks whether the pair of current state and event is an '
-      'allowed transition. It then computes the next state and saves the related changes atomically at the '
-      'required persistence boundary. In the example, verified settlement moves a pending payment to '
-      'captured. An event without the required evidence, or one that is invalid from the current state, must '
-      'be handled explicitly.\n'
-      '\n'
-      'Separate state objects can hold the behaviour for each lifecycle stage, but a small transition table '
-      'is often clearer. The central requirement is that lifecycle rules control the change. A pricing '
-      'Strategy may be selected as an interchangeable policy; a payment state follows its history and '
-      'evidence. The caller cannot bypass those rules by selecting whichever state would permit the action '
-      'it wants.',
-      ['Pending payment', 'Verified settlement transition', 'Captured state permits refund request'],
-      'require((payment.state, event.kind) in allowed_transitions)\n'
-      'payment.state = next_state(payment.state, event)'),
-     ('Chain of Responsibility',
-      'An incoming request must be authenticated, checked against its request budget, and parsed before the '
-      'application handles it. We can connect handlers into a Chain of Responsibility. Each handler applies '
-      'its part of the contract and either rejects, handles, transforms, or passes the request onward.\n'
-      '\n'
-      'In the example, authentication runs first. If it permits the request, rate limiting decides whether '
-      'to admit the work. Parsing then produces the input for the application. The nested expression '
-      'auth(rate_limit(parse(application))) assembles that order; it does not mean every request necessarily '
-      'reaches the innermost handler. A rejecting handler ends its path according to the response contract.\n'
-      '\n'
-      'Continuation must be explicit. Forgetting to call the next handler can silently swallow work, while '
-      'changing the order can change cost or policy. For example, expensive parsing before admission '
-      'consumes resources even for work that will be rejected. This arrangement coordinates calls during '
-      'execution. A multi-stage operation that must continue after a process crash also needs persisted '
-      'progress and recovery; the chain alone provides neither.',
-      ['Authenticate', 'Apply request budget', 'Parse and invoke next handler'],
-      'auth(rate_limit(parse(application)))(request)\n'
-      '# Each handler has explicit rejection and continuation rules'),
-     ('Template Method',
-      "Every supported import must validate its input, transform it into the application's representation, "
-      'and commit the result in that order. CSV and another format may need different transformations, but '
-      'neither should skip validation. Template Method keeps the shared sequence in one operation while '
-      'exposing selected steps for customisation.\n'
-      '\n'
-      'In the example, run(input) calls validate(input), then transform(input), then commit(result). A '
-      'specialised implementation supplies the format-specific transformation. Inheritance commonly '
-      'expresses this arrangement: the base process defines run, and subclasses implement a permitted step. '
-      'The fixed process must still arrange resource cleanup when any step fails.\n'
-      '\n'
-      'The extension contract determines which steps may vary and which ordering rules must hold. If a '
-      'subclass can bypass validation or commit an incomplete transformation, the template no longer '
-      'protects the intended process. When several steps need independent variation, composed strategies can '
-      'be easier to combine than a growing subclass hierarchy. Use Template Method where one stable process '
-      'has a small set of controlled extension points.',
-      ['Fixed validate step', 'Overridable transform step', 'Fixed commit and cleanup'],
-      'run(input):\n    validate(input)\n    result = transform(input)\n    return commit(result)'),
-     ('Iterator',
-      'A caller wants to read records one at a time without knowing how they are stored. An Iterator '
-      'maintains the current traversal position and supplies the next item until the sequence ends. The '
-      'underlying collection can be an array, a tree, or a database query.\n'
-      '\n'
-      'This hides traversal mechanics while leaving their important behaviour in the contract. The caller '
-      'needs to know the ordering, how end-of-stream is reported, and what happens if the underlying data '
-      'changes during traversal. A lazy database iterator may fetch more rows only when the caller asks for '
-      'them. It can therefore keep a cursor and connection open between iterations.\n'
-      '\n'
-      'In the example, the iterator is used inside a bounded cursor scope. Finishing the loop or exiting '
-      'through an error must release the associated resources. A slow consumer can otherwise occupy a scarce '
-      'connection for a long time, and closing the owner early can make the next read fail. For a small '
-      'bounded result, fetching a list and releasing the connection before returning may offer a simpler '
-      'lifetime contract.',
-      ['Client requests next item', 'Iterator owns traversal position', 'End or close releases resources'],
-      'with open_bounded_cursor(query) as rows:\n    for row in rows:\n        consume(row)'),
-     ('Mediator',
-      'Checkout needs to coordinate inventory and payment. If each collaborator directly calls the other '
-      'whenever something happens, their knowledge of one another can grow difficult to follow. A Mediator '
-      'receives their outcomes and decides the next action for this particular process.\n'
-      '\n'
-      'In the example, the coordinator asks inventory for a reservation and asks payments for authorisation '
-      'under an operation identifier. It then interprets both outcomes and chooses the permitted next step. '
-      'Inventory need not know the payment API, and the payment collaborator need not know the reservation '
-      'implementation. The coordination rule has a clear home.\n'
-      '\n'
-      'The mediator still needs explicit treatment of failure and uncertain outcomes. Keep its '
-      'responsibility focused so it does not become an object containing every application rule. If these '
-      'calls cross systems and progress must survive restarts, a durable workflow orchestrator may implement '
-      'the coordination with saved state and recovery. Mediator names the object relationship; it does not '
-      'itself make the sequence persistent or make inventory and payment one atomic operation.',
-      ['Inventory reports reservation',
-       'Mediator decides next action',
-       'Payment collaborator receives command'],
-      'reservation = inventory.reserve(command)\n'
-      'outcome = payments.authorize(command.operation_id)\n'
-      'coordinate_outcomes(reservation, outcome)'),
-     ('Memento',
-      'Before changing a draft, the editor asks it for a snapshot of the values needed to restore its '
-      'present local state. After an unwanted edit, the editor passes that snapshot back to restore(). '
-      'Memento supports this capture and restoration without requiring every caller to read and rewrite the '
-      "draft's internal fields.\n"
-      '\n'
-      'The draft defines what belongs in the snapshot. If editable paragraph data is copied appropriately, '
-      'later edits do not change the saved version. If the snapshot merely stores a reference to the same '
-      'mutable paragraph object, an edit can change both the current draft and the supposed snapshot. '
-      'Ownership and copying rules are therefore part of making restoration meaningful.\n'
-      '\n'
-      'Restoration has a defined local scope. Returning the draft to earlier values cannot retract an email '
-      'that was sent during the intervening operation or reverse a payment at a provider. Those effects '
-      'require their own recovery or compensation arrangements. Use Memento when the supported state and '
-      'restoration behaviour are clear; backups, event histories, and external compensation address broader '
-      'and different recovery questions.',
-      ['Capture local draft snapshot', 'Apply editable change', 'Restore supported local state'],
-      'before = draft.snapshot_owned_values()\n'
-      'draft.apply(edit)\n'
-      'draft.restore(before)\n'
-      '# No claim about undoing external effects'),
-     ('Visitor',
-      'A document tree has known node kinds, such as text and image. We want to add an export operation that '
-      'handles each kind without placing all export logic inside the node classes. A Visitor groups the '
-      'type-specific behaviour for that operation.\n'
-      '\n'
-      'During traversal, each node dispatches to the appropriate visitor operation, such as export_text or '
-      'export_image. The example expresses the same decision with pattern matching on node.kind. Another '
-      'visitor can perform validation over those same known kinds. This is useful when the structure is '
-      'fairly stable and we expect to add operations over it.\n'
-      '\n'
-      'The trade-off appears when the structure changes. Adding a new node kind may require updating every '
-      'visitor so each operation can handle it correctly. Define unknown-node handling: silently skipping an '
-      'unfamiliar node could lose content during export. Some languages make pattern matching simpler than a '
-      'separate visitor class hierarchy. Choose the representation that makes the known variants and each '
-      "operation's coverage clear.",
-      ['Known document node variants',
-       'Visitor supplies export operation',
-       'Each node dispatches appropriate behavior'],
-      'visit(node):\n'
-      '    match node.kind:\n'
-      '        case "text": return export_text(node)\n'
-      '        case "image": return export_image(node)\n'
-      '        case _: raise UnsupportedNode')],
+  'Our service renders a message as plain text or HTML. The caller chooses a format, but the service '
+  'should not contain the details of every rendering algorithm.\n'
+  '\n'
+  'A **Strategy** puts each algorithm behind the same operation, such as `render(data)`. The service '
+  'receives the chosen renderer and calls it. Supplying another renderer changes how the content is '
+  'produced without changing the calling steps.\n'
+  '\n'
+  'The shared contract must specify the output. An HTML result needs to be identified and escaped '
+  'appropriately; it cannot silently be treated as safe plain text. A function can serve as a strategy '
+  'when one operation is enough. The useful separation is the replaceable algorithm, rather than a '
+  'required class hierarchy.',
+  ['Caller chooses rendering format',
+   'Service receives that strategy',
+   'Strategy renders the data',
+   'Service handles its stated output type'],
+  'renderer = renderers.for_format(command.format)\n'
+  'content = renderer.render(command.data)\n'
+  'require(content.format == command.format)'),
+ ('Observer',
+  'After accepting a notification, the service updates a counter and refreshes an on-screen list. We do '
+  'not want the acceptance code to call every interested component by name.\n'
+  '\n'
+  'With **Observer**, interested objects subscribe to an event source. When acceptance occurs, the '
+  'source calls the registered listeners with the event. A subscription records this interest; removing '
+  'it ends that interest.\n'
+  '\n'
+  'In this example, callbacks run synchronously in registration order. The source copies the listener '
+  'list before calling them, so changes during a callback affect the next event. It records a '
+  "listener's error and continues to the next listener.\n"
+  '\n'
+  'These are chosen rules, not automatic guarantees of Observer. A process crash can lose an in-memory '
+  'event, and a slow callback delays this call. Delivery that must survive a restart needs saved event '
+  'data and a recovery mechanism.',
+  ['Listeners subscribe to acceptance',
+   'Source snapshots the listener list',
+   'Source calls each listener',
+   'One listener error is recorded'],
+  'for listener in snapshot(subscribers):\n'
+  '    try: listener.on_accepted(event)\n'
+  '    except Exception as error: record_listener_error(error)'),
+ ('Command',
+  'A worker may need to send a receipt later. Instead of immediately calling a sender, the application '
+  'can create a value describing the requested action: `SendReceipt(order_id, operation_id)`.\n'
+  '\n'
+  'This value is a **Command**. A handler reads it, loads the required order, checks the permitted '
+  'action, and performs the work. The request is separate from its execution. That makes it possible to '
+  'queue or record the request.\n'
+  '\n'
+  'The command should contain stable data, not an open request connection. If it is saved for later, '
+  'its format also needs to remain readable by the worker. Replaying the same command can repeat an '
+  'email unless the handler and provider use a defined duplicate-handling protocol. Recording an '
+  'intention does not itself make retries safe.',
+  ['Create SendReceipt command',
+   'Queue or pass the command',
+   'Handler loads and checks current data',
+   'Handler performs the requested action'],
+  'command = SendReceipt(order_id, operation_id)\n'
+  'handler.handle(command)\n'
+  '# Handler obtains its own valid resources'),
+ ('State',
+  'A draft notification can be edited. Once it has been submitted, editing that same delivery request '
+  'is no longer allowed. After confirmed delivery, sending it again is also a different action.\n'
+  '\n'
+  'The **State** pattern puts behaviour for each lifecycle stage in a state object. The notification '
+  'delegates an action to its current state. `Draft.submit` can save the accepted request and move to '
+  "`Queued`. `Queued.edit` rejects the edit. The object's history determines which behaviour is "
+  'active.\n'
+  '\n'
+  'State changes need evidence: a delivery confirmation can permit the transition to Delivered, while '
+  'an unverified caller request cannot. A small transition table may be simpler than separate state '
+  'classes. Either form must enforce the same allowed changes. Unlike selecting a rendering strategy, '
+  'selecting a convenient state cannot bypass those lifecycle rules.',
+  ['Notification begins in Draft',
+   'Draft accepts a valid submission',
+   'Notification moves to Queued',
+   'Queued rejects an edit'],
+  'submit(notification):\n'
+  '    return notification.state.submit(notification)\n'
+  '\n'
+  'Draft.submit(notification):\n'
+  '    save_submission_and_state(notification, next_state="Queued")\n'
+  'Queued.submit(notification): raise AlreadySubmitted'),
+ ('Chain of Responsibility',
+  'Before a notification request reaches the service, we check its caller, enforce a request limit, and '
+  'parse its input. Each step can either stop the request or pass it onward.\n'
+  '\n'
+  'A **Chain of Responsibility** connects these handlers in order. Authentication first rejects an '
+  'unknown caller. An allowed caller reaches the request-limit check. A request still allowed then '
+  'reaches parsing and the application.\n'
+  '\n'
+  'Each handler must say when it calls the next one. Forgetting that call can swallow a request; '
+  'calling it twice can repeat the work. Order matters too: rejecting an over-budget request before '
+  'expensive parsing avoids work we did not intend to admit. This chain organises calls in one '
+  'execution. It does not save progress for recovery after a process crash.',
+  ['Check caller identity',
+   'Reject work beyond its limit',
+   'Parse admitted input',
+   'Invoke the application'],
+  'handler = auth(rate_limit(parse(application)))\n'
+  'response = handler(request)\n'
+  '# Each wrapper either returns a rejection or calls next once'),
+ ('Template Method',
+  'Every notification preparation must validate input, render content, and save the prepared result. '
+  'Email and SMS use different rendering steps, but both need that same order.\n'
+  '\n'
+  'A **Template Method** defines the shared sequence in a base class. Its `prepare` operation calls '
+  '`validate`, the overridable `render`, and then `save`. An email subclass supplies HTML rendering; an '
+  'SMS subclass supplies text rendering. Callers use the shared `prepare` entry point.\n'
+  '\n'
+  'The extension rules matter. The subclass should replace the permitted rendering step without '
+  'bypassing validation. Keep resource cleanup around the whole operation if any step acquires '
+  'resources. When several steps vary independently, passing separate strategies may be easier than '
+  'creating a subclass for every combination.',
+  ['Shared prepare validates input',
+   'Subclass supplies rendering step',
+   'Shared prepare saves the result',
+   'Callers use the shared entry point'],
+  'class Preparation:\n'
+  '    prepare(input):\n'
+  '        validate(input)\n'
+  '        content = self.render(input)\n'
+  '        return save(content)\n'
+  '    render(input): raise NotImplemented\n'
+  '\n'
+  'class SmsPreparation(Preparation):\n'
+  '    render(input): return render_sms_text(input)'),
+ ('Iterator',
+  'A caller wants to read saved notifications one at a time. It should not have to know whether they '
+  'are stored in an array, a tree, or rows fetched from a database.\n'
+  '\n'
+  'An **Iterator** keeps the traversal position and supplies the next item until there are no more. A '
+  'loop asks for each item through that operation. The contract should state the ordering and what '
+  'happens if the underlying collection changes.\n'
+  '\n'
+  'A database iterator may fetch rows only as the caller advances. It can therefore keep a connection '
+  'open throughout the loop. Use it inside an owning resource block so leaving early or raising an '
+  'error closes the cursor. For a small bounded result, fetching a list first may let the connection '
+  'close sooner.',
+  ['Caller requests the next record',
+   'Iterator advances its position',
+   'Caller consumes the record',
+   'Completion or scope exit closes cursor'],
+  'with open_bounded_cursor(query) as rows:\n    for row in rows:\n        consume(row)'),
+ ('Mediator',
+  'In a notification editor, changing the channel affects the template choices and the recipient field. '
+  'If every control calls all the others, each must know much of the form.\n'
+  '\n'
+  'A **Mediator** coordinates these interactions. The channel selector reports its change to a form '
+  'coordinator. The coordinator updates the template choices and recipient field. The controls know the '
+  "coordinator instead of knowing one another's detailed APIs.\n"
+  '\n'
+  "The coordinator owns this form's interaction rules. It should not grow into the owner of every "
+  'application rule. Validation and saving can still live in their own collaborators. Mediator '
+  'simplifies who communicates with whom; it does not remove the need to understand the order and '
+  'effects of those updates.',
+  ['User changes delivery channel',
+   'Selector informs the mediator',
+   'Mediator updates template choices',
+   'Mediator updates recipient input'],
+  'channel_changed(channel):\n'
+  '    templates.show_for(channel)\n'
+  '    recipient_field.use_format(address_format(channel))'),
+ ('Memento',
+  'A person edits a notification draft and wants to undo the last edit. Before the change, the draft '
+  'can provide a snapshot of the state it supports restoring.\n'
+  '\n'
+  "That snapshot is a **Memento**. The editor keeps it without rewriting the draft's internal fields. "
+  'If the edit is unwanted, the editor gives the snapshot back to `restore`. The draft decides which '
+  'values to restore and how.\n'
+  '\n'
+  'The saved values must not change along with the draft. A snapshot that only points to the same '
+  'editable paragraph list would fail this test; the draft must copy its owned editable data. Restoring '
+  'this local draft cannot unsend a notification already delivered. Undoing values and reversing an '
+  'external effect are different operations.',
+  ['Draft captures its editable values',
+   'Editor keeps the snapshot',
+   'Edit changes the current draft',
+   'Draft restores the saved values'],
+  'before = draft.snapshot_owned_values()\n'
+  'draft.apply(edit)\n'
+  'draft.restore(before)\n'
+  '# Restores local draft data, not external deliveries'),
+ ('Visitor',
+  'A message document contains text and image nodes. We want to export both kinds to HTML, then add '
+  'another operation that checks accessibility. Putting every new operation into every node class would '
+  'spread the work.\n'
+  '\n'
+  'A **Visitor** groups the handling for one operation. During traversal, a text node calls '
+  '`visit_text` and an image node calls `visit_image` on the supplied visitor. An HTML visitor provides '
+  'export behaviour; an accessibility visitor provides checks.\n'
+  '\n'
+  'This works well when the node kinds are fairly stable and new operations are common. Adding a new '
+  'node kind, such as video, means updating visitors that must support it. Unknown kinds need an '
+  'explicit result rather than silently disappearing. Pattern matching can offer a simpler alternative '
+  'in languages that support it.',
+  ['Traversal reaches a text node',
+   'Node calls visitor.visit_text',
+   'Image node calls visitor.visit_image',
+   'Another visitor supplies another operation'],
+  'TextNode.accept(visitor): return visitor.visit_text(self)\n'
+  'ImageNode.accept(visitor): return visitor.visit_image(self)\n'
+  '\n'
+  'class HtmlVisitor:\n'
+  '    visit_text(node): return escape_html(node.text)\n'
+  '    visit_image(node): return render_image(node)')],
  7: [('Repository',
-      'A reservation service needs to load a reservation, apply its confirmation rule, and save it. A '
-      "Repository offers these data operations in the application's vocabulary while a concrete adapter "
-      'performs SQL or other storage work. The service can use a repository contract without knowing table '
-      'names and query syntax.\n'
-      '\n'
-      'In the example, get_for_update(reservation_id) obtains the reservation under the required update '
-      'rules. The service calls confirm(payment_evidence), then asks the repository to save the changed '
-      'record. The contract must state whether these calls share a transaction, who commits, and which '
-      'outcomes represent missing data, conflict, or storage failure. Returning a record must also say '
-      'whether it remains usable after a connection closes.\n'
-      '\n'
-      'The right boundary follows the data rule. A repository for each table can split values that need to '
-      'change atomically as one aggregate. Also bound queries and expose relevant costs: a simple method '
-      'name must not conceal an unlimited remote load or an unowned live cursor. A test substitute helps '
-      'check service decisions, but real storage checks are needed to establish actual commit and recovery '
-      'behaviour.',
-      ['Domain operation', 'Repository contract', 'Concrete persistence adapter'],
-      'reservation = repository.get_for_update(reservation_id)\n'
-      'reservation.confirm(payment_evidence)\n'
-      'repository.save(reservation)'),
-     ('Unit of Work',
-      'To reserve a seat, the application changes inventory and inserts a reservation record. If both are in '
-      'one transactional database, we want one commit decision: save both local changes or save neither. A '
-      'Unit of Work groups the changes and owns the transaction resources for that operation.\n'
-      '\n'
-      'The application opens the unit, asks its inventory repository to reserve the seat, and asks its '
-      "reservation repository to add the record. These repositories use the unit's transaction instead of "
-      'committing independently. The explicit commit then makes the grouped changes durable according to the '
-      "database's contract. If the operation fails before commit, the owning scope must roll back unfinished "
-      'work and release resources.\n'
-      '\n'
-      'Keep this boundary short and precise. A remote payment provider is not a participant in the local '
-      'database transaction merely because its call appears inside the same language scope. Rolling back the '
-      'database cannot undo a provider charge. External effects need their own identity, outcome, and '
-      "recovery protocol. The Unit of Work's atomicity follows the actual transaction boundary, rather than "
-      'the indentation of the program.',
-      ['Begin local transaction', 'Apply related local changes', 'Commit both or roll back'],
-      'with unit_of_work() as uow:\n'
-      '    uow.inventory.reserve(seat)\n'
-      '    uow.reservations.add(record)\n'
-      '    uow.commit()'),
-     ('Specification',
-      'A refund rule may ask whether a payment is captured, still within its refund period, and otherwise '
-      'eligible. We can express that decision as a named predicate: RefundPolicy.satisfied_by(payment, now). '
-      'A predicate returns whether the supplied values meet a condition. Specification gives a reusable rule '
-      'such an explicit form and, where useful, lets rules be combined.\n'
-      '\n'
-      'The evaluation uses the payment state and time supplied to it. A successful result does not reserve '
-      'that state. Another operation could refund the payment before this caller writes its change. In the '
-      'example, refund_if_still_eligible(payment.version) performs the transition only if the relevant '
-      'current conditions or version still permit it. The rule and the atomic update must agree.\n'
-      '\n'
-      'A specification may also be translated into a storage query for selection. That translation must '
-      'preserve the same time, null-value, and access semantics as the in-memory decision. A plain function '
-      'is often enough for one rule. Add a composable expression framework when shared rule composition or '
-      'query translation gives a concrete benefit.',
-      ['Evaluate refund predicate', 'Concurrent state may change', 'Atomic transition rechecks invariant'],
-      'eligible = RefundPolicy.satisfied_by(payment, now)\n'
-      'if eligible:\n'
-      '    repository.refund_if_still_eligible(payment.version)'),
-     ('CQRS',
-      'Capturing a payment needs a model that checks allowed transitions and records a valid change. '
-      'Displaying an account statement needs a convenient arrangement of dates, descriptions, and amounts. '
-      'Command Query Responsibility Segregation, or CQRS, separates the models used to change data and to '
-      'answer queries when these needs differ enough to justify it.\n'
-      '\n'
-      "A command such as capture(payment_id, operation_id) goes through the write model's rules. A query "
-      "such as account_statement(account_id) uses the read model's shape. A projection can update the read "
-      'model from accepted changes. If that work runs later, a successful command may be followed by a '
-      'statement that has not caught up yet. The query contract must explain that freshness, and the '
-      'projection needs defined recovery and rebuilding behaviour.\n'
-      '\n'
-      'The models can live in one process and use one database. Event sourcing and separate services are '
-      'additional decisions, rather than requirements of CQRS. With one simple model that already supports '
-      'both operations, separate models may add more synchronisation and maintenance than they save. Choose '
-      'the separation for actual differences in rules, access patterns, or query needs.',
-      ['Command enforces invariant', 'Projection updates read model', 'Query serves explicit freshness'],
-      'commands.capture(payment_id, operation_id)\n'
-      'statement = queries.account_statement(account_id)\n'
-      '# Projection lag is part of the query contract')]}
+  'The service needs to find a saved notification and change its delivery status. It should not have to '
+  "know the database's table names to do this.\n"
+  '\n'
+  'A **Repository** offers data operations in application terms, such as `get(notification_id)` and '
+  '`save(notification)`. Its implementation performs the storage queries. The service loads the '
+  'notification, applies the delivery rule, and asks the repository to save the changed value.\n'
+  '\n'
+  'The contract must explain what these calls promise. A missing identifier needs a defined result. '
+  'Concurrent changes need a conflict rule. Loading and saving do not automatically form one '
+  'transaction merely because they use the same repository. In this example, a Unit of Work supplies '
+  'that transaction. A test repository can check service decisions, but only real storage checks '
+  'establish actual database behaviour.',
+  ['Service loads a notification',
+   'Repository performs storage access',
+   'Service applies its status rule',
+   'Repository stages the changed value'],
+  'with unit_of_work() as uow:\n'
+  '    notification = uow.notifications.get(notification_id)\n'
+  '    notification.record_delivery(verified_receipt)\n'
+  '    uow.notifications.save(notification)\n'
+  '    uow.commit()'),
+ ('Unit of Work',
+  'Accepting a notification adds a message record and a delivery-job record. Saving only the message '
+  'would leave accepted work with no job to send it.\n'
+  '\n'
+  'A **Unit of Work** tracks the records added, changed, or removed during an operation and coordinates '
+  'saving them. In this example, both repositories use one transaction in the same database. `commit()` '
+  'writes the pending changes and asks the database to commit them together. If the operation exits '
+  'before a successful commit, the owning block rolls back unfinished work and releases its resources.\n'
+  '\n'
+  'This groups the local changes. Calling an email provider inside the block would not put the provider '
+  'into that database transaction. Database rollback cannot retract an email. The boundary follows the '
+  'actual participating storage, not the indentation of the code.',
+  ['Open one local transaction',
+   'Track message and job additions',
+   'Commit both database changes',
+   'Roll back unfinished work on exit'],
+  'with unit_of_work() as uow:\n'
+  '    uow.notifications.add(notification)\n'
+  '    uow.delivery_jobs.add(job)\n'
+  '    uow.commit()'),
+ ('Specification',
+  'A scheduled notification is ready only if its scheduled time has arrived and it has not been '
+  'cancelled. We want this rule to have one clear name.\n'
+  '\n'
+  'A **Specification** expresses a condition as a test, such as `ReadyToSend.satisfied_by(notification, '
+  'now)`. A test returning true or false is a **predicate**. Small specifications can be combined when '
+  'the application needs reusable combinations of rules.\n'
+  '\n'
+  'A true result describes the values just tested. Another caller could cancel the notification before '
+  'we claim it for sending. The final update must therefore recheck the required current conditions. '
+  'Here `claim_if_still_ready` checks the saved version and readiness rule atomically, and returns no '
+  'claim if either changed. A plain function is enough when no rule-composition machinery is needed.',
+  ['Load notification and its version',
+   'Evaluate the named readiness rule',
+   'Concurrent cancellation may intervene',
+   'Atomic claim checks readiness again'],
+  'if ReadyToSend.satisfied_by(notification, now):\n'
+  '    claim = repository.claim_if_still_ready(\n'
+  '        notification.id, notification.version, now)\n'
+  '    # No claim means the current conditions did not permit it'),
+ ('CQRS',
+  'Submitting a notification needs rules that prevent invalid changes. A progress screen needs a '
+  'convenient list of recipients, times, and statuses. Those jobs may benefit from different data '
+  'models.\n'
+  '\n'
+  '**Command Query Responsibility Segregation**, or **CQRS**, separates the model used for changes from '
+  'the model used for reads. A command goes through the change rules. A query reads the view prepared '
+  'for its needs.\n'
+  '\n'
+  'A process called a **projection** can update the reading view from accepted changes. If it runs '
+  'later, the screen may briefly lag behind a successful command. The application must explain that '
+  'delay and arrange recovery when projection work fails.\n'
+  '\n'
+  'The models can share one process and database. CQRS does not require saving every change as an event '
+  'or deploying separate services. When one simple model serves both jobs well, maintaining two models '
+  'may add unnecessary work.',
+  ['Command checks a submission',
+   'Write model records accepted work',
+   'Projection updates progress view',
+   'Query reads that view with stated freshness'],
+  'accepted = commands.submit_notification(command)\n'
+  'rows = queries.notification_progress(account_id)\n'
+  '# A separately updated progress view may lag behind acceptance')]}

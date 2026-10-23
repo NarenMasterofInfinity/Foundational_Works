@@ -16,7 +16,7 @@ def paragraphs(value):return ''.join('<p>'+e(p)+'</p>' for p in value.split('\n\
 
 
 def lesson_paragraphs(value):
-    """Allow named terms and code fragments in the two introductory rewrites."""
+    """Render named terms and code fragments in the revised introductory units."""
     result=[]
     for paragraph in value.split('\n\n'):
         safe=e(paragraph)
@@ -37,7 +37,7 @@ def slug(value):return re.sub(r'[^a-z0-9]+','-',value.lower()).strip('-')
 
 def concept_body(unit,chapter,bench=''):
     n=unit['n'];j=int(chapter['number'].split('.')[1]);rows=[(i,LESSONS[n][i-1]) for i in chapter['topic_numbers']]
-    render_paragraphs=lesson_paragraphs if n in (3,4) else paragraphs
+    render_paragraphs=lesson_paragraphs if n in (3,4,5,6) else paragraphs
     opening,takeaway,question=GUIDES[n][j-1]
     html=introduction(opening)
     fig_no=0
@@ -51,8 +51,8 @@ def concept_body(unit,chapter,bench=''):
         html+=visual+'</section>'
     if n==6 and j in PATTERN_LESSONS:
         for name,prose,trace,code in PATTERN_LESSONS[j]:
-            html+=f'<section class="pattern-lesson" id="pattern-{slug(name)}"><span class="eyebrow">PATTERN / MECHANISM, USE, AND COST</span><h2>{e(name)}</h2>'+paragraphs(prose)
-            fig_no+=1;html+=flow(n,j,fig_no,name+' · the example',trace,PATTERN_SUMMARIES[name],True)
+            html+=f'<section class="pattern-lesson" id="pattern-{slug(name)}"><span class="eyebrow">PATTERN / HOW IT WORKS</span><h2>{e(name)}</h2>'+render_paragraphs(prose)
+            fig_no+=1;html+=flow(n,j,fig_no,name+' · the example',trace,PATTERN_SUMMARIES[name])
             html+='<pre><code>'+e(code)+'</code></pre></section>'
     # Short chapters receive additional meaningful views of the unit's worked
     # system, not empty commissions or duplicated hidden figures.
@@ -61,6 +61,16 @@ def concept_body(unit,chapter,bench=''):
         fig_no+=1
         if n==3 and j==1:
             html+=flow(n,j,fig_no,'Follow the task-list request',['Browser asks: GET /tasks','Address and port lead to service','Application obtains the task list','Response returns to the browser'],'Addresses and ports bring data to the program. HTTP tells the program what was requested and gives the response its meaning.')
+        elif n==5 and j==4:
+            if fig_no==3:
+                html+=flow(n,j,fig_no,'Test the payment rule without making a payment',['Supply a recording gateway','Run the payment operation','Inspect the requested charge','Check the returned outcome'],'The test controls the gateway result and checks the service’s decision. A separate test must check communication with the real provider.')
+            else:
+                html+=snapshots(n,j,fig_no,'Keep calculation separate from effects',['Fee function receives an amount','Function returns the calculated fee','Gateway sends the payment request','Repository stores the outcome'],'Calculating a fee need not send a request or change stored data. Separating these steps lets us test the calculation directly.')
+        elif n==6 and j==3:
+            if fig_no==3:
+                html+=flow(n,j,fig_no,'Supply the sender from outside',['Startup chooses EmailSender','Pass sender to service','Service receives a message','Service calls supplied sender'],'The constructor shows that the service needs a sender. It does not need to search a global registry during the operation.')
+            else:
+                html+=flow(n,j,fig_no,'Choose a sender when the message arrives',['Service receives channel: SMS','Ask the supplied sender factory','Factory selects SMS sender','Service uses its send operation'],'Injection supplies the factory at construction. The factory handles the choice that becomes known only when a message arrives.')
         elif fig_no%2:
             html+=flow(n,j,fig_no,'Follow the related complete design',case['flow'],CASE_CAPTIONS[CASE_FOR_UNIT[n]][1])
         else:
@@ -88,7 +98,7 @@ def concept_body(unit,chapter,bench=''):
         html+='''<h2>Compare latency, availability, and operating work under stated assumptions</h2><p>Construct a 100-request trace for each option: single deployment has 98 observations at 190 ms, one at 900 ms, and one at 1,400 ms; replicated application has 98 at 140 ms, one at 450 ms, and one at 800 ms; partitioned design has 98 at 110 ms, one at 600 ms, and one at 1,600 ms. Nearest-rank p99 is observation 99 after sorting. These synthetic traces deliberately show that lower common-case latency can coexist with worse tail latency. They predict no real deployment.</p><p>For a separate steady-state availability model, assume independent app-instance availability of 0.99 and data-owner availability of 0.999. An interchangeable pool of k apps is available with probability 1 − 0.01^k. The single and replicated options require one data owner. The partitioned operation in this example requires all three independent owners, so multiply by 0.999³. Shared outages, overload, failover time, repair, and correlated failures are omitted; these probabilities are not SLO commitments.</p><div class="table-wrap"><table><caption>Illustrative comparison; latency traces, availability probabilities, and operating judgments are assumptions</caption><thead><tr><th>Architecture</th><th>Monthly cost units</th><th>Constructed p99</th><th>Modeled availability</th><th>Operational complexity judgment</th></tr></thead><tbody><tr><td>Single: 1 app, 1 data owner</td><td>371</td><td>900 ms</td><td>98.901%</td><td>Lower: one app release and one data owner</td></tr><tr><td>Replicated: 4 apps, 1 data owner</td><td>551</td><td>450 ms</td><td>99.899999%</td><td>Medium: rolling releases, shared cache, pool capacity and failover</td></tr><tr><td>Partitioned: 8 apps, 3 required data owners</td><td>1,402</td><td>600 ms</td><td>99.700300%</td><td>Higher: routing, rebalancing, multiple owners and partial recovery</td></tr></tbody></table></div><p>For a per-key request touching only one shard, the all-three-owners availability expression does not apply. Replication with an actual quorum or failover protocol also needs a different model. The calculation is executable as architecture_comparison() in the mechanism collection. Choose a candidate against the workload and targets, then test tail latency, degraded capacity, restoration, and operating burden. Cost arithmetic alone cannot establish those properties.</p>'''
     if n==2 and j==3:
         html+='''<div class="callout theory"><span class="eyebrow">INFRASTRUCTURE WORKSHEET · ASSUMED CAPACITY</span><p>At 28,935.19 peak requests/s, a hypothetical tested instance capacity of 600 requests/s and a 60% utilization target imply ceil(28,935.19 / 360) = 81 active instances. Reserving capacity for one lost instance gives 82. This does not size the database, image delivery path, or failure domains. Validate each separately; the 600 figure is an assumed input, not a reported benchmark.</p></div>'''
-    if n not in (3,4) or j==len(unit['chapters']):
+    if n not in (3,4,5,6) or j==len(unit['chapters']):
         html+='<details class="deep-dive"><summary>Think further · '+e(THOUGHT[n])+'</summary>'+paragraphs(THOUGHT_ANSWERS[n])+'</details>'
     html+='<p class="mental-model"><strong>Remember:</strong> '+e(takeaway)+'</p>'
     html+='<p class="check-question">Try applying it: '+e(question)+'</p>'

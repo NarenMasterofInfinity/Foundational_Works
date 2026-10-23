@@ -31,23 +31,9 @@ A and B read count zero, then both write one. Which steps must the shared lock p
 An upload read completes while a callback uses the only event-loop thread for two seconds. When can the upload task continue? || Its result is ready, but its continuation still needs a turn on the thread. It waits until the callback yields or finishes. The distinction is between a completed I/O operation and execution of the code that uses its result. More queued tasks do not let that one thread run both pieces at once.
 150 jobs arrive and 100 finish each second. If all are accepted, how much extra work remains after ten seconds? || Each second adds 150 − 100 = 50 unfinished jobs. Ten seconds add 500, assuming none are rejected or abandoned. More queue space stores the excess without changing its growth. A bounded queue can reject or wait when full, and the producer must react to that feedback for arrivals to slow.''')
 
-add(5, '''When can composition avoid many subclasses? || A payment service may vary both its gateway and its fraud policy. Combining those choices through inheritance can require a subclass for each combination. With composition, the service receives a policy and gateway and calls each for its own work. Either can be replaced while keeping the other. ¶ This needs clear collaborator contracts and wiring. Inheritance remains appropriate when specialisation preserves the behaviour callers are promised. Similar fields alone do not establish that relationship.
-What must a payment gateway contract explain beyond charge(amount)? || State the currency and amount units, the operation identity, repeated-operation behaviour, and the meanings of results and errors. For example, 100 USD minor units means one dollar, while “accepted” may mean only that processing has begun. ¶ A timeout after submission can leave a charge uncertain because the provider may have performed it before the reply was lost. The contract should preserve this distinction and explain a supported recovery path. A Boolean cannot express approval, definite decline, and uncertainty separately. Merely including an operation identifier does not make duplicate handling work.
-Why does applying SOLID not require an interface for every class? || Each principle asks about a design property: focused responsibilities, useful extension points, valid substitution, caller-specific interfaces, or the direction of dependencies. An interface is useful when it protects meaningful variation or hides details callers need not know. An application-owned gateway contract can do this for provider communication. ¶ An interface that only forwards every call may add navigation and maintenance without helping a real change. Evaluate a concrete change or test need rather than maximising interface count. A contract also needs behavioural meaning; matching method signatures alone does not make implementations substitutable.
-How is Payment 42 different from Money(USD,100)? || Payment 42 retains its identity as its status changes, so it is an entity. A second payment for the same amount has a different identity and history. Equal Money values can represent the same amount and currency without separate identities, making Money a value object. ¶ Identity and mutability are separate questions. Money is often represented immutably, and a payment can also have successive immutable snapshots sharing its identifier. Both still need valid rules; adding different currencies requires an explicit conversion policy rather than arbitrary arithmetic.
-How can pure functions and external payment effects work together? || A pure decision function takes explicit state and command data and returns a decision, new state, or requested action. A separate coordinator performs storage and provider calls and supplies their observed outcomes to later decisions. We can check the decision using inputs and outputs without making a real charge. ¶ The effect path still needs durability, authorisation, duplicate handling, and reconciliation of uncertain outcomes. Replaying a pure calculation does not authorise blindly repeating its requested charge. Pure local calculation does not make a remote effect atomic with a local database write.
-Why ask an account to reserve an amount rather than overwrite its balance from outside? || The account owner can keep the reservation rule and its update together. For example, it can reject a reservation that would make reserved money exceed the balance. External read/compare/write logic spreads the policy across callers. Reading a balance for reporting remains a valid query. ¶ The method boundary does not itself coordinate writers. If two processes both see 1,000 available and each reserve 600, both can pass a separate check. The actual shared storage boundary must make the check and update atomic so that one operation sees the effect of the other and rejects the conflicting reservation.
-A mock confirms every expected method call. What could still be wrong? || The order may still end in the wrong state, shipment may start after a decline, or an uncertain result may be recorded as paid. Checking the requested private calls does not necessarily check the business outcome. Assert the required state and effects for approved, declined, and uncertain results. ¶ Real transaction rollback, request encoding, resource cleanup, and provider retry behaviour also need evidence at their actual boundaries. A mock makes a path controllable but cannot prove how the component it replaced behaves. A harmless internal rearrangement should not break a test unless it changes a required interaction or outcome.
-A refactor changes provider timeout into decline. Has it preserved behaviour? || No. A definite decline says the operation was rejected. A timeout after submission can mean the effect happened but its reply was lost. Reporting that as decline can cause callers to start a new payment and risk a second charge. ¶ Keep the outcome uncertain until supported evidence resolves it, retaining the operation identity needed for recovery. A structural refactor should preserve these meanings. Include a timeout test alongside approval, decline, and storage-failure tests, and check that the timeout leaves the payment pending for investigation rather than definitely declined.''')
+add(5, "A service can use two fraud policies and two providers. How does composition help? || The service receives one fraud-policy object and one gateway object. It asks the policy whether to allow the attempt, then asks the gateway to charge. Either part can be replaced without making a service subclass for every combination. ¶ Each replacement must still preserve its operation's meaning. Composition separates the choices; it does not remove the need for clear behaviour between them.\nWhat is missing from the operation charge(100)? || We need the currency and amount units. We also need an operation identifier, valid inputs, possible results, and failure behaviour. In our example, USD 100 minor units means one dollar. Approved confirms a successful charge; declined confirms rejection; uncertain leaves the result unresolved. ¶ The contract must explain supported retries and status checks. A timeout after submission may hide a successful charge, and adding an operation identifier does not by itself make the provider recognise duplicates.\nDoes SOLID require an interface around every class? Explain with the payment gateway. || No. A gateway interface is useful because it lets payment rules use a common operation while each adapter handles provider details. A second provider can then be added without spreading its message fields through the service. ¶ An interface that only adds another forwarding layer may solve no real problem. SOLID helps examine responsibilities, replacements, and dependencies; interface count is not a measure of design quality.\nWhy is Payment 42 an entity while Money(USD,100) is a value object? || Payment 42 keeps its identity as its status changes. Another payment for the same amount has a different identifier and history. Money(USD,100) is recognised by its amount and currency: another equal value can replace it. ¶ Immutability is a separate choice. Money is often immutable, and a payment can also have immutable snapshots linked by identifier 42. Adding money in different currencies still requires an explicit conversion rule.\nWhich part of a function-based payment design makes the real charge? || The outer code performs the provider call. A pure decision function uses explicit inputs and returns a decision or requested action; it makes no charge itself. The outer code records progress and feeds the observed provider result into the next decision. ¶ Calling the pure function again can recompute its decision. It must not automatically repeat a charge that has already run. The code that performs effects still needs operation identity and a way to resolve uncertain results.\nTwo callers each try to reserve 600 from an account with 1,000 available. Why is reserve(amount) alone insufficient? || The method gives the account one place to own the rule. However, if both callers read 1,000 before either writes, both separate checks pass. Merely moving the code into a method does not stop that sequence. ¶ The shared database must make the check and update atomic. After one reservation leaves 400 available, the second check must see insufficient funds and reject 600. A conditional update or suitable transaction can enforce this rule.\nA test confirms every private method call, but the order is paid after a decline. What should the test check? || It should check the required outcome: the payment is declined, the order remains unpaid, and shipment does not begin. A matching sequence of internal calls can still produce the wrong business state. ¶ Also test approval and uncertainty. Keep separate tests using the real adapter and database for message encoding, commits, and provider behaviour. A replacement gateway makes replies controllable but cannot prove how the real provider behaves.\nA refactor changes timeout into decline. Why is that a behaviour change? || Decline means the provider definitely rejected the charge. Timeout means the caller stopped waiting; the charge may already have succeeded before the reply was lost. Replacing uncertainty with decline tells the caller something we do not know. ¶ The caller might then start another payment and charge twice. Preserve the uncertain result and operation identifier until a supported status check or recovery procedure resolves it. Include this case in the refactor's checks.")
 
-add(6, '''A notification service receives an SMS SDK through its constructor. Has it necessarily achieved dependency inversion? || It has used dependency injection because another part of the program supplied the SDK. But suppose the service still builds the SDK's request objects and interprets its exceptions. Its policy still depends on those provider details. ¶ Dependency inversion requires a suitable contract for the application's needs. Define Sender in application terms and let an adapter translate that contract to the SDK. Injection can supply the adapter, while the service relies on Sender's message and outcome meanings. The argument's presence alone cannot establish this separation.
-Two application processes each register a singleton sender. Must they receive the same object, and is either sender automatically safe for concurrent calls? || Each process can have its own sender. A singleton lifetime promises reuse within the stated container or application boundary, not one object across every host. Even inside one process, the framework's exact boundary matters. ¶ Reuse also says nothing about safe concurrent access. If requests share mutable state in that sender, its implementation must coordinate the permitted calls. State who owns it, when it is released, and what concurrent use its contract supports.
-A factory returns a connection. Why does the caller need more than the connection object to use it correctly? || It needs the ownership rule. The connection might be newly created and transferred to the caller, borrowed from a scope, or shared under another owner. The first case requires the caller to release it; the other cases require the caller to respect the owner's boundary. ¶ Closing a shared connection can interrupt other users. Failing to return a connection the caller owns can remove capacity from a pool. The contract must therefore say who releases it and how long it may be retained.
-A service receives a DI container, then calls resolve() throughout its methods. Why are its dependencies still difficult to see? || The constructor names only the container. To discover whether the service needs a sender, repository, or formatter, we must inspect the runtime lookups in its methods. A missing registration may remain unnoticed until the relevant branch executes. This is service-locator behaviour even though the container itself was injected. ¶ Resolve collaborators at a deliberate composition or integration boundary, then pass the focused contracts the service needs. Its inputs make those dependencies and their ownership easier to review.
-Each notification chooses email or SMS at runtime. How can dependency injection and a factory work together? || Create a narrow SenderFactory and inject it into NotificationService. When a command arrives, the service reads its channel and asks the factory for the corresponding Sender. Injection supplied the collaborator; the factory performs the later selection or construction. ¶ Specify whether the returned sender is caller-owned, scope-owned, or shared by the application. That tells the service whether it must close it, may retain it, or only borrows it for the operation.
-A singleton stores the unit of work obtained during request one. That request finishes. What can go wrong on request two, and how should the relationship change? || Request one's scope can dispose the unit of work while the singleton still holds its reference. Request two then tries to use expired resources and may also encounter context retained from the wrong user or tenant. This is a captive dependency. ¶ Supply a valid unit of work for each operation, or supply a narrow factory that creates the appropriate scope and defines its cleanup. Every use must fit that scope. Looking up the same expired object globally, or extending all connections indefinitely, does not repair the ownership relationship.
-A report generator is constructed lazily. Two first requests arrive together. What must the initialisation contract define? || Both callers can observe that the generator is absent before either finishes constructing it. Coordinate the check, construction, and publication so the application does not create unintended duplicates or expose a partially constructed object. Use a supported lazy primitive or the runtime's appropriate locking and publication rules. ¶ Also decide how construction failure reaches the waiting callers and whether a later request retries. If the generator is essential to ordinary service, constructing it before readiness may make failures easier to handle.
-A pool starts with ten connections. Each failed request keeps one connection instead of returning it. Why can later healthy requests stop making progress? || Every leak reduces available capacity: after one such failure, nine connections remain; after enough failures, none may be available. The later request's own operation could succeed, but it cannot begin its database work without a connection. ¶ Release belongs in a structured scope or finally-style path that covers failure and cancellation as well as success. Roll back unfinished work as required before returning the resource. Memory garbage collection is not a guarantee that the pool will regain capacity in time.''')
+add(6, 'A notification service receives a provider SDK through its constructor. Has it necessarily achieved dependency inversion? || It uses DI because another part of the program supplied the SDK. It may still create the provider’s request types and interpret its special status codes. Those are source dependencies on provider details. ¶ Define Sender using the application’s message and outcome meanings. An adapter translates between that contract and the SDK. Passing this adapter into the service combines injection with a dependency direction that keeps provider details outside the notification rule.\nTwo processes each have a singleton sender. Must it be the same object, and is it automatically safe for concurrent calls? || No. The reuse boundary must be stated. Each process can have its own singleton instance, and separate containers may also have separate instances under their rules. ¶ Sharing an instance does not protect its mutable data. If several threads may call it, its implementation must preserve the contract during those calls. Its owner must also keep it valid until its final use.\nA factory returns a connection. What must its contract tell the caller besides how to query it? || It must state who owns the connection and when it stops being valid. A fresh connection may be transferred to the caller, which must close it. A borrowed connection remains under another owner and must be used within that owner’s boundary. ¶ Closing a borrowed connection too early can interrupt another operation. Failing to release an owned connection can leave fewer connections for later callers.\nA constructor receives a container, and the service calls resolve() inside its methods. Why are its dependencies hard to see? || The constructor names the container, but not the sender or repository actually used. We must inspect the lookups in the methods to discover those needs. A missing registration may appear only when a particular branch runs. ¶ This is service-locator behaviour. Obtain the needed objects at the assembly or scope boundary, then pass the service its specific dependencies.\nEach notification chooses email or SMS when it arrives. How can DI and a factory work together? || Startup injects SenderFactory into the notification service. When a notification arrives, the service reads its channel and asks the factory for the corresponding sender. DI supplied the factory; the factory makes the later choice. ¶ The return contract also states whether that sender is application-owned, borrowed from a scope, or newly owned by the caller. The service follows that rule when retaining or closing it.\nAn application-wide service retains request A’s database session. Request A ends. What can go wrong during request B? || Request A may close the session while the service still holds its reference. Request B then reaches a closed resource. Retained request data may also belong to the wrong user. This is a captive dependency. ¶ Pass a valid session for each operation, or inject a focused factory that opens an operation scope. Finish the operation before closing its resources. Keeping all sessions open indefinitely does not preserve the intended request boundaries.\nTwo first requests arrive together for a lazily created report generator. What needs to be decided? || Both can observe that no generator exists and try to create one. Use supported coordination so the intended number is created and other callers receive only a fully initialised object. ¶ Define construction failure as well. Will later callers retry, or receive the saved error? Who releases resources from the failed attempt? The first request also bears the construction delay; essential setup may be better completed before reporting readiness.\nA pool has ten connections. Every failed request keeps one. Why can a later healthy request become stuck? || After one leak, nine connections remain available. Repeated failures can leave all ten held. The later request cannot start its database work even if its own query and the database are healthy. ¶ Use an owning resource block or finally path to return the connection when the operation ends, including supported failure and cancellation paths. Roll back unfinished work as the connection’s reuse contract requires.')
 
 add(7, '''What makes a monolith modular if it has one deployment? || Its modules have clear responsibilities, controlled interfaces, and data ownership. Orders should use a payment contract rather than alter private payment tables. One deployment keeps calls local but does not prevent useful boundaries. Enforce important dependencies through review or appropriate checks.
 Why can dependency arrows point differently from runtime calls? || A service can depend on an application-owned repository interface, while a database adapter implements it. At runtime, calls execute the supplied adapter. The source arrow describes knowledge or implementation relationships, not necessarily the physical direction of a message or a separate network service.
@@ -188,9 +174,9 @@ THOUGHT={2: 'How would simultaneous retries change an estimate based on average 
  3: (((('Our application used to call a local function. Now it calls a service in another region. What new '
  'events can affect the result?')))),
  4: 'The client disconnects after an upload job is accepted. Should processing stop?',
- 5: 'Which payment rules should remain the same when objects are replaced by pure functions?',
- 6: 'A notification job runs after both the creating request and the user session have ended. How should it '
-    'obtain resources, and which authority should permit its action?',
+ 5: 'We replace payment objects with pure functions. Which requirements remain?',
+ 6: (('A saved notification job runs after its creating request and user session have ended. How should it '
+ 'obtain resources and permission to act?')),
  7: 'What evidence would justify extracting payments into a separate service?',
  8: 'Can finite storage support a permanent promise to recognise every old idempotency key?',
  9: 'How should restoration from a historical backup respect later deletion decisions?',
@@ -226,24 +212,19 @@ THOUGHT_ANSWERS={2: 'Retries add attempts without adding new user intentions. A 
  'outside the request scope own the remaining work. Request-owned children can stop and release their '
  'resources. If cancellation of the job is allowed, record that decision so later workers can obey it. '
  'Closing the connection alone neither deletes the saved job nor reverses work already completed.')))),
- 5: 'Currency, units, allowed state transitions, operation identity, and the meaning of uncertainty remain '
-    'requirements regardless of representation. For the same inputs and observed provider outcomes, the new '
-    'design should make the same business decisions. Tests can check these decisions through explicit '
-    'function inputs and outputs.\n'
-    '\n'
-    'The separate effect coordinator still needs authorisation, durable progress, transactions for local '
-    'changes, provider identity, duplicate handling, and reconciliation. Replay should recompute decisions '
-    'without blindly repeating external effects. Moving methods into functions changes the representation, '
-    'not the obligations of a payment system.',
- 6: 'Save durable job data and identifiers instead of capturing a request connection or session object. When '
-    'execution begins, create a job scope, obtain current resources under a documented owner, load the '
-    'required state, and release those resources when the job finishes or fails. The request and job now '
-    'have separate ownership boundaries.\n'
-    '\n'
-    'The application must also choose an authorisation policy. Some jobs represent work validly accepted '
-    'earlier; others must recheck current membership or permission before acting. Make that decision '
-    'explicit and retain only the necessary context. A long-running job must not silently treat an expired '
-    'user session as continuing authority.',
+ 5: (('The amount units, currency rules, permitted states, operation identity, and outcome meanings stay the '
+ 'same. Given the same state and provider result, the function should make the same business decision.\n'
+ '\n'
+ 'The outer code must still perform and record effects safely. A timeout can still hide a completed '
+ 'charge, and a database write can still fail after that charge. Changing methods into functions does '
+ 'not combine those separate events or make replay safe automatically.')),
+ 6: (('Save the necessary job data and identifiers rather than an open connection or session object. The '
+ 'worker opens its own scope, obtains current resources, loads the data, performs the work, and '
+ 'releases those resources.\n'
+ '\n'
+ 'The application also needs an explicit permission rule. Some jobs carry out work validly accepted '
+ 'earlier; others must check current permission before acting. Choose that rule for this operation. An '
+ 'old session object cannot silently stand for permission that remains current forever.')),
  7: 'Look for stable capability ownership, different scaling or isolation needs, and an operating team '
     'prepared for network and version failures. Compare those benefits with added data coordination and '
     'recovery. Preserve existing payment invariants and histories through migration. A separate deployment '
@@ -355,28 +336,22 @@ TASKS={2: ('Implement a capacity worksheet with explicit user activity, peak, an
  'identifiers. Fill the queue and show the busy response. Also make conversion fail and check that its '
  'files and other resources are released. An in-memory demonstration needs saved job records before it '
  'can promise restart recovery.'),
- 5: ('Replace hardcoded payment-provider construction with an injected recording gateway.',
-     'Pass the gateway as an argument or constructor dependency. Its charge method should record the '
-     'supplied command and return a controlled result. Use it to exercise approved, declined, and uncertain '
-     'outcomes without real charges, and check that currency and minor-unit amounts cross the boundary '
-     'unchanged.\n'
-     '\n'
-     'The small worked example records a command and returns “uncertain”; it isolates the dependency rather '
-     'than implementing a complete payment service. Extend the surrounding service checks to its resulting '
-     'business state as appropriate. Real request encoding, persistence, and provider recovery need separate '
-     'evidence. Preserve uncertainty rather than treating a canned timeout as decline.'),
- 6: ('Demonstrate transient, scoped, and singleton identities across two request scopes. Then add an owned '
-     'disposable resource and show what happens when it is retained beyond its scope.',
-     'Record two resolutions of each lifetime inside scope one and again inside scope two. Expected scoped '
-     'identities are A,A followed by B,B. Transient resolutions should produce distinct instances, while '
-     'resolutions of the application-owned singleton should return S within its stated boundary. Compare '
-     'object identity rather than equal field values.\n'
-     '\n'
-     'Give the scoped resource an observable closed flag or cleanup record. Exit its scope through both a '
-     'normal operation and a failure, and confirm that cleanup occurs. Keep a reference in the longer-lived '
-     'object and demonstrate that a later use is rejected after closure. This shows why a surviving '
-     'reference does not extend validity. Finally, obtain a fresh resource for each operation and verify its '
-     'own cleanup boundary.'),
+ 5: ('Supply a recording gateway that returns uncertain. What should the small test assert?',
+ 'Give the gateway a list of received commands. Its charge method appends a copy of the command and '
+ 'returns uncertain. Pass this gateway into pay instead of constructing a real provider inside pay.\n'
+ '\n'
+ 'Assert that pay returns uncertain and that exactly one command was recorded with operation P7, USD '
+ 'currency, and amount_minor=100. This checks the collaborator boundary. It does not establish '
+ "persistence, duplicate handling, or the order's state after the result."),
+ 6: ('Demonstrate transient, scoped, and singleton identity across two scopes. Then show why retaining a '
+ 'scoped resource does not keep it valid.',
+ 'Resolve a scoped object twice inside scope A and twice inside scope B. The identities should be A1,A1 '
+ 'and B1,B1. Transient lookups should create new instances, while singleton lookups within the stated '
+ 'container boundary should return S. Compare identity rather than equal values.\n'
+ '\n'
+ 'Give the scoped resource a closed flag and record cleanup on scope exit. Exercise both normal '
+ 'completion and an exception. Retain a reference after exit and show that its use is rejected. Then '
+ 'obtain a fresh resource for a new operation and close it at that operation’s end.'),
  7: ('Implement shopping modules and one meaningful dependency-boundary check.',
      'Let orders use a payment contract without importing private payment storage or writing its tables. '
      'Check that boundary, then replace the provider adapter while preserving the order rule. Avoid a test '
@@ -516,28 +491,24 @@ DESIGN={2: ('A team sizes servers from daily average RPS alone. Identify the mis
  'progress record. Replacement workers can then find unfinished jobs after restart. Return acceptance '
  'only after the required record is saved; define a clear busy or waiting result when capacity is '
  'unavailable.'),
- 5: ('A payment class mixes fee rules, HTTP parsing, provider calls, and storage. Plan a '
-     'behaviour-preserving refactor.',
-     'First record the required outcomes for approval, decline, timeout, and storage failure, including '
-     'amount units and the order of visible effects. Extract fee calculation and check its results on the '
-     'same inputs. Then move HTTP parsing, provider translation, and persistence into focused collaborators '
-     'in small steps, rerunning the behavioural checks after each move.\n'
-     '\n'
-     'Give the gateway an explicit outcome contract and supply its implementation from outside the service. '
-     'Keep storage ownership clear. Preserve operation identity and uncertainty: a failed local write after '
-     'a remote charge does not prove that no charge occurred. Judge the change by preserved behaviour and '
-     'clearer responsibilities, rather than by the number of classes.'),
- 6: ('A singleton notification service resolves a request connection from a global container and stores it. '
-     'Identify both design problems and propose an assembly and ownership arrangement.',
-     "The lookup hides the connection dependency from the service's visible inputs. Retaining it also "
-     'captures a request-owned resource in a longer-lived object. After the request closes its scope, the '
-     'singleton can keep using an invalid connection.\n'
-     '\n'
-     "Keep the singleton's lasting collaborators safe for that lifetime. For database work, pass a currently "
-     'valid per-operation unit of work or inject a narrow scope factory. Create the request or job scope at '
-     'its explicit boundary, obtain its connection, perform the operation, and release resources on exit. '
-     'Preserve the right user and tenant context. Making every connection live indefinitely would replace '
-     'the original lifetime rule with uncontrolled sharing.'),
+ 5: ('How would you split a class that parses requests, calculates fees, calls a provider, and stores '
+ 'results?',
+ 'First record the results and state changes for approval, decline, timeout, and storage failure. '
+ 'Extract fee calculation and compare the same inputs and outputs. Then separate request parsing, '
+ 'provider translation, and storage in small steps, checking the same behaviours after each move.\n'
+ '\n'
+ 'Pass the gateway into the payment service. Keep provider field names in the adapter and amount units '
+ 'in the gateway contract. Preserve uncertainty: a failed local save after a successful remote charge '
+ 'does not undo that charge. The design should make each responsibility easier to locate without '
+ "changing the caller's promised results."),
+ 6: ('An application-wide notification service looks up a request connection in a global container and '
+ 'stores it. Propose a clearer arrangement.',
+ 'There are two problems. The global lookup hides the connection dependency. Storing the connection '
+ 'retains a request-owned resource in an object that outlives the request.\n'
+ '\n'
+ 'Keep the service’s lasting dependencies valid for its lifetime. Pass a valid unit of work into each '
+ 'database operation, or inject a narrow factory that creates an operation scope. The request or job '
+ 'owns that scope, supplies the correct user context, and closes resources after the work ends.'),
  7: ('Several services share tables and require simultaneous releases. Review whether the deployment split '
      'is useful.',
      'Map who owns decisions and data, what changes together, and what fails together. A modular '
