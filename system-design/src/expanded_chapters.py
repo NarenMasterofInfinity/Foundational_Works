@@ -1,6 +1,8 @@
 """Render authored concept chapters and full case-study reviews."""
 from html import escape as e
 import re
+from importlib import import_module
+from textbook_25_common import plate as textbook_plate
 from atlas_figures import snapshots,flow,special
 from textbook_chapter_5_4 import INTRO as INTRO_5_4, LESSONS as LS_5_4, drawing as FIG_5_4
 from textbook_chapter_5_3 import INTRO as INTRO_5_3, LESSONS as LS_5_3, drawing as FIG_5_3
@@ -55,7 +57,13 @@ def concept_body(unit,chapter,bench=''):
     n=unit['n'];j=int(chapter['number'].split('.')[1]);rows=[(i, TB_3_2[i] if (n,j)==(3,2) else (TB_3_1[i] if (n,j)==(3,1) else (TB_2_4[i] if (n,j)==(2,4) else (TB_2_3[i] if (n,j)==(2,3) else (TB_2_2[i] if (n,j)==(2,2) else (CHAPTER_2_1[i] if (n,j)==(2,1) else LESSONS[n][i-1])))))) for i in chapter['topic_numbers']]
     render_paragraphs=lesson_paragraphs if n in (2,3,4,5,6) else paragraphs
     opening,takeaway,question=GUIDES[n][j-1]
+    textbook=None
+    if 6 <= n <= 11:
+        try:textbook=import_module(f'textbook_next_{n}_{j}')
+        except ModuleNotFoundError as err:
+            if err.name != f'textbook_next_{n}_{j}':raise
     html=introduction(opening)
+    if textbook:html+='<div class="chapter-intro"><p>'+e(textbook.INTRO)+'</p></div>
     if (n,j)==(5,4):html+='<p>'+e(INTRO_5_4)+'</p>'
     if (n,j)==(5,3):html+='<p>'+e(INTRO_5_3)+'</p>'
     if (n,j)==(5,2):html+='<p>'+e(INTRO_5_2)+'</p>'
@@ -83,6 +91,9 @@ def concept_body(unit,chapter,bench=''):
         if (n,j)==(3,4):html+=render_paragraphs(LS_3_4[sub-1]['text'])
         if (n,j)==(3,3):html+=render_paragraphs(LS_3_3[sub-1]['text'])
         visual=FIG_5_4(n,j,fig_no,sub-1) if (n,j)==(5,4) else (FIG_5_3(n,j,fig_no,sub-1) if (n,j)==(5,3) else (FIG_5_2(n,j,fig_no,sub-1) if (n,j)==(5,2) else (FIG_5_1(n,j,fig_no,sub-1) if (n,j)==(5,1) else (FIG_4_4(n,j,fig_no,sub-1) if (n,j)==(4,4) else (FIG_4_3(n,j,fig_no,sub-1) if (n,j)==(4,3) else (FIG_4_2(n,j,fig_no,sub-1) if (n,j)==(4,2) else (FIG_4_1(n,j,fig_no,sub-1) if (n,j)==(4,1) else (FIG_3_4(n,j,fig_no,sub-1) if (n,j)==(3,4) else (FIG_3_3(n,j,fig_no,sub-1) if (n,j)==(3,3) else (FIG_3_2(n,j,fig_no,i) if (n,j)==(3,2) else (FIG_3_1(n,j,fig_no,i) if (n,j)==(3,1) else (FIG_2_4(n,j,fig_no,i) if (n,j)==(2,4) else (FIG_2_3(n,j,fig_no,i) if (n,j)==(2,3) else (FIG_2_2(n,j,fig_no,i) if (n,j)==(2,2) else (unit2_figure(n,j,fig_no,i) if n==2 and j==1 else special(n,j,fig_no,i))))))))))))))))
+        if textbook and sub <= len(textbook.QUESTIONS):
+            html+='<div class="callout intuition"><strong>Think and apply:</strong> '+e(textbook.QUESTIONS[sub-1])+'</div>'
+            visual=textbook_plate(n,j,fig_no,display_title,row['trace'],textbook.FORMS[sub-1])
         if visual is None:visual=snapshots(n,j,fig_no,display_title.rstrip('?')+' · the example',row['trace'],SUMMARIES[n][i-1])
         html+=visual+'</section>'
     if n==6 and j in PATTERN_LESSONS:
@@ -115,6 +126,8 @@ def concept_body(unit,chapter,bench=''):
             html+=flow(n,j,fig_no,'Follow the related complete design',case['flow'],CASE_CAPTIONS[CASE_FOR_UNIT[n]][1])
         else:
             html+=snapshots(n,j,fig_no,'State and ownership in the related design',[case['entities'][0],case['entities'][1],case['flow'][-1],case['entities'][-1]],CASE_CAPTIONS[CASE_FOR_UNIT[n]][0])
+    if textbook and getattr(textbook,'CODE',None):
+        html+='<h2>Try it with a small piece of code</h2><p>This excerpt illustrates one mechanism, not a complete production implementation.</p><pre><code>'+e(textbook.CODE)+'</code></pre>'
     if j==len(unit['chapters']):
         kind,code,outcome=CODE[n]
         html+='<h2>Try the mechanism in code</h2>'
