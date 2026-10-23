@@ -12,7 +12,7 @@ FIGURES = {
 7: ["progress","An error budget is a measured allowance",["1,000 allowed failures","600 observed failures","400 remain","99.9% of 1,000,000"]],
 }
 # For chapters with three syllabus topics, the fourth illustration is supplemental.
-SUPPLEMENT = null
+SUPPLEMENT = None
 
 from html import escape as E
 from atlas_figures import shell
