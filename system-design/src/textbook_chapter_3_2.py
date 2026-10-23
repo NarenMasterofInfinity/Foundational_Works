@@ -14,7 +14,7 @@ FIGURES = {
 8: ["waterfall","A cold request pays for multiple stages",["DNS: 20 ms","TCP: 40 ms","TLS: 40 ms","Request + work: 55 ms"]],
 }
 # For chapters with three syllabus topics, the fourth illustration is supplemental.
-SUPPLEMENT = null
+SUPPLEMENT = None
 
 from html import escape as E
 from atlas_figures import shell
