@@ -63,6 +63,11 @@ def concept_body(unit,chapter,bench=''):
         except ModuleNotFoundError as err:
             if err.name != f'textbook_next_{n}_{j}':raise
     html=introduction(opening)
+    extended=None
+    if 11 <= n <= 21:
+        module=import_module(f'textbook_unit_{n}_extended')
+        extended=module.CHAPTERS.get(j)
+    if extended:html+='<div class="chapter-intro"><p>'+e(extended['intro'])+'</p></div>'
     if textbook:html+='<div class="chapter-intro"><p>'+e(textbook.INTRO)+'</p></div>
     if (n,j)==(5,4):html+='<p>'+e(INTRO_5_4)+'</p>'
     if (n,j)==(5,3):html+='<p>'+e(INTRO_5_3)+'</p>'
@@ -94,6 +99,10 @@ def concept_body(unit,chapter,bench=''):
         if textbook and sub <= len(textbook.QUESTIONS):
             html+='<div class="callout intuition"><strong>Think and apply:</strong> '+e(textbook.QUESTIONS[sub-1])+'</div>'
             visual=textbook_plate(n,j,fig_no,display_title,row['trace'],textbook.FORMS[sub-1])
+        if extended and sub <= len(extended['lesson']):
+            lesson=extended['lesson'][sub-1]
+            html+='<div class="callout intuition"><strong>Build the idea:</strong> '+e(' '.join(lesson['steps']))+' <strong>Try:</strong> '+e(lesson['question'])+'</div>'
+            visual=textbook_plate(n,j,fig_no,display_title,row['trace'],extended['diagram'][sub-1])
         if visual is None:visual=snapshots(n,j,fig_no,display_title.rstrip('?')+' · the example',row['trace'],SUMMARIES[n][i-1])
         html+=visual+'</section>'
     if n==6 and j in PATTERN_LESSONS:
@@ -126,6 +135,8 @@ def concept_body(unit,chapter,bench=''):
             html+=flow(n,j,fig_no,'Follow the related complete design',case['flow'],CASE_CAPTIONS[CASE_FOR_UNIT[n]][1])
         else:
             html+=snapshots(n,j,fig_no,'State and ownership in the related design',[case['entities'][0],case['entities'][1],case['flow'][-1],case['entities'][-1]],CASE_CAPTIONS[CASE_FOR_UNIT[n]][0])
+    if extended and extended.get('code'):
+        html+='<h2>Small code experiment</h2><p>One illustrative mechanism; production safety requires the contracts explained above.</p><pre><code>'+e(extended['code'])+'</code></pre>'
     if textbook and getattr(textbook,'CODE',None):
         html+='<h2>Try it with a small piece of code</h2><p>This excerpt illustrates one mechanism, not a complete production implementation.</p><pre><code>'+e(textbook.CODE)+'</code></pre>'
     if j==len(unit['chapters']):
@@ -160,7 +171,14 @@ def concept_body(unit,chapter,bench=''):
 
 def case_body(chapter):
     j=int(chapter['number'].split('.')[1]);case=CASES[j]
+    companion=import_module('textbook_unit_22_extended').CHAPTERS.get(j)
     html=introduction(CASE_OPENINGS[j],'The workload, timing, and prices in this design are teaching assumptions. They are not measured benchmarks or a description of a particular company.')
+    if companion:
+        html+='<div class="chapter-intro"><p>'+e(companion['intro'])+'</p></div>'
+        html+='<h2>Five questions to draw before selecting technology</h2><ol>'
+        for prompt in ['Who performs the main user action and what counts as success?','Where does the authoritative state live?','Which operation may be repeated or partially completed?','Which resource becomes limiting as demand grows?','How will an operator recognize and recover from failure?']:
+            html+='<li>'+e(prompt)+'</li>'
+        html+='</ol>'
     fig=0
     for i,(title,prose) in enumerate(zip(chapter['sections'],case['sections']),1):
         html+=f'<section class="case-section" data-case-section="{i}" id="case-{j}-section-{i}"><h2>{chapter["number"]}.{i} · {e(title)}</h2>'+paragraphs(prose)
