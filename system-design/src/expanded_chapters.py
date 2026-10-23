@@ -2,7 +2,16 @@
 from html import escape as e
 import re
 from atlas_figures import snapshots,flow,special
-from textbook_chapter_4_2 import INTRO as TEXTBOOK_INTRO, LESSONS as TEXTBOOK_LESSONS, drawing as textbook_drawing
+from textbook_chapter_4_2 import INTRO as INTRO_4_2, LESSONS as LS_4_2, drawing as FIG_4_2
+from textbook_chapter_4_1 import INTRO as INTRO_4_1, LESSONS as LS_4_1, drawing as FIG_4_1
+from textbook_chapter_3_4 import INTRO as INTRO_3_4, LESSONS as LS_3_4, drawing as FIG_3_4
+from textbook_chapter_3_3 import INTRO as INTRO_3_3, LESSONS as LS_3_3, drawing as FIG_3_3
+from textbook_chapter_3_2 import TOPICS as TB_3_2, figure as FIG_3_2
+from textbook_chapter_3_1 import TOPICS as TB_3_1, figure as FIG_3_1
+from textbook_chapter_2_4 import TOPICS as TB_2_4, figure as FIG_2_4
+from textbook_chapter_2_3 import TOPICS as TB_2_3, figure as FIG_2_3
+from textbook_chapter_2_2 import TOPICS as TB_2_2, figure as FIG_2_2
+from textbook_unit2 import CHAPTER_2_1, unit2_figure
 from figures import FIGURES
 from teaching.foundations import LESSONS
 from teaching.cases import CASES,FAILURE_TRACES,EVOLUTION
@@ -37,22 +46,25 @@ def slug(value):return re.sub(r'[^a-z0-9]+','-',value.lower()).strip('-')
 
 
 def concept_body(unit,chapter,bench=''):
-    n=unit['n'];j=int(chapter['number'].split('.')[1]);rows=[(i,LESSONS[n][i-1]) for i in chapter['topic_numbers']]
-    render_paragraphs=lesson_paragraphs if n in (3,4,5,6) else paragraphs
+    n=unit['n'];j=int(chapter['number'].split('.')[1]);rows=[(i, TB_3_2[i] if (n,j)==(3,2) else (TB_3_1[i] if (n,j)==(3,1) else (TB_2_4[i] if (n,j)==(2,4) else (TB_2_3[i] if (n,j)==(2,3) else (TB_2_2[i] if (n,j)==(2,2) else (CHAPTER_2_1[i] if (n,j)==(2,1) else LESSONS[n][i-1])))))) for i in chapter['topic_numbers']]
+    render_paragraphs=lesson_paragraphs if n in (2,3,4,5,6) else paragraphs
     opening,takeaway,question=GUIDES[n][j-1]
     html=introduction(opening)
-    if (n,j)==(4,2):html+='<div class="chapter-intro"><p>'+e(TEXTBOOK_INTRO)+'</p></div>'
+    if (n,j)==(4,2):html+='<p>'+e(INTRO_4_2)+'</p>'
+    if (n,j)==(4,1):html+='<p>'+e(INTRO_4_1)+'</p>'
+    if (n,j)==(3,4):html+='<p>'+e(INTRO_3_4)+'</p>'
+    if (n,j)==(3,3):html+='<p>'+e(INTRO_3_3)+'</p>'
     fig_no=0
     for sub,(i,row) in enumerate(rows,1):
         title=unit['topics'][i-1].rstrip('.')
         display_title=row.get('heading',title)
-        if (n,j)==(4,2):
-            lesson=TEXTBOOK_LESSONS[sub-1]
-            html+=f'<section class="concept-lesson" id="topic-{n}-{i}" data-syllabus-topic="{n}:{i}"><h2>{chapter["number"]}.{sub} · {e(lesson["title"])}</h2>'+render_paragraphs(lesson['text'])+render_paragraphs(row['prose'])
-        else:
-            html+=f'<section class="concept-lesson" id="topic-{n}-{i}" data-syllabus-topic="{n}:{i}"><h2>{chapter["number"]}.{sub} · {e(display_title)}</h2>'+render_paragraphs(row['prose'])
+        html+=f'<section class="concept-lesson" id="topic-{n}-{i}" data-syllabus-topic="{n}:{i}"><h2>{chapter["number"]}.{sub} · {e(display_title)}</h2>'+render_paragraphs(row['prose'])
         fig_no+=1
-        visual=textbook_drawing(n,j,fig_no,sub-1) if (n,j)==(4,2) else special(n,j,fig_no,i)
+        if (n,j)==(4,2):html+=render_paragraphs(LS_4_2[sub-1]['text'])
+        if (n,j)==(4,1):html+=render_paragraphs(LS_4_1[sub-1]['text'])
+        if (n,j)==(3,4):html+=render_paragraphs(LS_3_4[sub-1]['text'])
+        if (n,j)==(3,3):html+=render_paragraphs(LS_3_3[sub-1]['text'])
+        visual=FIG_4_2(n,j,fig_no,sub-1) if (n,j)==(4,2) else (FIG_4_1(n,j,fig_no,sub-1) if (n,j)==(4,1) else (FIG_3_4(n,j,fig_no,sub-1) if (n,j)==(3,4) else (FIG_3_3(n,j,fig_no,sub-1) if (n,j)==(3,3) else (FIG_3_2(n,j,fig_no,i) if (n,j)==(3,2) else (FIG_3_1(n,j,fig_no,i) if (n,j)==(3,1) else (FIG_2_4(n,j,fig_no,i) if (n,j)==(2,4) else (FIG_2_3(n,j,fig_no,i) if (n,j)==(2,3) else (FIG_2_2(n,j,fig_no,i) if (n,j)==(2,2) else (unit2_figure(n,j,fig_no,i) if n==2 and j==1 else special(n,j,fig_no,i))))))))))
         if visual is None:visual=snapshots(n,j,fig_no,display_title.rstrip('?')+' · the example',row['trace'],SUMMARIES[n][i-1])
         html+=visual+'</section>'
     if n==6 and j in PATTERN_LESSONS:
@@ -65,7 +77,11 @@ def concept_body(unit,chapter,bench=''):
     case=CASES[CASE_FOR_UNIT[n]]
     while fig_no<4:
         fig_no+=1
-        if n==3 and j==1:
+        if (n,j)==(3,1):
+            html+=FIG_3_1(n,j,fig_no,0)
+        elif n==2 and j==1:
+            html+=unit2_figure(n,j,fig_no,0)
+        elif n==3 and j==1:
             html+=flow(n,j,fig_no,'Follow the task-list request',['Browser asks: GET /tasks','Address and port lead to service','Application obtains the task list','Response returns to the browser'],'Addresses and ports bring data to the program. HTTP tells the program what was requested and gives the response its meaning.')
         elif n==5 and j==4:
             if fig_no==3:
