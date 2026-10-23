@@ -5,6 +5,10 @@ on:
     paths:
       - "system-design/**"
       - ".github/workflows/atlas-browser-check.yml"
+  pull_request:
+    paths:
+      - 'system-design/**'
+      - '.github/workflows/atlas-browser-check.yml'
   workflow_dispatch:
 permissions:
   contents: read
