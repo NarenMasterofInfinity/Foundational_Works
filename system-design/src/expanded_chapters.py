@@ -2,6 +2,7 @@
 from html import escape as e
 import re
 from atlas_figures import snapshots,flow,special
+from textbook_chapter_5_4 import INTRO as INTRO_5_4, LESSONS as LS_5_4, drawing as FIG_5_4
 from textbook_chapter_5_3 import INTRO as INTRO_5_3, LESSONS as LS_5_3, drawing as FIG_5_3
 from textbook_chapter_5_2 import INTRO as INTRO_5_2, LESSONS as LS_5_2, drawing as FIG_5_2
 from textbook_chapter_5_1 import INTRO as INTRO_5_1, LESSONS as LS_5_1, drawing as FIG_5_1
@@ -55,6 +56,7 @@ def concept_body(unit,chapter,bench=''):
     render_paragraphs=lesson_paragraphs if n in (2,3,4,5,6) else paragraphs
     opening,takeaway,question=GUIDES[n][j-1]
     html=introduction(opening)
+    if (n,j)==(5,4):html+='<p>'+e(INTRO_5_4)+'</p>'
     if (n,j)==(5,3):html+='<p>'+e(INTRO_5_3)+'</p>'
     if (n,j)==(5,2):html+='<p>'+e(INTRO_5_2)+'</p>'
     if (n,j)==(5,1):html+='<p>'+e(INTRO_5_1)+'</p>'
@@ -70,6 +72,7 @@ def concept_body(unit,chapter,bench=''):
         display_title=row.get('heading',title)
         html+=f'<section class="concept-lesson" id="topic-{n}-{i}" data-syllabus-topic="{n}:{i}"><h2>{chapter["number"]}.{sub} · {e(display_title)}</h2>'+render_paragraphs(row['prose'])
         fig_no+=1
+        if (n,j)==(5,4):html+=render_paragraphs(LS_5_4[sub-1]['text'])
         if (n,j)==(5,3):html+=render_paragraphs(LS_5_3[sub-1]['text'])
         if (n,j)==(5,2):html+=render_paragraphs(LS_5_2[sub-1]['text'])
         if (n,j)==(5,1):html+=render_paragraphs(LS_5_1[sub-1]['text'])
@@ -79,7 +82,7 @@ def concept_body(unit,chapter,bench=''):
         if (n,j)==(4,1):html+=render_paragraphs(LS_4_1[sub-1]['text'])
         if (n,j)==(3,4):html+=render_paragraphs(LS_3_4[sub-1]['text'])
         if (n,j)==(3,3):html+=render_paragraphs(LS_3_3[sub-1]['text'])
-        visual=FIG_5_3(n,j,fig_no,sub-1) if (n,j)==(5,3) else (FIG_5_2(n,j,fig_no,sub-1) if (n,j)==(5,2) else (FIG_5_1(n,j,fig_no,sub-1) if (n,j)==(5,1) else (FIG_4_4(n,j,fig_no,sub-1) if (n,j)==(4,4) else (FIG_4_3(n,j,fig_no,sub-1) if (n,j)==(4,3) else (FIG_4_2(n,j,fig_no,sub-1) if (n,j)==(4,2) else (FIG_4_1(n,j,fig_no,sub-1) if (n,j)==(4,1) else (FIG_3_4(n,j,fig_no,sub-1) if (n,j)==(3,4) else (FIG_3_3(n,j,fig_no,sub-1) if (n,j)==(3,3) else (FIG_3_2(n,j,fig_no,i) if (n,j)==(3,2) else (FIG_3_1(n,j,fig_no,i) if (n,j)==(3,1) else (FIG_2_4(n,j,fig_no,i) if (n,j)==(2,4) else (FIG_2_3(n,j,fig_no,i) if (n,j)==(2,3) else (FIG_2_2(n,j,fig_no,i) if (n,j)==(2,2) else (unit2_figure(n,j,fig_no,i) if n==2 and j==1 else special(n,j,fig_no,i)))))))))))))))
+        visual=FIG_5_4(n,j,fig_no,sub-1) if (n,j)==(5,4) else (FIG_5_3(n,j,fig_no,sub-1) if (n,j)==(5,3) else (FIG_5_2(n,j,fig_no,sub-1) if (n,j)==(5,2) else (FIG_5_1(n,j,fig_no,sub-1) if (n,j)==(5,1) else (FIG_4_4(n,j,fig_no,sub-1) if (n,j)==(4,4) else (FIG_4_3(n,j,fig_no,sub-1) if (n,j)==(4,3) else (FIG_4_2(n,j,fig_no,sub-1) if (n,j)==(4,2) else (FIG_4_1(n,j,fig_no,sub-1) if (n,j)==(4,1) else (FIG_3_4(n,j,fig_no,sub-1) if (n,j)==(3,4) else (FIG_3_3(n,j,fig_no,sub-1) if (n,j)==(3,3) else (FIG_3_2(n,j,fig_no,i) if (n,j)==(3,2) else (FIG_3_1(n,j,fig_no,i) if (n,j)==(3,1) else (FIG_2_4(n,j,fig_no,i) if (n,j)==(2,4) else (FIG_2_3(n,j,fig_no,i) if (n,j)==(2,3) else (FIG_2_2(n,j,fig_no,i) if (n,j)==(2,2) else (unit2_figure(n,j,fig_no,i) if n==2 and j==1 else special(n,j,fig_no,i))))))))))))))))
         if visual is None:visual=snapshots(n,j,fig_no,display_title.rstrip('?')+' · the example',row['trace'],SUMMARIES[n][i-1])
         html+=visual+'</section>'
     if n==6 and j in PATTERN_LESSONS:
