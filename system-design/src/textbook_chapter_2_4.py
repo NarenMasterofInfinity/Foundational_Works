@@ -14,7 +14,7 @@ FIGURES = {
 15: ["matrix","Keep a decision record, not only a winner",["Decision context","Assumptions","Consequences","Revisit trigger"]],
 }
 # For chapters with three syllabus topics, the fourth illustration is supplemental.
-SUPPLEMENT = null
+SUPPLEMENT = None
 
 from html import escape as E
 from atlas_figures import shell
