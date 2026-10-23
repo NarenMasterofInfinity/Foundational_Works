@@ -1,0 +1,6 @@
+"""NCERT-inspired additional worked narrative for 6.3."""
+INTRO="Think about a notification service that sends email, SMS, or push messages. This chapter, “Injection, locators & factories”, starts with something a person wants to do, then follows the data and the responsibility until a design choice becomes necessary. The original technical lesson follows so that the explanation stays precise, even when an everyday analogy stops being accurate."
+TOPICS=["DI vs service locator.","DI vs factory pattern."]
+CODE="def choose_sender(channel, registry):\n    if channel not in registry:\n        raise ValueError('unsupported channel')\n    return registry[channel]()"
+QUESTIONS=["Apply “DI vs service locator” to a notification service that sends email, SMS, or push messages. What is the smallest working design? Which component owns the decision, which observable failure could break it, and what would you test? Name one limitation of the simple approach before adding infrastructure.","Apply “DI vs factory pattern” to a notification service that sends email, SMS, or push messages. What is the smallest working design? Which component owns the decision, which observable failure could break it, and what would you test? Name one limitation of the simple approach before adding infrastructure."]
+FORMS=["ledger","ladder"]
