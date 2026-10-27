@@ -219,7 +219,7 @@ def backpressure():
     s = text(180,28,'ARRIVE 150/s · FINISH 100/s')
     s += text(180,57,'Without a limit: +50 waiting jobs/s')
     s += arrow(45,265,45,85) + arrow(45,265,330,265)
-    s += text(22,84,'jobs',15,'start') + text(330,290,'seconds',15,'end')
+    s += text(22,84,'jobs',15,'start') + text(330,310,'seconds',15,'end')
     for x,v in [(45,'0'),(112,'0.5'),(180,'1'),(247,'1.5'),(315,'2')]:s += text(x,286,v,15)
     for y,v in [(265,'0'),(224,'25'),(183,'50'),(141,'75'),(100,'100')]:s += text(32,y+5,v,15,'end')
     s += '<path d="M45 265L315 100" fill="none" stroke="#a96e21" stroke-width="3"/>'
