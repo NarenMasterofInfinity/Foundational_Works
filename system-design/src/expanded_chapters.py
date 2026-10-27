@@ -8,10 +8,14 @@ from textbook_chapter_5_4 import INTRO as INTRO_5_4, LESSONS as LS_5_4, drawing 
 from textbook_chapter_5_3 import INTRO as INTRO_5_3, LESSONS as LS_5_3, drawing as FIG_5_3
 from textbook_chapter_5_2 import INTRO as INTRO_5_2, LESSONS as LS_5_2, drawing as FIG_5_2
 from textbook_chapter_5_1 import INTRO as INTRO_5_1, LESSONS as LS_5_1, drawing as FIG_5_1
-from textbook_chapter_4_4 import INTRO as INTRO_4_4, LESSONS as LS_4_4, drawing as FIG_4_4
-from textbook_chapter_4_3 import INTRO as INTRO_4_3, LESSONS as LS_4_3, drawing as FIG_4_3
-from textbook_chapter_4_2 import INTRO as INTRO_4_2, LESSONS as LS_4_2, drawing as FIG_4_2
-from textbook_chapter_4_1 import INTRO as INTRO_4_1, LESSONS as LS_4_1, drawing as FIG_4_1
+from textbook_chapter_4_4 import INTRO as INTRO_4_4
+from unit4_redesign_4 import LESSONS as LS_4_4, drawing as FIG_4_4
+from textbook_chapter_4_3 import INTRO as INTRO_4_3
+from unit4_redesign_3 import LESSONS as LS_4_3, drawing as FIG_4_3
+from textbook_chapter_4_2 import INTRO as INTRO_4_2
+from unit4_redesign_2 import LESSONS as LS_4_2, drawing as FIG_4_2
+from textbook_chapter_4_1 import INTRO as INTRO_4_1
+from unit4_redesign_1 import LESSONS as LS_4_1, drawing as FIG_4_1
 from textbook_chapter_3_4 import INTRO as INTRO_3_4, LESSONS as LS_3_4, drawing as FIG_3_4
 from textbook_chapter_3_3 import INTRO as INTRO_3_3, LESSONS as LS_3_3, drawing as FIG_3_3
 from textbook_chapter_3_2 import TOPICS as TB_3_2, figure as FIG_3_2
@@ -68,7 +72,7 @@ def concept_body(unit,chapter,bench=''):
         module=import_module(f'textbook_unit_{n}_extended')
         extended=module.CHAPTERS.get(str(j))
     if extended:html+='<div class="chapter-intro"><p>'+e(extended['intro'])+'</p></div>'
-    if textbook:html+='<div class="chapter-intro"><p>'+e(textbook.INTRO)+'</p></div>
+    if textbook:html+='<div class="chapter-intro"><p>'+e(textbook.INTRO)+'</p></div>'
     if (n,j)==(5,4):html+='<p>'+e(INTRO_5_4)+'</p>'
     if (n,j)==(5,3):html+='<p>'+e(INTRO_5_3)+'</p>'
     if (n,j)==(5,2):html+='<p>'+e(INTRO_5_2)+'</p>'
