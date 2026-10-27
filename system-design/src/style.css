@@ -6,3 +6,12 @@
 @media(max-width:700px){.concept-lesson>p,.case-section>p,.pattern-lesson>p{font-size:14px;line-height:1.95}.extra-lab .lab-controls{grid-template-columns:1fr}.reference-jumps{gap:13px}.assessment-unit{margin-top:32px}}
 @media print{.concept-lesson>p,.case-section>p,.pattern-lesson>p{font-size:10pt;line-height:1.8}.unit-page .syllabus,.unit-page .reading-room,.unit-page .chapter-list,.unit-page .edition-note,.unit-page>.prereq,.unit-page .visual-legend,.reference-jumps{display:none!important}.assessment-unit{break-before:page}.assessment-unit>h2{font-size:22pt}.assessment-unit .solution,.assessment-unit .exercise{break-inside:avoid}.pattern-lesson{break-before:auto}.unit-page>h2{break-after:avoid}.extra-lab .lab-output{font-size:9pt}.extra-lab label{display:none}.extra-lab .lab-controls{display:none}.concept-lesson,.case-section{margin-bottom:18px}.figure-drawing{outline:none}.panel#figure-index .figure-list>a{padding:11px}.panel#figure-index .figure-list h3{font-size:12pt}.panel#figure-index .figure-list p{font-size:8pt}.panel#glossary .glossary dt{font-size:12pt}.panel#glossary .glossary dd{font-size:9pt}.panel#contents .toc-unit{break-inside:avoid}.panel#contents .toc-unit h3{font-size:15pt}.panel#contents .toc-unit ol{font-size:9pt}.panel#patterns .pattern-group{break-inside:avoid}body[data-print-part] .panel[data-print=true]{display:none!important}body[data-print-part="1"] .panel[data-part="1"],body[data-print-part="2"] .panel[data-part="2"],body[data-print-part="3"] .panel[data-part="3"],body[data-print-part="4"] .panel[data-part="4"],body[data-print-part="5"] .panel[data-part="5"],body[data-print-part="6"] .panel[data-part="6"],body[data-print-part="reference"] .panel[data-part="reference"]{display:block!important}}
 .concept-lesson>p,.case-section>p,.pattern-lesson>p,.chapter-intro>p{overflow-wrap:anywhere}
+
+/* Unit 4: one composition for each screen width; print uses the wide view. */
+.release-stamp{display:none}
+@media print{.release-stamp{display:block;font:7pt monospace;overflow-wrap:anywhere}}
+.figure svg.figure-narrow{display:none}
+@media screen and (max-width:700px){
+  .figure svg.figure-wide{display:none}
+  .figure svg.figure-narrow{display:block;width:100%;min-width:0}
+}

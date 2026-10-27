@@ -14,4 +14,4 @@ The final manifest must distinguish produced content from review evidence. Passi
 
 ## Completed
 
-All seven production steps are implemented. The final edition contains all 22 units and 99 chapters, 575 original figures, all twelve 22-section designs, 26 individual pattern treatments, thirteen workbenches, and 242 questions with separate explained answers. The generated manifest records the exact artifacts. The complete tagged PDF contains 973 A4 pages; the original foundations PDF is retained. Final build, executable, browser, responsive, offline, SVG, print, and PDF checks are recorded in [QA.md](QA.md).
+All seven production steps are implemented. The final edition contains all 22 units and 99 chapters, 575 original figures, all twelve 22-section designs, 26 individual pattern treatments, thirteen workbenches, and 242 questions with separate explained answers. The generated manifest records the exact artifacts. The complete tagged PDF and its source identity are recorded in [release.json](release.json); the original foundations PDF is retained. Final build, executable, browser, responsive, offline, SVG, print, and PDF checks are recorded in [QA.md](QA.md).

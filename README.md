@@ -13,7 +13,7 @@ Each unit has its own folder and opens as a self-contained HTML page. Navigation
 
 This repository publishes through GitHub’s built-in Pages deployment from **main → / (root)**. In **Settings → Pages → Build and deployment**, the source is **Deploy from a branch**. Commit and push site updates to `main`; Pages serves the root `index.html` and each unit folder’s `index.html`. `.nojekyll` keeps the content as plain static files. See [GitHub’s publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
-Repository: `NarenMasterofInfinity/Foundational_Works`. The live library is `https://narenmasterofinfinity.github.io/Foundational_Works/`. The 21 October 2026 retrieval revision was verified against the exact HTML served by Pages. The separate custom workflow at `.github/workflows/static.yml` is blocked by the repository’s owner-only action policy; built-in branch publishing succeeds independently.
+Repository: `NarenMasterofInfinity/Foundational_Works`. The live library is `https://narenmasterofinfinity.github.io/Foundational_Works/`. The 21 October 2026 retrieval revision was verified against the exact HTML served by Pages. The repository permits local actions only. The shell-only Atlas release check validates committed artifacts; built-in branch publishing serves them. Source edits must include regenerated HTML, PDF, blueprint, manifest, and release record, as described in [the release instructions](system-design/README.md#release).
 
 ## Unit structure
 

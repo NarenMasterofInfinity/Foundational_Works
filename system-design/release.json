@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "source_sha256": "03fe1cdaf84c0909c011b6139767b3eb8fe6432cbf40cee6005f62345b6bc56c",
+  "artifacts": {
+    "index.html": "2ace28be19b938ca732aa5b7496132203b550c57d3bd92f858f2a2d21e78b5ad",
+    "BLUEPRINT.md": "88f80daff88b245bfd16979a632bba5b663984e221dad26ee8b7a546ee4e8921",
+    "completion-manifest.json": "ede3878709de0d158ca2d1f998cdae218f2be13c0b43a52cf054373e089e2f00",
+    "System-Design-Atlas-Complete.pdf": "14a2e1ac5ebefdb2559dae9674acad097b113209c42c7f08c34eae383e9eb5ec"
+  },
+  "pdf_pages": 1153
+}
