@@ -37,6 +37,22 @@ await call('Emulation.setDeviceMetricsOverride',{width:1440,height:1100,deviceSc
 try{
  await load('system-design/index.html');
  if(process.argv.includes('--pdf-only')){await exportPDF();}
+ else if(process.argv.includes('--unit4-only')){
+  for(const width of [1440,390]){
+   await call('Emulation.setDeviceMetricsOverride',{width,height:1100,deviceScaleFactor:1,mobile:width<701});
+   for(let j=1;j<=4;j++){
+    await navigate('ch-4-'+j);
+    await new Promise(r=>setTimeout(r,250));
+    const figures=await evaluate(`[...document.querySelectorAll('#ch-4-${j} figure')].map(f=>f.id)`);
+    for(const id of figures){
+     const clip=await evaluate(`(()=>{const r=document.getElementById(${JSON.stringify(id)}).getBoundingClientRect();return {x:r.x+scrollX,y:r.y+scrollY,width:r.width,height:r.height,scale:1}})()`);
+     const shot=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip});
+     writeFileSync(join(qa,id+'-'+width+'.png'),Buffer.from(shot.data,'base64'));
+    }
+   }
+  }
+  console.log('Captured all 17 Unit 4 figures at desktop and mobile widths: '+qa);
+ }
  else if(process.argv.includes('--figures-only')){
   const figures=manifest.figures.filter(f=>['fig-4-0-1','fig-6-0-2','fig-10-0-1','fig-12-0-2','fig-14-0-1','fig-18-0-1','fig-22-9-2','fig-22-11-3','fig-22-12-3','fig-2-0-2'].includes(f.id));
   for(const f of figures){await evaluate(`SystemAtlas.navigate('#'+${JSON.stringify(f.id)})`);const clip=await evaluate(`(()=>{const r=document.getElementById(${JSON.stringify(f.id)}).getBoundingClientRect();return {x:r.x+scrollX,y:r.y+scrollY,width:r.width,height:r.height,scale:1}})()`);const result=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip});writeFileSync(join(qa,f.id+'.png'),Buffer.from(result.data,'base64'));}console.log('Captured '+figures.length+' representative complete figures.');
@@ -72,6 +88,13 @@ try{
   await navigate('ch-22-12');await click('[data-read="ch-22-12"]');const marked=await evaluate('document.querySelector("[data-read=ch-22-12]").getAttribute("aria-pressed")');await load('system-design/index.html#ch-22-12');assert.equal(await evaluate('document.querySelector("[data-read=ch-22-12]").getAttribute("aria-pressed")'),marked);assert.match(await text('#reading-progress'),/of 99/);
   await capture('document-design-desktop');
   const ids=await evaluate('[...document.querySelectorAll(".panel")].map(e=>e.id)');
+  // The expected cycle comes from the worked example, independently of the
+  // SVG metadata. Also check that each path actually touches its named nodes.
+  await navigate('ch-4-3');
+  const deadlock=await evaluate(`(()=>{const s=document.querySelector('#fig-4-3-4 .figure-wide');return [...s.querySelectorAll('path[data-source]')].map(p=>{const a=s.querySelector('[data-node="'+p.dataset.source+'"]'),b=s.querySelector('[data-node="'+p.dataset.target+'"]');const touches=(node,point)=>{const r=node.getBBox(),eps=1;return point.x>=r.x-eps&&point.x<=r.x+r.width+eps&&point.y>=r.y-eps&&point.y<=r.y+r.height+eps&&(Math.abs(point.x-r.x)<eps||Math.abs(point.x-r.x-r.width)<eps||Math.abs(point.y-r.y)<eps||Math.abs(point.y-r.y-r.height)<eps)};return {from:p.dataset.source,to:p.dataset.target,relation:p.dataset.relation,connected:touches(a,p.getPointAtLength(0))&&touches(b,p.getPointAtLength(p.getTotalLength()))};});})()`);
+  assert.deepEqual(deadlock.map(e=>[e.from,e.to,e.relation]),[['lock-x','thread-a','held-by'],['lock-y','thread-b','held-by'],['thread-a','lock-y','waits-for'],['thread-b','lock-x','waits-for']]);
+  assert.ok(deadlock.every(e=>e.connected),'Deadlock paths must touch both named nodes');
+  const unit4Quality=[];
   const clipped=[];
   for(const width of [1440,1024,768,390,360]){
    await call('Emulation.setDeviceMetricsOverride',{width,height:1100,deviceScaleFactor:1,mobile:width<701});
@@ -80,11 +103,27 @@ try{
    }
    console.log('All '+ids.length+' views fit '+width+' px.');
   }
+  // Canvas containment is insufficient: verify the visible narrow composition
+  // itself fits, has readable type, and does not repeat its caption as prose.
+  for(const width of [390,360]){
+   await call('Emulation.setDeviceMetricsOverride',{width,height:1100,deviceScaleFactor:1,mobile:true});
+   for(let j=1;j<=4;j++){
+    await navigate('ch-4-'+j);
+    const findings=await evaluate(`(()=>{return [...document.querySelectorAll('#ch-4-${j} .figure')].map(f=>{const svg=f.querySelector('.figure-narrow'),r=svg.getBoundingClientRect(),v=svg.viewBox.baseVal;return {id:f.id,visible:getComputedStyle(svg).display!=='none',fits:r.width<=f.clientWidth+1,minFont:Math.min(...[...svg.querySelectorAll('text')].map(t=>parseFloat(getComputedStyle(t).fontSize)*r.width/v.width)),clipped:[...svg.querySelectorAll('text')].filter(t=>{const b=t.getBBox();return b.x<0||b.y<0||b.x+b.width>v.width||b.y+b.height>v.height}).map(t=>t.textContent),repeatedCaption:[...f.parentElement.children].some(p=>p.tagName==='P'&&p.textContent===f.querySelector('figcaption p').textContent)};});})()`);
+    assert.equal(findings.length,j===1?5:4);
+    for(const f of findings){assert.ok(f.visible&&f.fits,JSON.stringify(f));assert.ok(f.minFont>=12,JSON.stringify(f));assert.deepEqual(f.clipped,[],JSON.stringify(f));assert.equal(f.repeatedCaption,false,JSON.stringify(f));}
+    unit4Quality.push({width,chapter:j,figures:findings});
+   }
+  }
+  writeFileSync(join(qa,'unit4-quality.json'),JSON.stringify({deadlock,layouts:unit4Quality},null,2));
   writeFileSync(join(qa,'svg-text-bounds.json'),JSON.stringify(clipped,null,2));assert.deepEqual(clipped,[],'SVG text must fit its viewBox');
   await navigate('overview');await capture('complete-overview-mobile');await click('#menu-toggle');assert.equal(await evaluate('document.querySelector("#menu-toggle").getAttribute("aria-expanded")'),'true');await click('a[href="#ch-22-9"]');await new Promise(r=>setTimeout(r,60));assert.equal(await evaluate('SystemAtlas.activePanel'),'ch-22-9');assert.equal(await evaluate('document.querySelector("#menu-toggle").getAttribute("aria-expanded")'),'false');await capture('payment-design-mobile');
   await call('Emulation.setDeviceMetricsOverride',{width:1440,height:1100,deviceScaleFactor:1,mobile:false});
   await navigate('sources');await change('#source-search','raft');await change('#glossary-search','durability');
-  await evaluate('dispatchEvent(new Event("beforeprint"))');await call('Emulation.setEmulatedMedia',{media:'print'});assert.equal(await evaluate('[...document.querySelectorAll(".chapter")].filter(e=>getComputedStyle(e).display!=="none").length'),99);await evaluate('dispatchEvent(new Event("afterprint"))');await call('Emulation.setEmulatedMedia',{media:''});assert.equal(await evaluate('document.querySelector("#source-search").value'),'raft');assert.equal(await evaluate('document.querySelector("#glossary-search").value'),'durability');
+  await evaluate('dispatchEvent(new Event("beforeprint"))');await call('Emulation.setEmulatedMedia',{media:'print'});assert.equal(await evaluate('[...document.querySelectorAll(".chapter")].filter(e=>getComputedStyle(e).display!=="none").length'),99);
+  assert.equal(await evaluate('[...document.querySelectorAll(".figure-narrow")].filter(e=>getComputedStyle(e).display!=="none").length'),0,'Print uses one composition per figure');
+  assert.equal(await evaluate('[...document.querySelectorAll(".figure-wide")].filter(e=>getComputedStyle(e).display!=="none").length'),17);
+  await evaluate('dispatchEvent(new Event("afterprint"))');await call('Emulation.setEmulatedMedia',{media:''});assert.equal(await evaluate('document.querySelector("#source-search").value'),'raft');assert.equal(await evaluate('document.querySelector("#glossary-search").value'),'durability');
   await load('index.html','Boolean(document.querySelector("#system-design-unit"))');await change('#unit-search','system design');assert.equal(await evaluate('document.querySelector("#system-design-unit").hidden'),false);assert.equal(await evaluate('document.querySelector("#retrieval-unit").hidden'),true);await change('#unit-search','rank fusion');assert.equal(await evaluate('document.querySelector("#retrieval-unit").hidden'),false);await change('#unit-search','');
   for(const width of [1440,390,360]){await call('Emulation.setDeviceMetricsOverride',{width,height:1100,deviceScaleFactor:1,mobile:width<701});assert.ok(await evaluate('document.documentElement.scrollWidth<=innerWidth+1'));}
   await call('Emulation.setScriptExecutionDisabled',{value:true});await call('Page.navigate',{url:pathToFileURL(join(root,'system-design/index.html')).href});

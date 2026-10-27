@@ -85,7 +85,7 @@ Content source: src/teaching/foundations.py
 
 - Read-heavy vs write-heavy systems.
 
-Figures: 2.1.1 Gathering and prioritizing requirements · the example; 2.1.2 User journeys and workload characteristics · the example; 2.1.3 Read-heavy vs write-heavy systems · the example; 2.1.4 State and ownership in the related design
+Figures: 2.1.1 A vague request becomes a testable promise; 2.1.2 One feed opening creates several kinds of work; 2.1.3 One publish can create a thousand storage writes; 2.1.4 An estimate is meaningful only with its boundary
 
 References: https://sre.google/workbook/implementing-slos/ · https://doi.org/10.1287/opre.9.3.383 · https://research.google/pubs/the-tail-at-scale/
 
@@ -101,7 +101,7 @@ Content source: src/teaching/foundations.py
 
 - SLI, SLO, SLA, and error budgets.
 
-Figures: 2.2.1 Latency, throughput, QPS, RPS, TPS · the example; 2.2.2 A small mean can hide one slow request; 2.2.3 Availability, reliability, durability, consistency · the example; 2.2.4 SLI, SLO, SLA, and error budgets · the example
+Figures: 2.2.1 A line grows even when service is busy; 2.2.2 One outlier, three very different summaries; 2.2.3 Four promises require four tests; 2.2.4 An error budget is a measured allowance
 
 References: https://sre.google/workbook/implementing-slos/ · https://doi.org/10.1287/opre.9.3.383 · https://research.google/pubs/the-tail-at-scale/
 
@@ -115,7 +115,7 @@ Content source: src/teaching/foundations.py
 
 - Peak vs average load.
 
-Figures: 2.3.1 Capacity and growth planning · the example; 2.3.2 Different workload dimensions have different magnitudes; 2.3.3 Peak vs average load · the example; 2.3.4 State and ownership in the related design
+Figures: 2.3.1 Compound growth is not a straight line; 2.3.2 One million actions can stress different resources; 2.3.3 An average hides a noon surge; 2.3.4 State and ownership in the related design
 
 References: https://sre.google/workbook/implementing-slos/ · https://doi.org/10.1287/opre.9.3.383 · https://research.google/pubs/the-tail-at-scale/
 
@@ -133,7 +133,7 @@ Content source: src/teaching/foundations.py
 
 - Decision matrices and trade-off analysis.
 
-Figures: 2.4.1 Little's Law and queueing intuition · the example; 2.4.2 Amdahl's Law and bottlenecks · the example; 2.4.3 Tail latency and latency budgets · the example; 2.4.4 Cost, security, operational complexity, and maintainability as constraints · the example; 2.4.5 Decision matrices and trade-off analysis · the example
+Figures: 2.4.1 Little's Law counts work in flight; 2.4.2 More workers cannot shrink sequential time; 2.4.3 Parallel calls finish when the last required call does; 2.4.4 Reject infeasible designs before scoring; 2.4.5 Keep a decision record, not only a winner
 
 References: https://sre.google/workbook/implementing-slos/ · https://doi.org/10.1287/opre.9.3.383 · https://research.google/pubs/the-tail-at-scale/
 
@@ -154,7 +154,7 @@ Content source: src/teaching/foundations.py
 
 - TCP vs UDP vs QUIC.
 
-Figures: 3.1.1 Follow a request from the browser · the example; 3.1.2 Find the machine and the program · the example; 3.1.3 What does each transport deliver?; 3.1.4 Follow the task-list request
+Figures: 3.1.1 Follow the browser's journey through the internet; 3.1.2 An address finds a host, a port finds a service; 3.1.3 Three transports, three different delivery contracts; 3.1.4 Packet delivery is not business success
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
@@ -172,7 +172,7 @@ Content source: src/teaching/foundations.py
 
 - Latency caused by network round trips.
 
-Figures: 3.2.1 Find an address from a name · the example; 3.2.2 Protect the conversation with TLS · the example; 3.2.3 Carry several HTTP exchanges · the example; 3.2.4 Three messages prepare the TCP connection; 3.2.5 A cold request spends time before server work
+Figures: 3.2.1 A name can be answered from a cache; 3.2.2 TLS protects data crossing an untrusted network; 3.2.3 HTTP messages and transport streams; 3.2.4 TCP establishes state before protected HTTP; 3.2.5 A cold request pays for multiple stages
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
@@ -188,7 +188,7 @@ Content source: src/teaching/foundations.py
 
 - WebSockets, Server-Sent Events, and polling.
 
-Figures: 3.3.1 Forward a request through a proxy · the example; 3.3.2 Share traffic and check common rules · the example; 3.3.3 Route by port or by path · the example; 3.3.4 Send updates to the browser · the example
+Figures: 3.3.1 Who is the proxy speaking for?; 3.3.2 One entrance, many jobs; 3.3.3 Which layer makes the routing decision?; 3.3.4 How does a page learn about new books?
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
@@ -206,7 +206,7 @@ Content source: src/teaching/foundations.py
 
 - Connection pooling and keepalive.
 
-Figures: 3.4.1 Follow traffic out and back · the example; 3.4.2 Find a service whose address can change · the example; 3.4.3 Reuse a nearby copy · the example; 3.4.4 What does a timeout tell us · the example; 3.4.5 Borrow and return connections · the example
+Figures: 3.4.1 A guarded entrance and a translated address; 3.4.2 Find a service even when its machines change; 3.4.3 Keep popular pages near the reader; 3.4.4 Silence after a timeout does not tell the whole story; 3.4.5 Reuse expensive connections responsibly
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://www.rfc-editor.org/rfc/rfc9000.html · https://www.rfc-editor.org/rfc/rfc8446.html
 
@@ -231,7 +231,7 @@ Content source: src/teaching/foundations.py
 
 - Synchronous vs asynchronous execution.
 
-Figures: 4.1.1 Start a program and follow its threads · the example; 4.1.2 Each thread has a call stack; objects can be shared; 4.1.3 Let threads take turns · the example; 4.1.4 Find out whether work calculates or waits · the example; 4.1.5 Start now and receive a result later · the example
+Figures: 4.1.1 One program, two processes, three threads; 4.1.2 What memory is shared?; 4.1.3 A single core schedules several threads; 4.1.4 Computing time versus waiting time; 4.1.5 Synchronous and asynchronous execution
 
 References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
@@ -247,7 +247,7 @@ Content source: src/teaching/foundations.py
 
 - Thread pools and worker pools.
 
-Figures: 4.2.1 Wait without holding the thread · the example; 4.2.2 Distinguish overlap from simultaneous work · the example; 4.2.3 Follow a task through an event loop · the example; 4.2.4 Give workers a bounded waiting queue · the example
+Figures: 4.2.1 Blocking vs nonblocking I/O; 4.2.2 Concurrency is not parallelism; 4.2.3 Follow a task through the event loop; 4.2.4 The bounded worker pool
 
 References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
@@ -263,7 +263,7 @@ Content source: src/teaching/foundations.py
 
 - Deadlocks, starvation, livelocks.
 
-Figures: 4.3.1 Share a value or send a message · the example; 4.3.2 Follow a lost counter update · the example; 4.3.3 Choose the right coordination tool · the example; 4.3.4 Each worker waits for a lock held by the other
+Figures: 4.3.1 Shared value or explicit message; 4.3.2 How one increment gets lost; 4.3.3 Which coordination tool solves which problem?; 4.3.4 A deadlock has a circular wait
 
 References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
@@ -279,7 +279,7 @@ Content source: src/teaching/foundations.py
 
 - Cancellation and structured concurrency.
 
-Figures: 4.4.1 Make a completed value visible to a reader · the example; 4.4.2 Keep shared data safe to use · the example; 4.4.3 Slow arrivals when workers cannot keep up · the example; 4.4.4 End related tasks and release their resources · the example
+Figures: 4.4.1 Visibility needs a synchronization edge; 4.4.2 Immutable sharing and guarded mutation; 4.4.3 When arrivals exceed service capacity; 4.4.4 Cancellation propagates through a task family
 
 References: https://pages.cs.wisc.edu/~remzi/OSTEP/ · https://go.dev/ref/mem
 
@@ -304,7 +304,7 @@ Content source: src/teaching/lld.py
 
 - SOLID principles, including their limitations.
 
-Figures: 5.1.1 Four ways to organise an object · the example; 5.1.2 Build with parts or derive a class · the example; 5.1.3 State exactly what a charge means · the example; 5.1.4 Keep related work together · the example; 5.1.5 Use SOLID to examine a real change · the example
+Figures: 5.1.1 An object should have a clear job; 5.1.2 Prefer a useful part to a fragile family tree; 5.1.3 A function name is not enough; 5.1.4 Keep one reason for change together; 5.1.5 Use SOLID as questions, not commandments
 
 References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
@@ -320,7 +320,7 @@ Content source: src/teaching/lld.py
 
 - Command-query separation.
 
-Figures: 5.2.1 Keep one copy of a shared rule · the example; 5.2.2 Avoid knowing the whole object chain · the example; 5.2.3 Ask the owner to perform the change · the example; 5.2.4 Make reads and changes easy to distinguish · the example
+Figures: 5.2.1 One rule, one trustworthy place; 5.2.2 Talk to your neighbor; 5.2.3 Tell the owner to do its job; 5.2.4 Separate a question from a command
 
 References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
@@ -336,7 +336,7 @@ Content source: src/teaching/lld.py
 
 - Testability and design for change.
 
-Figures: 5.3.1 Calculate new values, then perform effects · the example; 5.3.2 Distinguish identity from value · the example; 5.3.3 Follow the conversation between objects · the example; 5.3.4 Test decisions with a replaceable gateway · the example
+Figures: 5.3.1 Compute first, then perform effects deliberately; 5.3.2 A payment has identity; a price has value; 5.3.3 Objects collaborate through contracts; 5.3.4 Test a policy without spending money
 
 References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
@@ -348,7 +348,7 @@ Content source: src/teaching/lld.py
 
 - Functional programming alternatives to object-centric design.
 
-Figures: 5.4.1 Improve the structure one step at a time · the example; 5.4.2 Express decisions as functions · the example; 5.4.3 Test the payment rule without making a payment; 5.4.4 Keep calculation separate from effects
+Figures: 5.4.1 Change structure without changing behavior; 5.4.2 Functions can clarify state and effects; 5.4.3 Test the payment rule without making a payment; 5.4.4 Keep calculation separate from effects
 
 References: https://doi.org/10.1145/361598.361623 · https://refactoring.guru/design-patterns/catalog
 
@@ -375,7 +375,7 @@ Content source: src/teaching/lld.py
 
 - Composition roots and DI containers.
 
-Figures: 6.1.1 See what the service needs · the example; 6.1.2 Let another part of the program make the call · the example; 6.1.3 Pass the sender into the service · the example; 6.1.4 Supply a dependency when it becomes necessary · the example; 6.1.5 Separate injection from dependency inversion · the example; 6.1.6 Assemble the application in one clear place · the example
+Figures: 6.1.1 See what the service needs; 6.1.2 Let another part of the program make the call; 6.1.3 Pass the sender into the service; 6.1.4 Supply a dependency when it becomes necessary; 6.1.5 Separate injection from dependency inversion; 6.1.6 Assemble the application in one clear place
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -395,7 +395,7 @@ Content source: src/teaching/lld.py
 
 - Dependency cycles and captive dependencies.
 
-Figures: 6.2.1 Which requests receive the same object?; 6.2.2 Give each request or job its own boundary · the example; 6.2.3 Decide who must close the resource · the example; 6.2.4 Release resources on every exit path · the example; 6.2.5 Create an expensive object only when needed · the example; 6.2.6 Find cycles and dependencies kept too long · the example
+Figures: 6.2.1 Choose when objects are reused; 6.2.2 Give each request or job its own boundary; 6.2.3 Decide who must close the resource; 6.2.4 Release resources on every exit path; 6.2.5 Create an expensive object only when needed; 6.2.6 Find cycles and dependencies kept too long
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -407,7 +407,7 @@ Content source: src/teaching/lld.py
 
 - DI vs factory pattern.
 
-Figures: 6.3.1 Show dependencies instead of looking them up inside · the example; 6.3.2 Inject a factory for a choice made later · the example; 6.3.3 Supply the sender from outside; 6.3.4 Choose a sender when the message arrives
+Figures: 6.3.1 Show dependencies instead of looking them up inside; 6.3.2 Inject a factory for a choice made later; 6.3.3 Supply the sender from outside; 6.3.4 Choose a sender when the message arrives
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -417,7 +417,7 @@ Content source: src/teaching/lld.py
 
 - Factory Method, Abstract Factory, Builder, Prototype, Singleton.
 
-Figures: 6.4.1 Choose how an object is created · the example; 6.4.2 Factory Method · the example; 6.4.3 Abstract Factory · the example; 6.4.4 Builder · the example; 6.4.5 Prototype · the example; 6.4.6 Singleton · the example
+Figures: 6.4.1 Choose how an object is created; 6.4.2 Factory Method · the example; 6.4.3 Abstract Factory · the example; 6.4.4 Builder · the example; 6.4.5 Prototype · the example; 6.4.6 Singleton · the example
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -427,7 +427,7 @@ Content source: src/teaching/lld.py
 
 - Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy.
 
-Figures: 6.5.1 Arrange objects around an existing operation · the example; 6.5.2 Adapter · the example; 6.5.3 Bridge · the example; 6.5.4 Composite · the example; 6.5.5 Decorator · the example; 6.5.6 Facade · the example; 6.5.7 Flyweight · the example; 6.5.8 Proxy · the example
+Figures: 6.5.1 Arrange objects around an existing operation; 6.5.2 Adapter · the example; 6.5.3 Bridge · the example; 6.5.4 Composite · the example; 6.5.5 Decorator · the example; 6.5.6 Facade · the example; 6.5.7 Flyweight · the example; 6.5.8 Proxy · the example
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -437,7 +437,7 @@ Content source: src/teaching/lld.py
 
 - Strategy, Observer, Command, State, Chain of Responsibility, Template Method, Iterator, Mediator, Memento, Visitor.
 
-Figures: 6.6.1 Give each behaviour a clear home · the example; 6.6.2 Strategy · the example; 6.6.3 Observer · the example; 6.6.4 Command · the example; 6.6.5 State · the example; 6.6.6 Chain of Responsibility · the example; 6.6.7 Template Method · the example; 6.6.8 Iterator · the example; 6.6.9 Mediator · the example; 6.6.10 Memento · the example; 6.6.11 Visitor · the example
+Figures: 6.6.1 Give each behaviour a clear home; 6.6.2 Strategy · the example; 6.6.3 Observer · the example; 6.6.4 Command · the example; 6.6.5 State · the example; 6.6.6 Chain of Responsibility · the example; 6.6.7 Template Method · the example; 6.6.8 Iterator · the example; 6.6.9 Mediator · the example; 6.6.10 Memento · the example; 6.6.11 Visitor · the example
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -447,7 +447,7 @@ Content source: src/teaching/lld.py
 
 - Repository, Unit of Work, Specification, CQRS, and dependency boundaries.
 
-Figures: 6.7.1 Separate data access, rules, and commit decisions · the example; 6.7.2 Repository · the example; 6.7.3 Unit of Work · the example; 6.7.4 Specification · the example; 6.7.5 CQRS · the example
+Figures: 6.7.1 Separate data access, rules, and commit decisions; 6.7.2 Repository · the example; 6.7.3 Unit of Work · the example; 6.7.4 Specification · the example; 6.7.5 CQRS · the example
 
 References: https://martinfowler.com/articles/injection.html · https://refactoring.guru/design-patterns/catalog
 
@@ -474,7 +474,7 @@ Content source: src/teaching/lld.py
 
 - Onion Architecture.
 
-Figures: 7.1.1 Layered/N-tier architecture · the example; 7.1.2 Modular monoliths · the example; 7.1.3 Monolith vs microservices · the example; 7.1.4 Clean Architecture · the example; 7.1.5 Hexagonal/Ports and Adapters · the example; 7.1.6 Onion Architecture · the example
+Figures: 7.1.1 Layered/N-tier architecture; 7.1.2 Modular monoliths; 7.1.3 Monolith vs microservices; 7.1.4 Clean Architecture; 7.1.5 Hexagonal/Ports and Adapters; 7.1.6 Onion Architecture
 
 References: https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/ · https://martinfowler.com/bliki/BoundedContext.html · https://martinfowler.com/articles/microservices.html
 
@@ -490,7 +490,7 @@ Content source: src/teaching/lld.py
 
 - Domain events.
 
-Figures: 7.2.1 Domain-Driven Design (DDD) · the example; 7.2.2 Context boundaries protect different business meanings; 7.2.3 Aggregates, entities, value objects, domain services · the example; 7.2.4 Domain events · the example
+Figures: 7.2.1 Domain-Driven Design (DDD); 7.2.2 Bounded contexts and ubiquitous language; 7.2.3 Aggregates, entities, value objects, domain services; 7.2.4 Domain events
 
 References: https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/ · https://martinfowler.com/bliki/BoundedContext.html · https://martinfowler.com/articles/microservices.html
 
@@ -508,7 +508,7 @@ Content source: src/teaching/lld.py
 
 - Event-driven architecture.
 
-Figures: 7.3.1 Dependency rules and module boundaries · the example; 7.3.2 Business logic vs orchestration vs infrastructure · the example; 7.3.3 Controllers, services, repositories, adapters · the example; 7.3.4 Anti-corruption layers · the example; 7.3.5 Event-driven architecture · the example
+Figures: 7.3.1 Dependency rules and module boundaries; 7.3.2 Business logic vs orchestration vs infrastructure; 7.3.3 Controllers, services, repositories, adapters; 7.3.4 Anti-corruption layers; 7.3.5 Event-driven architecture
 
 References: https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/ · https://martinfowler.com/bliki/BoundedContext.html · https://martinfowler.com/articles/microservices.html
 
@@ -526,7 +526,7 @@ Content source: src/teaching/lld.py
 
 - When not to use microservices.
 
-Figures: 7.4.1 Serverless and function-oriented architectures · the example; 7.4.2 Evolutionary architecture · the example; 7.4.3 Technical vs business boundaries · the example; 7.4.4 Distributed monolith antipattern · the example; 7.4.5 When not to use microservices · the example
+Figures: 7.4.1 Serverless and function-oriented architectures; 7.4.2 Evolutionary architecture; 7.4.3 Technical vs business boundaries; 7.4.4 Distributed monolith antipattern; 7.4.5 When not to use microservices
 
 References: https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/ · https://martinfowler.com/bliki/BoundedContext.html · https://martinfowler.com/articles/microservices.html
 
@@ -553,7 +553,7 @@ Content source: src/teaching/lld.py
 
 - Pagination, filtering, sorting.
 
-Figures: 8.1.1 API fundamentals and interface contracts · the example; 8.1.2 REST, GraphQL, gRPC, RPC · the example; 8.1.3 Resource modeling · the example; 8.1.4 Request/response schemas · the example; 8.1.5 Status codes and error models · the example; 8.1.6 Pagination, filtering, sorting · the example
+Figures: 8.1.1 API fundamentals and interface contracts; 8.1.2 REST, GraphQL, gRPC, RPC; 8.1.3 Resource modeling; 8.1.4 Request/response schemas; 8.1.5 Status codes and error models; 8.1.6 Pagination, filtering, sorting
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://www.rfc-editor.org/rfc/rfc9700.html
 
@@ -567,7 +567,7 @@ Content source: src/teaching/lld.py
 
 - Idempotency and idempotency keys.
 
-Figures: 8.2.1 Cursor vs offset pagination · the example; 8.2.2 API versioning and compatibility · the example; 8.2.3 A payment retry follows durable operation identity; 8.2.4 State and ownership in the related design
+Figures: 8.2.1 Cursor vs offset pagination; 8.2.2 API versioning and compatibility; 8.2.3 Idempotency and idempotency keys; 8.2.4 State and ownership in the related design
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://www.rfc-editor.org/rfc/rfc9700.html
 
@@ -585,7 +585,7 @@ Content source: src/teaching/lld.py
 
 - Webhooks and delivery acknowledgments.
 
-Figures: 8.3.1 Authentication vs authorization at API boundaries · the example; 8.3.2 Rate limits and quotas · the example; 8.3.3 Retries and timeouts · the example; 8.3.4 Streaming APIs and long-running operations · the example; 8.3.5 Webhooks and delivery acknowledgments · the example
+Figures: 8.3.1 Authentication vs authorization at API boundaries; 8.3.2 Rate limits and quotas; 8.3.3 Retries and timeouts; 8.3.4 Streaming APIs and long-running operations; 8.3.5 Webhooks and delivery acknowledgments
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://www.rfc-editor.org/rfc/rfc9700.html
 
@@ -603,7 +603,7 @@ Content source: src/teaching/lld.py
 
 - API documentation and discoverability.
 
-Figures: 8.4.1 Schema evolution · the example; 8.4.2 Consumer-driven contracts · the example; 8.4.3 API gateways and BFF · the example; 8.4.4 Public vs internal APIs · the example; 8.4.5 API documentation and discoverability · the example
+Figures: 8.4.1 Schema evolution; 8.4.2 Consumer-driven contracts; 8.4.3 API gateways and BFF; 8.4.4 Public vs internal APIs; 8.4.5 API documentation and discoverability
 
 References: https://www.rfc-editor.org/rfc/rfc9110.html · https://api-security.owasp.org/editions/2023/en/0x11-t10/ · https://www.rfc-editor.org/rfc/rfc9700.html
 
@@ -636,7 +636,7 @@ Content source: src/teaching/data.py
 
 - Vector indexes: introductory architecture only.
 
-Figures: 9.1.1 What data storage must guarantee · the example; 9.1.2 Relational databases and SQL · the example; 9.1.3 Document databases · the example; 9.1.4 Key-value databases · the example; 9.1.5 Wide-column stores · the example; 9.1.6 Graph databases · the example; 9.1.7 Time-series databases · the example; 9.1.8 Search indexes · the example; 9.1.9 Vector indexes: introductory architecture only · the example
+Figures: 9.1.1 What data storage must guarantee; 9.1.2 Relational databases and SQL; 9.1.3 Document databases; 9.1.4 Key-value databases; 9.1.5 Wide-column stores; 9.1.6 Graph databases; 9.1.7 Time-series databases; 9.1.8 Search indexes; 9.1.9 Vector indexes: introductory architecture only
 
 References: https://db.cs.cmu.edu/courses/ · https://www.postgresql.org/docs/18/indexes-types.html
 
@@ -652,7 +652,7 @@ Content source: src/teaching/data.py
 
 - Normalization vs denormalization.
 
-Figures: 9.2.1 Object storage vs block vs file storage · the example; 9.2.2 OLTP vs OLAP · the example; 9.2.3 Row-oriented vs column-oriented storage · the example; 9.2.4 Normalization vs denormalization · the example
+Figures: 9.2.1 Object storage vs block vs file storage; 9.2.2 OLTP vs OLAP; 9.2.3 Row-oriented vs column-oriented storage; 9.2.4 Normalization vs denormalization
 
 References: https://db.cs.cmu.edu/courses/ · https://www.postgresql.org/docs/18/indexes-types.html
 
@@ -668,7 +668,7 @@ Content source: src/teaching/data.py
 
 - Choosing storage based on access patterns.
 
-Figures: 9.3.1 An order schema preserves relationships and history; 9.3.2 Referential integrity · the example; 9.3.3 Data ownership · the example; 9.3.4 Choosing storage based on access patterns · the example
+Figures: 9.3.1 ER diagrams and relational modeling; 9.3.2 Referential integrity; 9.3.3 Data ownership; 9.3.4 Choosing storage based on access patterns
 
 References: https://db.cs.cmu.edu/courses/ · https://www.postgresql.org/docs/18/indexes-types.html
 
@@ -680,7 +680,7 @@ Content source: src/teaching/data.py
 
 - Polyglot persistence and its operational costs.
 
-Figures: 9.4.1 Data retention and lifecycle · the example; 9.4.2 Polyglot persistence and its operational costs · the example; 9.4.3 Follow the related complete design; 9.4.4 State and ownership in the related design
+Figures: 9.4.1 Data retention and lifecycle; 9.4.2 Polyglot persistence and its operational costs; 9.4.3 Follow the related complete design; 9.4.4 State and ownership in the related design
 
 References: https://db.cs.cmu.edu/courses/ · https://www.postgresql.org/docs/18/indexes-types.html
 
@@ -707,7 +707,7 @@ Content source: src/teaching/data.py
 
 - Index selection and query optimization.
 
-Figures: 10.1.1 How databases store and retrieve records · the example; 10.1.2 Pages, records, indexes, and buffer pools · the example; 10.1.3 B+tree lookup narrows an ordered key range; 10.1.4 LSM trees and write amplification · the example; 10.1.5 Query planning and EXPLAIN · the example; 10.1.6 Index selection and query optimization · the example
+Figures: 10.1.1 How databases store and retrieve records; 10.1.2 Pages, records, indexes, and buffer pools; 10.1.3 B-tree/B+tree and hash indexing; 10.1.4 LSM trees and write amplification; 10.1.5 Query planning and EXPLAIN; 10.1.6 Index selection and query optimization
 
 References: https://www.postgresql.org/docs/18/transaction-iso.html · https://www.postgresql.org/docs/18/indexes-types.html · https://www.postgresql.org/docs/18/wal-intro.html · https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
 
@@ -723,7 +723,7 @@ Content source: src/teaching/data.py
 
 - MVCC.
 
-Figures: 10.2.1 ACID properties · the example; 10.2.2 Transaction commit and rollback · the example; 10.2.3 Write-ahead logging · the example; 10.2.4 Two snapshots can legitimately see different versions
+Figures: 10.2.1 ACID properties; 10.2.2 Transaction commit and rollback; 10.2.3 Write-ahead logging; 10.2.4 MVCC
 
 References: https://www.postgresql.org/docs/18/transaction-iso.html · https://www.postgresql.org/docs/18/indexes-types.html · https://www.postgresql.org/docs/18/wal-intro.html · https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
 
@@ -741,7 +741,7 @@ Content source: src/teaching/data.py
 
 - Serializable execution and serializability.
 
-Figures: 10.3.1 Locking and optimistic concurrency control · the example; 10.3.2 Dirty reads, nonrepeatable reads, phantom reads · the example; 10.3.3 Lost updates, write skew, serialization anomalies · the example; 10.3.4 Isolation levels and implementation differences · the example; 10.3.5 Serializable execution and serializability · the example
+Figures: 10.3.1 Locking and optimistic concurrency control; 10.3.2 Dirty reads, nonrepeatable reads, phantom reads; 10.3.3 Lost updates, write skew, serialization anomalies; 10.3.4 Isolation levels and implementation differences; 10.3.5 Serializable execution and serializability
 
 References: https://www.postgresql.org/docs/18/transaction-iso.html · https://www.postgresql.org/docs/18/indexes-types.html · https://www.postgresql.org/docs/18/wal-intro.html · https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
 
@@ -755,7 +755,7 @@ Content source: src/teaching/data.py
 
 - Backup, recovery, and durability.
 
-Figures: 10.4.1 Database connection pooling · the example; 10.4.2 Transactions across multiple operations · the example; 10.4.3 Backup, recovery, and durability · the example; 10.4.4 State and ownership in the related design
+Figures: 10.4.1 Database connection pooling; 10.4.2 Transactions across multiple operations; 10.4.3 Backup, recovery, and durability; 10.4.4 State and ownership in the related design
 
 References: https://www.postgresql.org/docs/18/transaction-iso.html · https://www.postgresql.org/docs/18/indexes-types.html · https://www.postgresql.org/docs/18/wal-intro.html · https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
 
@@ -778,7 +778,7 @@ Content source: src/teaching/data.py
 
 - Browser, CDN, application, and database caches.
 
-Figures: 11.1.1 Why caching works · the example; 11.1.2 Cache locality and the working set · the example; 11.1.3 In-process vs distributed caches · the example; 11.1.4 Browser, CDN, application, and database caches · the example
+Figures: 11.1.1 Why caching works; 11.1.2 Cache locality and the working set; 11.1.3 In-process vs distributed caches; 11.1.4 Browser, CDN, application, and database caches
 
 References: https://www.rfc-editor.org/rfc/rfc9111.html · https://redis.io/docs/latest/develop/reference/eviction/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 
@@ -794,7 +794,7 @@ Content source: src/teaching/data.py
 
 - Eviction: LRU, LFU, FIFO, and alternatives.
 
-Figures: 11.2.1 Cache-aside, read-through, write-through, write-behind · the example; 11.2.2 TTL and cache expiration · the example; 11.2.3 A stale cache is a separate state copy; 11.2.4 LRU and FIFO disagree after the same accesses
+Figures: 11.2.1 Cache-aside, read-through, write-through, write-behind; 11.2.2 TTL and cache expiration; 11.2.3 Cache consistency and invalidation; 11.2.4 Eviction: LRU, LFU, FIFO, and alternatives
 
 References: https://www.rfc-editor.org/rfc/rfc9111.html · https://redis.io/docs/latest/develop/reference/eviction/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 
@@ -812,7 +812,7 @@ Content source: src/teaching/data.py
 
 - Cache warming and prefetching.
 
-Figures: 11.3.1 Hot keys · the example; 11.3.2 Cache stampedes, penetration, and avalanche · the example; 11.3.3 Negative caching · the example; 11.3.4 Stale-while-revalidate · the example; 11.3.5 Cache warming and prefetching · the example
+Figures: 11.3.1 Hot keys; 11.3.2 Cache stampedes, penetration, and avalanche; 11.3.3 Negative caching; 11.3.4 Stale-while-revalidate; 11.3.5 Cache warming and prefetching
 
 References: https://www.rfc-editor.org/rfc/rfc9111.html · https://redis.io/docs/latest/develop/reference/eviction/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 
@@ -828,7 +828,7 @@ Content source: src/teaching/data.py
 
 - When caching is harmful.
 
-Figures: 11.4.1 Redis-like data structures · the example; 11.4.2 CDN architecture and origin shielding · the example; 11.4.3 Cache partitioning and replication · the example; 11.4.4 When caching is harmful · the example
+Figures: 11.4.1 Redis-like data structures; 11.4.2 CDN architecture and origin shielding; 11.4.3 Cache partitioning and replication; 11.4.4 When caching is harmful
 
 References: https://www.rfc-editor.org/rfc/rfc9111.html · https://redis.io/docs/latest/develop/reference/eviction/ · https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 
@@ -855,7 +855,7 @@ Content source: src/teaching/data.py
 
 - Autoscaling metrics.
 
-Figures: 12.1.1 Vertical vs horizontal scaling · the example; 12.1.2 Stateless vs stateful services · the example; 12.1.3 Load distribution algorithms · the example; 12.1.4 Health checks and failover · the example; 12.1.5 Sticky sessions · the example; 12.1.6 Autoscaling metrics · the example
+Figures: 12.1.1 Vertical vs horizontal scaling; 12.1.2 Stateless vs stateful services; 12.1.3 Load distribution algorithms; 12.1.4 Health checks and failover; 12.1.5 Sticky sessions; 12.1.6 Autoscaling metrics
 
 References: https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store
 
@@ -875,7 +875,7 @@ Content source: src/teaching/data.py
 
 - Hot partitions and skew.
 
-Figures: 12.2.1 Replication · the example; 12.2.2 Partitioning and sharding · the example; 12.2.3 Range partitioning vs hash partitioning · the example; 12.2.4 A new owner takes only part of the hash space; 12.2.5 Rebalancing · the example; 12.2.6 Averages hide a hot partition
+Figures: 12.2.1 Replication; 12.2.2 Partitioning and sharding; 12.2.3 Range partitioning vs hash partitioning; 12.2.4 Consistent hashing and rendezvous hashing; 12.2.5 Rebalancing; 12.2.6 Hot partitions and skew
 
 References: https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store
 
@@ -893,7 +893,7 @@ Content source: src/teaching/data.py
 
 - Bottleneck identification.
 
-Figures: 12.3.1 Read replicas and read/write splitting · the example; 12.3.2 Replication lag · the example; 12.3.3 Database proxying · the example; 12.3.4 Connection pool saturation · the example; 12.3.5 Bottleneck identification · the example
+Figures: 12.3.1 Read replicas and read/write splitting; 12.3.2 Replication lag; 12.3.3 Database proxying; 12.3.4 Connection pool saturation; 12.3.5 Bottleneck identification
 
 References: https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store
 
@@ -911,7 +911,7 @@ Content source: src/teaching/data.py
 
 - Scale-out economics.
 
-Figures: 12.4.1 Queueing and overload · the example; 12.4.2 Single points of failure · the example; 12.4.3 Multi-region strategies · the example; 12.4.4 Scaling writes vs scaling reads · the example; 12.4.5 Scale-out economics · the example
+Figures: 12.4.1 Queueing and overload; 12.4.2 Single points of failure; 12.4.3 Multi-region strategies; 12.4.4 Scaling writes vs scaling reads; 12.4.5 Scale-out economics
 
 References: https://learn.microsoft.com/en-us/azure/architecture/best-practices/index-best-practices · https://www.amazon.science/publications/dynamo-amazons-highly-available-key-value-store
 
@@ -936,7 +936,7 @@ Content source: src/teaching/data.py
 
 - Metadata vs binary data.
 
-Figures: 13.1.1 Binary/object storage · the example; 13.1.2 The upload pipeline separates bytes from control; 13.1.3 Multipart and resumable uploads · the example; 13.1.4 Checksums and content addressing · the example; 13.1.5 Metadata vs binary data · the example
+Figures: 13.1.1 Binary/object storage; 13.1.2 Large-file upload architecture; 13.1.3 Multipart and resumable uploads; 13.1.4 Checksums and content addressing; 13.1.5 Metadata vs binary data
 
 References: https://openlineage.io/docs/ · https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex · https://kafka.apache.org/41/design/design/
 
@@ -950,7 +950,7 @@ Content source: src/teaching/data.py
 
 - Search ingestion and reindexing.
 
-Figures: 13.2.1 An inverted index is a term-to-document map; 13.2.2 Indexing pipelines · the example; 13.2.3 Search ingestion and reindexing · the example; 13.2.4 State and ownership in the related design
+Figures: 13.2.1 Search engines and inverted indexes; 13.2.2 Indexing pipelines; 13.2.3 Search ingestion and reindexing; 13.2.4 State and ownership in the related design
 
 References: https://openlineage.io/docs/ · https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex · https://kafka.apache.org/41/design/design/
 
@@ -968,7 +968,7 @@ Content source: src/teaching/data.py
 
 - Stream processing fundamentals.
 
-Figures: 13.3.1 Batch vs streaming pipelines · the example; 13.3.2 ETL vs ELT · the example; 13.3.3 Change Data Capture (CDC) · the example; 13.3.4 Data lakes and warehouses · the example; 13.3.5 Stream processing fundamentals · the example
+Figures: 13.3.1 Batch vs streaming pipelines; 13.3.2 ETL vs ELT; 13.3.3 Change Data Capture (CDC); 13.3.4 Data lakes and warehouses; 13.3.5 Stream processing fundamentals
 
 References: https://openlineage.io/docs/ · https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex · https://kafka.apache.org/41/design/design/
 
@@ -984,7 +984,7 @@ Content source: src/teaching/data.py
 
 - Designing data-intensive applications.
 
-Figures: 13.4.1 Data provenance and lineage · the example; 13.4.2 Data quality, schema validation, and replay · the example; 13.4.3 Lifecycle policies and retention · the example; 13.4.4 Designing data-intensive applications · the example
+Figures: 13.4.1 Data provenance and lineage; 13.4.2 Data quality, schema validation, and replay; 13.4.3 Lifecycle policies and retention; 13.4.4 Designing data-intensive applications
 
 References: https://openlineage.io/docs/ · https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex · https://kafka.apache.org/41/design/design/
 
@@ -1013,7 +1013,7 @@ Content source: src/teaching/distributed.py
 
 - Lamport clocks and vector clocks.
 
-Figures: 14.1.1 What makes a distributed system difficult · the example; 14.1.2 Partial failures · the example; 14.1.3 Network uncertainty · the example; 14.1.4 Fault models · the example; 14.1.5 Time, clocks, and event ordering · the example; 14.1.6 Physical vs logical clocks · the example; 14.1.7 Vector comparison exposes concurrent events
+Figures: 14.1.1 What makes a distributed system difficult?; 14.1.2 Partial failures; 14.1.3 Network uncertainty; 14.1.4 Fault models; 14.1.5 Time, clocks, and event ordering; 14.1.6 Physical vs logical clocks; 14.1.7 Lamport clocks and vector clocks
 
 References: https://jepsen.io/consistency · https://lamport.azurewebsites.net/pubs/time-clocks.pdf · https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf
 
@@ -1033,7 +1033,7 @@ Content source: src/teaching/distributed.py
 
 - Read-your-writes and monotonic reads.
 
-Figures: 14.2.1 Consistency models · the example; 14.2.2 Strong consistency and eventual consistency · the example; 14.2.3 Linearizability · the example; 14.2.4 Serializability vs linearizability · the example; 14.2.5 Sequential and causal consistency · the example; 14.2.6 Read-your-writes and monotonic reads · the example
+Figures: 14.2.1 Consistency models; 14.2.2 Strong consistency and eventual consistency; 14.2.3 Linearizability; 14.2.4 Serializability vs linearizability; 14.2.5 Sequential and causal consistency; 14.2.6 Read-your-writes and monotonic reads
 
 References: https://jepsen.io/consistency · https://lamport.azurewebsites.net/pubs/time-clocks.pdf · https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf
 
@@ -1049,7 +1049,7 @@ Content source: src/teaching/distributed.py
 
 - Split-brain situations.
 
-Figures: 14.3.1 CAP theorem, with its actual assumptions · the example; 14.3.2 PACELC as a useful extension · the example; 14.3.3 Intersecting quorums still need a protocol; 14.3.4 A partition can leave two live but disconnected sides
+Figures: 14.3.1 CAP theorem, with its actual assumptions; 14.3.2 PACELC as a useful extension; 14.3.3 Quorums and read/write trade-offs; 14.3.4 Split-brain situations
 
 References: https://jepsen.io/consistency · https://lamport.azurewebsites.net/pubs/time-clocks.pdf · https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf
 
@@ -1063,7 +1063,7 @@ Content source: src/teaching/distributed.py
 
 - Safety vs liveness.
 
-Figures: 14.4.1 Distributed coordination · the example; 14.4.2 The fallacies of distributed computing · the example; 14.4.3 Safety vs liveness · the example; 14.4.4 State and ownership in the related design
+Figures: 14.4.1 Distributed coordination; 14.4.2 The fallacies of distributed computing; 14.4.3 Safety vs liveness; 14.4.4 State and ownership in the related design
 
 References: https://jepsen.io/consistency · https://lamport.azurewebsites.net/pubs/time-clocks.pdf · https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf
 
@@ -1090,7 +1090,7 @@ Content source: src/teaching/distributed.py
 
 - Quorum-based systems.
 
-Figures: 15.1.1 Primary/replica architectures · the example; 15.1.2 Leader/follower replication · the example; 15.1.3 Multi-leader replication · the example; 15.1.4 Leaderless replication · the example; 15.1.5 Synchronous vs asynchronous replication · the example; 15.1.6 Quorum-based systems · the example
+Figures: 15.1.1 Primary/replica architectures; 15.1.2 Leader/follower replication; 15.1.3 Multi-leader replication; 15.1.4 Leaderless replication; 15.1.5 Synchronous vs asynchronous replication; 15.1.6 Quorum-based systems
 
 References: https://pdos.csail.mit.edu/6.5840/ · https://raft.github.io/raft.pdf · https://lamport.azurewebsites.net/pubs/paxos-simple.pdf · https://arxiv.org/abs/1608.03960
 
@@ -1108,7 +1108,7 @@ Content source: src/teaching/distributed.py
 
 - Membership changes.
 
-Figures: 15.2.1 Consensus and replicated state machines · the example; 15.2.2 Raft election changes authority under protocol rules; 15.2.3 Paxos: conceptual foundations · the example; 15.2.4 Presence in a log is not the same as commitment; 15.2.5 Membership changes · the example
+Figures: 15.2.1 Consensus and replicated state machines; 15.2.2 Raft: terms, elections, log replication, commit; 15.2.3 Paxos: conceptual foundations; 15.2.4 Log ordering and durability; 15.2.5 Membership changes
 
 References: https://pdos.csail.mit.edu/6.5840/ · https://raft.github.io/raft.pdf · https://lamport.azurewebsites.net/pubs/paxos-simple.pdf · https://arxiv.org/abs/1608.03960
 
@@ -1124,7 +1124,7 @@ Content source: src/teaching/distributed.py
 
 - Distributed locks and leases.
 
-Figures: 15.3.1 Split-brain prevention and fencing tokens · the example; 15.3.2 Failure detection · the example; 15.3.3 Strongly consistent metadata services · the example; 15.3.4 Distributed locks and leases · the example
+Figures: 15.3.1 Split-brain prevention and fencing tokens; 15.3.2 Failure detection; 15.3.3 Strongly consistent metadata services; 15.3.4 Distributed locks and leases
 
 References: https://pdos.csail.mit.edu/6.5840/ · https://raft.github.io/raft.pdf · https://lamport.azurewebsites.net/pubs/paxos-simple.pdf · https://arxiv.org/abs/1608.03960
 
@@ -1136,7 +1136,7 @@ Content source: src/teaching/distributed.py
 
 - Multi-region replication trade-offs.
 
-Figures: 15.4.1 Conflict resolution and CRDT introduction · the example; 15.4.2 Multi-region replication trade-offs · the example; 15.4.3 Follow the related complete design; 15.4.4 State and ownership in the related design
+Figures: 15.4.1 Conflict resolution and CRDT introduction; 15.4.2 Multi-region replication trade-offs; 15.4.3 Follow the related complete design; 15.4.4 State and ownership in the related design
 
 References: https://pdos.csail.mit.edu/6.5840/ · https://raft.github.io/raft.pdf · https://lamport.azurewebsites.net/pubs/paxos-simple.pdf · https://arxiv.org/abs/1608.03960
 
@@ -1169,7 +1169,7 @@ Content source: src/teaching/distributed.py
 
 - Consumer acknowledgements.
 
-Figures: 16.1.1 Synchronous vs asynchronous communication · the example; 16.1.2 Queues vs logs vs pub/sub · the example; 16.1.3 Producers, consumers, brokers · the example; 16.1.4 Partitions, consumer groups, offsets · the example; 16.1.5 Delivery guarantees · the example; 16.1.6 At-most-once and at-least-once processing · the example; 16.1.7 Exactly-once processing within defined boundaries · the example; 16.1.8 Ordering guarantees · the example; 16.1.9 Consumer acknowledgements · the example
+Figures: 16.1.1 Synchronous vs asynchronous communication; 16.1.2 Queues vs logs vs pub/sub; 16.1.3 Producers, consumers, brokers; 16.1.4 Partitions, consumer groups, offsets; 16.1.5 Delivery guarantees; 16.1.6 At-most-once and at-least-once processing; 16.1.7 Exactly-once processing within defined boundaries; 16.1.8 Ordering guarantees; 16.1.9 Consumer acknowledgements
 
 References: https://learn.microsoft.com/en-us/azure/architecture/patterns/saga · https://microservices.io/patterns/data/transactional-outbox.html · https://kafka.apache.org/41/design/design/
 
@@ -1185,7 +1185,7 @@ Content source: src/teaching/distributed.py
 
 - Event sourcing.
 
-Figures: 16.2.1 Retries and dead-letter queues · the example; 16.2.2 Poison messages · the example; 16.2.3 Idempotent consumers · the example; 16.2.4 Event sourcing · the example
+Figures: 16.2.1 Retries and dead-letter queues; 16.2.2 Poison messages; 16.2.3 Idempotent consumers; 16.2.4 Event sourcing
 
 References: https://learn.microsoft.com/en-us/azure/architecture/patterns/saga · https://microservices.io/patterns/data/transactional-outbox.html · https://kafka.apache.org/41/design/design/
 
@@ -1199,7 +1199,7 @@ Content source: src/teaching/distributed.py
 
 - Sagas and compensating transactions.
 
-Figures: 16.3.1 CQRS · the example; 16.3.2 The outbox closes a local publication gap; 16.3.3 A failed shipment starts tracked compensation; 16.3.4 State and ownership in the related design
+Figures: 16.3.1 CQRS; 16.3.2 Transactional outbox; 16.3.3 Sagas and compensating transactions; 16.3.4 State and ownership in the related design
 
 References: https://learn.microsoft.com/en-us/azure/architecture/patterns/saga · https://microservices.io/patterns/data/transactional-outbox.html · https://kafka.apache.org/41/design/design/
 
@@ -1219,7 +1219,7 @@ Content source: src/teaching/distributed.py
 
 - Reconciliation after partial failure.
 
-Figures: 16.4.1 Choreography vs orchestration · the example; 16.4.2 Workflow engines · the example; 16.4.3 Durable job execution · the example; 16.4.4 Scheduling, leases, and worker coordination · the example; 16.4.5 Backpressure and replay · the example; 16.4.6 Reconciliation after partial failure · the example
+Figures: 16.4.1 Choreography vs orchestration; 16.4.2 Workflow engines; 16.4.3 Durable job execution; 16.4.4 Scheduling, leases, and worker coordination; 16.4.5 Backpressure and replay; 16.4.6 Reconciliation after partial failure
 
 References: https://learn.microsoft.com/en-us/azure/architecture/patterns/saga · https://microservices.io/patterns/data/transactional-outbox.html · https://kafka.apache.org/41/design/design/
 
@@ -1242,7 +1242,7 @@ Content source: src/teaching/distributed.py
 
 - Active-active vs active-passive.
 
-Figures: 17.1.1 Failure domains and fault isolation · the example; 17.1.2 Availability vs durability · the example; 17.1.3 Redundancy · the example; 17.1.4 Active-active vs active-passive · the example
+Figures: 17.1.1 Failure domains and fault isolation; 17.1.2 Availability vs durability; 17.1.3 Redundancy; 17.1.4 Active-active vs active-passive
 
 References: https://sre.google/sre-book/handling-overload/ · https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide · https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
 
@@ -1262,7 +1262,7 @@ Content source: src/teaching/distributed.py
 
 - Rate limiting.
 
-Figures: 17.2.1 Timeouts · the example; 17.2.2 Retries, exponential backoff, jitter · the example; 17.2.3 Retry storms · the example; 17.2.4 A circuit breaker bounds futile calls; 17.2.5 Bulkheads · the example; 17.2.6 Rate limiting · the example
+Figures: 17.2.1 Timeouts; 17.2.2 Retries, exponential backoff, jitter; 17.2.3 Retry storms; 17.2.4 Circuit breakers; 17.2.5 Bulkheads; 17.2.6 Rate limiting
 
 References: https://sre.google/sre-book/handling-overload/ · https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide · https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
 
@@ -1278,7 +1278,7 @@ Content source: src/teaching/distributed.py
 
 - Health checking.
 
-Figures: 17.3.1 Load shedding · the example; 17.3.2 Graceful degradation · the example; 17.3.3 Fallbacks · the example; 17.3.4 Health checking · the example
+Figures: 17.3.1 Load shedding; 17.3.2 Graceful degradation; 17.3.3 Fallbacks; 17.3.4 Health checking
 
 References: https://sre.google/sre-book/handling-overload/ · https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide · https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
 
@@ -1302,7 +1302,7 @@ Content source: src/teaching/distributed.py
 
 - Incident analysis and prevention.
 
-Figures: 17.4.1 Recovery time and recoverable data are different; 17.4.2 Backups and restore testing · the example; 17.4.3 Failover and failback · the example; 17.4.4 Multi-zone and multi-region deployments · the example; 17.4.5 Chaos engineering · the example; 17.4.6 SLO-based reliability decisions · the example; 17.4.7 Cascading failures · the example; 17.4.8 Incident analysis and prevention · the example
+Figures: 17.4.1 RTO and RPO; 17.4.2 Backups and restore testing; 17.4.3 Failover and failback; 17.4.4 Multi-zone and multi-region deployments; 17.4.5 Chaos engineering; 17.4.6 SLO-based reliability decisions; 17.4.7 Cascading failures; 17.4.8 Incident analysis and prevention
 
 References: https://sre.google/sre-book/handling-overload/ · https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide · https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
 
@@ -1331,7 +1331,7 @@ Content source: src/teaching/production.py
 
 - Least privilege.
 
-Figures: 18.1.1 Threat modeling · the example; 18.1.2 Trust boundaries · the example; 18.1.3 Authentication vs authorization · the example; 18.1.4 Sessions, cookies, tokens · the example; 18.1.5 OAuth 2.0 and OpenID Connect · the example; 18.1.6 Role-based and attribute-based access control · the example; 18.1.7 Least privilege · the example
+Figures: 18.1.1 Threat modeling; 18.1.2 Trust boundaries; 18.1.3 Authentication vs authorization; 18.1.4 Sessions, cookies, tokens; 18.1.5 OAuth 2.0 and OpenID Connect; 18.1.6 Role-based and attribute-based access control; 18.1.7 Least privilege
 
 References: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html · https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html · https://www.rfc-editor.org/rfc/rfc9700.html · https://openid.net/specs/openid-connect-core-1_0.html
 
@@ -1353,7 +1353,7 @@ Content source: src/teaching/production.py
 
 - Zero-trust principles.
 
-Figures: 18.2.1 Defense in depth · the example; 18.2.2 Secrets management · the example; 18.2.3 Encryption in transit and at rest · the example; 18.2.4 Password hashing · the example; 18.2.5 Key management and rotation · the example; 18.2.6 Network segmentation · the example; 18.2.7 Zero-trust principles · the example
+Figures: 18.2.1 Defense in depth; 18.2.2 Secrets management; 18.2.3 Encryption in transit and at rest; 18.2.4 Password hashing; 18.2.5 Key management and rotation; 18.2.6 Network segmentation; 18.2.7 Zero-trust principles
 
 References: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html · https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html · https://www.rfc-editor.org/rfc/rfc9700.html · https://openid.net/specs/openid-connect-core-1_0.html
 
@@ -1371,7 +1371,7 @@ Content source: src/teaching/production.py
 
 - Privacy, retention, and deletion.
 
-Figures: 18.3.1 API security and common vulnerabilities · the example; 18.3.2 Tenant identity must survive every trust boundary; 18.3.3 Data minimization · the example; 18.3.4 Audit trails · the example; 18.3.5 Privacy, retention, and deletion · the example
+Figures: 18.3.1 API security and common vulnerabilities; 18.3.2 Multi-tenant isolation; 18.3.3 Data minimization; 18.3.4 Audit trails; 18.3.5 Privacy, retention, and deletion
 
 References: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html · https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html · https://www.rfc-editor.org/rfc/rfc9700.html · https://openid.net/specs/openid-connect-core-1_0.html
 
@@ -1385,7 +1385,7 @@ Content source: src/teaching/production.py
 
 - Secure-by-design reviews.
 
-Figures: 18.4.1 Supply-chain security · the example; 18.4.2 Security vs usability trade-offs · the example; 18.4.3 Secure-by-design reviews · the example; 18.4.4 State and ownership in the related design
+Figures: 18.4.1 Supply-chain security; 18.4.2 Security vs usability trade-offs; 18.4.3 Secure-by-design reviews; 18.4.4 State and ownership in the related design
 
 References: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html · https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html · https://www.rfc-editor.org/rfc/rfc9700.html · https://openid.net/specs/openid-connect-core-1_0.html
 
@@ -1412,7 +1412,7 @@ Content source: src/teaching/production.py
 
 - Golden signals.
 
-Figures: 19.1.1 Monitoring vs observability · the example; 19.1.2 Logs, metrics, and traces · the example; 19.1.3 Structured logging · the example; 19.1.4 This slow request is dominated by waiting; 19.1.5 Trace IDs, span IDs, context propagation · the example; 19.1.6 Golden signals · the example
+Figures: 19.1.1 Monitoring vs observability; 19.1.2 Logs, metrics, and traces; 19.1.3 Structured logging; 19.1.4 Distributed tracing; 19.1.5 Trace IDs, span IDs, context propagation; 19.1.6 Golden signals
 
 References: https://opentelemetry.io/docs/concepts/signals/ · https://opentelemetry.io/docs/concepts/context-propagation/ · https://sre.google/workbook/alerting-on-slos/
 
@@ -1430,7 +1430,7 @@ Content source: src/teaching/production.py
 
 - Dashboards.
 
-Figures: 19.2.1 RED and USE methods · the example; 19.2.2 SLIs, SLOs, error budgets · the example; 19.2.3 Alert design and alert fatigue · the example; 19.2.4 Sampling and telemetry cost · the example; 19.2.5 Dashboards · the example
+Figures: 19.2.1 RED and USE methods; 19.2.2 SLIs, SLOs, error budgets; 19.2.3 Alert design and alert fatigue; 19.2.4 Sampling and telemetry cost; 19.2.5 Dashboards
 
 References: https://opentelemetry.io/docs/concepts/signals/ · https://opentelemetry.io/docs/concepts/context-propagation/ · https://sre.google/workbook/alerting-on-slos/
 
@@ -1448,7 +1448,7 @@ Content source: src/teaching/production.py
 
 - Root-cause investigation.
 
-Figures: 19.3.1 Profiling · the example; 19.3.2 Query and application performance diagnosis · the example; 19.3.3 Incident response · the example; 19.3.4 On-call and runbooks · the example; 19.3.5 Root-cause investigation · the example
+Figures: 19.3.1 Profiling; 19.3.2 Query and application performance diagnosis; 19.3.3 Incident response; 19.3.4 On-call and runbooks; 19.3.5 Root-cause investigation
 
 References: https://opentelemetry.io/docs/concepts/signals/ · https://opentelemetry.io/docs/concepts/context-propagation/ · https://sre.google/workbook/alerting-on-slos/
 
@@ -1462,7 +1462,7 @@ Content source: src/teaching/production.py
 
 - Observability across asynchronous workflows.
 
-Figures: 19.4.1 Blameless postmortems · the example; 19.4.2 Capacity monitoring · the example; 19.4.3 Observability across asynchronous workflows · the example; 19.4.4 State and ownership in the related design
+Figures: 19.4.1 Blameless postmortems; 19.4.2 Capacity monitoring; 19.4.3 Observability across asynchronous workflows; 19.4.4 State and ownership in the related design
 
 References: https://opentelemetry.io/docs/concepts/signals/ · https://opentelemetry.io/docs/concepts/context-propagation/ · https://sre.google/workbook/alerting-on-slos/
 
@@ -1485,7 +1485,7 @@ Content source: src/teaching/production.py
 
 - Kubernetes fundamentals.
 
-Figures: 20.1.1 Development vs staging vs production · the example; 20.1.2 VMs and containers isolate at different layers; 20.1.3 Container fundamentals · the example; 20.1.4 Kubernetes fundamentals · the example
+Figures: 20.1.1 Development vs staging vs production; 20.1.2 Virtual machines vs containers; 20.1.3 Container fundamentals; 20.1.4 Kubernetes fundamentals
 
 References: https://12factor.net/ · https://kubernetes.io/docs/concepts/overview/components/ · https://sre.google/workbook/canarying-releases/
 
@@ -1503,7 +1503,7 @@ Content source: src/teaching/production.py
 
 - Immutable infrastructure.
 
-Figures: 20.2.1 Control plane vs data plane · the example; 20.2.2 Scheduling and service discovery · the example; 20.2.3 Autoscaling · the example; 20.2.4 Configuration and secret delivery · the example; 20.2.5 Immutable infrastructure · the example
+Figures: 20.2.1 Control plane vs data plane; 20.2.2 Scheduling and service discovery; 20.2.3 Autoscaling; 20.2.4 Configuration and secret delivery; 20.2.5 Immutable infrastructure
 
 References: https://12factor.net/ · https://kubernetes.io/docs/concepts/overview/components/ · https://sre.google/workbook/canarying-releases/
 
@@ -1523,7 +1523,7 @@ Content source: src/teaching/production.py
 
 - Multi-environment configuration.
 
-Figures: 20.3.1 Infrastructure as Code · the example; 20.3.2 CI/CD · the example; 20.3.3 Canary exposure expands only after verification; 20.3.4 Feature flags · the example; 20.3.5 Rollbacks and database migrations · the example; 20.3.6 Multi-environment configuration · the example
+Figures: 20.3.1 Infrastructure as Code; 20.3.2 CI/CD; 20.3.3 Rolling, blue-green, and canary deployments; 20.3.4 Feature flags; 20.3.5 Rollbacks and database migrations; 20.3.6 Multi-environment configuration
 
 References: https://12factor.net/ · https://kubernetes.io/docs/concepts/overview/components/ · https://sre.google/workbook/canarying-releases/
 
@@ -1543,7 +1543,7 @@ Content source: src/teaching/production.py
 
 - Platform engineering basics.
 
-Figures: 20.4.1 Twelve-Factor App principles · the example; 20.4.2 Serverless compute · the example; 20.4.3 Cloud vs on-premises trade-offs · the example; 20.4.4 Infrastructure ownership and managed services · the example; 20.4.5 Deployment topologies and networking · the example; 20.4.6 Platform engineering basics · the example
+Figures: 20.4.1 Twelve-Factor App principles; 20.4.2 Serverless compute; 20.4.3 Cloud vs on-premises trade-offs; 20.4.4 Infrastructure ownership and managed services; 20.4.5 Deployment topologies and networking; 20.4.6 Platform engineering basics
 
 References: https://12factor.net/ · https://kubernetes.io/docs/concepts/overview/components/ · https://sre.google/workbook/canarying-releases/
 
@@ -1570,7 +1570,7 @@ Content source: src/teaching/production.py
 
 - Tail latency analysis.
 
-Figures: 21.1.1 Performance budgets · the example; 21.1.2 CPU, memory, disk, network, and database bottlenecks · the example; 21.1.3 Profiling and benchmarking · the example; 21.1.4 Load, stress, spike, and soak testing · the example; 21.1.5 Benchmark methodology and statistical pitfalls · the example; 21.1.6 Tail latency analysis · the example
+Figures: 21.1.1 Performance budgets; 21.1.2 CPU, memory, disk, network, and database bottlenecks; 21.1.3 Profiling and benchmarking; 21.1.4 Load, stress, spike, and soak testing; 21.1.5 Benchmark methodology and statistical pitfalls; 21.1.6 Tail latency analysis
 
 References: https://martinfowler.com/articles/practical-test-pyramid.html · https://sre.google/sre-book/handling-overload/ · https://research.google/pubs/the-tail-at-scale/
 
@@ -1590,7 +1590,7 @@ Content source: src/teaching/production.py
 
 - Capacity reservation vs elastic capacity.
 
-Figures: 21.2.1 Queue saturation and throughput ceilings · the example; 21.2.2 Performance tuning vs architecture changes · the example; 21.2.3 Architecture costs are not capacity guarantees; 21.2.4 Compute, storage, networking, and telemetry costs · the example; 21.2.5 Cost per request or transaction · the example; 21.2.6 Capacity reservation vs elastic capacity · the example
+Figures: 21.2.1 Queue saturation and throughput ceilings; 21.2.2 Performance tuning vs architecture changes; 21.2.3 Horizontal scaling economics; 21.2.4 Compute, storage, networking, and telemetry costs; 21.2.5 Cost per request or transaction; 21.2.6 Capacity reservation vs elastic capacity
 
 References: https://martinfowler.com/articles/practical-test-pyramid.html · https://sre.google/sre-book/handling-overload/ · https://research.google/pubs/the-tail-at-scale/
 
@@ -1606,7 +1606,7 @@ Content source: src/teaching/production.py
 
 - Fault-injection tests.
 
-Figures: 21.3.1 Cost-performance optimization · the example; 21.3.2 Sustainability and resource efficiency · the example; 21.3.3 Unit, integration, contract, end-to-end, and performance tests · the example; 21.3.4 Fault-injection tests · the example
+Figures: 21.3.1 Cost-performance optimization; 21.3.2 Sustainability and resource efficiency; 21.3.3 Unit, integration, contract, end-to-end, and performance tests; 21.3.4 Fault-injection tests
 
 References: https://martinfowler.com/articles/practical-test-pyramid.html · https://sre.google/sre-book/handling-overload/ · https://research.google/pubs/the-tail-at-scale/
 
@@ -1622,7 +1622,7 @@ Content source: src/teaching/production.py
 
 - Evaluating a design against its original requirements.
 
-Figures: 21.4.1 Data consistency validation · the example; 21.4.2 Architecture fitness functions · the example; 21.4.3 Regression testing · the example; 21.4.4 Evaluating a design against its original requirements · the example
+Figures: 21.4.1 Data consistency validation; 21.4.2 Architecture fitness functions; 21.4.3 Regression testing; 21.4.4 Evaluating a design against its original requirements
 
 References: https://martinfowler.com/articles/practical-test-pyramid.html · https://sre.google/sre-book/handling-overload/ · https://research.google/pubs/the-tail-at-scale/
 

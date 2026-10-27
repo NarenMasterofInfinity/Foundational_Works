@@ -109,17 +109,8 @@ Visual quality principles:
 - Merge units in order; rebase a later unit branch when earlier shared
   renderer files change.
 
-## Unit 2 progress
+## Revision status and release evidence
 
-**Chapter 2.1 rewritten in source** (three topic lessons) with four new,
-concept-specific generated SVG plates:
+The current scope and remaining editorial work are recorded in [WRITING_REVISION_PLAN.md](WRITING_REVISION_PLAN.md). Integration of merged source does not itself establish unit-level teaching quality.
 
-1. Vague brief → measurable promise, an editorial annotated worksheet.
-2. One feed opening → many kinds of network work, a time-down swimlane.
-3. Fan-out on write vs read, an asymmetric branching comparison.
-4. Count at the correct boundary, a measurement ledger.
-
-Chapters **2.2–2.4 are not yet textbook-revised**. The rest of the existing
-atlas content is intentionally preserved in this change. Do not use the Unit 2
-PR as evidence of unit-level editorial completion until these remaining three
-chapters are revised and visual/browser verification is performed.
+Every release must include regenerated HTML and PDF, blueprint, manifest, and `release.json`. Follow the [release instructions](README.md#release); CI rejects stale artifacts and verifies the source identifier printed in the PDF. Browser checks include Unit 4’s narrow figures and deadlock edge connections. Human visual and editorial review remains a separate requirement from structural checks.

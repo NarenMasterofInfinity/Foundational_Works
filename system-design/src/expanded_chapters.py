@@ -8,14 +8,10 @@ from textbook_chapter_5_4 import INTRO as INTRO_5_4, LESSONS as LS_5_4, drawing 
 from textbook_chapter_5_3 import INTRO as INTRO_5_3, LESSONS as LS_5_3, drawing as FIG_5_3
 from textbook_chapter_5_2 import INTRO as INTRO_5_2, LESSONS as LS_5_2, drawing as FIG_5_2
 from textbook_chapter_5_1 import INTRO as INTRO_5_1, LESSONS as LS_5_1, drawing as FIG_5_1
-from textbook_chapter_4_4 import INTRO as INTRO_4_4
-from unit4_redesign_4 import LESSONS as LS_4_4, drawing as FIG_4_4
-from textbook_chapter_4_3 import INTRO as INTRO_4_3
-from unit4_redesign_3 import LESSONS as LS_4_3, drawing as FIG_4_3
-from textbook_chapter_4_2 import INTRO as INTRO_4_2
-from unit4_redesign_2 import LESSONS as LS_4_2, drawing as FIG_4_2
-from textbook_chapter_4_1 import INTRO as INTRO_4_1
-from unit4_redesign_1 import LESSONS as LS_4_1, drawing as FIG_4_1
+from unit4_redesign_4 import drawing as FIG_4_4
+from unit4_redesign_3 import drawing as FIG_4_3
+from unit4_redesign_2 import drawing as FIG_4_2
+from unit4_redesign_1 import drawing as FIG_4_1
 from textbook_chapter_3_4 import INTRO as INTRO_3_4, LESSONS as LS_3_4, drawing as FIG_3_4
 from textbook_chapter_3_3 import INTRO as INTRO_3_3, LESSONS as LS_3_3, drawing as FIG_3_3
 from textbook_chapter_3_2 import TOPICS as TB_3_2, figure as FIG_3_2
@@ -62,25 +58,29 @@ def concept_body(unit,chapter,bench=''):
     render_paragraphs=lesson_paragraphs if n in (2,3,4,5,6) else paragraphs
     opening,takeaway,question=GUIDES[n][j-1]
     textbook=None
-    if 6 <= n <= 11:
-        try:textbook=import_module(f'textbook_next_{n}_{j}')
-        except ModuleNotFoundError as err:
-            if err.name != f'textbook_next_{n}_{j}':raise
+    if 6 <= n <= 10 or (n == 11 and j <= 2):
+        textbook=import_module(f'textbook_next_{n}_{j}')
     html=introduction(opening)
     extended=None
-    if 11 <= n <= 21:
+    if 12 <= n <= 21 or (n == 11 and j >= 3):
         module=import_module(f'textbook_unit_{n}_extended')
-        extended=module.CHAPTERS.get(str(j))
+        extended=module.CHAPTERS[str(j)]
+    # A companion must cover the whole chapter. Do not silently drop merged
+    # lessons because a key or array length no longer matches the syllabus.
+    if textbook:
+        assert len(textbook.QUESTIONS) == len(textbook.FORMS) == len(rows), chapter['id']
+    if extended:
+        assert len(extended['lesson']) == len(extended['diagram']) == len(rows), chapter['id']
+    chapter['supplemental_content_files'] = (
+        ([f'src/unit4_redesign_{j}.py', 'src/unit4_mobile.py'] if n == 4 else [])
+        + ([f'src/textbook_next_{n}_{j}.py'] if textbook else [])
+        + ([f'src/textbook_unit_{n}_extended.py'] if extended else []))
     if extended:html+='<div class="chapter-intro"><p>'+e(extended['intro'])+'</p></div>'
     if textbook:html+='<div class="chapter-intro"><p>'+e(textbook.INTRO)+'</p></div>'
     if (n,j)==(5,4):html+='<p>'+e(INTRO_5_4)+'</p>'
     if (n,j)==(5,3):html+='<p>'+e(INTRO_5_3)+'</p>'
     if (n,j)==(5,2):html+='<p>'+e(INTRO_5_2)+'</p>'
     if (n,j)==(5,1):html+='<p>'+e(INTRO_5_1)+'</p>'
-    if (n,j)==(4,4):html+='<p>'+e(INTRO_4_4)+'</p>'
-    if (n,j)==(4,3):html+='<p>'+e(INTRO_4_3)+'</p>'
-    if (n,j)==(4,2):html+='<p>'+e(INTRO_4_2)+'</p>'
-    if (n,j)==(4,1):html+='<p>'+e(INTRO_4_1)+'</p>'
     if (n,j)==(3,4):html+='<p>'+e(INTRO_3_4)+'</p>'
     if (n,j)==(3,3):html+='<p>'+e(INTRO_3_3)+'</p>'
     fig_no=0
@@ -93,13 +93,9 @@ def concept_body(unit,chapter,bench=''):
         if (n,j)==(5,3):html+=render_paragraphs(LS_5_3[sub-1]['text'])
         if (n,j)==(5,2):html+=render_paragraphs(LS_5_2[sub-1]['text'])
         if (n,j)==(5,1):html+=render_paragraphs(LS_5_1[sub-1]['text'])
-        if (n,j)==(4,4):html+=render_paragraphs(LS_4_4[sub-1]['text'])
-        if (n,j)==(4,3):html+=render_paragraphs(LS_4_3[sub-1]['text'])
-        if (n,j)==(4,2):html+=render_paragraphs(LS_4_2[sub-1]['text'])
-        if (n,j)==(4,1):html+=render_paragraphs(LS_4_1[sub-1]['text'])
         if (n,j)==(3,4):html+=render_paragraphs(LS_3_4[sub-1]['text'])
         if (n,j)==(3,3):html+=render_paragraphs(LS_3_3[sub-1]['text'])
-        visual=FIG_5_4(n,j,fig_no,sub-1) if (n,j)==(5,4) else (FIG_5_3(n,j,fig_no,sub-1) if (n,j)==(5,3) else (FIG_5_2(n,j,fig_no,sub-1) if (n,j)==(5,2) else (FIG_5_1(n,j,fig_no,sub-1) if (n,j)==(5,1) else (FIG_4_4(n,j,fig_no,sub-1) if (n,j)==(4,4) else (FIG_4_3(n,j,fig_no,sub-1) if (n,j)==(4,3) else (FIG_4_2(n,j,fig_no,sub-1) if (n,j)==(4,2) else (FIG_4_1(n,j,fig_no,sub-1) if (n,j)==(4,1) else (FIG_3_4(n,j,fig_no,sub-1) if (n,j)==(3,4) else (FIG_3_3(n,j,fig_no,sub-1) if (n,j)==(3,3) else (FIG_3_2(n,j,fig_no,i) if (n,j)==(3,2) else (FIG_3_1(n,j,fig_no,i) if (n,j)==(3,1) else (FIG_2_4(n,j,fig_no,i) if (n,j)==(2,4) else (FIG_2_3(n,j,fig_no,i) if (n,j)==(2,3) else (FIG_2_2(n,j,fig_no,i) if (n,j)==(2,2) else (unit2_figure(n,j,fig_no,i) if n==2 and j==1 else special(n,j,fig_no,i))))))))))))))))
+        visual=None if (textbook or extended) else FIG_5_4(n,j,fig_no,sub-1) if (n,j)==(5,4) else (FIG_5_3(n,j,fig_no,sub-1) if (n,j)==(5,3) else (FIG_5_2(n,j,fig_no,sub-1) if (n,j)==(5,2) else (FIG_5_1(n,j,fig_no,sub-1) if (n,j)==(5,1) else (FIG_4_4(n,j,fig_no,sub-1) if (n,j)==(4,4) else (FIG_4_3(n,j,fig_no,sub-1) if (n,j)==(4,3) else (FIG_4_2(n,j,fig_no,sub-1) if (n,j)==(4,2) else (FIG_4_1(n,j,fig_no,sub-1) if (n,j)==(4,1) else (FIG_3_4(n,j,fig_no,sub-1) if (n,j)==(3,4) else (FIG_3_3(n,j,fig_no,sub-1) if (n,j)==(3,3) else (FIG_3_2(n,j,fig_no,i) if (n,j)==(3,2) else (FIG_3_1(n,j,fig_no,i) if (n,j)==(3,1) else (FIG_2_4(n,j,fig_no,i) if (n,j)==(2,4) else (FIG_2_3(n,j,fig_no,i) if (n,j)==(2,3) else (FIG_2_2(n,j,fig_no,i) if (n,j)==(2,2) else (unit2_figure(n,j,fig_no,i) if n==2 and j==1 else special(n,j,fig_no,i))))))))))))))))
         if textbook and sub <= len(textbook.QUESTIONS):
             html+='<div class="callout intuition"><strong>Think and apply:</strong> '+e(textbook.QUESTIONS[sub-1])+'</div>'
             visual=textbook_plate(n,j,fig_no,display_title,row['trace'],textbook.FORMS[sub-1])
@@ -175,7 +171,8 @@ def concept_body(unit,chapter,bench=''):
 
 def case_body(chapter):
     j=int(chapter['number'].split('.')[1]);case=CASES[j]
-    companion=import_module('textbook_unit_22_extended').CHAPTERS.get(str(j))
+    companion=import_module('textbook_unit_22_extended').CHAPTERS[str(j)]
+    chapter['supplemental_content_files'] = ['src/textbook_unit_22_extended.py']
     html=introduction(CASE_OPENINGS[j],'The workload, timing, and prices in this design are teaching assumptions. They are not measured benchmarks or a description of a particular company.')
     if companion:
         html+='<div class="chapter-intro"><p>'+e(companion['intro'])+'</p></div>'

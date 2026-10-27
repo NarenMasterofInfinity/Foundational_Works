@@ -14,9 +14,13 @@ def box(x,y,w,h,label,kind='flow',sub=None):
     color=C[kind]
     return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="7" fill="#fffefa" stroke="{color}" stroke-width="1.5"/><rect x="{x}" y="{y+9}" width="3" height="{h-18}" fill="{color}"/>'+text(x+w/2,y+29,label,max(12,int(w/8)),14)+(text(x+w/2,y+h-16,sub,max(12,int(w/7)),11,color='#61746b') if sub else '')
 
-def shell(n,j,k,title,body,caption,why,height=260,width=900):
+def shell(n,j,k,title,body,caption,why,height=260,width=900,mobile=None):
     ident=f'fig-{n}-{j}-{k}';number=f'{n}.{j}.{k}'
-    svg=f'<svg viewBox="0 0 {width} {height}" role="img" aria-labelledby="{ident}-title {ident}-desc"><title id="{ident}-title">Figure {number}: {e(title)}</title><desc id="{ident}-desc">{e(caption)}</desc>{body}</svg>'
+    variant=' class="figure-wide"' if mobile else ''
+    svg=f'<svg{variant} viewBox="0 0 {width} {height}" role="img" aria-labelledby="{ident}-title {ident}-desc"><title id="{ident}-title">Figure {number}: {e(title)}</title><desc id="{ident}-desc">{e(caption)}</desc>{body}</svg>'
+    if mobile:
+        mobile_body,mobile_height=mobile
+        svg+=f'<svg class="figure-narrow" viewBox="0 0 360 {mobile_height}" role="img" aria-labelledby="{ident}-mobile-title {ident}-mobile-desc"><title id="{ident}-mobile-title">Figure {number}: {e(title)}</title><desc id="{ident}-mobile-desc">{e(caption)}</desc>{mobile_body}</svg>'
     FIGURES.append(dict(id=ident,number=number,chapter=f'ch-{n}-{j}',title=title,caption=caption,why=why,status='available'))
     return f'<figure class="figure" id="{ident}"><div class="figure-drawing">{svg}</div><figcaption><span>FIG. {number}</span><strong>{e(title)}</strong><p>{e(caption)}</p><p class="figure-why"><em>Author-created illustration. Numbers are illustrative unless stated otherwise.</em></p></figcaption></figure>'
 

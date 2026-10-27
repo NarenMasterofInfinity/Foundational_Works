@@ -1,23 +1,11 @@
-# Current writing revision: Units 5 and 6
+# Current revision: integrated release and Unit 4 review
 
-Completed on **23 October 2026**, following the focused revision of Units 3 and 4. The `ncert-style-writing` skill and Unit 1 remain the teaching reference: very simple, engaging language with enough explanation to follow each step.
+The 27 October 2026 release integrates the merged chapter companions into the committed HTML and complete PDF. The renderer requires the expected companion modules and chapter keys, checks their lesson/diagram counts, and records their source paths in the completion manifest. It registers only figures that appear in the HTML.
 
-## What changed
+Unit 4 is the focused editorial and visual scope. Its four chapters retain the existing uploaded-file narrative and stable topic/figure links. Duplicate introductions and supplemental prose are removed. The 17 custom figures have captions that explain the visible evidence, with separate compositions for desktop and phones. Counter values, worker and semaphore limits, lock names, and overload rates agree with the lessons. Deadlock shows both held-lock ownership and the complete waiting cycle. Phone figures fit without horizontal panning and use labels of at least 12 rendered CSS pixels at 360 and 390 px viewports.
 
-Unit 5 follows a payment service. It explains objects and their operations, then uses concrete changes to distinguish abstraction, encapsulation, polymorphism, inheritance, and composition. A charge contract states units, currency, identity, and result meanings. Reservation examples show why putting a rule inside a method still needs a suitable database operation. Payment examples retain the difference between decline and uncertainty.
+A fresh, context-free read of Chapter 4.3 identified terminology, lost-update, transfer-example, and condition-variable clarity gaps. Those findings are incorporated. The Go memory model and Python threading/task documentation support the synchronization and cancellation distinctions; illustrative rates remain assumptions.
 
-Unit 6 follows notification delivery. Startup construction, source dependencies, runtime calls, object reuse, and resource ownership are explained separately. Each of the 26 design patterns has its own problem, mechanism, example, and relevant limit. Pattern diagrams show ordered actions; source relationship diagrams point toward the interface used or implemented.
+The release pipeline follows the actual hosting mode: committed files from main, published by built-in branch Pages. Shell-only CI preserves the repository’s local-actions policy, rejects stale generated files, and verifies a source identifier inside both HTML and PDF. Source, HTML, blueprint, manifest, PDF, and release record must ship together.
 
-All 33 concept lessons, 26 pattern explanations, 11 chapter introductions, related captions and reference summaries, worked-code explanations, and 22 assessments were revised. The short chapters now use diagrams matching their own examples. The unit-level advanced question appears at the end of each target unit. Syllabus items, pattern names, assessment IDs, and stable reading links remain.
-
-Concept and pattern prose changed from 10,268 to 8,446 words. Length is determined by the explanation needed, rather than a target per heading. Calculations, state changes, and unfamiliar terms are explained where they first become useful.
-
-## Verification
-
-All other 88 chapter panels match baseline `cfcb650` byte for byte, including Units 1, 3, and 4. Their lesson, guide, reference-summary, assessment, and worked-code data are preserved. The earlier foundations PDF remains unchanged.
-
-The build, executable checks, five-width browser suite, scope comparison, and PDF text checks pass. Revised desktop/mobile views and printed pages were inspected. The complete PDF has 1,068 tagged A4 pages and includes all chapter, figure, and case-section headings. See [QA.md](QA.md).
-
-## Previous focused revision
-
-Units 3 and 4 were revised on 22 October 2026. Their 34 lessons follow a browser request and uploaded files, respectively. That pass preserved the other 91 chapter panels. Their content is preserved in this revision.
+Earlier Units 5 and 6 language revisions remain. Companion additions in other units are integrated, but have not received the Unit 4 quality review in this pass. This release makes no blanket claim that all 99 chapters meet the textbook revision standard. See [QA.md](QA.md) for checks and [README.md](README.md#release) for release commands.

@@ -1,27 +1,38 @@
 # Complete-edition verification
 
-Verified on **23 October 2026** after the focused Units 5 and 6 writing revision.
+Verified locally on **27 October 2026** for the merged-source integration and focused Unit 4 review.
 
-## Writing scope
+## Scope and editorial evidence
 
-- **33 concept lessons, 26 pattern explanations, 11 chapter introductions, and 22 assessments** were revised with related figure labels, captions, reference definitions, and worked explanations. See [WRITING_REVISION_PLAN.md](WRITING_REVISION_PLAN.md).
-- All **88 other chapter panels** match baseline `cfcb650` byte for byte, including Units 1, 3, and 4. Non-target lessons, guides, summaries, assessments, and worked-code data are unchanged. All pattern names and assessment kinds/IDs remain.
-- Both revised Python examples pass: the recording gateway checks the supplied command and result; the lifetime model checks identity, cleanup after success/error, and rejection of a retained closed resource. Other illustrative snippets are reviewed with their stated assumptions; they are not presented as production provider or database integrations. The historical foundations PDF is preserved.
+The committed HTML and PDF include the merged chapter companions. Expected companion modules, chapter keys, and lesson/diagram lengths are required by the renderer. The manifest records companion source paths. Figure registration matches actual HTML figures exactly; the integration removed 26 registrations for figures that were generated and then overwritten.
 
-## Build and executable checks
+Unit 4’s 17 custom figures are active. Its duplicate chapter introductions and appended lesson/caption repetitions are removed. The uploaded-file example, counters, worker limits, semaphore permits, lock names, and overload rates agree across prose and graphics. Each figure has desktop and narrow-screen compositions; print uses the desktop composition once.
 
-- The build validates **22 units, 99 chapters, 390 syllabus items, 575 figures, 12 designs with 264 sections, and 242 questions with separate answers**. Coverage, prerequisites, unique IDs, internal links, and relative downloads pass.
-- The original task example passes validation, persistence, repeated completion, storage-failure, reopen, and abrupt-process-loss checks before and after commit.
-- The mechanism suite passes capacity and queue arithmetic, token budgets, eviction, continuation, vector order, ownership remapping, seat claims, balanced/idempotent postings, duplicate delivery, workflow fencing/deletion, tenant policy, and fictional costs.
-- Python compilation, JavaScript syntax checks, and `git diff --check` pass.
+A context-free read of Chapter 4.3 found four clarity gaps, now corrected: workers versus threads, the reason a lost update loses information, the two-account transfer, and the coordinated condition-variable wait. Synchronization and cancellation statements were checked against the [Go memory model](https://go.dev/ref/mem), [Python condition-variable documentation](https://docs.python.org/3.14/library/threading.html#condition-objects), and [Python task-group documentation](https://docs.python.org/3/library/asyncio-task.html#task-groups). Numerical workloads remain illustrative assumptions.
 
-## Browser and PDF
+This pass does not certify the teaching quality of every merged companion or every chapter. Other units retain earlier writing revisions and the merged additions; they still need focused editorial and visual review.
 
-- All **133 views** fit **1440, 1024, 768, 390, and 360 px**. SVG text bounds pass. All **13 workbenches**, navigation, search, filters, deep links, and reading marks pass.
-- Offline file reading loads no external resources. Chapters remain readable without JavaScript. No uncaught browser exceptions occur. Print exposes every chapter and restores filters afterward.
-- Revised desktop/mobile readings were inspected, including object principles, injection, dependency arrows, Adapter, and Unit of Work. Emphasis and code fragments render without raw formatting markers.
-- The complete export is a tagged **1,068-page A4 PDF**, **13,684,894 bytes**. Extraction confirms all **99 chapter headers, 575 figure labels, and 264 case-section headings**. Representative target pages were rendered and inspected.
+## Build, executable, and browser checks
 
-The build records **87,826 authored lesson words** across the book. Counts establish coverage, not teaching quality. Local model checks do not establish production protocol correctness.
+- Python compilation, deterministic HTML rebuild, JavaScript parsing, and `git diff --check` pass.
+- Coverage checks pass for 22 units, 99 chapters, 390 syllabus items, 575 rendered figures, 12 designs with 264 sections, and 242 questions with separate answers. Figure IDs in the manifest match the rendered HTML exactly.
+- The task example and bounded mechanism suite pass validation, persistence/crash ordering, arithmetic, queueing, caching, pagination, vector order, assignment, seat claims, postings, repeated delivery, fencing, deletion, tenant policy, and assumed costs.
+- All 133 views fit 1440, 1024, 768, 390, and 360 px. The 13 workbenches, navigation, filters, deep links, and saved reading progress pass. Offline reading makes no external requests; all chapters remain readable without JavaScript. Print exposes all chapters and restores the interactive state afterward.
+- Unit 4’s 17 narrow compositions fit their containers at 360 and 390 px, have no text outside the SVG canvas, and have labels of at least 12 rendered CSS pixels. Their captions are not repeated as lesson paragraphs. The deadlock’s four semantic edges match the worked cycle and touch the correct diagram nodes.
+- Desktop and phone versions of all 17 figures were captured and visually reviewed. Actual PDF pages 100, 113, and 117 cover memory, deadlock, and backpressure; representative pages were rendered for print inspection.
 
-Reproduction commands are in [README.md](README.md). Working artifacts under `/tmp/atlas-units-5-6` and `/tmp/system-design-complete-qa` are not runtime dependencies. Build and verification scripts do not commit or push.
+These checks establish artifact integrity, selected mechanisms, and rendering behavior. They do not measure learning outcomes. The deadlock topology is checked against the worked example rather than inferred from the diagram’s own labels; human inspection remains necessary for other diagram semantics.
+
+## PDF and release integrity
+
+The current export contains **1,153 tagged A4 pages**. `verify_release.py` independently extracts the PDF and checks all 99 chapter titles, 575 figure labels, and 264 case-section headings. It requires the current source identifier inside both HTML and PDF and verifies the hashes of all generated artifacts against [release.json](release.json).
+
+Negative checks on an isolated copy accept the intact release and reject independently changed source, HTML, and PDF files. Attempting to record the previous PDF after a source change also fails. Regenerating HTML alone therefore cannot make the stale export pass the release check.
+
+The larger export includes the previously source-only companion introductions, questions, and code examples. The retained foundations PDF is unchanged. Exact export size and hashes are release data, not manually maintained QA claims.
+
+## Hosting and reproduction
+
+Pages serves committed files from main at the repository root. The blocked custom deployment workflow is retired. The shell-only **Atlas release check** checks out the exact event commit without external actions, verifies regenerated files and release identity, then runs executable and browser checks under the existing local-actions policy. Live publication must be confirmed by comparing served HTML/PDF hashes to the release record after merge.
+
+Commands are in [README.md](README.md#release). Local evidence is under `/tmp/system-design-complete-qa` and `/tmp/atlas-audit`; these are not runtime dependencies. The source identifier covers source files and is not a score for teaching quality.
